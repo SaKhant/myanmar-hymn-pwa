@@ -14,7 +14,7 @@
 <script>
 const DB="hymn-house-offline",HYMNS="hymns",CATEGORIES="categories",META="metadata",FAV="hymn-house:favorites",FONT="hymn-house:font-size";let hymns=[],categories=[],meta=null;
 const app=document.getElementById("app"),esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-function openDb(){return new Promise((ok,no)=>{const r=indexedDB.open(DB,1);r.onsuccess=()=>ok(r.result);r.onerror=()=>no(r.error)})}function all(store){return new Promise((ok,no)=>{const r=store.getAll();r.onsuccess=()=>ok(r.result);r.onerror=()=>no(r.error)})}
+function openDb(){return new Promise((ok,no)=>{const r=indexedDB.open(DB,2);r.onupgradeneeded=()=>{const db=r.result,s=db.objectStoreNames.contains(HYMNS)?r.transaction.objectStore(HYMNS):db.createObjectStore(HYMNS,{keyPath:"key"});if(!s.indexNames.contains("collection"))s.createIndex("collection","collection");if(!s.indexNames.contains("collection-number"))s.createIndex("collection-number",["collection","number"]);if(!db.objectStoreNames.contains(CATEGORIES))db.createObjectStore(CATEGORIES,{keyPath:"slug"});if(!db.objectStoreNames.contains(META))db.createObjectStore(META,{keyPath:"key"})};r.onsuccess=()=>ok(r.result);r.onerror=()=>no(r.error)})}function all(store){return new Promise((ok,no)=>{const r=store.getAll();r.onsuccess=()=>ok(r.result);r.onerror=()=>no(r.error)})}
 function collection(kind,lang){return `${lang==="my"?"myanmar":"english"}_${kind}`}
 function find(kind,lang,id){return hymns.find(h=>h.collection===collection(kind,lang)&&(h.id===id||String(h.number)===id))}
 function title(h){return h.title?.trim()||h.first_line?.trim()||`Hymn ${h.number??h.id}`}
