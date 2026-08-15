@@ -3,7 +3,9 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, ChevronRight } from "lucide-react";
 import { ReaderActions } from "@/components/reader-actions";
 import { OnlineAudio } from "@/components/online-audio";
+import { GuitarReader } from "@/components/guitar-reader";
 import { getAdjacentHymns, getHymn, getHymns } from "@/lib/hymns/data";
+import { getGuitarArrangement } from "@/lib/hymns/guitar-data";
 import type { HymnKind, HymnLanguage } from "@/lib/hymns/types";
 
 function englishReferenceNumber(reference: string | undefined): string | undefined {
@@ -55,6 +57,7 @@ export default async function HymnPage({params,searchParams}:{params:Promise<{ki
   const audioUrl=validAudioUrl(hymn.audio_url)??(!isMyanmar?validAudioUrl(relatedMyanmarHymn?.audio_url):undefined);
   const hasLongTitle=Array.from(title).length>32;
   const hasDetails=Object.keys(hymn.metadata).length>0;
+  const guitarArrangement=getGuitarArrangement(hymn);
 
   return <main className="page reader-page">
     <Link href={kind==="hymns"?"/":"/yp"} className="focus-ring mb-6 inline-flex items-center gap-2 rounded-lg text-xs font-semibold text-[var(--muted)]"><ArrowLeft size={15}/>Back to {kind==="yp"?"YP Songs":"Hymns"}</Link>
@@ -75,7 +78,7 @@ export default async function HymnPage({params,searchParams}:{params:Promise<{ki
         <div className="mt-4"><ReaderActions hymn={{id:hymn.id,kind,language,number:hymn.number,title,sections:hymn.sections}}/></div>
       </header>
 
-      <div className={`mx-auto max-w-2xl py-7 ${isMyanmar?"reader-lyrics-myanmar":"leading-[1.8]"}`} style={isMyanmar?undefined:{fontSize:"var(--lyric-size,20px)"}}>
+      {guitarArrangement?<GuitarReader sections={hymn.sections} arrangement={guitarArrangement}/>:<div className={`mx-auto max-w-2xl py-7 ${isMyanmar?"reader-lyrics-myanmar":"leading-[1.8]"}`} style={isMyanmar?undefined:{fontSize:"var(--lyric-size,20px)"}}>
         {hymn.sections.map((section,index)=>{
           const chorus=section.type==="chorus"||section.type==="refrain";
           return <section key={`${section.type}-${section.number}-${index}`} className={`mb-7 last:mb-0 ${chorus?"border-l-2 border-[color-mix(in_srgb,var(--gold)_72%,transparent)] pl-4":""}`}>
@@ -83,7 +86,7 @@ export default async function HymnPage({params,searchParams}:{params:Promise<{ki
             <div className={isMyanmar?"myanmar":""}>{section.lines.map((line,i)=>kind==="yp"&&isChordOnlyLine(line)?null:<p key={i} className={isMyanmar?undefined:"min-h-[1.6em]"}>{line}</p>)}</div>
           </section>;
         })}
-      </div>
+      </div>}
 
       {hasDetails&&<details className="group mb-7 border-t border-[var(--line)]">
         <summary className="focus-ring flex min-h-12 cursor-pointer list-none items-center rounded-lg text-sm font-bold [&::-webkit-details-marker]:hidden">Hymn details<ChevronRight className="ml-auto text-[var(--muted)] transition-transform group-open:rotate-90" size={18}/></summary>
