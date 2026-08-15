@@ -3,7 +3,6 @@ import type { HymnKind, HymnLanguage } from "./hymns/types";
 export type StoredHymn = { id: string; kind: HymnKind; language: HymnLanguage; number: number | null; title: string };
 export const FAVORITES_KEY = "hymn-house:favorites";
 export const FONT_SIZE_KEY = "hymn-house:font-size";
-export const THEME_KEY = "hymn-house:theme";
 
 export function readStored<T>(key: string, fallback: T): T {
   if (typeof window === "undefined") return fallback;
