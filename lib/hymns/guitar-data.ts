@@ -18,8 +18,9 @@ const reviewedArrangements = new Map<number, GuitarArrangement>([
   [hymnFiveArrangement.myanmarHymnNumber, hymnFiveArrangement],
 ]);
 
-function lineText(segments: GuitarSegment[]): string {
-  return segments.map((segment) => segment.text).join("");
+function lineText(line: GuitarArrangement["verses"][number]["lines"][number]): string {
+  const phrases=line.phrases??(line.segments?[{segments:line.segments}]:[]);
+  return phrases.flatMap((phrase)=>phrase.segments).map((segment: GuitarSegment) => segment.text).join("");
 }
 
 function matchesLyrics(hymn: HymnRecord, arrangement: GuitarArrangement): boolean {
@@ -27,7 +28,7 @@ function matchesLyrics(hymn: HymnRecord, arrangement: GuitarArrangement): boolea
   return arrangement.verses.every((verse) => {
     const section = verses.find((candidate) => candidate.number === verse.number);
     return section?.lines.length === verse.lines.length
-      && verse.lines.every((line, index) => lineText(line.segments) === section.lines[index]);
+      && verse.lines.every((line, index) => lineText(line) === section.lines[index]);
   });
 }
 

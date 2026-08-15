@@ -1,7 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import type { GuitarReaderProps } from "@/lib/hymns/guitar-types";
+import type { GuitarLine, GuitarPhrase, GuitarReaderProps } from "@/lib/hymns/guitar-types";
+
+function linePhrases(line:GuitarLine):GuitarPhrase[] {
+  if(line.phrases)return line.phrases;
+  const segments=line.segments??[];
+  const breaks=[0,...(line.phraseBreaks??[]),segments.length];
+  return breaks.slice(0,-1).map((start,index)=>({segments:segments.slice(start,breaks[index+1])})).filter((phrase)=>phrase.segments.length>0);
+}
 
 export function GuitarReader({ sections, arrangement }: GuitarReaderProps) {
   const [mode, setMode] = useState<"lyrics" | "guitar">("lyrics");
@@ -21,12 +28,14 @@ export function GuitarReader({ sections, arrangement }: GuitarReaderProps) {
       {arrangement.verses.map((verse) => <section key={verse.number} className="guitar-verse">
         <p className="guitar-verse-number">{verse.number}</p>
         <div className="myanmar">
-          {verse.lines.map((line, lineIndex) => <p className="guitar-line" key={lineIndex}>
-            {line.segments.map((segment, segmentIndex) => <span className="guitar-segment" key={segmentIndex}>
-              {segment.chord && <span className="guitar-chord" aria-label={`Chord ${segment.chord}`}>{segment.chord}</span>}
-              {segment.text}
-            </span>)}
-          </p>)}
+          {verse.lines.map((line, lineIndex) => <div className="guitar-line" key={lineIndex}>
+            {linePhrases(line).map((phrase,phraseIndex)=><div className="guitar-phrase" key={phraseIndex}>
+              {phrase.segments.map((segment, segmentIndex) => <span className="guitar-segment" key={segmentIndex}>
+                <span className="guitar-chord" aria-label={segment.chord?`Chord ${segment.chord}`:undefined}>{segment.chord??"\u00a0"}</span>
+                <span className="guitar-lyric-segment">{segment.text}</span>
+              </span>)}
+            </div>)}
+          </div>)}
         </div>
       </section>)}
     </div>}

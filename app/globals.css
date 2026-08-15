@@ -51,9 +51,12 @@ a { color:inherit; text-decoration:none; }
 .guitar-verse { position:relative; margin-bottom:2rem; padding-left:1.7rem; }
 .guitar-verse:last-child { margin-bottom:0; }
 .guitar-verse-number { position:absolute; top:.8rem; left:0; min-height:0!important; color:var(--gold); font-family:Arial,sans-serif; font-size:.72rem; font-weight:800; }
-.guitar-line { min-height:2.9em; margin:0 0 .18rem; padding-top:1.15em; font-family:var(--font-padauk),"Padauk","Myanmar Text","Noto Sans Myanmar",sans-serif; line-height:1.55; overflow-wrap:anywhere; }
-.guitar-segment { position:relative; }
-.guitar-chord { position:absolute; left:0; top:-1.4em; color:var(--gold); font-family:ui-monospace,"SFMono-Regular",Consolas,"Liberation Mono",monospace; font-size:.72em; font-weight:800; line-height:1; white-space:nowrap; }
+.guitar-line { margin:0 0 .35rem; font-family:var(--font-padauk),"Padauk","Myanmar Text","Noto Sans Myanmar",sans-serif; line-height:1.55; }
+.guitar-phrase { display:flex; flex-wrap:nowrap; align-items:start; max-width:100%; min-height:2.75em; margin-bottom:.12rem; }
+.guitar-phrase:last-child { margin-bottom:0; }
+.guitar-segment { display:inline-grid; flex:0 0 auto; grid-template-rows:1.05em auto; min-width:0; }
+.guitar-chord { display:block; color:var(--gold); font-family:ui-monospace,"SFMono-Regular",Consolas,"Liberation Mono",monospace; font-size:.72em; font-weight:800; line-height:1; white-space:nowrap; }
+.guitar-lyric-segment { display:block; white-space:pre; }
 @media (max-width:380px) { .guitar-view { font-size:clamp(18px,var(--lyric-size,21px),24px); } .guitar-verse { padding-left:1.35rem; } .guitar-info { gap:.42rem; } }
 @media (min-width:768px) { .reader-page { width:min(100%,56rem); padding-bottom:4rem; } .reader-title-myanmar { font-size:30px; } .reader-title-myanmar-long { font-size:27px; } }
 @media (prefers-reduced-motion:reduce) { .reader-page { animation:none; } }

@@ -6,6 +6,12 @@ export interface GuitarSegment {
 }
 
 export interface GuitarLine {
+  segments?: GuitarSegment[];
+  phrases?: GuitarPhrase[];
+  phraseBreaks?: number[];
+}
+
+export interface GuitarPhrase {
   segments: GuitarSegment[];
 }
 
