@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-15T18:53:34.949Z",
+  "generatedAt": "2026-08-15T19:48:37.580Z",
   "range": {
     "start": 2,
     "end": 20
@@ -219,7 +219,7 @@
         "A7"
       ],
       "sourceChordEventCount": 19,
-      "reason": "Source chords found; Myanmar syllable anchors require manual review.",
+      "reason": "Myanmar syllable anchors manually reviewed and included in the production index.",
       "structure": [
         {
           "type": "verse",
@@ -237,8 +237,8 @@
           "lineCount": 4
         }
       ],
-      "myanmarAnchorsPrepared": false,
-      "status": "needs-review"
+      "myanmarAnchorsPrepared": true,
+      "status": "reviewed"
     },
     {
       "myanmarNumber": 7,
@@ -262,7 +262,7 @@
         "A"
       ],
       "sourceChordEventCount": 13,
-      "reason": "Source chords found; Myanmar syllable anchors require manual review.",
+      "reason": "Myanmar syllable anchors manually reviewed and included in the production index.",
       "structure": [
         {
           "type": "verse",
@@ -285,8 +285,8 @@
           "lineCount": 4
         }
       ],
-      "myanmarAnchorsPrepared": false,
-      "status": "needs-review"
+      "myanmarAnchorsPrepared": true,
+      "status": "reviewed"
     },
     {
       "myanmarNumber": 8,
@@ -309,7 +309,7 @@
         "D7"
       ],
       "sourceChordEventCount": 11,
-      "reason": "Source chords found; Myanmar syllable anchors require manual review.",
+      "reason": "Myanmar syllable anchors manually reviewed and included in the production index.",
       "structure": [
         {
           "type": "verse",
@@ -322,8 +322,8 @@
           "lineCount": 4
         }
       ],
-      "myanmarAnchorsPrepared": false,
-      "status": "needs-review"
+      "myanmarAnchorsPrepared": true,
+      "status": "reviewed"
     },
     {
       "myanmarNumber": 9,
@@ -347,7 +347,7 @@
         "D7"
       ],
       "sourceChordEventCount": 11,
-      "reason": "Source chords found; Myanmar syllable anchors require manual review.",
+      "reason": "Myanmar syllable anchors manually reviewed and included in the production index.",
       "structure": [
         {
           "type": "verse",
@@ -355,8 +355,8 @@
           "lineCount": 6
         }
       ],
-      "myanmarAnchorsPrepared": false,
-      "status": "needs-review"
+      "myanmarAnchorsPrepared": true,
+      "status": "reviewed"
     },
     {
       "myanmarNumber": 10,
@@ -379,7 +379,7 @@
         "D7"
       ],
       "sourceChordEventCount": 12,
-      "reason": "Source chords found; Myanmar syllable anchors require manual review.",
+      "reason": "Myanmar syllable anchors manually reviewed and included in the production index.",
       "structure": [
         {
           "type": "verse",
@@ -412,8 +412,8 @@
           "lineCount": 4
         }
       ],
-      "myanmarAnchorsPrepared": false,
-      "status": "needs-review"
+      "myanmarAnchorsPrepared": true,
+      "status": "reviewed"
     },
     {
       "myanmarNumber": 11,

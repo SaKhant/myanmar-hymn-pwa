@@ -25,8 +25,8 @@ export function GuitarReader({ sections, arrangement }: GuitarReaderProps) {
         <span>Capo <strong>{arrangement.capo}</strong></span><i aria-hidden="true">•</i>
         <span>Play <strong>{arrangement.playKey}</strong></span>
       </div>
-      {arrangement.verses.map((verse) => <section key={verse.number} className="guitar-verse">
-        <p className="guitar-verse-number">{verse.number}</p>
+      {arrangement.verses.map((verse,sectionIndex) => <section key={`${verse.type??"verse"}-${verse.number}-${sectionIndex}`} className="guitar-verse">
+        <p className="guitar-verse-number">{verse.type==="chorus"?"Ch":verse.number}</p>
         <div className="myanmar">
           {verse.lines.map((line, lineIndex) => <div className="guitar-line" key={lineIndex}>
             {linePhrases(line).map((phrase,phraseIndex)=><div className="guitar-phrase" key={phraseIndex}>

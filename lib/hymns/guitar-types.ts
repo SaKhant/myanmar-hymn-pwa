@@ -16,7 +16,8 @@ export interface GuitarPhrase {
 }
 
 export interface GuitarVerse {
-  number: number;
+  type?: string;
+  number: number | null;
   lines: GuitarLine[];
 }
 
