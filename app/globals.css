@@ -7,7 +7,7 @@
 * { box-sizing:border-box; }
 html { background:var(--paper); color:var(--ink); scroll-behavior:auto; }
 body { margin:0; background:var(--paper); color:var(--ink); font-family:Arial,"Noto Sans Myanmar","Myanmar Text",sans-serif; }
-.app-splash { position:fixed; inset:0; z-index:100; display:grid; place-items:center; background:#000; opacity:1; transition:opacity .3s ease; }
+.app-splash { position:fixed; inset:0; z-index:100; display:grid; place-items:center; background:var(--paper); opacity:1; transition:opacity .3s ease; }
 .app-splash-fading { opacity:0; pointer-events:none; }
 .app-splash-image { width:min(78vw,31rem); height:auto; object-fit:contain; }
 @media (prefers-reduced-motion:reduce) { .app-splash { transition:none; } }
