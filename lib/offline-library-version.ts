@@ -1,0 +1,3 @@
+export const OFFLINE_LIBRARY_VERSION = "1";
+export const OFFLINE_LIBRARY_RELEASE_DATE = "2026-08-15";
+

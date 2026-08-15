@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, ChevronRight, Volume2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, ChevronRight } from "lucide-react";
 import { ReaderActions } from "@/components/reader-actions";
+import { OnlineAudio } from "@/components/online-audio";
 import { getAdjacentHymns, getHymn, getHymns } from "@/lib/hymns/data";
 import type { HymnKind, HymnLanguage } from "@/lib/hymns/types";
 
@@ -91,7 +92,7 @@ export default async function HymnPage({params,searchParams}:{params:Promise<{ki
         </div>
       </details>}
 
-      {audioUrl&&<div className="surface mb-7 p-5"><p className="mb-3 flex items-center gap-2 font-bold"><Volume2 size={19}/>Audio</p><audio controls preload="none" className="w-full" src={audioUrl}>Your browser does not support audio.</audio></div>}
+      {audioUrl&&<OnlineAudio src={audioUrl}/>}
 
       <nav className="flex items-center justify-between gap-3 border-t border-[var(--line)] pt-6">
         {adjacent.previous?<Link className="focus-ring inline-flex min-h-11 items-center gap-1.5 rounded-[12px] border border-[var(--line)] px-3 py-2 text-sm font-bold" href={`/${kind}/${language}/${adjacent.previous.id}`}><ArrowLeft size={17}/>Previous</Link>:<span aria-hidden="true"/>}
