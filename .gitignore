@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Next.js and deployment output
+.next/
+out/
+.vercel/
+
+# Local environment files (keep documented examples)
+.env
+.env.*
+!.env.example
+
+# Build and tool caches
+*.tsbuildinfo
+.turbo/
+.eslintcache
+coverage/
+
+# Logs and temporary files
+*.log
+tmp/
+temp/
+*.tmp
+hymn-pwa-*-qr.png
+
+# Operating-system files
+.DS_Store
+Thumbs.db

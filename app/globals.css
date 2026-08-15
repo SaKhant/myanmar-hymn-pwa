@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+:root { --paper:#fbfaf6; --ink:#25322b; --muted:#68736c; --line:#e4e5dc; --sage:#456b57; --sage-soft:#e9f0e9; --gold:#9b7541; --active-red:#c83f45; --active-blue:#3478c7; --nav-hymns:#f5c518; --nav-yp:#25cf62; }
+@media (prefers-color-scheme: dark) { :root { --paper:#151a17; --ink:#edf1eb; --muted:#aab4ad; --line:#303a33; --sage:#95bda3; --sage-soft:#223229; --gold:#d8b67b; --active-red:#ff6b70; --active-blue:#69a9f5; --nav-hymns:#ffd52a; --nav-yp:#39e978; } }
+:root[data-theme="light"] { --paper:#fbfaf6; --ink:#25322b; --muted:#68736c; --line:#e4e5dc; --sage:#456b57; --sage-soft:#e9f0e9; --gold:#9b7541; --active-red:#c83f45; --active-blue:#3478c7; --nav-hymns:#f5c518; --nav-yp:#25cf62; color-scheme:light; }
+:root[data-theme="dark"] { --paper:#151a17; --ink:#edf1eb; --muted:#aab4ad; --line:#303a33; --sage:#95bda3; --sage-soft:#223229; --gold:#d8b67b; --active-red:#ff6b70; --active-blue:#69a9f5; --nav-hymns:#ffd52a; --nav-yp:#39e978; color-scheme:dark; }
+* { box-sizing:border-box; }
+html { background:var(--paper); color:var(--ink); scroll-behavior:smooth; }
+body { margin:0; background:var(--paper); color:var(--ink); font-family:Arial,"Noto Sans Myanmar","Myanmar Text",sans-serif; }
+.app-splash { position:fixed; inset:0; z-index:100; display:grid; place-items:center; background:#000; opacity:1; transition:opacity .3s ease; }
+.app-splash-fading { opacity:0; pointer-events:none; }
+.app-splash-image { width:min(78vw,31rem); height:auto; object-fit:contain; }
+@media (prefers-reduced-motion:reduce) { .app-splash { transition:none; } }
+button,a,input { -webkit-tap-highlight-color:transparent; }
+a { color:inherit; text-decoration:none; }
+.bottom-nav-link { color:var(--muted); }
+.bottom-nav-link[data-tab="hymns"][aria-current="page"] { color:var(--active-blue); }
+.bottom-nav-link[data-tab="yp"][aria-current="page"] { color:var(--active-blue); }
+.bottom-nav-link[data-tab="favorites"][aria-current="page"] { color:var(--active-blue); }
+.bottom-nav-link[data-tab="settings"][aria-current="page"] { color:var(--active-blue); }
+.bottom-nav-link svg { color:currentColor; stroke:currentColor; }
+.shell { min-height:100dvh; padding-bottom:5.5rem; }
+.page { width:min(100% - 2rem, 72rem); margin-inline:auto; padding-block:2rem 3rem; }
+.hymn-list-row { content-visibility:auto; contain-intrinsic-size:auto 73px; }
+.eyebrow { color:var(--gold); font-size:.74rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
+.surface { border:1px solid var(--line); background:color-mix(in srgb,var(--paper) 92%,var(--sage-soft)); border-radius:1.25rem; }
+.theme-option-light { background:var(--active-blue); color:#fff; }
+.theme-option-dark { background:#a96bd8; color:#000; }
+.focus-ring:focus-visible { outline:3px solid color-mix(in srgb,var(--sage) 40%,transparent); outline-offset:2px; }
+.myanmar { font-family:var(--font-padauk),"Padauk","Myanmar Text","Noto Sans Myanmar",sans-serif; line-height:1.82; }
+.myanmar-search-input { color:var(--ink); -webkit-text-fill-color:var(--ink); caret-color:var(--active-red); opacity:1; font-family:var(--font-padauk),"Padauk","Myanmar Text","Noto Sans Myanmar",sans-serif; line-height:1.5; }
+.myanmar-search-input::placeholder { color:var(--muted); -webkit-text-fill-color:var(--muted); opacity:1; }
+.search-input-clean:focus,.search-input-clean:focus-visible { outline:none; border-color:var(--line); box-shadow:none; }
+.reader-page { width:min(100% - 2.25rem, 56rem); padding-bottom:calc(7rem + env(safe-area-inset-bottom)); }
+.reader-kicker { font-size:.67rem; letter-spacing:.1em; opacity:.88; }
+.reader-current-version { color:var(--gold); font-size:.75rem; }
+.reader-version-separator { margin-inline:.55rem; color:var(--muted); }
+.reader-version-link,.reader-version-reference { display:inline-flex; align-items:center; border-radius:.25rem; color:var(--sage); font-size:.75rem; letter-spacing:.09em; padding:.1rem .05rem; }
+.reader-version-link { text-decoration:underline; text-decoration-color:transparent; text-underline-offset:3px; transition:text-decoration-color .15s ease,color .15s ease; }
+.reader-version-link:hover { text-decoration-color:currentColor; }
+.reader-version-link[aria-current="page"] { color:var(--gold); text-decoration-color:currentColor; }
+.reader-version-language { color:var(--muted); }
+.reader-title-myanmar { font-family:var(--font-padauk),"Padauk","Myanmar Text","Noto Sans Myanmar",sans-serif; font-size:27px; font-weight:400; line-height:1.48; letter-spacing:0; }
+.reader-title-myanmar-long { font-size:24px; line-height:1.52; }
+.reader-lyrics-myanmar { font-family:var(--font-padauk),"Padauk","Myanmar Text","Noto Sans Myanmar",sans-serif; font-size:var(--lyric-size,21px); line-height:1.8; text-align:left; }
+.reader-lyrics-myanmar p { min-height:1.8em; }
+@media (min-width:768px) { .reader-page { width:min(100%,56rem); padding-bottom:4rem; } .reader-title-myanmar { font-size:30px; } .reader-title-myanmar-long { font-size:27px; } }
+@media (min-width:768px) { .shell { padding-left:15rem; padding-bottom:0; } .page { padding:3rem 2.5rem 4rem; width:min(100%,80rem); } }
