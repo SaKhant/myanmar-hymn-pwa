@@ -1,0 +1,1096 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-15T18:39:13.746Z",
+  "range": {
+    "start": 2,
+    "end": 20
+  },
+  "policy": {
+    "productionRequiresStatus": "reviewed",
+    "generatedDefaultStatus": "needs-review",
+    "anchorMethod": "explicit Myanmar text segments"
+  },
+  "records": [
+    {
+      "myanmarNumber": 2,
+      "myanmarTitle": "ဘုန်းတော်၊ ဘုန်းတော်၊ ဘုန်းတော်၊ ချီးမွမ်း၍ လေးမြတ်မည်",
+      "englishReference": "2",
+      "englishSourceNumber": 2,
+      "englishRecordFound": true,
+      "sourceUrl": "https://www.hymnal.net/en/hymn/h/2",
+      "sourceFound": true,
+      "chordInformationFound": true,
+      "originalKey": "F Major",
+      "suggestedPlayKey": "D",
+      "capo": 3,
+      "timeSignature": "4/4",
+      "meter": "12.13.12.10.",
+      "chordsUsed": [
+        "D",
+        "A",
+        "G",
+        "Bm"
+      ],
+      "sourceChordEventCount": 20,
+      "reason": "Source chords found; Myanmar syllable anchors require manual review.",
+      "structure": [
+        {
+          "type": "verse",
+          "number": 1,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 2,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 3,
+          "lineCount": 4
+        }
+      ],
+      "myanmarAnchorsPrepared": false,
+      "status": "needs-review"
+    },
+    {
+      "myanmarNumber": 3,
+      "myanmarTitle": "ကြွပါ၊ ဘုန်းကြီးဘုရင်",
+      "englishReference": "3",
+      "englishSourceNumber": 3,
+      "englishRecordFound": true,
+      "sourceUrl": "https://www.hymnal.net/en/hymn/h/3",
+      "sourceFound": true,
+      "chordInformationFound": true,
+      "originalKey": "F Major",
+      "suggestedPlayKey": "D",
+      "capo": 3,
+      "timeSignature": "3/4",
+      "meter": "6.6.4.6.6.6.4.",
+      "chordsUsed": [
+        "D",
+        "A",
+        "G"
+      ],
+      "sourceChordEventCount": 12,
+      "reason": "Source chords found; Myanmar syllable anchors require manual review.",
+      "structure": [
+        {
+          "type": "verse",
+          "number": 1,
+          "lineCount": 6
+        },
+        {
+          "type": "verse",
+          "number": 2,
+          "lineCount": 6
+        },
+        {
+          "type": "verse",
+          "number": 3,
+          "lineCount": 6
+        },
+        {
+          "type": "verse",
+          "number": 4,
+          "lineCount": 6
+        }
+      ],
+      "myanmarAnchorsPrepared": false,
+      "status": "needs-review"
+    },
+    {
+      "myanmarNumber": 4,
+      "myanmarTitle": "ကောင်းကင်အဖ၊ မေတ္တာနက်နဲ",
+      "englishReference": "4",
+      "englishSourceNumber": 4,
+      "englishRecordFound": true,
+      "sourceUrl": "https://www.hymnal.net/en/hymn/h/4",
+      "sourceFound": true,
+      "chordInformationFound": true,
+      "originalKey": "D Major",
+      "suggestedPlayKey": "D",
+      "capo": 0,
+      "timeSignature": "3/4",
+      "meter": "8.8.8.8.",
+      "chordsUsed": [
+        "D",
+        "G",
+        "A"
+      ],
+      "sourceChordEventCount": 11,
+      "reason": "Source chords found; Myanmar syllable anchors require manual review.",
+      "structure": [
+        {
+          "type": "verse",
+          "number": 1,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 2,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 3,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 4,
+          "lineCount": 4
+        }
+      ],
+      "myanmarAnchorsPrepared": false,
+      "status": "needs-review"
+    },
+    {
+      "myanmarNumber": 5,
+      "myanmarTitle": "အဖဘုရားကို လေးမြတ်မည်",
+      "englishReference": "5",
+      "englishSourceNumber": 5,
+      "englishRecordFound": true,
+      "sourceUrl": "https://www.hymnal.net/en/hymn/h/5",
+      "sourceFound": true,
+      "chordInformationFound": true,
+      "originalKey": "Bb Major",
+      "suggestedPlayKey": "G",
+      "capo": 3,
+      "timeSignature": "4/4",
+      "meter": "8.7.8.7.D.",
+      "chordsUsed": [
+        "G",
+        "C",
+        "D",
+        "Em",
+        "B",
+        "Am"
+      ],
+      "sourceChordEventCount": 18,
+      "reason": "Source chords found; Myanmar syllable anchors require manual review.",
+      "structure": [
+        {
+          "type": "verse",
+          "number": 1,
+          "lineCount": 8
+        },
+        {
+          "type": "verse",
+          "number": 2,
+          "lineCount": 8
+        },
+        {
+          "type": "verse",
+          "number": 3,
+          "lineCount": 8
+        }
+      ],
+      "myanmarAnchorsPrepared": false,
+      "status": "needs-review"
+    },
+    {
+      "myanmarNumber": 6,
+      "myanmarTitle": "သန့်ရှင်း၊ သန့်ရှင်း၊ သန့်ရှင်း၊ ဘုန်းတန်ခိုးကြီးဘုရား",
+      "englishReference": "6",
+      "englishSourceNumber": 6,
+      "englishRecordFound": true,
+      "sourceUrl": "https://www.hymnal.net/en/hymn/h/6",
+      "sourceFound": true,
+      "chordInformationFound": true,
+      "originalKey": "Eb Major",
+      "suggestedPlayKey": "D",
+      "capo": 1,
+      "timeSignature": "4/4",
+      "meter": "12.13.12.10.",
+      "chordsUsed": [
+        "D",
+        "A",
+        "G",
+        "E"
+      ],
+      "sourceChordEventCount": 18,
+      "reason": "Source chords found; Myanmar syllable anchors require manual review.",
+      "structure": [
+        {
+          "type": "verse",
+          "number": 1,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 2,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 3,
+          "lineCount": 4
+        }
+      ],
+      "myanmarAnchorsPrepared": false,
+      "status": "needs-review"
+    },
+    {
+      "myanmarNumber": 7,
+      "myanmarTitle": "ဘုန်းကြီးပါစေသော ခမည်းတော်",
+      "englishReference": "7",
+      "englishSourceNumber": 7,
+      "englishRecordFound": true,
+      "sourceUrl": "https://www.hymnal.net/en/hymn/h/7",
+      "sourceFound": true,
+      "chordInformationFound": true,
+      "originalKey": "Eb Major",
+      "suggestedPlayKey": "D",
+      "capo": 1,
+      "timeSignature": "4/4",
+      "meter": "8.7.8.7. with chorus.",
+      "chordsUsed": [
+        "D",
+        "Em",
+        "G",
+        "A"
+      ],
+      "sourceChordEventCount": 11,
+      "reason": "Source chords found; Myanmar syllable anchors require manual review.",
+      "structure": [
+        {
+          "type": "verse",
+          "number": 1,
+          "lineCount": 4
+        },
+        {
+          "type": "chorus",
+          "number": null,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 2,
+          "lineCount": 4
+        },
+        {
+          "type": "chorus",
+          "number": null,
+          "lineCount": 4
+        }
+      ],
+      "myanmarAnchorsPrepared": false,
+      "status": "needs-review"
+    },
+    {
+      "myanmarNumber": 8,
+      "myanmarTitle": "ကောင်းချီးပေးဘုရားကို ချီးမွမ်း",
+      "englishReference": "8",
+      "englishSourceNumber": 8,
+      "englishRecordFound": true,
+      "sourceUrl": "https://www.hymnal.net/en/hymn/h/8",
+      "sourceFound": true,
+      "chordInformationFound": true,
+      "originalKey": "G Major",
+      "suggestedPlayKey": "G",
+      "capo": 0,
+      "timeSignature": "4/4",
+      "meter": "8.8.8.8.",
+      "chordsUsed": [
+        "G",
+        "D",
+        "C"
+      ],
+      "sourceChordEventCount": 10,
+      "reason": "Source chords found; Myanmar syllable anchors require manual review.",
+      "structure": [
+        {
+          "type": "verse",
+          "number": 1,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 2,
+          "lineCount": 4
+        }
+      ],
+      "myanmarAnchorsPrepared": false,
+      "status": "needs-review"
+    },
+    {
+      "myanmarNumber": 9,
+      "myanmarTitle": "ခမည်းတော်ဘုရား ဘုန်းကြီးစေ",
+      "englishReference": "9",
+      "englishSourceNumber": 9,
+      "englishRecordFound": true,
+      "sourceUrl": "https://www.hymnal.net/en/hymn/h/9",
+      "sourceFound": true,
+      "chordInformationFound": true,
+      "originalKey": "Bb Major",
+      "suggestedPlayKey": "G",
+      "capo": 3,
+      "timeSignature": "4/4",
+      "meter": "8.7.8.7.8.7.",
+      "chordsUsed": [
+        "G",
+        "C",
+        "D"
+      ],
+      "sourceChordEventCount": 9,
+      "reason": "Source chords found; Myanmar syllable anchors require manual review.",
+      "structure": [
+        {
+          "type": "verse",
+          "number": 1,
+          "lineCount": 6
+        }
+      ],
+      "myanmarAnchorsPrepared": false,
+      "status": "needs-review"
+    },
+    {
+      "myanmarNumber": 10,
+      "myanmarTitle": "အို ၊ ထာဝရအဖဘုရား",
+      "englishReference": "10",
+      "englishSourceNumber": 10,
+      "englishRecordFound": true,
+      "sourceUrl": "https://www.hymnal.net/en/hymn/h/10",
+      "sourceFound": true,
+      "chordInformationFound": true,
+      "originalKey": "G Major",
+      "suggestedPlayKey": "G",
+      "capo": 0,
+      "timeSignature": "3/4",
+      "meter": "8.8.8.8.",
+      "chordsUsed": [
+        "G",
+        "C",
+        "D"
+      ],
+      "sourceChordEventCount": 11,
+      "reason": "Source chords found; Myanmar syllable anchors require manual review.",
+      "structure": [
+        {
+          "type": "verse",
+          "number": 1,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 2,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 3,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 4,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 5,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 6,
+          "lineCount": 4
+        }
+      ],
+      "myanmarAnchorsPrepared": false,
+      "status": "needs-review"
+    },
+    {
+      "myanmarNumber": 11,
+      "myanmarTitle": "ခမည်းတော်သည် ဝိညာဉ်တော်ဖြစ်၊",
+      "englishReference": "11",
+      "englishSourceNumber": 11,
+      "englishRecordFound": true,
+      "sourceUrl": "https://www.hymnal.net/en/hymn/h/11",
+      "sourceFound": true,
+      "chordInformationFound": true,
+      "originalKey": "Ab Major",
+      "suggestedPlayKey": "G",
+      "capo": 1,
+      "timeSignature": "4/4",
+      "meter": "8.6.8.6.",
+      "chordsUsed": [
+        "G",
+        "Am",
+        "C",
+        "D"
+      ],
+      "sourceChordEventCount": 8,
+      "reason": "Source chords found; Myanmar syllable anchors require manual review.",
+      "structure": [
+        {
+          "type": "verse",
+          "number": 1,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 2,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 3,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 4,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 5,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 6,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 7,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 8,
+          "lineCount": 4
+        }
+      ],
+      "myanmarAnchorsPrepared": false,
+      "status": "needs-review"
+    },
+    {
+      "myanmarNumber": 12,
+      "myanmarTitle": "အဖဘုရား အသက်ရင်းမြစ်",
+      "englishReference": "12",
+      "englishSourceNumber": 12,
+      "englishRecordFound": true,
+      "sourceUrl": "https://www.hymnal.net/en/hymn/h/12",
+      "sourceFound": true,
+      "chordInformationFound": true,
+      "originalKey": "D Major",
+      "suggestedPlayKey": "D",
+      "capo": 0,
+      "timeSignature": "3/4",
+      "meter": "8.6.8.6.",
+      "chordsUsed": [
+        "D",
+        "G",
+        "A"
+      ],
+      "sourceChordEventCount": 10,
+      "reason": "Source chords found; Myanmar syllable anchors require manual review.",
+      "structure": [
+        {
+          "type": "verse",
+          "number": 1,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 2,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 3,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 4,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 5,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 6,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 7,
+          "lineCount": 4
+        }
+      ],
+      "myanmarAnchorsPrepared": false,
+      "status": "needs-review"
+    },
+    {
+      "myanmarNumber": 13,
+      "myanmarTitle": "ကိုယ်တော်သည် မေတ္တာအလင်းရှင်",
+      "englishReference": "13",
+      "englishSourceNumber": 13,
+      "englishRecordFound": true,
+      "sourceUrl": "https://www.hymnal.net/en/hymn/h/13",
+      "sourceFound": true,
+      "chordInformationFound": true,
+      "originalKey": "F Major",
+      "suggestedPlayKey": "D",
+      "capo": 3,
+      "timeSignature": "3/4",
+      "meter": "8.7.8.7. with chorus.",
+      "chordsUsed": [
+        "D",
+        "A",
+        "G"
+      ],
+      "sourceChordEventCount": 15,
+      "reason": "Source chords found; Myanmar syllable anchors require manual review.",
+      "structure": [
+        {
+          "type": "verse",
+          "number": 1,
+          "lineCount": 4
+        },
+        {
+          "type": "chorus",
+          "number": null,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 2,
+          "lineCount": 4
+        },
+        {
+          "type": "chorus",
+          "number": null,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 3,
+          "lineCount": 4
+        },
+        {
+          "type": "chorus",
+          "number": null,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 4,
+          "lineCount": 4
+        },
+        {
+          "type": "chorus",
+          "number": null,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 5,
+          "lineCount": 4
+        },
+        {
+          "type": "chorus",
+          "number": null,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 6,
+          "lineCount": 4
+        },
+        {
+          "type": "chorus",
+          "number": null,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 7,
+          "lineCount": 4
+        },
+        {
+          "type": "chorus",
+          "number": null,
+          "lineCount": 4
+        }
+      ],
+      "myanmarAnchorsPrepared": false,
+      "status": "needs-review"
+    },
+    {
+      "myanmarNumber": 14,
+      "myanmarTitle": "ထာဝရ၊ အရူပ၊ ပညာတော် ဘုရား",
+      "englishReference": "14",
+      "englishSourceNumber": 14,
+      "englishRecordFound": true,
+      "sourceUrl": "https://www.hymnal.net/en/hymn/h/14",
+      "sourceFound": true,
+      "chordInformationFound": true,
+      "originalKey": "G Major",
+      "suggestedPlayKey": "G",
+      "capo": 0,
+      "timeSignature": "3/4",
+      "meter": "11.11.11.11.",
+      "chordsUsed": [
+        "G",
+        "C",
+        "A",
+        "D",
+        "Em"
+      ],
+      "sourceChordEventCount": 20,
+      "reason": "Source chords found; Myanmar syllable anchors require manual review.",
+      "structure": [
+        {
+          "type": "verse",
+          "number": 1,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 2,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 3,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 4,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 5,
+          "lineCount": 4
+        }
+      ],
+      "myanmarAnchorsPrepared": false,
+      "status": "needs-review"
+    },
+    {
+      "myanmarNumber": 15,
+      "myanmarTitle": "သာလွန်ထူးမြတ်သောဘုရား",
+      "englishReference": "15",
+      "englishSourceNumber": 15,
+      "englishRecordFound": true,
+      "sourceUrl": "https://www.hymnal.net/en/hymn/h/15",
+      "sourceFound": true,
+      "chordInformationFound": true,
+      "originalKey": "D Major",
+      "suggestedPlayKey": "D",
+      "capo": 0,
+      "timeSignature": "4/4",
+      "meter": "7.6.7.6.D.",
+      "chordsUsed": [
+        "D",
+        "G",
+        "A"
+      ],
+      "sourceChordEventCount": 17,
+      "reason": "Source chords found; Myanmar syllable anchors require manual review.",
+      "structure": [
+        {
+          "type": "verse",
+          "number": 1,
+          "lineCount": 8
+        },
+        {
+          "type": "verse",
+          "number": 2,
+          "lineCount": 8
+        },
+        {
+          "type": "verse",
+          "number": 3,
+          "lineCount": 8
+        },
+        {
+          "type": "verse",
+          "number": 4,
+          "lineCount": 8
+        },
+        {
+          "type": "verse",
+          "number": 5,
+          "lineCount": 8
+        }
+      ],
+      "myanmarAnchorsPrepared": false,
+      "status": "needs-review"
+    },
+    {
+      "myanmarNumber": 16,
+      "myanmarTitle": "ခမည်းတော် အမြဲစိမ်းလန်းနေ",
+      "englishReference": "16",
+      "englishSourceNumber": 16,
+      "englishRecordFound": true,
+      "sourceUrl": "https://www.hymnal.net/en/hymn/h/16",
+      "sourceFound": true,
+      "chordInformationFound": true,
+      "originalKey": "C Major",
+      "suggestedPlayKey": "C",
+      "capo": 0,
+      "timeSignature": "6/8",
+      "meter": "8.6.8.6.D.",
+      "chordsUsed": [
+        "C",
+        "G",
+        "D",
+        "F"
+      ],
+      "sourceChordEventCount": 15,
+      "reason": "Source chords found; Myanmar syllable anchors require manual review.",
+      "structure": [
+        {
+          "type": "verse",
+          "number": 1,
+          "lineCount": 4
+        },
+        {
+          "type": "chorus",
+          "number": null,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 2,
+          "lineCount": 4
+        },
+        {
+          "type": "chorus",
+          "number": null,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 3,
+          "lineCount": 4
+        },
+        {
+          "type": "chorus",
+          "number": null,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 4,
+          "lineCount": 4
+        },
+        {
+          "type": "chorus",
+          "number": null,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 5,
+          "lineCount": 4
+        },
+        {
+          "type": "chorus",
+          "number": null,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 6,
+          "lineCount": 4
+        },
+        {
+          "type": "chorus",
+          "number": null,
+          "lineCount": 4
+        }
+      ],
+      "myanmarAnchorsPrepared": false,
+      "status": "needs-review"
+    },
+    {
+      "myanmarNumber": 17,
+      "myanmarTitle": "အိုဖဘုရား၊ ကိုယ်တော်ဖန်ဆင်းခြင်းကြီးမား",
+      "englishReference": "17",
+      "englishSourceNumber": 17,
+      "englishRecordFound": true,
+      "sourceUrl": "https://www.hymnal.net/en/hymn/h/17",
+      "sourceFound": true,
+      "chordInformationFound": true,
+      "originalKey": "Bb Major",
+      "suggestedPlayKey": "G",
+      "capo": 3,
+      "timeSignature": "4/4",
+      "meter": "11.10.11.10. with chorus.",
+      "chordsUsed": [
+        "G",
+        "C",
+        "D"
+      ],
+      "sourceChordEventCount": 15,
+      "reason": "Source chords found; Myanmar syllable anchors require manual review.",
+      "structure": [
+        {
+          "type": "verse",
+          "number": 1,
+          "lineCount": 4
+        },
+        {
+          "type": "chorus",
+          "number": null,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 2,
+          "lineCount": 4
+        },
+        {
+          "type": "chorus",
+          "number": null,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 3,
+          "lineCount": 4
+        },
+        {
+          "type": "chorus",
+          "number": null,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 4,
+          "lineCount": 4
+        },
+        {
+          "type": "chorus",
+          "number": null,
+          "lineCount": 4
+        }
+      ],
+      "myanmarAnchorsPrepared": false,
+      "status": "needs-review"
+    },
+    {
+      "myanmarNumber": 18,
+      "myanmarTitle": "သစ္စာတော်ပြည့်၊ အားကိုးထိုက်သူ",
+      "englishReference": "18",
+      "englishSourceNumber": 18,
+      "englishRecordFound": true,
+      "sourceUrl": "https://www.hymnal.net/en/hymn/h/18",
+      "sourceFound": true,
+      "chordInformationFound": true,
+      "originalKey": "Bb Major",
+      "suggestedPlayKey": "G",
+      "capo": 3,
+      "timeSignature": "4/4",
+      "meter": "8.6.8.6.D.",
+      "chordsUsed": [
+        "G",
+        "D",
+        "C"
+      ],
+      "sourceChordEventCount": 11,
+      "reason": "Source chords found; Myanmar syllable anchors require manual review.",
+      "structure": [
+        {
+          "type": "verse",
+          "number": 1,
+          "lineCount": 4
+        },
+        {
+          "type": "chorus",
+          "number": null,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 2,
+          "lineCount": 4
+        },
+        {
+          "type": "chorus",
+          "number": null,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 3,
+          "lineCount": 4
+        },
+        {
+          "type": "chorus",
+          "number": null,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 4,
+          "lineCount": 4
+        },
+        {
+          "type": "chorus",
+          "number": null,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 5,
+          "lineCount": 4
+        },
+        {
+          "type": "chorus",
+          "number": null,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 6,
+          "lineCount": 4
+        },
+        {
+          "type": "chorus",
+          "number": null,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 7,
+          "lineCount": 4
+        },
+        {
+          "type": "chorus",
+          "number": null,
+          "lineCount": 4
+        },
+        {
+          "type": "verse",
+          "number": 8,
+          "lineCount": 4
+        },
+        {
+          "type": "chorus",
+          "number": null,
+          "lineCount": 4
+        }
+      ],
+      "myanmarAnchorsPrepared": false,
+      "status": "needs-review"
+    },
+    {
+      "myanmarNumber": 19,
+      "myanmarTitle": "'' သစ္စာတော်ကြီးမြတ်လှ ''၊ အိုအဖဘုရား",
+      "englishReference": "19",
+      "englishSourceNumber": 19,
+      "englishRecordFound": true,
+      "sourceUrl": "https://www.hymnal.net/en/hymn/h/19",
+      "sourceFound": true,
+      "chordInformationFound": true,
+      "originalKey": "D Major",
+      "suggestedPlayKey": "D",
+      "capo": 0,
+      "timeSignature": "3/4",
+      "meter": "11.10.11.10. with chorus.",
+      "chordsUsed": [
+        "D",
+        "G",
+        "A",
+        "E",
+        "B"
+      ],
+      "sourceChordEventCount": 28,
+      "reason": "Source chords found; Myanmar syllable anchors require manual review.",
+      "structure": [
+        {
+          "type": "verse",
+          "number": 1,
+          "lineCount": 4
+        },
+        {
+          "type": "chorus",
+          "number": null,
+          "lineCount": 5
+        },
+        {
+          "type": "verse",
+          "number": 2,
+          "lineCount": 4
+        },
+        {
+          "type": "chorus",
+          "number": null,
+          "lineCount": 5
+        },
+        {
+          "type": "verse",
+          "number": 3,
+          "lineCount": 4
+        },
+        {
+          "type": "chorus",
+          "number": null,
+          "lineCount": 5
+        }
+      ],
+      "myanmarAnchorsPrepared": false,
+      "status": "needs-review"
+    },
+    {
+      "myanmarNumber": 20,
+      "myanmarTitle": "ခမည်းတော်ဘုရားကို လေးမြတ်",
+      "englishReference": "20",
+      "englishSourceNumber": 20,
+      "englishRecordFound": true,
+      "sourceUrl": "https://www.hymnal.net/en/hymn/h/20",
+      "sourceFound": true,
+      "chordInformationFound": true,
+      "originalKey": "Eb Major",
+      "suggestedPlayKey": "D",
+      "capo": 1,
+      "timeSignature": "4/4",
+      "meter": "8.7.8.7.D.",
+      "chordsUsed": [
+        "D",
+        "G",
+        "A"
+      ],
+      "sourceChordEventCount": 21,
+      "reason": "Source chords found; Myanmar syllable anchors require manual review.",
+      "structure": [
+        {
+          "type": "verse",
+          "number": 1,
+          "lineCount": 8
+        },
+        {
+          "type": "verse",
+          "number": 2,
+          "lineCount": 8
+        },
+        {
+          "type": "verse",
+          "number": 3,
+          "lineCount": 8
+        },
+        {
+          "type": "verse",
+          "number": 4,
+          "lineCount": 8
+        }
+      ],
+      "myanmarAnchorsPrepared": false,
+      "status": "needs-review"
+    }
+  ]
+}

@@ -14,6 +14,8 @@ export interface GuitarVerse {
   lines: GuitarLine[];
 }
 
+export type GuitarArrangementStatus = "reviewed" | "needs-review" | "unavailable";
+
 export interface GuitarArrangement {
   myanmarHymnNumber: number;
   englishSourceNumber: number;
@@ -21,6 +23,10 @@ export interface GuitarArrangement {
   originalKeyDisplay: string;
   playKey: string;
   capo: number;
+  timeSignature?: string;
+  meter?: string;
+  chordsUsed: string[];
+  status: GuitarArrangementStatus;
   verses: GuitarVerse[];
 }
 
