@@ -58,6 +58,7 @@ export default async function HymnPage({params,searchParams}:{params:Promise<{ki
   const hasLongTitle=Array.from(title).length>32;
   const hasDetails=Object.keys(hymn.metadata).length>0;
   const guitarArrangement=getGuitarArrangement(hymn);
+  const numberedNotesImageSrc=kind==="hymns"&&isMyanmar&&hymn.number===1?"/jianpu/myanmar-hymn-1.png":undefined;
 
   return <main className="page reader-page">
     <Link href={kind==="hymns"?"/":"/yp"} className="focus-ring mb-6 inline-flex items-center gap-2 rounded-lg text-xs font-semibold text-[var(--muted)]"><ArrowLeft size={15}/>Back to {kind==="yp"?"YP Songs":"Hymns"}</Link>
@@ -78,7 +79,7 @@ export default async function HymnPage({params,searchParams}:{params:Promise<{ki
         <div className="mt-4"><ReaderActions hymn={{id:hymn.id,kind,language,number:hymn.number,title,sections:hymn.sections}}/></div>
       </header>
 
-      {guitarArrangement?<GuitarReader sections={hymn.sections} arrangement={guitarArrangement}/>:<div className={`mx-auto max-w-2xl py-7 ${isMyanmar?"reader-lyrics-myanmar":"leading-[1.8]"}`} style={isMyanmar?undefined:{fontSize:"var(--lyric-size,20px)"}}>
+      {guitarArrangement?<GuitarReader sections={hymn.sections} arrangement={guitarArrangement} numberedNotesImageSrc={numberedNotesImageSrc}/>:<div className={`mx-auto max-w-2xl py-7 ${isMyanmar?"reader-lyrics-myanmar":"leading-[1.8]"}`} style={isMyanmar?undefined:{fontSize:"var(--lyric-size,20px)"}}>
         {hymn.sections.map((section,index)=>{
           const chorus=section.type==="chorus"||section.type==="refrain";
           return <section key={`${section.type}-${section.number}-${index}`} className={`mb-7 last:mb-0 ${chorus?"border-l-2 border-[color-mix(in_srgb,var(--gold)_72%,transparent)] pl-4":""}`}>

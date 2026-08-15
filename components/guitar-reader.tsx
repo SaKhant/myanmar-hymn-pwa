@@ -1,7 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import type { GuitarLine, GuitarPhrase, GuitarReaderProps } from "@/lib/hymns/guitar-types";
+
+type ReaderMode = "lyrics" | "guitar" | "numbered-notes";
+type GuitarReaderWithNumberedNotesProps = GuitarReaderProps & { numberedNotesImageSrc?: string };
 
 function linePhrases(line:GuitarLine):GuitarPhrase[] {
   if(line.phrases)return line.phrases;
@@ -10,16 +14,17 @@ function linePhrases(line:GuitarLine):GuitarPhrase[] {
   return breaks.slice(0,-1).map((start,index)=>({segments:segments.slice(start,breaks[index+1])})).filter((phrase)=>phrase.segments.length>0);
 }
 
-export function GuitarReader({ sections, arrangement }: GuitarReaderProps) {
-  const [mode, setMode] = useState<"lyrics" | "guitar">("lyrics");
+export function GuitarReader({ sections, arrangement, numberedNotesImageSrc }: GuitarReaderWithNumberedNotesProps) {
+  const [mode, setMode] = useState<ReaderMode>("lyrics");
 
   return <>
     <div className="reader-mode-switch" role="group" aria-label="Reader display mode">
       <button type="button" aria-pressed={mode === "lyrics"} onClick={() => setMode("lyrics")}>Lyrics</button>
       <button type="button" aria-pressed={mode === "guitar"} onClick={() => setMode("guitar")}>Guitar</button>
+      {numberedNotesImageSrc&&<button type="button" aria-pressed={mode === "numbered-notes"} onClick={() => setMode("numbered-notes")}>Numbered Notes</button>}
     </div>
 
-    {mode === "lyrics" ? <LyricsView sections={sections}/> : <div className="guitar-view">
+    {mode === "lyrics" ? <LyricsView sections={sections}/> : mode === "numbered-notes"&&numberedNotesImageSrc ? <NumberedNotesView imageSrc={numberedNotesImageSrc}/> : <div className="guitar-view">
       <div className="guitar-info" aria-label={`Original key ${arrangement.originalKey}, capo ${arrangement.capo}, play in ${arrangement.playKey}`}>
         <span>Key <strong>{arrangement.originalKeyDisplay}</strong></span><i aria-hidden="true">•</i>
         <span>Capo <strong>{arrangement.capo}</strong></span><i aria-hidden="true">•</i>
@@ -40,6 +45,28 @@ export function GuitarReader({ sections, arrangement }: GuitarReaderProps) {
       </section>)}
     </div>}
   </>;
+}
+
+function NumberedNotesView({ imageSrc }: { imageSrc: string }) {
+  const [zoom, setZoom] = useState(1);
+  const changeZoom = (amount: number) => setZoom((current) => Math.min(2.5, Math.max(1, Number((current + amount).toFixed(2)))));
+
+  return <section className="numbered-notes-view" aria-label="Numbered musical notation">
+    <div className="numbered-notes-toolbar">
+      <p>Numbered Notes</p>
+      <div role="group" aria-label="Numbered notes zoom">
+        <button type="button" onClick={() => changeZoom(-0.25)} disabled={zoom === 1} aria-label="Zoom out">−</button>
+        <button type="button" onClick={() => setZoom(1)} disabled={zoom === 1} aria-label="Reset zoom">{Math.round(zoom * 100)}%</button>
+        <button type="button" onClick={() => changeZoom(0.25)} disabled={zoom === 2.5} aria-label="Zoom in">+</button>
+      </div>
+    </div>
+    <div className="numbered-notes-viewport">
+      <div className="numbered-notes-canvas" style={{ width: `${zoom * 100}%` }}>
+        <Image src={imageSrc} alt="Myanmar Hymn 1 numbered musical notation" width={1800} height={1450} sizes="(max-width: 42rem) 100vw, 42rem" draggable={false}/>
+      </div>
+    </div>
+    <p className="numbered-notes-hint">Pinch or use the controls to zoom.</p>
+  </section>;
 }
 
 function LyricsView({ sections }: Pick<GuitarReaderProps, "sections">) {
