@@ -1,12 +1,20 @@
 #!/usr/bin/env node
 
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const myanmarHymns = JSON.parse(await readFile(resolve(projectRoot, "hymn_dataset/myanmar_hymns.json"), "utf8"));
 const englishHymns = JSON.parse(await readFile(resolve(projectRoot, "hymn_dataset/english_hymns.json"), "utf8"));
+const arrangementDirectory = resolve(projectRoot, "lib/hymns/guitar/arrangements");
+const reviewedNumbers = new Set();
+for (const file of await readdir(arrangementDirectory)) {
+  if (!file.endsWith(".ts")) continue;
+  const source = await readFile(resolve(arrangementDirectory, file), "utf8");
+  const number = Number(source.match(/myanmarHymnNumber:\s*(\d+)/)?.[1]);
+  if (number && /status:\s*"reviewed"/.test(source)) reviewedNumbers.add(number);
+}
 const start = Number(process.argv[2] ?? 2);
 const end = Number(process.argv[3] ?? 20);
 if (!Number.isInteger(start) || !Number.isInteger(end) || start < 1 || end < start) throw new Error("Usage: node scripts/generate-guitar-batch.mjs START END");
@@ -31,7 +39,7 @@ async function inspectSource(englishNumber) {
     const response = await fetch(sourceUrl, { headers: { "User-Agent": "Myanmar-Hymn-PWA guitar preparation" } });
     if (!response.ok) return { sourceUrl, sourceFound:false, chordInformationFound:false, reason:`Source returned HTTP ${response.status}` };
     const html = await response.text();
-    const chordMatches = [...html.matchAll(/class="chord"[^>]*>([^<]+)<\/span>/g)].map((match) => stripTags(match[1]));
+    const chordMatches = [...html.matchAll(/class="chord"[^>]*>([\s\S]*?)<\/span>/g)].map((match) => stripTags(match[1]));
     const chordsUsed = [...new Set(chordMatches)].filter(Boolean);
     const originalKey = detail(html, "Key");
     const playKey = stripTags(html.match(/id="fromkeysig"[^>]*>([^<]+)</i)?.[1] ?? "") || originalKey;
@@ -66,6 +74,7 @@ for (let number = start; number <= end; number += 1) {
   }
   const englishRecordFound = englishHymns.some((hymn) => hymn.number === englishSourceNumber);
   const source = await inspectSource(englishSourceNumber);
+  const reviewed = reviewedNumbers.has(number);
   records.push({
     myanmarNumber:number,
     myanmarTitle:myanmar.title,
@@ -74,8 +83,9 @@ for (let number = start; number <= end; number += 1) {
     englishRecordFound,
     ...source,
     structure:myanmar.sections.map((section) => ({ type:section.type, number:section.number, lineCount:section.lines.length })),
-    myanmarAnchorsPrepared:false,
-    status:source.sourceFound && source.chordInformationFound ? "needs-review" : "unavailable",
+    myanmarAnchorsPrepared:reviewed,
+    status:reviewed ? "reviewed" : source.sourceFound && source.chordInformationFound ? "needs-review" : "unavailable",
+    reason:reviewed ? "Myanmar syllable anchors manually reviewed and included in the production index." : source.reason,
   });
 }
 

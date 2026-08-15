@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-15T18:39:13.746Z",
+  "generatedAt": "2026-08-15T18:53:34.949Z",
   "range": {
     "start": 2,
     "end": 20
@@ -29,10 +29,14 @@
         "D",
         "A",
         "G",
-        "Bm"
+        "Bm",
+        "E7",
+        "D7",
+        "Em7",
+        "A7"
       ],
-      "sourceChordEventCount": 20,
-      "reason": "Source chords found; Myanmar syllable anchors require manual review.",
+      "sourceChordEventCount": 24,
+      "reason": "Myanmar syllable anchors manually reviewed and included in the production index.",
       "structure": [
         {
           "type": "verse",
@@ -50,8 +54,8 @@
           "lineCount": 4
         }
       ],
-      "myanmarAnchorsPrepared": false,
-      "status": "needs-review"
+      "myanmarAnchorsPrepared": true,
+      "status": "reviewed"
     },
     {
       "myanmarNumber": 3,
@@ -73,7 +77,7 @@
         "G"
       ],
       "sourceChordEventCount": 12,
-      "reason": "Source chords found; Myanmar syllable anchors require manual review.",
+      "reason": "Myanmar syllable anchors manually reviewed and included in the production index.",
       "structure": [
         {
           "type": "verse",
@@ -96,8 +100,8 @@
           "lineCount": 6
         }
       ],
-      "myanmarAnchorsPrepared": false,
-      "status": "needs-review"
+      "myanmarAnchorsPrepared": true,
+      "status": "reviewed"
     },
     {
       "myanmarNumber": 4,
@@ -116,10 +120,11 @@
       "chordsUsed": [
         "D",
         "G",
-        "A"
+        "A",
+        "A7"
       ],
-      "sourceChordEventCount": 11,
-      "reason": "Source chords found; Myanmar syllable anchors require manual review.",
+      "sourceChordEventCount": 13,
+      "reason": "Myanmar syllable anchors manually reviewed and included in the production index.",
       "structure": [
         {
           "type": "verse",
@@ -142,8 +147,8 @@
           "lineCount": 4
         }
       ],
-      "myanmarAnchorsPrepared": false,
-      "status": "needs-review"
+      "myanmarAnchorsPrepared": true,
+      "status": "reviewed"
     },
     {
       "myanmarNumber": 5,
@@ -161,14 +166,17 @@
       "meter": "8.7.8.7.D.",
       "chordsUsed": [
         "G",
+        "D7",
         "C",
         "D",
         "Em",
         "B",
-        "Am"
+        "Am",
+        "B7",
+        "A7"
       ],
-      "sourceChordEventCount": 18,
-      "reason": "Source chords found; Myanmar syllable anchors require manual review.",
+      "sourceChordEventCount": 26,
+      "reason": "Myanmar syllable anchors manually reviewed and included in the production index.",
       "structure": [
         {
           "type": "verse",
@@ -186,8 +194,8 @@
           "lineCount": 8
         }
       ],
-      "myanmarAnchorsPrepared": false,
-      "status": "needs-review"
+      "myanmarAnchorsPrepared": true,
+      "status": "reviewed"
     },
     {
       "myanmarNumber": 6,
@@ -207,9 +215,10 @@
         "D",
         "A",
         "G",
-        "E"
+        "E",
+        "A7"
       ],
-      "sourceChordEventCount": 18,
+      "sourceChordEventCount": 19,
       "reason": "Source chords found; Myanmar syllable anchors require manual review.",
       "structure": [
         {
@@ -248,10 +257,11 @@
       "chordsUsed": [
         "D",
         "Em",
+        "A7",
         "G",
         "A"
       ],
-      "sourceChordEventCount": 11,
+      "sourceChordEventCount": 13,
       "reason": "Source chords found; Myanmar syllable anchors require manual review.",
       "structure": [
         {
@@ -295,9 +305,10 @@
       "chordsUsed": [
         "G",
         "D",
-        "C"
+        "C",
+        "D7"
       ],
-      "sourceChordEventCount": 10,
+      "sourceChordEventCount": 11,
       "reason": "Source chords found; Myanmar syllable anchors require manual review.",
       "structure": [
         {
@@ -331,9 +342,11 @@
       "chordsUsed": [
         "G",
         "C",
-        "D"
+        "D",
+        "A7",
+        "D7"
       ],
-      "sourceChordEventCount": 9,
+      "sourceChordEventCount": 11,
       "reason": "Source chords found; Myanmar syllable anchors require manual review.",
       "structure": [
         {
@@ -362,9 +375,10 @@
       "chordsUsed": [
         "G",
         "C",
-        "D"
+        "D",
+        "D7"
       ],
-      "sourceChordEventCount": 11,
+      "sourceChordEventCount": 12,
       "reason": "Source chords found; Myanmar syllable anchors require manual review.",
       "structure": [
         {
@@ -419,9 +433,10 @@
         "G",
         "Am",
         "C",
-        "D"
+        "D",
+        "D7"
       ],
-      "sourceChordEventCount": 8,
+      "sourceChordEventCount": 9,
       "reason": "Source chords found; Myanmar syllable anchors require manual review.",
       "structure": [
         {
@@ -485,9 +500,10 @@
       "chordsUsed": [
         "D",
         "G",
-        "A"
+        "A",
+        "A7"
       ],
-      "sourceChordEventCount": 10,
+      "sourceChordEventCount": 11,
       "reason": "Source chords found; Myanmar syllable anchors require manual review.",
       "structure": [
         {
@@ -546,9 +562,10 @@
       "chordsUsed": [
         "D",
         "A",
-        "G"
+        "G",
+        "A7"
       ],
-      "sourceChordEventCount": 15,
+      "sourceChordEventCount": 17,
       "reason": "Source chords found; Myanmar syllable anchors require manual review.",
       "structure": [
         {
@@ -644,9 +661,10 @@
         "C",
         "A",
         "D",
+        "D7",
         "Em"
       ],
-      "sourceChordEventCount": 20,
+      "sourceChordEventCount": 23,
       "reason": "Source chords found; Myanmar syllable anchors require manual review.",
       "structure": [
         {
@@ -695,9 +713,11 @@
       "chordsUsed": [
         "D",
         "G",
-        "A"
+        "A",
+        "E7",
+        "A7"
       ],
-      "sourceChordEventCount": 17,
+      "sourceChordEventCount": 19,
       "reason": "Source chords found; Myanmar syllable anchors require manual review.",
       "structure": [
         {
@@ -746,10 +766,12 @@
       "chordsUsed": [
         "C",
         "G",
+        "G7",
         "D",
+        "D7",
         "F"
       ],
-      "sourceChordEventCount": 15,
+      "sourceChordEventCount": 20,
       "reason": "Source chords found; Myanmar syllable anchors require manual review.",
       "structure": [
         {
@@ -833,9 +855,10 @@
       "chordsUsed": [
         "G",
         "C",
+        "D7",
         "D"
       ],
-      "sourceChordEventCount": 15,
+      "sourceChordEventCount": 19,
       "reason": "Source chords found; Myanmar syllable anchors require manual review.",
       "structure": [
         {
@@ -899,9 +922,12 @@
       "chordsUsed": [
         "G",
         "D",
+        "D7",
+        "A7",
+        "G7",
         "C"
       ],
-      "sourceChordEventCount": 11,
+      "sourceChordEventCount": 17,
       "reason": "Source chords found; Myanmar syllable anchors require manual review.",
       "structure": [
         {
@@ -1006,10 +1032,13 @@
         "D",
         "G",
         "A",
+        "E7",
         "E",
+        "A7",
+        "Em7",
         "B"
       ],
-      "sourceChordEventCount": 28,
+      "sourceChordEventCount": 34,
       "reason": "Source chords found; Myanmar syllable anchors require manual review.",
       "structure": [
         {
@@ -1063,9 +1092,11 @@
       "chordsUsed": [
         "D",
         "G",
-        "A"
+        "A",
+        "E7",
+        "A7"
       ],
-      "sourceChordEventCount": 21,
+      "sourceChordEventCount": 25,
       "reason": "Source chords found; Myanmar syllable anchors require manual review.",
       "structure": [
         {

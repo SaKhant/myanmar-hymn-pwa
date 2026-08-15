@@ -3,11 +3,19 @@ import "server-only";
 import type { HymnRecord } from "./types";
 import type { GuitarArrangement, GuitarSegment } from "./guitar-types";
 import { hymnOneArrangement } from "./guitar/arrangements/001";
+import { hymnTwoArrangement } from "./guitar/arrangements/002";
+import { hymnThreeArrangement } from "./guitar/arrangements/003";
+import { hymnFourArrangement } from "./guitar/arrangements/004";
+import { hymnFiveArrangement } from "./guitar/arrangements/005";
 
 // Only reviewed modules belong in this production index. Preparation records
 // under hymn_dataset/guitar are intentionally not imported into the app.
 const reviewedArrangements = new Map<number, GuitarArrangement>([
   [hymnOneArrangement.myanmarHymnNumber, hymnOneArrangement],
+  [hymnTwoArrangement.myanmarHymnNumber, hymnTwoArrangement],
+  [hymnThreeArrangement.myanmarHymnNumber, hymnThreeArrangement],
+  [hymnFourArrangement.myanmarHymnNumber, hymnFourArrangement],
+  [hymnFiveArrangement.myanmarHymnNumber, hymnFiveArrangement],
 ]);
 
 function lineText(segments: GuitarSegment[]): string {
