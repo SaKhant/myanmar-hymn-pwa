@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, ChevronRight } from "lucide-react";
 import { ReaderActions } from "@/components/reader-actions";
 import { OnlineAudio } from "@/components/online-audio";
+import { ReaderScrollTop } from "@/components/reader-scroll-top";
 import { getAdjacentHymns, getHymn, getHymns } from "@/lib/hymns/data";
 import type { HymnKind, HymnLanguage } from "@/lib/hymns/types";
 
@@ -57,6 +58,7 @@ export default async function HymnPage({params,searchParams}:{params:Promise<{ki
   const hasDetails=Object.keys(hymn.metadata).length>0;
 
   return <main className="page reader-page">
+    <ReaderScrollTop routeKey={`${kind}-${language}-${hymn.id}`}/>
     <Link href={kind==="hymns"?"/":"/yp"} className="focus-ring mb-6 inline-flex items-center gap-2 rounded-lg text-xs font-semibold text-[var(--muted)]"><ArrowLeft size={15}/>Back to {kind==="yp"?"YP Songs":"Hymns"}</Link>
     <article>
       <header className="border-b border-[var(--line)] pb-5">
