@@ -62,7 +62,7 @@ function NumberedNotesView({ imageSrc }: { imageSrc: string }) {
     </div>
     <div className="numbered-notes-viewport">
       <div className="numbered-notes-canvas" style={{ width: `${zoom * 100}%` }}>
-        <Image src={imageSrc} alt="Myanmar Hymn 1 numbered musical notation" width={1800} height={1450} sizes="(max-width: 42rem) 100vw, 42rem" draggable={false}/>
+        <Image src={imageSrc} alt="Myanmar Hymn 1 numbered musical notation" width={1800} height={1380} sizes="(max-width: 42rem) 100vw, 42rem" draggable={false}/>
       </div>
     </div>
     <p className="numbered-notes-hint">Pinch or use the controls to zoom.</p>
