@@ -22,6 +22,36 @@ import { hymnSeventeenArrangement } from "./guitar/arrangements/017";
 import { hymnEighteenArrangement } from "./guitar/arrangements/018";
 import { hymnNineteenArrangement } from "./guitar/arrangements/019";
 import { hymnTwentyArrangement } from "./guitar/arrangements/020";
+import { hymnTwentyOneArrangement } from "./guitar/arrangements/021";
+import { hymnTwentyTwoArrangement } from "./guitar/arrangements/022";
+import { hymnTwentyThreeArrangement } from "./guitar/arrangements/023";
+import { hymnTwentyFourArrangement } from "./guitar/arrangements/024";
+import { hymnTwentyFiveArrangement } from "./guitar/arrangements/025";
+import { hymnTwentySixArrangement } from "./guitar/arrangements/026";
+import { hymnTwentySevenArrangement } from "./guitar/arrangements/027";
+import { hymnTwentyEightArrangement } from "./guitar/arrangements/028";
+import { hymnTwentyNineArrangement } from "./guitar/arrangements/029";
+import { hymnThirtyArrangement } from "./guitar/arrangements/030";
+import { hymnThirtyOneArrangement } from "./guitar/arrangements/031";
+import { hymnThirtyTwoArrangement } from "./guitar/arrangements/032";
+import { hymnThirtyThreeArrangement } from "./guitar/arrangements/033";
+import { hymnThirtyFourArrangement } from "./guitar/arrangements/034";
+import { hymnThirtyFiveArrangement } from "./guitar/arrangements/035";
+import { hymnThirtySixArrangement } from "./guitar/arrangements/036";
+import { hymnThirtySevenArrangement } from "./guitar/arrangements/037";
+import { hymnThirtyEightArrangement } from "./guitar/arrangements/038";
+import { hymnThirtyNineArrangement } from "./guitar/arrangements/039";
+import { hymnFortyArrangement } from "./guitar/arrangements/040";
+import { hymnFortyOneArrangement } from "./guitar/arrangements/041";
+import { hymnFortyTwoArrangement } from "./guitar/arrangements/042";
+import { hymnFortyThreeArrangement } from "./guitar/arrangements/043";
+import { hymnFortyFourArrangement } from "./guitar/arrangements/044";
+import { hymnFortyFiveArrangement } from "./guitar/arrangements/045";
+import { hymnFortySixArrangement } from "./guitar/arrangements/046";
+import { hymnFortySevenArrangement } from "./guitar/arrangements/047";
+import { hymnFortyEightArrangement } from "./guitar/arrangements/048";
+import { hymnFortyNineArrangement } from "./guitar/arrangements/049";
+import { hymnFiftyArrangement } from "./guitar/arrangements/050";
 
 // Only reviewed modules belong in this production index. Preparation records
 // under hymn_dataset/guitar are intentionally not imported into the app.
@@ -46,6 +76,36 @@ const reviewedArrangements = new Map<number, GuitarArrangement>([
   [hymnEighteenArrangement.myanmarHymnNumber, hymnEighteenArrangement],
   [hymnNineteenArrangement.myanmarHymnNumber, hymnNineteenArrangement],
   [hymnTwentyArrangement.myanmarHymnNumber, hymnTwentyArrangement],
+  [hymnTwentyOneArrangement.myanmarHymnNumber, hymnTwentyOneArrangement],
+  [hymnTwentyTwoArrangement.myanmarHymnNumber, hymnTwentyTwoArrangement],
+  [hymnTwentyThreeArrangement.myanmarHymnNumber, hymnTwentyThreeArrangement],
+  [hymnTwentyFourArrangement.myanmarHymnNumber, hymnTwentyFourArrangement],
+  [hymnTwentyFiveArrangement.myanmarHymnNumber, hymnTwentyFiveArrangement],
+  [hymnTwentySixArrangement.myanmarHymnNumber, hymnTwentySixArrangement],
+  [hymnTwentySevenArrangement.myanmarHymnNumber, hymnTwentySevenArrangement],
+  [hymnTwentyEightArrangement.myanmarHymnNumber, hymnTwentyEightArrangement],
+  [hymnTwentyNineArrangement.myanmarHymnNumber, hymnTwentyNineArrangement],
+  [hymnThirtyArrangement.myanmarHymnNumber, hymnThirtyArrangement],
+  [hymnThirtyOneArrangement.myanmarHymnNumber, hymnThirtyOneArrangement],
+  [hymnThirtyTwoArrangement.myanmarHymnNumber, hymnThirtyTwoArrangement],
+  [hymnThirtyThreeArrangement.myanmarHymnNumber, hymnThirtyThreeArrangement],
+  [hymnThirtyFourArrangement.myanmarHymnNumber, hymnThirtyFourArrangement],
+  [hymnThirtyFiveArrangement.myanmarHymnNumber, hymnThirtyFiveArrangement],
+  [hymnThirtySixArrangement.myanmarHymnNumber, hymnThirtySixArrangement],
+  [hymnThirtySevenArrangement.myanmarHymnNumber, hymnThirtySevenArrangement],
+  [hymnThirtyEightArrangement.myanmarHymnNumber, hymnThirtyEightArrangement],
+  [hymnThirtyNineArrangement.myanmarHymnNumber, hymnThirtyNineArrangement],
+  [hymnFortyArrangement.myanmarHymnNumber, hymnFortyArrangement],
+  [hymnFortyOneArrangement.myanmarHymnNumber, hymnFortyOneArrangement],
+  [hymnFortyTwoArrangement.myanmarHymnNumber, hymnFortyTwoArrangement],
+  [hymnFortyThreeArrangement.myanmarHymnNumber, hymnFortyThreeArrangement],
+  [hymnFortyFourArrangement.myanmarHymnNumber, hymnFortyFourArrangement],
+  [hymnFortyFiveArrangement.myanmarHymnNumber, hymnFortyFiveArrangement],
+  [hymnFortySixArrangement.myanmarHymnNumber, hymnFortySixArrangement],
+  [hymnFortySevenArrangement.myanmarHymnNumber, hymnFortySevenArrangement],
+  [hymnFortyEightArrangement.myanmarHymnNumber, hymnFortyEightArrangement],
+  [hymnFortyNineArrangement.myanmarHymnNumber, hymnFortyNineArrangement],
+  [hymnFiftyArrangement.myanmarHymnNumber, hymnFiftyArrangement],
 ]);
 
 function lineText(line: GuitarArrangement["verses"][number]["lines"][number]): string {
