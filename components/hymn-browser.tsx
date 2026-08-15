@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useDeferredValue, useMemo, useState } from "react";
-import { BookMarked, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import type { HymnKind, HymnLanguage, HymnSummary } from "@/lib/hymns/types";
 import { normalizeHymnNumberQuery, normalizeSearchText, normalizeTitlePrefix } from "@/lib/hymns/search";
 import { SearchField } from "./search-field";
@@ -61,7 +61,6 @@ export function HymnBrowser({ kind, myanmar, english=[], initialLanguage="my", i
   return <main className="page"><header className="mb-7"><p className={`eyebrow ${kind==="hymns"?"normal-case":""}`}>{kind==="yp"?"Songs of Enjoyment":"Hymnal.net"}</p><h1 className="mt-2 font-serif text-4xl tracking-tight md:text-5xl">{kind==="yp"?"YP Songs":"Hymns"}</h1></header>
     {kind==="yp"&&!myanmarOnly&&<div className="mb-5 flex w-full rounded-xl bg-[var(--sage-soft)] p-1 sm:w-fit" role="group" aria-label="Language">{(["my","en"] as const).map(lang=><button key={lang} onClick={()=>setSelectedLanguage(lang)} className={`focus-ring flex-1 rounded-lg px-7 py-2.5 text-sm font-bold sm:flex-none ${language===lang?"bg-[var(--paper)] text-[var(--ink)] shadow-sm":"text-[var(--muted)]"}`}>{lang==="my"?"မြန်မာ":"English"}</button>)}</div>}
     <SearchField value={query} onChange={(value)=>{setQuery(value);setSubmittedMissingNumber(false)}} onSubmit={submitSearch} placeholder="Search number, title, or lyric…" cleanFocus={kind==="hymns"}/>
-    {kind==="hymns"&&!hasQuery&&<Link href="/categories" className="focus-ring mt-5 flex min-h-13 items-center gap-3 rounded-xl border border-[var(--line)] px-4 text-sm font-bold hover:bg-[var(--sage-soft)]"><BookMarked className="text-[var(--sage)]" size={19}/>Categories<ChevronRight className="ml-auto text-[var(--muted)]" size={17}/></Link>}
     <p className="my-4 text-sm text-[var(--muted)]">{countLabel}</p>
     {results.length>0&&<HymnList results={results} kind={kind} language={language} exactNumber={numberQuery}/>} 
     {results.length===0&&<div className="py-16 text-center"><p className="font-serif text-2xl">{submittedMissingNumber?(kind==="hymns"?"Hymn not found":"Song not found"):(kind==="hymns"?"No hymns found":"No songs found")}</p><p className="mt-2 text-sm text-[var(--muted)]">Try a number, title, or phrase from the lyrics.</p></div>}
