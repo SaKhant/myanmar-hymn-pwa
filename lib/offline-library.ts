@@ -4,7 +4,7 @@ export const OFFLINE_DATABASE_NAME="hymn-house-offline";
 export const OFFLINE_HYMN_STORE="hymns";
 export const OFFLINE_CATEGORY_STORE="categories";
 export const OFFLINE_METADATA_STORE="metadata";
-const DATABASE_VERSION=2;
+const DATABASE_VERSION=1;
 
 export type OfflineHymn=Omit<HymnRecord,"audio_url"> & {key:string};
 export type OfflineLibraryMeta={key:"library";version:string;releaseDate:string;downloadedAt:string;sizeBytes:number;hymnCount:number;categoryCount:number};
@@ -18,9 +18,7 @@ export function openOfflineDatabase():Promise<IDBDatabase>{
     const request=indexedDB.open(OFFLINE_DATABASE_NAME,DATABASE_VERSION);
     request.onupgradeneeded=()=>{
       const database=request.result;
-      const hymnStore=database.objectStoreNames.contains(OFFLINE_HYMN_STORE)?request.transaction!.objectStore(OFFLINE_HYMN_STORE):database.createObjectStore(OFFLINE_HYMN_STORE,{keyPath:"key"});
-      if(!hymnStore.indexNames.contains("collection"))hymnStore.createIndex("collection","collection");
-      if(!hymnStore.indexNames.contains("collection-number"))hymnStore.createIndex("collection-number",["collection","number"]);
+      if(!database.objectStoreNames.contains(OFFLINE_HYMN_STORE))database.createObjectStore(OFFLINE_HYMN_STORE,{keyPath:"key"});
       if(!database.objectStoreNames.contains(OFFLINE_CATEGORY_STORE))database.createObjectStore(OFFLINE_CATEGORY_STORE,{keyPath:"slug"});
       if(!database.objectStoreNames.contains(OFFLINE_METADATA_STORE))database.createObjectStore(OFFLINE_METADATA_STORE,{keyPath:"key"});
     };
@@ -84,3 +82,4 @@ export async function getAvailableOfflineLibraryVersion():Promise<{version:strin
   if(!response.ok)throw new Error("Could not check for library updates");
   return response.json() as Promise<{version:string;releaseDate:string}>;
 }
+
