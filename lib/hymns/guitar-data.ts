@@ -12,6 +12,16 @@ import { hymnSevenArrangement } from "./guitar/arrangements/007";
 import { hymnEightArrangement } from "./guitar/arrangements/008";
 import { hymnNineArrangement } from "./guitar/arrangements/009";
 import { hymnTenArrangement } from "./guitar/arrangements/010";
+import { hymnElevenArrangement } from "./guitar/arrangements/011";
+import { hymnTwelveArrangement } from "./guitar/arrangements/012";
+import { hymnThirteenArrangement } from "./guitar/arrangements/013";
+import { hymnFourteenArrangement } from "./guitar/arrangements/014";
+import { hymnFifteenArrangement } from "./guitar/arrangements/015";
+import { hymnSixteenArrangement } from "./guitar/arrangements/016";
+import { hymnSeventeenArrangement } from "./guitar/arrangements/017";
+import { hymnEighteenArrangement } from "./guitar/arrangements/018";
+import { hymnNineteenArrangement } from "./guitar/arrangements/019";
+import { hymnTwentyArrangement } from "./guitar/arrangements/020";
 
 // Only reviewed modules belong in this production index. Preparation records
 // under hymn_dataset/guitar are intentionally not imported into the app.
@@ -26,6 +36,16 @@ const reviewedArrangements = new Map<number, GuitarArrangement>([
   [hymnEightArrangement.myanmarHymnNumber, hymnEightArrangement],
   [hymnNineArrangement.myanmarHymnNumber, hymnNineArrangement],
   [hymnTenArrangement.myanmarHymnNumber, hymnTenArrangement],
+  [hymnElevenArrangement.myanmarHymnNumber, hymnElevenArrangement],
+  [hymnTwelveArrangement.myanmarHymnNumber, hymnTwelveArrangement],
+  [hymnThirteenArrangement.myanmarHymnNumber, hymnThirteenArrangement],
+  [hymnFourteenArrangement.myanmarHymnNumber, hymnFourteenArrangement],
+  [hymnFifteenArrangement.myanmarHymnNumber, hymnFifteenArrangement],
+  [hymnSixteenArrangement.myanmarHymnNumber, hymnSixteenArrangement],
+  [hymnSeventeenArrangement.myanmarHymnNumber, hymnSeventeenArrangement],
+  [hymnEighteenArrangement.myanmarHymnNumber, hymnEighteenArrangement],
+  [hymnNineteenArrangement.myanmarHymnNumber, hymnNineteenArrangement],
+  [hymnTwentyArrangement.myanmarHymnNumber, hymnTwentyArrangement],
 ]);
 
 function lineText(line: GuitarArrangement["verses"][number]["lines"][number]): string {
