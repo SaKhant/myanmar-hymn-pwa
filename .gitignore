@@ -16,6 +16,7 @@ out/
 .turbo/
 .eslintcache
 coverage/
+hymn_dataset/guitar/generated/
 
 # Logs and temporary files
 *.log
