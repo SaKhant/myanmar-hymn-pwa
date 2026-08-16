@@ -3,7 +3,7 @@
 :root { --paper:#fbfaf6; --ink:#25322b; --muted:#68736c; --line:#e4e5dc; --sage:#456b57; --sage-soft:#e9f0e9; --gold:#9b7541; --active-red:#c83f45; --active-blue:#3478c7; --nav-hymns:#f5c518; --nav-yp:#25cf62; color-scheme:light; }
 * { box-sizing:border-box; }
 html { background:var(--paper); color:var(--ink); scroll-behavior:auto; }
-body { margin:0; background:var(--paper); color:var(--ink); font-family:Arial,"Noto Sans Myanmar","Myanmar Text",sans-serif; }
+body { margin:0; background:var(--paper); color:var(--ink); font-family:Arial,"Noto Sans Myanmar","Myanmar Text",sans-serif; -webkit-touch-callout:none; -webkit-user-select:none; user-select:none; }
 .app-splash { position:fixed; inset:0; z-index:100; display:grid; place-items:center; background:var(--paper); opacity:1; transition:opacity .3s ease; }
 .app-splash-fading { opacity:0; pointer-events:none; }
 .app-splash-content { display:flex; flex-direction:column; align-items:center; gap:1rem; }
