@@ -12,8 +12,12 @@ export function OfflineNavigation(){
       if(url.origin!==location.origin)return;
       event.preventDefault();
       // A hard navigation lets the service worker return the cached normal app shell.
+      const destination=`${url.pathname}${url.search}${url.hash}`;
+      const hymnReader=/^\/hymns\/(?:my|en)\/[^/]+/.test(location.pathname);
+      const nextHymnReader=/^\/hymns\/(?:my|en)\/[^/]+/.test(url.pathname);
+      if(hymnReader&&nextHymnReader)location.replace(destination);
       // eslint-disable-next-line @next/next/no-location-assign-relative-destination
-      location.href=`${url.pathname}${url.search}${url.hash}`;
+      else location.href=destination;
     };
     document.addEventListener("click",handleClick,true);
     return()=>document.removeEventListener("click",handleClick,true);

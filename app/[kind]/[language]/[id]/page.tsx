@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowRight, ChevronRight } from "lucide-react";
 import { ReaderActions } from "@/components/reader-actions";
 import { OnlineAudio } from "@/components/online-audio";
 import { GuitarReader } from "@/components/guitar-reader";
+import { ReaderBackButton } from "@/components/reader-back-button";
 import { getAdjacentHymns, getHymn, getHymns } from "@/lib/hymns/data";
 import { getGuitarArrangement } from "@/lib/hymns/guitar-data";
 import type { HymnKind, HymnLanguage } from "@/lib/hymns/types";
@@ -61,14 +62,14 @@ export default async function HymnPage({params,searchParams}:{params:Promise<{ki
   const numberedNotesImageSrc=kind==="hymns"&&isMyanmar&&hymn.number===1?"/jianpu/myanmar-hymn-1.png":undefined;
 
   return <main className="page reader-page">
-    <Link href={kind==="hymns"?"/":"/yp"} className="focus-ring mb-6 inline-flex items-center gap-2 rounded-lg text-xs font-semibold text-[var(--muted)]"><ArrowLeft size={15}/>Back to {kind==="yp"?"YP Songs":"Hymns"}</Link>
+    {kind==="hymns"?<ReaderBackButton fallback="/" label="Back to Hymns"/>:<Link href="/yp" className="focus-ring mb-6 inline-flex items-center gap-2 rounded-lg text-xs font-semibold text-[var(--muted)]"><ArrowLeft size={15}/>Back to YP Songs</Link>}
     <article>
       <header className="border-b border-[var(--line)] pb-5">
         <p className="eyebrow reader-kicker">
-          {kind==="hymns"&&isMyanmar&&<Link href={`/hymns/my/${hymn.id}`} aria-current="page" className="reader-current-version reader-version-link focus-ring">MY {hymn.number??hymn.id}</Link>}
-          {kind==="hymns"&&!isMyanmar&&relatedMyanmarHymn&&<><Link href={`/hymns/my/${relatedMyanmarHymn.id}`} className="reader-version-link focus-ring">MY {relatedMyanmarHymn.number??relatedMyanmarHymn.id}</Link><span className="reader-version-separator">•</span></>}
-          {kind==="hymns"&&isMyanmar&&englishReference&&<><span className="reader-version-separator">•</span>{englishReferenceTarget?<Link href={`/hymns/en/${englishReferenceTarget.id}?from=${encodeURIComponent(hymn.id)}`} className="reader-version-link focus-ring">ENG {englishReference}</Link>:<span className="reader-version-reference">ENG {englishReference}</span>}</>}
-          {kind==="hymns"&&!isMyanmar&&<Link href={`/${kind}/${language}/${hymn.id}${relatedMyanmarHymn?`?from=${encodeURIComponent(relatedMyanmarHymn.id)}`:""}`} aria-current="page" className="reader-current-version reader-version-link focus-ring">ENG {englishVersionLabel}</Link>}
+          {kind==="hymns"&&isMyanmar&&<Link replace href={`/hymns/my/${hymn.id}`} aria-current="page" className="reader-current-version reader-version-link focus-ring">MY {hymn.number??hymn.id}</Link>}
+          {kind==="hymns"&&!isMyanmar&&relatedMyanmarHymn&&<><Link replace href={`/hymns/my/${relatedMyanmarHymn.id}`} className="reader-version-link focus-ring">MY {relatedMyanmarHymn.number??relatedMyanmarHymn.id}</Link><span className="reader-version-separator">•</span></>}
+          {kind==="hymns"&&isMyanmar&&englishReference&&<><span className="reader-version-separator">•</span>{englishReferenceTarget?<Link replace href={`/hymns/en/${englishReferenceTarget.id}?from=${encodeURIComponent(hymn.id)}`} className="reader-version-link focus-ring">ENG {englishReference}</Link>:<span className="reader-version-reference">ENG {englishReference}</span>}</>}
+          {kind==="hymns"&&!isMyanmar&&<Link replace href={`/${kind}/${language}/${hymn.id}${relatedMyanmarHymn?`?from=${encodeURIComponent(relatedMyanmarHymn.id)}`:""}`} aria-current="page" className="reader-current-version reader-version-link focus-ring">ENG {englishVersionLabel}</Link>}
           {kind==="yp"&&isMyanmar&&<Link href={`/yp/my/${hymn.id}`} aria-current="page" className="reader-current-version reader-version-link focus-ring">MY {hymn.number??hymn.id}</Link>}
           {kind==="yp"&&isMyanmar&&relatedYpSong&&<><span className="reader-version-separator">•</span><Link href={`/yp/en/${relatedYpSong.id}`} className="reader-version-link focus-ring">ENG {relatedYpSong.number??relatedYpSong.id}</Link></>}
           {kind==="yp"&&!isMyanmar&&relatedYpSong&&<><Link href={`/yp/my/${relatedYpSong.id}`} className="reader-version-link focus-ring">MY {relatedYpSong.number??relatedYpSong.id}</Link><span className="reader-version-separator">•</span></>}
@@ -99,8 +100,8 @@ export default async function HymnPage({params,searchParams}:{params:Promise<{ki
       {audioUrl&&<OnlineAudio src={audioUrl}/>}
 
       <nav className="flex items-center justify-between gap-3 border-t border-[var(--line)] pt-6">
-        {adjacent.previous?<Link className="focus-ring inline-flex min-h-11 items-center gap-1.5 rounded-[12px] border border-[var(--line)] px-3 py-2 text-sm font-bold" href={`/${kind}/${language}/${adjacent.previous.id}`}><ArrowLeft size={17}/>Previous</Link>:<span aria-hidden="true"/>}
-        {adjacent.next?<Link className="focus-ring ml-auto inline-flex min-h-11 items-center gap-1.5 rounded-[12px] border border-[var(--line)] px-3 py-2 text-sm font-bold" href={`/${kind}/${language}/${adjacent.next.id}`}>Next<ArrowRight size={17}/></Link>:<span aria-hidden="true"/>}
+        {adjacent.previous?<Link replace={kind==="hymns"} className="focus-ring inline-flex min-h-11 items-center gap-1.5 rounded-[12px] border border-[var(--line)] px-3 py-2 text-sm font-bold" href={`/${kind}/${language}/${adjacent.previous.id}`}><ArrowLeft size={17}/>Previous</Link>:<span aria-hidden="true"/>}
+        {adjacent.next?<Link replace={kind==="hymns"} className="focus-ring ml-auto inline-flex min-h-11 items-center gap-1.5 rounded-[12px] border border-[var(--line)] px-3 py-2 text-sm font-bold" href={`/${kind}/${language}/${adjacent.next.id}`}>Next<ArrowRight size={17}/></Link>:<span aria-hidden="true"/>}
       </nav>
     </article>
   </main>;
