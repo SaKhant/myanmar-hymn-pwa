@@ -2,6 +2,18 @@
 
 import { useEffect } from "react";
 
+export const OFFLINE_NAVIGATION_EVENT="hymn-house:offline-navigation";
+export const OFFLINE_SCROLL_STATE="__hymnHouseOfflineScroll";
+
+export function navigateOffline(destination:string,replace=false){
+  const container=document.querySelector<HTMLElement>(".offline-app");
+  if(!replace)history.replaceState({...history.state,[OFFLINE_SCROLL_STATE]:container?.scrollTop??0},"");
+  const nextState={...history.state,[OFFLINE_SCROLL_STATE]:0};
+  if(replace)history.replaceState(nextState,"",destination);
+  else history.pushState(nextState,"",destination);
+  window.dispatchEvent(new Event(OFFLINE_NAVIGATION_EVENT));
+}
+
 export function OfflineNavigation(){
   useEffect(()=>{
     const handleClick=(event:MouseEvent)=>{
@@ -15,9 +27,7 @@ export function OfflineNavigation(){
       const destination=`${url.pathname}${url.search}${url.hash}`;
       const hymnReader=/^\/hymns\/(?:my|en)\/[^/]+/.test(location.pathname);
       const nextHymnReader=/^\/hymns\/(?:my|en)\/[^/]+/.test(url.pathname);
-      if(hymnReader&&nextHymnReader)location.replace(destination);
-      // eslint-disable-next-line @next/next/no-location-assign-relative-destination
-      else location.href=destination;
+      navigateOffline(destination,hymnReader&&nextHymnReader);
     };
     document.addEventListener("click",handleClick,true);
     return()=>document.removeEventListener("click",handleClick,true);

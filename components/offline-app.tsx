@@ -1,12 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, ChevronRight, WifiOff } from "lucide-react";
 import { HymnBrowser } from "@/components/hymn-browser";
 import { OfflineLibrarySettings } from "@/components/offline-library-settings";
 import { ReaderActions } from "@/components/reader-actions";
 import { ReaderBackButton } from "@/components/reader-back-button";
+import { OFFLINE_NAVIGATION_EVENT, OFFLINE_SCROLL_STATE } from "@/components/offline-navigation";
 import { StoredList } from "@/components/stored-list";
 import { normalizeSearchText } from "@/lib/hymns/search";
 import { readOfflineCategories, readOfflineHymns, readOfflineLibraryMeta, type OfflineHymn } from "@/lib/offline-library";
@@ -68,8 +69,7 @@ function OfflineReader({hymn,hymns,kind,language}:{hymn:OfflineHymn;hymns:Offlin
 
 function OfflineCategories({categories}:{categories:HymnCategory[]}){return <main className="page"><p className="eyebrow">Myanmar hymn book</p><h1 className="mt-2 font-serif text-4xl md:text-5xl">Categories</h1><p className="mt-3 text-[var(--muted)]">Browse 33 themes from the source collection.</p><div className="mt-8 grid gap-3 sm:grid-cols-2">{[...categories].sort((a,b)=>categoryNumber(a.category)-categoryNumber(b.category)||a.category.localeCompare(b.category)).map(category=><section key={category.slug} className="surface p-5"><h2 className="myanmar font-bold">{categoryTitle(category)}</h2><p className="mt-2 text-xs text-[var(--muted)]">{category.hymns.length} hymn references</p><div className="mt-4 flex flex-wrap gap-2">{[...category.hymns].sort((a,b)=>a.number-b.number).map(hymn=><Link key={hymn.number} href={`/hymns/my/${hymn.number}`} className="focus-ring rounded-full bg-[var(--sage-soft)] px-3 py-1.5 text-xs font-bold text-[var(--sage)]">{hymn.number}</Link>)}</div></section>)}</div></main>}
 
-function OfflineRoute({hymns,categories}:{hymns:OfflineHymn[];categories:HymnCategory[]}){
-  const pathname=typeof window==="undefined"?"/":window.location.pathname;
+function OfflineRoute({hymns,categories,pathname}:{hymns:OfflineHymn[];categories:HymnCategory[];pathname:string}){
   const parts=pathname.split("/").filter(Boolean);
   if(!parts.length)return <HymnBrowser kind="hymns" myanmar={hymns.filter(hymn=>hymn.collection==="myanmar_hymns"&&Number.isInteger(hymn.number)).map(hymn=>toSummary(hymn,"hymns"))}/>;
   if(parts[0]==="yp"&&parts.length===1)return <HymnBrowser kind="yp" myanmar={hymns.filter(hymn=>hymn.collection==="myanmar_yp").map(hymn=>toSummary(hymn,"yp"))} myanmarOnly/>;
@@ -81,10 +81,13 @@ function OfflineRoute({hymns,categories}:{hymns:OfflineHymn[];categories:HymnCat
 }
 
 export function OfflineApp(){
-  const [offline,setOffline]=useState(false),[ready,setReady]=useState(false),[hymns,setHymns]=useState<OfflineHymn[]>([]),[categories,setCategories]=useState<HymnCategory[]>([]);
+  const [offline,setOffline]=useState(false),[ready,setReady]=useState(false),[pathname,setPathname]=useState("/"),[hymns,setHymns]=useState<OfflineHymn[]>([]),[categories,setCategories]=useState<HymnCategory[]>([]);
+  const containerRef=useRef<HTMLDivElement>(null);
   useEffect(()=>{const sync=()=>setOffline(!navigator.onLine);sync();window.addEventListener("online",sync);window.addEventListener("offline",sync);return()=>{window.removeEventListener("online",sync);window.removeEventListener("offline",sync)}},[]);
+  useEffect(()=>{const sync=()=>setPathname(location.pathname);sync();window.addEventListener("popstate",sync);window.addEventListener(OFFLINE_NAVIGATION_EVENT,sync);return()=>{window.removeEventListener("popstate",sync);window.removeEventListener(OFFLINE_NAVIGATION_EVENT,sync)}},[]);
   useEffect(()=>{if(!offline)return;let active=true;Promise.all([readOfflineLibraryMeta(),readOfflineHymns(),readOfflineCategories()]).then(([meta,records,storedCategories])=>{if(active&&meta){setHymns(records);setCategories(storedCategories);setReady(true)}}).catch(()=>{if(active)setReady(true)});return()=>{active=false}},[offline]);
-  const route=useMemo(()=>ready?<OfflineRoute hymns={hymns} categories={categories}/>:<main className="page"><p className="text-sm font-bold text-[var(--muted)]">Loading offline library…</p></main>,[categories,hymns,ready]);
+  useEffect(()=>{const frame=requestAnimationFrame(()=>containerRef.current?.scrollTo(0,Number(history.state?.[OFFLINE_SCROLL_STATE])||0));return()=>cancelAnimationFrame(frame)},[pathname]);
+  const route=useMemo(()=>ready?<OfflineRoute hymns={hymns} categories={categories} pathname={pathname}/>:<main className="page"><p className="text-sm font-bold text-[var(--muted)]">Loading offline library…</p></main>,[categories,hymns,pathname,ready]);
   if(!offline)return null;
-  return <div className="offline-app fixed inset-0 z-20 overflow-y-auto bg-[var(--paper)]">{route}</div>;
+  return <div ref={containerRef} className="offline-app fixed inset-0 z-20 overflow-y-auto bg-[var(--paper)]">{route}</div>;
 }
