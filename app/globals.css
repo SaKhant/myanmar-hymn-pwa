@@ -4,11 +4,14 @@
 * { box-sizing:border-box; }
 html { background:var(--paper); color:var(--ink); scroll-behavior:auto; }
 body { margin:0; background:var(--paper); color:var(--ink); font-family:Arial,"Noto Sans Myanmar","Myanmar Text",sans-serif; }
-.app-splash { position:fixed; inset:0; z-index:100; display:grid; place-items:center; background:var(--paper); opacity:1; transition:opacity .3s ease; animation:app-splash-dismiss 1.2s ease-out forwards; }
+.app-splash { position:fixed; inset:0; z-index:100; display:grid; place-items:center; background:var(--paper); opacity:1; transition:opacity .3s ease; }
 .app-splash-fading { opacity:0; pointer-events:none; }
+.app-splash-content { display:flex; flex-direction:column; align-items:center; gap:1rem; }
 .app-splash-image { width:min(78vw,31rem); height:auto; object-fit:contain; }
-@keyframes app-splash-dismiss { 0%,72% { opacity:1; } 100% { visibility:hidden; opacity:0; pointer-events:none; } }
-@media (prefers-reduced-motion:reduce) { .app-splash { transition:none; } }
+.app-splash-loading { display:flex; align-items:center; gap:.65rem; margin:0; color:var(--muted); font-size:.875rem; font-weight:700; }
+.app-splash-spinner { width:1rem; height:1rem; border:2px solid var(--line); border-top-color:var(--sage); border-radius:50%; animation:app-splash-spin .75s linear infinite; }
+@keyframes app-splash-spin { to { transform:rotate(360deg); } }
+@media (prefers-reduced-motion:reduce) { .app-splash { transition:none; } .app-splash-spinner { animation:none; border-top-color:var(--sage); } }
 button,a,input { -webkit-tap-highlight-color:transparent; }
 a { color:inherit; text-decoration:none; }
 .bottom-nav-link { color:var(--muted); }

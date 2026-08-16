@@ -13,7 +13,10 @@ export function AppSplash() {
   },[]);
 
   if(state==="hidden")return null;
-  return <div className={`app-splash ${state==="fading"?"app-splash-fading":""}`} aria-hidden="true">
-    <Image src="/splash-guitar.png" alt="" width={768} height={768} priority className="app-splash-image"/>
+  return <div className={`app-splash ${state==="fading"?"app-splash-fading":""}`} role="status" aria-live="polite" aria-label="Loading hymn data">
+    <div className="app-splash-content">
+      <Image src="/splash-guitar.png" alt="" width={768} height={768} priority className="app-splash-image"/>
+      <p className="app-splash-loading"><span className="app-splash-spinner" aria-hidden="true"/>Loading hymn data…</p>
+    </div>
   </div>;
 }
