@@ -6,6 +6,7 @@ import { ServiceWorker } from "@/components/service-worker";
 import { AppSplash } from "@/components/app-splash";
 import { OfflineLibraryPrompt } from "@/components/offline-library-prompt";
 import { OfflineNavigation } from "@/components/offline-navigation";
+import { OfflineApp } from "@/components/offline-app";
 
 const padauk = Padauk({
   weight: ["400", "700"],
@@ -26,5 +27,5 @@ export const metadata: Metadata = {
 export const viewport: Viewport = { themeColor:"#fbfaf6", width:"device-width", initialScale:1, viewportFit:"cover" };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en" className={padauk.variable}><body><AppSplash/><OfflineLibraryPrompt/><OfflineNavigation/><ServiceWorker/><div className="shell"><Navigation />{children}</div></body></html>;
+  return <html lang="en" className={padauk.variable}><body><AppSplash/><OfflineLibraryPrompt/><OfflineNavigation/><ServiceWorker/><div className="shell"><Navigation /><OfflineApp/>{children}</div></body></html>;
 }

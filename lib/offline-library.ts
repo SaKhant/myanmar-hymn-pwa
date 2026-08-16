@@ -37,6 +37,20 @@ export async function readOfflineLibraryMeta():Promise<OfflineLibraryMeta|null>{
   finally{database.close()}
 }
 
+export async function readOfflineHymns():Promise<OfflineHymn[]>{
+  if(typeof indexedDB==="undefined")return [];
+  const database=await openOfflineDatabase();
+  try{return await requestResult(database.transaction(OFFLINE_HYMN_STORE).objectStore(OFFLINE_HYMN_STORE).getAll()) as OfflineHymn[]}
+  finally{database.close()}
+}
+
+export async function readOfflineCategories():Promise<HymnCategory[]>{
+  if(typeof indexedDB==="undefined")return [];
+  const database=await openOfflineDatabase();
+  try{return await requestResult(database.transaction(OFFLINE_CATEGORY_STORE).objectStore(OFFLINE_CATEGORY_STORE).getAll()) as HymnCategory[]}
+  finally{database.close()}
+}
+
 function validatePayload(value:unknown):OfflinePayload{
   if(!value||typeof value!=="object")throw new Error("Invalid offline library response");
   const payload=value as Partial<OfflinePayload>;

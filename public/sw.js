@@ -1,5 +1,33 @@
-const CACHE="hymn-house-v43";
-const APP_SHELL=["/","/yp","/favorites","/settings","/categories","/offline.html","/icon-192.png","/icon-512.png","/splash-guitar.png"];
-self.addEventListener("install",event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(APP_SHELL)).then(()=>self.skipWaiting())));
-self.addEventListener("activate",event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
-self.addEventListener("fetch",event=>{if(event.request.method!=="GET")return;const url=new URL(event.request.url);if(url.origin===self.location.origin&&url.pathname.startsWith("/offline-library"))return;if(event.request.destination==="audio")return;if(event.request.mode==="navigate"){event.respondWith(fetch(event.request).then(response=>{if(response.ok){const copy=response.clone();caches.open(CACHE).then(cache=>cache.put(event.request,copy))}return response}).catch(()=>caches.match("/offline.html")));return}event.respondWith(caches.match(event.request).then(cached=>{const fetched=fetch(event.request).then(response=>{if(response.ok&&event.request.destination!=="audio"){const copy=response.clone();caches.open(CACHE).then(cache=>cache.put(event.request,copy))}return response}).catch(()=>cached);return cached||fetched}))});
+const version=new URL(self.location.href).searchParams.get("v")||"legacy";
+const cacheName=`hymn-house-shell-${version}`;
+const cachePrefix="hymn-house-shell-";
+const appShell=["/","/yp","/favorites","/settings","/categories","/icon-192.png","/icon-512.png","/splash-guitar.png","/jianpu/myanmar-hymn-1.png"];
+
+async function cacheResponse(request,response){
+  if(!response||!response.ok)return response;
+  const cache=await caches.open(cacheName);
+  await cache.put(request,response.clone());
+  if(response.headers.get("content-type")?.includes("text/html")){
+    const html=await response.clone().text();
+    const assets=[...html.matchAll(/(?:src|href)=["']([^"']+)["']/g)].map(match=>match[1]).filter(value=>value.startsWith("/_next/")||value.startsWith("/jianpu/")||value.startsWith("/icon-"));
+    await Promise.all([...new Set(assets)].map(async asset=>{try{const assetResponse=await fetch(asset,{cache:"reload"});if(assetResponse.ok)await cache.put(asset,assetResponse)}catch{}}));
+  }
+  return response;
+}
+async function precache(urls){
+  await Promise.all(urls.map(async url=>{try{await cacheResponse(url,await fetch(url,{cache:"reload"}))}catch{}}));
+}
+
+self.addEventListener("install",event=>event.waitUntil(precache(appShell).then(()=>self.skipWaiting())));
+self.addEventListener("activate",event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith("hymn-house-")&&key!==cacheName).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
+self.addEventListener("message",event=>{if(event.data?.type==="PRECACHE_APP_SHELL")event.waitUntil(precache(appShell))});
+self.addEventListener("fetch",event=>{
+  if(event.request.method!=="GET")return;
+  const url=new URL(event.request.url);
+  if(url.origin!==self.location.origin||url.pathname.startsWith("/offline-library")||url.pathname==="/app-version"||event.request.destination==="audio")return;
+  if(event.request.mode==="navigate"){
+    event.respondWith((async()=>{try{return await cacheResponse(event.request,await fetch(event.request))}catch{return (await caches.match(event.request))||(await caches.match(url.pathname))||(await caches.match("/"))||Response.error()}})());
+    return;
+  }
+  event.respondWith((async()=>{const cached=await caches.match(event.request);if(cached){event.waitUntil(fetch(event.request).then(response=>cacheResponse(event.request,response)).catch(()=>undefined));return cached}try{return await cacheResponse(event.request,await fetch(event.request))}catch{return Response.error()}})());
+});

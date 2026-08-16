@@ -11,7 +11,7 @@ export function OfflineNavigation(){
       const url=new URL(target.href,location.href);
       if(url.origin!==location.origin)return;
       event.preventDefault();
-      // A hard navigation lets the service worker supply the standalone IndexedDB-backed offline shell.
+      // A hard navigation lets the service worker return the cached normal app shell.
       // eslint-disable-next-line @next/next/no-location-assign-relative-destination
       location.href=`${url.pathname}${url.search}${url.hash}`;
     };

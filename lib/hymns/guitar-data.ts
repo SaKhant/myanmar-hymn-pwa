@@ -1,5 +1,3 @@
-import "server-only";
-
 import type { HymnRecord } from "./types";
 import type { GuitarArrangement, GuitarSegment } from "./guitar-types";
 import { hymnOneArrangement } from "./guitar/arrangements/001";
@@ -199,7 +197,7 @@ function lineText(line: GuitarArrangement["verses"][number]["lines"][number]): s
   return phrases.flatMap((phrase)=>phrase.segments).map((segment: GuitarSegment) => segment.text).join("");
 }
 
-function matchesLyrics(hymn: HymnRecord, arrangement: GuitarArrangement): boolean {
+function matchesLyrics(hymn: Omit<HymnRecord,"audio_url">, arrangement: GuitarArrangement): boolean {
   if(hymn.sections.length!==arrangement.verses.length)return false;
   return arrangement.verses.every((verse,index) => {
     const section=hymn.sections[index];
@@ -209,7 +207,7 @@ function matchesLyrics(hymn: HymnRecord, arrangement: GuitarArrangement): boolea
   });
 }
 
-export function getGuitarArrangement(hymn: HymnRecord): GuitarArrangement | undefined {
+export function getGuitarArrangement(hymn: Omit<HymnRecord,"audio_url">): GuitarArrangement | undefined {
   if (hymn.collection !== "myanmar_hymns" || hymn.language !== "my" || hymn.number === null) return undefined;
   const arrangement = reviewedArrangements.get(hymn.number);
   if (!arrangement || arrangement.status !== "reviewed") return undefined;

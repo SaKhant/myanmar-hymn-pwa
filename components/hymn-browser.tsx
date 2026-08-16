@@ -52,6 +52,12 @@ export function HymnBrowser({ kind, myanmar, english=[], initialLanguage="my", i
     const exact=source.find(h=>String(h.number)===exactNumber);
     if(exact){
       setSubmittedMissingNumber(false);
+      if(!navigator.onLine){
+        // The cached application shell reads this route from IndexedDB offline.
+        // eslint-disable-next-line @next/next/no-location-assign-relative-destination
+        location.href=`/${kind}/${language}/${exact.id}`;
+        return;
+      }
       router.push(`/${kind}/${language}/${exact.id}`);
       return;
     }
