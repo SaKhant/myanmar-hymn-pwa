@@ -40,7 +40,16 @@ export async function readOfflineLibraryMeta():Promise<OfflineLibraryMeta|null>{
 export async function readOfflineHymns():Promise<OfflineHymn[]>{
   if(typeof indexedDB==="undefined")return [];
   const database=await openOfflineDatabase();
-  try{return await requestResult(database.transaction(OFFLINE_HYMN_STORE).objectStore(OFFLINE_HYMN_STORE).getAll()) as OfflineHymn[]}
+  try{
+    const hymns=await requestResult(database.transaction(OFFLINE_HYMN_STORE).objectStore(OFFLINE_HYMN_STORE).getAll()) as OfflineHymn[];
+    return hymns.sort((a,b)=>{
+      const collectionOrder=a.collection.localeCompare(b.collection);
+      if(collectionOrder!==0)return collectionOrder;
+      const aNumber=a.number??Number.POSITIVE_INFINITY;
+      const bNumber=b.number??Number.POSITIVE_INFINITY;
+      return aNumber-bNumber||a.id.localeCompare(b.id,undefined,{numeric:true});
+    });
+  }
   finally{database.close()}
 }
 
