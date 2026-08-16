@@ -17,8 +17,10 @@ export function ServiceWorker(){
   const applyUpdate=useCallback(()=>{
     if(!availableVersion)return;
     setApplying(true);
-    localStorage.setItem(VERSION_KEY,availableVersion);
-    void registerVersion(availableVersion).catch(()=>setApplying(false));
+    void registerVersion(availableVersion).then(()=>{
+      localStorage.setItem(VERSION_KEY,availableVersion);
+      setAvailableVersion(null);
+    }).catch(()=>setApplying(false));
   },[availableVersion]);
   useEffect(()=>{
     if(!("serviceWorker" in navigator))return;
@@ -37,9 +39,12 @@ export function ServiceWorker(){
       try{const response=await fetch("/app-version",{cache:"no-store"});if(response.ok)version=(await response.json() as {version?:string}).version}catch{return}
       if(!version)return;
       const installedVersion=localStorage.getItem(VERSION_KEY);
-      if(installedVersion&&installedVersion!==version){setAvailableVersion(version);return}
-      localStorage.setItem(VERSION_KEY,version);
-      await registerVersion(version);
+      try{
+        await registerVersion(version);
+        localStorage.setItem(VERSION_KEY,version);
+      }catch{
+        if(installedVersion!==version)setAvailableVersion(version);
+      }
     };
     void checkForUpdate();
     return()=>navigator.serviceWorker.removeEventListener("controllerchange",handleControllerChange);
