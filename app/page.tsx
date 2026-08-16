@@ -3,5 +3,6 @@ import { getSummaries } from "@/lib/hymns/data";
 
 export default async function HymnsPage({searchParams}:{searchParams:Promise<{q?:string}>}) {
   const params=await searchParams;
-  return <HymnBrowser kind="hymns" myanmar={getSummaries("hymns","my")} initialQuery={params.q||""}/>;
+  const myanmar=getSummaries("hymns","my").map(hymn=>({...hymn,searchText:"",lyricSearchText:""}));
+  return <HymnBrowser kind="hymns" myanmar={myanmar} initialQuery={params.q||""} lyricSearchUrl="/hymn-search-index"/>;
 }

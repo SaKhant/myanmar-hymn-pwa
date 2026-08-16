@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useDeferredValue, useMemo, useState } from "react";
+import { useDeferredValue, useEffect, useMemo, useState } from "react";
 import { ChevronRight } from "lucide-react";
 import type { HymnKind, HymnLanguage, HymnSummary } from "@/lib/hymns/types";
 import { normalizeHymnNumberQuery, normalizeSearchText, normalizeTitlePrefix } from "@/lib/hymns/search";
@@ -18,9 +18,10 @@ function HymnList({results,kind,language,exactNumber}:{results:HymnSummary[];kin
   return <div className="divide-y divide-[var(--line)] border-y border-[var(--line)]">{results.map(h=>{const exact=String(h.number)===exactNumber;const showFirstLine=h.firstLine&&h.firstLine!==h.title&&!(kind==="yp"&&isChordOnlyText(h.firstLine));return <Link key={h.id} href={`/${kind}/${language}/${h.id}`} className={`hymn-list-row focus-ring flex min-h-14 items-center gap-4 px-2 py-4 hover:bg-[var(--sage-soft)] ${exact?"bg-[var(--sage-soft)]":""}`}><span className="w-12 shrink-0 text-center font-serif text-xl text-[var(--gold)]">{h.number??"—"}</span><span className="min-w-0"><strong className={`block text-[15px] ${language==="my"?"myanmar":""}`}>{h.title}</strong>{showFirstLine&&<small className={`mt-1 block truncate text-[var(--muted)] ${language==="my"?"myanmar":""}`}>{h.firstLine}</small>}</span><ChevronRight className="ml-auto shrink-0 text-[var(--muted)]" size={18}/></Link>})}</div>;
 }
 
-export function HymnBrowser({ kind, myanmar, english=[], initialLanguage="my", initialQuery="", myanmarOnly=false }:{ kind:HymnKind; myanmar:HymnSummary[]; english?:HymnSummary[]; initialLanguage?:HymnLanguage; initialQuery?:string; myanmarOnly?:boolean }) {
+export function HymnBrowser({ kind, myanmar, english=[], initialLanguage="my", initialQuery="", myanmarOnly=false, lyricSearchUrl }:{ kind:HymnKind; myanmar:HymnSummary[]; english?:HymnSummary[]; initialLanguage?:HymnLanguage; initialQuery?:string; myanmarOnly?:boolean; lyricSearchUrl?:string }) {
   const router=useRouter();
   const [selectedLanguage,setSelectedLanguage]=useState<HymnLanguage>(initialLanguage); const [query,setQuery]=useState(initialQuery);
+  const [lyricSearchIndex,setLyricSearchIndex]=useState<Record<string,string>>({});
   const [submittedMissingNumber,setSubmittedMissingNumber]=useState(false);
   const language: HymnLanguage=kind==="hymns"||myanmarOnly?"my":selectedLanguage;
   const source=language==="my"?myanmar:english;
@@ -28,6 +29,7 @@ export function HymnBrowser({ kind, myanmar, english=[], initialLanguage="my", i
   const normalizedQuery=normalizeSearchText(deferredQuery);
   const numberQuery=normalizeHymnNumberQuery(deferredQuery);
   const hasQuery=normalizedQuery.length>0;
+  useEffect(()=>{if(!lyricSearchUrl||!navigator.onLine)return;let active=true;fetch(lyricSearchUrl).then(response=>response.ok?response.json():Promise.reject()).then((entries:Array<{id:string;lyricSearchText:string}>)=>{if(active)setLyricSearchIndex(Object.fromEntries(entries.map(entry=>[entry.id,entry.lyricSearchText]))) }).catch(()=>{});return()=>{active=false}},[lyricSearchUrl]);
   const results=useMemo(()=>{
     if(!normalizedQuery)return source;
     if(numberQuery!==undefined){
@@ -41,11 +43,11 @@ export function HymnBrowser({ kind, myanmar, english=[], initialLanguage="my", i
       const prefixMatches=source.filter(h=>normalizeTitlePrefix(h.title).startsWith(prefix)||normalizeTitlePrefix(h.firstLine).startsWith(prefix));
       if(Array.from(prefix).length<=2)return prefixMatches;
       const prefixIds=new Set(prefixMatches.map(h=>h.id));
-      const lyricMatches=source.filter(h=>!prefixIds.has(h.id)&&h.lyricSearchText.includes(prefix));
+      const lyricMatches=source.filter(h=>!prefixIds.has(h.id)&&(lyricSearchIndex[h.id]??h.lyricSearchText).includes(prefix));
       return [...prefixMatches,...lyricMatches];
     }
     return source.filter(h=>h.searchText.includes(normalizedQuery));
-  },[kind,language,normalizedQuery,numberQuery,source]);
+  },[kind,language,lyricSearchIndex,normalizedQuery,numberQuery,source]);
   const submitSearch=()=>{
     const exactNumber=normalizeHymnNumberQuery(query);
     if(exactNumber===undefined)return;
