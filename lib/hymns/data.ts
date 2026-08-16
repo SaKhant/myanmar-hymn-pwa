@@ -3,6 +3,7 @@ import englishHymns from "@/hymn_dataset/english_hymns.json";
 import myanmarHymns from "@/hymn_dataset/myanmar_hymns.json";
 import englishYp from "@/hymn_dataset/english_yp.json";
 import myanmarYp from "@/hymn_dataset/myanmar_yp.json";
+import myanmarYp165170 from "@/hymn_dataset/myanmar_yp_165_170.json";
 import categories from "@/hymn_dataset/categories.json";
 import type { HymnCategory, HymnCollection, HymnKind, HymnLanguage, HymnRecord, HymnSummary } from "./types";
 import { normalizeSearchText } from "./search";
@@ -10,7 +11,10 @@ import { normalizeSearchText } from "./search";
 const collections: Record<HymnCollection, HymnRecord[]> = {
   myanmar_hymns: myanmarHymns as unknown as HymnRecord[],
   english_hymns: englishHymns as unknown as HymnRecord[],
-  myanmar_yp: myanmarYp as unknown as HymnRecord[],
+  myanmar_yp: [
+    ...(myanmarYp as unknown as HymnRecord[]),
+    ...(myanmarYp165170 as unknown as HymnRecord[]),
+  ],
   english_yp: englishYp as unknown as HymnRecord[],
 };
 
