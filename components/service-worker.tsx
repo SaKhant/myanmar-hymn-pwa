@@ -32,8 +32,10 @@ export function ServiceWorker(){
     const handleControllerChange=()=>{if(hadController&&!refreshing){refreshing=true;location.reload()}};
     navigator.serviceWorker.addEventListener("controllerchange",handleControllerChange);
     const checkForUpdate=async()=>{
-      let version="local";
-      try{const response=await fetch("/app-version",{cache:"no-store"});if(response.ok)version=(await response.json() as {version?:string}).version||version}catch{}
+      if(!navigator.onLine)return;
+      let version:string|undefined;
+      try{const response=await fetch("/app-version",{cache:"no-store"});if(response.ok)version=(await response.json() as {version?:string}).version}catch{return}
+      if(!version)return;
       const installedVersion=localStorage.getItem(VERSION_KEY);
       if(installedVersion&&installedVersion!==version){setAvailableVersion(version);return}
       localStorage.setItem(VERSION_KEY,version);
