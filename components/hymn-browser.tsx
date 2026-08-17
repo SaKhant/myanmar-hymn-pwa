@@ -73,9 +73,8 @@ export function HymnBrowser({ kind, myanmar, english=[], newTranslations=[], ini
   },[deferredQuery,hasQuery,newTranslations,normalizedQuery]);
 
   const submitSearch=()=>{
-    if(kind==="hymns"&&hymnSection==="new"){
+    if(kind==="hymns"&&/^e\s*\d+$/i.test(query.trim())){
       const raw=query.trim().replace(/^e\s*/i,"");
-      if(!/^\d+$/.test(raw))return;
       const exact=newTranslations.find(item=>String(item.englishNumber)===raw);
       if(exact){setSubmittedMissingNumber(false);router.push(`/hymns/new-translations/${exact.englishNumber}`);return;}
       setSubmittedMissingNumber(true);
@@ -93,9 +92,9 @@ export function HymnBrowser({ kind, myanmar, english=[], newTranslations=[], ini
     setSubmittedMissingNumber(true);
   };
 
-  const switchHymnSection=(section:Exclude<HymnSectionTab,null>)=>{setHymnSection(current=>current===section?null:section);setQuery("");setSubmittedMissingNumber(false)};
+  const switchHymnSection=(section:Exclude<HymnSectionTab,null>)=>setHymnSection(current=>current===section?null:section);
   const ypCountLabel=`${results.length.toLocaleString()} ${results.length===1?"song":"songs"}`;
-  const emptyHymnSection=hymnSection==="hymns"?results.length===0:hymnSection==="new"?newResults.length===0:false;
+  const hymnListEmpty=kind==="hymns"&&results.length===0&&newResults.length===0;
 
   return <main className="page">
     <header className="mb-7"><p className="eyebrow normal-case">Hymnal.net</p><h1 className={`mt-2 font-serif tracking-tight ${kind==="hymns"?"text-3xl md:text-4xl":"text-4xl md:text-5xl"}`}>{kind==="yp"?"New Songs":"Hymns"}</h1></header>
@@ -112,9 +111,10 @@ export function HymnBrowser({ kind, myanmar, english=[], newTranslations=[], ini
 
     {kind==="yp"&&<p className="my-4 text-sm text-[var(--muted)]">{ypCountLabel}</p>}
 
-    {kind==="hymns"&&hymnSection!==null&&!emptyHymnSection&&<div className="mt-5">{hymnSection==="hymns"?<HymnList results={results} kind="hymns" language="my" exactNumber={numberQuery}/>:<NewTranslationList items={newResults}/>}</div>}
+    {kind==="hymns"&&results.length>0&&<div className="mt-5"><HymnList results={results} kind="hymns" language="my" exactNumber={numberQuery}/></div>}
+    {kind==="hymns"&&newResults.length>0&&<NewTranslationList items={newResults}/>} 
     {kind==="yp"&&results.length>0&&<HymnList results={results} kind={kind} language={language} exactNumber={numberQuery}/>} 
 
-    {((kind==="hymns"&&hymnSection!==null&&emptyHymnSection)||(kind==="yp"&&results.length===0))&&<div className="py-16 text-center"><p className="font-serif text-2xl">{submittedMissingNumber?(kind==="hymns"?"Hymn not found":"Song not found"):(kind==="hymns"?"No hymns found":"No songs found")}</p><p className="mt-2 text-sm text-[var(--muted)]">Try a number, title, or phrase from the lyrics.</p></div>}
+    {(hymnListEmpty||(kind==="yp"&&results.length===0))&&<div className="py-16 text-center"><p className="font-serif text-2xl">{submittedMissingNumber?(kind==="hymns"?"Hymn not found":"Song not found"):(kind==="hymns"?"No hymns found":"No songs found")}</p><p className="mt-2 text-sm text-[var(--muted)]">Try a number, title, or phrase from the lyrics.</p></div>}
   </main>;
 }
