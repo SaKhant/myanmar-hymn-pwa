@@ -52,9 +52,7 @@ export default async function HymnPage({params,searchParams}:{params:Promise<{ki
   const discoveredMyanmarHymn=!isMyanmar&&kind==="hymns"?getHymns("hymns","my").find(candidate=>englishReferenceNumber(candidate.cross_references.Eng?.trim())===String(hymn.number??hymn.id)):undefined;
   const relatedMyanmarHymn=validatedMyanmarHymn??discoveredMyanmarHymn;
   const englishVersionLabel=relatedMyanmarHymn?.cross_references.Eng?.trim()||hymn.number||hymn.id;
-  const ypReference=kind==="yp"?ypReferenceNumber(hymn.cross_references["New Songs"]?.trim()):undefined;
-  const ypCandidate=ypReference?getHymn("yp",isMyanmar?"en":"my",ypReference):undefined;
-  const relatedYpSong=ypCandidate&&ypReferenceNumber(ypCandidate.cross_references["New Songs"]?.trim())===String(hymn.number??hymn.id)?ypCandidate:undefined;
+  const relatedYpSong=kind==="yp"?getHymn("yp",isMyanmar?"en":"my",String(hymn.number??hymn.id)):undefined;
   const audioUrl=validAudioUrl(hymn.audio_url)??(!isMyanmar?validAudioUrl(relatedMyanmarHymn?.audio_url):undefined);
   const hasLongTitle=Array.from(title).length>32;
   const hasDetails=Object.keys(hymn.metadata).length>0;
