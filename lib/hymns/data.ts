@@ -3,6 +3,7 @@ import englishHymns from "@/hymn_dataset/english_hymns.json";
 import myanmarHymns from "@/hymn_dataset/myanmar_hymns.json";
 import englishYp from "@/hymn_dataset/english_yp.json";
 import englishYp165170 from "@/hymn_dataset/english_yp_165_170.json";
+import englishYp171176 from "@/hymn_dataset/english_yp_171_176.json";
 import myanmarYp from "@/hymn_dataset/myanmar_yp.json";
 import myanmarYp165170 from "@/hymn_dataset/myanmar_yp_165_170.json";
 import myanmarYp171176 from "@/hymn_dataset/myanmar_yp_171_176.json";
@@ -31,6 +32,7 @@ const collections: Record<HymnCollection, HymnRecord[]> = {
   english_yp: [
     ...(englishYp as unknown as HymnRecord[]),
     ...(englishYp165170 as unknown as HymnRecord[]),
+    ...(englishYp171176 as unknown as HymnRecord[]),
   ],
 };
 
