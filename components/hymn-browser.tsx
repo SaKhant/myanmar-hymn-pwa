@@ -111,7 +111,7 @@ export function HymnBrowser({ kind, myanmar, english=[], newTranslations=[], ini
   return <main className="page">
     <header className="mb-7"><p className="eyebrow normal-case">Hymnal.net</p><h1 className={`mt-2 font-serif tracking-tight ${kind==="hymns"?"text-3xl md:text-4xl":"text-4xl md:text-5xl"}`}>{kind==="yp"?"New Songs":"Hymns"}</h1></header>
 
-    {kind==="hymns"&&<div className="mb-5 flex w-full rounded-xl bg-[var(--sage-soft)] p-1 sm:w-fit" role="group" aria-label="Hymn section">
+    {kind==="hymns"&&<div className="mb-5 flex w-full rounded-xl bg-blue-100 p-1 sm:w-fit" role="group" aria-label="Hymn section">
       <button type="button" onClick={()=>switchHymnSection("hymns")} aria-pressed={hymnSection==="hymns"} className={`focus-ring myanmar flex-1 rounded-lg px-6 py-2.5 text-sm font-bold sm:flex-none ${hymnSection==="hymns"?"bg-[var(--paper)] text-[var(--ink)] shadow-sm":"text-[var(--muted)]"}`}>ဓမ္မသီချင်း</button>
       <button type="button" onClick={()=>switchHymnSection("new")} aria-pressed={hymnSection==="new"} className={`focus-ring myanmar flex-1 rounded-lg px-6 py-2.5 text-sm font-bold sm:flex-none ${hymnSection==="new"?"bg-[var(--paper)] text-[var(--ink)] shadow-sm":"text-[var(--muted)]"}`}>အသစ်</button>
     </div>}
