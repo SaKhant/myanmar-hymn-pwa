@@ -111,15 +111,15 @@ export function HymnBrowser({ kind, myanmar, english=[], newTranslations=[], ini
   return <main className="page">
     <header className="mb-7"><p className="eyebrow normal-case">Hymnal.net</p><h1 className={`mt-2 font-serif tracking-tight ${kind==="hymns"?"text-3xl md:text-4xl":"text-4xl md:text-5xl"}`}>{kind==="yp"?"New Songs":"Hymns"}</h1></header>
 
-    {kind==="hymns"&&<div className="mb-5 flex w-full items-center rounded-xl bg-blue-100 p-1 sm:w-fit" role="group" aria-label="Hymn section">
-      <button type="button" onClick={()=>switchHymnSection("hymns")} aria-pressed={hymnSection==="hymns"} className={`focus-ring myanmar flex-1 rounded-lg px-6 py-2.5 text-sm font-bold sm:flex-none ${hymnSection==="hymns"?"bg-[var(--paper)] text-[var(--ink)] shadow-sm":"text-[var(--muted)]"}`}>ဓမ္မသီချင်း</button>
-      <span aria-hidden="true" className="px-1 text-base font-bold text-[var(--muted)]">|</span>
-      <button type="button" onClick={()=>switchHymnSection("new")} aria-pressed={hymnSection==="new"} className={`focus-ring myanmar flex-1 rounded-lg px-6 py-2.5 text-sm font-bold sm:flex-none ${hymnSection==="new"?"bg-[var(--paper)] text-[var(--ink)] shadow-sm":"text-[var(--muted)]"}`}>အသစ်</button>
-    </div>}
-
     {kind==="yp"&&!myanmarOnly&&<div className="mb-5 flex w-full rounded-xl bg-[var(--sage-soft)] p-1 sm:w-fit" role="group" aria-label="Language">{(["my","en"] as const).map(lang=><button key={lang} onClick={()=>setSelectedLanguage(lang)} className={`focus-ring flex-1 rounded-lg px-7 py-2.5 text-sm font-bold sm:flex-none ${language===lang?"bg-[var(--paper)] text-[var(--ink)] shadow-sm":"text-[var(--muted)]"}`}>{lang==="my"?"မြန်မာ":"English"}</button>)}</div>}
 
     {kind==="hymns"?<div className="w-full max-w-md rounded-xl bg-blue-100 p-1.5"><div className="flex items-center gap-2"><form role="search" className="min-w-0 flex-1" onSubmit={(event)=>{event.preventDefault();submitSearch()}}><div className="flex h-11 overflow-hidden rounded-lg border border-black bg-[var(--paper)]"><label className="min-w-0 flex-1"><span className="sr-only">Search hymns</span><input type="text" lang="my" dir="ltr" autoComplete="off" autoCapitalize="none" autoCorrect="off" spellCheck={false} enterKeyHint="search" value={query} onChange={(event)=>{setQuery(event.currentTarget.value);setSubmittedMissingNumber(false)}} onKeyDown={(event)=>{if(event.key==="Enter"&&!event.nativeEvent.isComposing){event.preventDefault();event.currentTarget.form?.requestSubmit()}}} className="myanmar-search-input h-full w-full border-0 bg-transparent px-3 text-sm outline-none" /></label><button type="submit" aria-label="Search" className="focus-ring flex h-full w-11 shrink-0 items-center justify-center border-l border-black bg-[var(--paper)] text-black transition hover:bg-[var(--sage-soft)]"><Search aria-hidden="true" size={19}/></button></div></form><Link href="/categories" aria-label="Categories" title="Categories" className="focus-ring flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-black bg-blue-400 text-white no-underline transition hover:bg-blue-500"><Menu aria-hidden="true" size={22}/></Link></div></div>:<SearchField value={query} onChange={(value)=>{setQuery(value);setSubmittedMissingNumber(false)}} onSubmit={submitSearch} placeholder="Search number, title, or lyric…" cleanFocus/>}
+
+    {kind==="hymns"&&<div className="mx-auto mt-3 flex w-fit items-center rounded-lg bg-blue-100 p-0.5" role="group" aria-label="Hymn section">
+      <button type="button" onClick={()=>switchHymnSection("hymns")} aria-pressed={hymnSection==="hymns"} className={`focus-ring myanmar rounded-md px-3 py-1 text-[11px] font-bold ${hymnSection==="hymns"?"bg-[var(--paper)] text-[var(--ink)] shadow-sm":"text-[var(--muted)]"}`}>ဓမ္မသီချင်း</button>
+      <span aria-hidden="true" className="px-0.5 text-xs font-bold text-[var(--muted)]">|</span>
+      <button type="button" onClick={()=>switchHymnSection("new")} aria-pressed={hymnSection==="new"} className={`focus-ring myanmar rounded-md px-3 py-1 text-[11px] font-bold ${hymnSection==="new"?"bg-[var(--paper)] text-[var(--ink)] shadow-sm":"text-[var(--muted)]"}`}>အသစ်</button>
+    </div>}
 
     {kind==="yp"&&<p className="my-4 text-sm text-[var(--muted)]">{ypCountLabel}</p>}
 
