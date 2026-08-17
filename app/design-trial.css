@@ -3,8 +3,14 @@
 #hymns-quick-menu span,
 #hymns-quick-menu svg {
   color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  opacity: 1;
 }
 
-#hymns-quick-menu svg {
+#hymns-quick-menu svg,
+#hymns-quick-menu svg path,
+#hymns-quick-menu svg circle,
+#hymns-quick-menu svg line,
+#hymns-quick-menu svg polyline {
   stroke: #fff !important;
 }
