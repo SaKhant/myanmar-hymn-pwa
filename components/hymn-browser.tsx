@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useDeferredValue, useEffect, useMemo, useState } from "react";
-import { BookMarked, ChevronRight } from "lucide-react";
+import { ChevronRight, Menu, Search } from "lucide-react";
 import type { HymnKind, HymnLanguage, HymnSummary } from "@/lib/hymns/types";
 import { normalizeHymnNumberQuery, normalizeSearchText, normalizeTitlePrefix } from "@/lib/hymns/search";
 import { SearchField } from "./search-field";
@@ -118,7 +118,7 @@ export function HymnBrowser({ kind, myanmar, english=[], newTranslations=[], ini
 
     {kind==="yp"&&!myanmarOnly&&<div className="mb-5 flex w-full rounded-xl bg-[var(--sage-soft)] p-1 sm:w-fit" role="group" aria-label="Language">{(["my","en"] as const).map(lang=><button key={lang} onClick={()=>setSelectedLanguage(lang)} className={`focus-ring flex-1 rounded-lg px-7 py-2.5 text-sm font-bold sm:flex-none ${language===lang?"bg-[var(--paper)] text-[var(--ink)] shadow-sm":"text-[var(--muted)]"}`}>{lang==="my"?"မြန်မာ":"English"}</button>)}</div>}
 
-    {kind==="hymns"?<div className="flex items-center gap-2"><div className="min-w-0 flex-1"><SearchField value={query} onChange={(value)=>{setQuery(value);setSubmittedMissingNumber(false)}} onSubmit={submitSearch} placeholder="" cleanFocus/></div><Link href="/categories" aria-label="Categories" title="Categories" className="focus-ring flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-[var(--line)] bg-[var(--paper)] text-[var(--sage)] no-underline transition hover:bg-[var(--sage-soft)]"><BookMarked aria-hidden="true" size={22}/></Link></div>:<SearchField value={query} onChange={(value)=>{setQuery(value);setSubmittedMissingNumber(false)}} onSubmit={submitSearch} placeholder="Search number, title, or lyric…" cleanFocus/>}
+    {kind==="hymns"?<div className="rounded-2xl bg-blue-100 p-2.5"><div className="flex items-center gap-3"><form role="search" className="min-w-0 flex-1" onSubmit={(event)=>{event.preventDefault();submitSearch()}}><div className="flex h-14 overflow-hidden rounded-xl border border-black bg-[var(--paper)]"><label className="min-w-0 flex-1"><span className="sr-only">Search hymns</span><input type="text" lang="my" dir="ltr" autoComplete="off" autoCapitalize="none" autoCorrect="off" spellCheck={false} enterKeyHint="search" value={query} onChange={(event)=>{setQuery(event.currentTarget.value);setSubmittedMissingNumber(false)}} onKeyDown={(event)=>{if(event.key==="Enter"&&!event.nativeEvent.isComposing){event.preventDefault();event.currentTarget.form?.requestSubmit()}}} className="myanmar-search-input h-full w-full border-0 bg-transparent px-4 text-base outline-none" /></label><button type="submit" aria-label="Search" className="focus-ring flex h-full w-14 shrink-0 items-center justify-center border-l border-black bg-[var(--paper)] text-black transition hover:bg-[var(--sage-soft)]"><Search aria-hidden="true" size={22}/></button></div></form><Link href="/categories" aria-label="Categories" title="Categories" className="focus-ring flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-black bg-blue-400 text-white no-underline transition hover:bg-blue-500"><Menu aria-hidden="true" size={28}/></Link></div></div>:<SearchField value={query} onChange={(value)=>{setQuery(value);setSubmittedMissingNumber(false)}} onSubmit={submitSearch} placeholder="Search number, title, or lyric…" cleanFocus/>}
 
     {kind==="yp"&&<p className="my-4 text-sm text-[var(--muted)]">{ypCountLabel}</p>}
 
