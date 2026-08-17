@@ -24,19 +24,19 @@ export default async function MatuHymnPage({ params }: { params: Promise<{ id: s
       </Link>
 
       <p className={styles.kicker}>
-        <Link href={`/hymns/my/${hymn.number}`}>MY {hymn.number}</Link>
+        <Link href={`/hymns/my/${hymn.number}`}>M{hymn.number}</Link>
         {englishReference ? (
           <>
             {" • "}
             {english ? (
-              <Link href={`/hymns/en/${english.number ?? english.id}`}>ENG {englishReference}</Link>
+              <Link href={`/hymns/en/${english.number ?? english.id}`}>E{englishReference}</Link>
             ) : (
-              <span>ENG {englishReference}</span>
+              <span>E{englishReference}</span>
             )}
           </>
         ) : null}
         {" • "}
-        <span className={styles.current}>MATU {hymn.number}</span>
+        <span className={styles.current}>MT{hymn.number}</span>
       </p>
 
       <h1 className={styles.title}>{hymn.title || hymn.first_line || `Matu Hymn ${hymn.number}`}</h1>
