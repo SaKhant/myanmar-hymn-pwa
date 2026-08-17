@@ -10,7 +10,7 @@ import { SearchField } from "./search-field";
 const CHORD_TOKEN=/^[A-G](?:#|b)?(?:(?:maj|min|m|dim|aug|sus|add)?\d*(?:\([^)]*\))?)?(?:\/[A-G](?:#|b)?)?$/i;
 
 type NewTranslationSummary={id:string;englishNumber:number;title:string;category:string;englishTitle:string|null;searchText:string};
-type HymnSectionTab="hymns"|"new";
+type HymnSectionTab="hymns"|"new"|null;
 
 function isChordOnlyText(value:string):boolean {
   const tokens=value.trim().replace(/[|,:()\-–—]/g," ").split(/\s+/).filter(Boolean);
@@ -43,7 +43,7 @@ function NewTranslationGrid({items}:{items:NewTranslationSummary[]}){
 export function HymnBrowser({ kind, myanmar, english=[], newTranslations=[], initialLanguage="my", initialQuery="", myanmarOnly=false, lyricSearchUrl }:{ kind:HymnKind; myanmar:HymnSummary[]; english?:HymnSummary[]; newTranslations?:NewTranslationSummary[]; initialLanguage?:HymnLanguage; initialQuery?:string; myanmarOnly?:boolean; lyricSearchUrl?:string }) {
   const router=useRouter();
   const [selectedLanguage,setSelectedLanguage]=useState<HymnLanguage>(initialLanguage);
-  const [hymnSection,setHymnSection]=useState<HymnSectionTab>("hymns");
+  const [hymnSection,setHymnSection]=useState<HymnSectionTab>(null);
   const [query,setQuery]=useState(initialQuery);
   const [lyricSearchIndex,setLyricSearchIndex]=useState<Record<string,string>>({});
   const [submittedMissingNumber,setSubmittedMissingNumber]=useState(false);
@@ -103,10 +103,10 @@ export function HymnBrowser({ kind, myanmar, english=[], newTranslations=[], ini
     setSubmittedMissingNumber(true);
   };
 
-  const switchHymnSection=(section:HymnSectionTab)=>{setHymnSection(section);setQuery("");setSubmittedMissingNumber(false)};
+  const switchHymnSection=(section:Exclude<HymnSectionTab,null>)=>{setHymnSection(current=>current===section?null:section);setQuery("");setSubmittedMissingNumber(false)};
   const ypCountLabel=`${results.length.toLocaleString()} ${results.length===1?"song":"songs"}`;
   const hymnGridResults=hymnSection==="hymns"?results:[];
-  const emptyHymnSection=hymnSection==="hymns"?hymnGridResults.length===0:newResults.length===0;
+  const emptyHymnSection=hymnSection==="hymns"?hymnGridResults.length===0:hymnSection==="new"?newResults.length===0:false;
 
   return <main className="page">
     <header className="mb-7"><p className="eyebrow normal-case">Hymnal.net</p><h1 className={`mt-2 font-serif tracking-tight ${kind==="hymns"?"text-3xl md:text-4xl":"text-4xl md:text-5xl"}`}>{kind==="yp"?"New Songs":"Hymns"}</h1></header>
@@ -122,9 +122,9 @@ export function HymnBrowser({ kind, myanmar, english=[], newTranslations=[], ini
 
     {kind==="yp"&&<p className="my-4 text-sm text-[var(--muted)]">{ypCountLabel}</p>}
 
-    {kind==="hymns"&&!emptyHymnSection&&<div className="mt-5">{hymnSection==="hymns"?<OfficialHymnGrid hymns={hymnGridResults} showAll={!hasQuery}/>:<NewTranslationGrid items={newResults}/>}</div>}
+    {kind==="hymns"&&hymnSection!==null&&!emptyHymnSection&&<div className="mt-5">{hymnSection==="hymns"?<OfficialHymnGrid hymns={hymnGridResults} showAll={!hasQuery}/>:<NewTranslationGrid items={newResults}/>}</div>}
     {kind==="yp"&&results.length>0&&<HymnList results={results} kind={kind} language={language} exactNumber={numberQuery}/>} 
 
-    {((kind==="hymns"&&emptyHymnSection)||(kind==="yp"&&results.length===0))&&<div className="py-16 text-center"><p className="font-serif text-2xl">{submittedMissingNumber?(kind==="hymns"?"Hymn not found":"Song not found"):(kind==="hymns"?"No hymns found":"No songs found")}</p><p className="mt-2 text-sm text-[var(--muted)]">Try a number, title, or phrase from the lyrics.</p></div>}
+    {((kind==="hymns"&&hymnSection!==null&&emptyHymnSection)||(kind==="yp"&&results.length===0))&&<div className="py-16 text-center"><p className="font-serif text-2xl">{submittedMissingNumber?(kind==="hymns"?"Hymn not found":"Song not found"):(kind==="hymns"?"No hymns found":"No songs found")}</p><p className="mt-2 text-sm text-[var(--muted)]">Try a number, title, or phrase from the lyrics.</p></div>}
   </main>;
 }
