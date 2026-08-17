@@ -1,0 +1,488 @@
+[
+  {
+    "id": "165",
+    "number": 165,
+    "collection": "english_yp",
+    "language": "en",
+    "title": "Until we all arrive",
+    "first_line": "Until we all arrive",
+    "theme": null,
+    "page_heading": "#165",
+    "metadata": {
+      "Scripture": "Eph. 4:13; Rev. 19:7"
+    },
+    "cross_references": {
+      "New Songs": "620"
+    },
+    "audio_url": null,
+    "sections": [
+      {
+        "type": "verse",
+        "number": 1,
+        "lines": [
+          "G C",
+          "Until we all arrive",
+          "Em",
+          "At the oneness of the faith",
+          "D",
+          "And of the full knowledge",
+          "G C",
+          "Of the Son of God,",
+          "Em",
+          "At the oneness of the faith",
+          "D",
+          "At a full-grown man,",
+          "C G",
+          "At the measure of the stature of the",
+          "Am C",
+          "Fullness of Christ,",
+          "G D G",
+          "Until we all arrive."
+        ]
+      },
+      {
+        "type": "chorus",
+        "number": null,
+        "lines": [
+          "G",
+          "Let us rejoice and",
+          "C Em",
+          "let us give the glory to Him",
+          "D",
+          "For the marriage of the Lamb has come,",
+          "G",
+          "Let us exult and",
+          "C Em",
+          "let us give the glory to Him",
+          "D D7",
+          "For the marriage of the Lamb has come",
+          "C",
+          "And His wife has",
+          "G C D Em",
+          "made herself ready,",
+          "C D G",
+          "For the marriage of the Lamb has come."
+        ]
+      }
+    ],
+    "source_file": "ypeng/165.html",
+    "lyrics_text": "1\nG C\nUntil we all arrive\nEm\nAt the oneness of the faith\nD\nAnd of the full knowledge\nG C\nOf the Son of God,\nEm\nAt the oneness of the faith\nD\nAt a full-grown man,\nC G\nAt the measure of the stature of the\nAm C\nFullness of Christ,\nG D G\nUntil we all arrive.\n\nChorus\nG\nLet us rejoice and\nC Em\nlet us give the glory to Him\nD\nFor the marriage of the Lamb has come,\nG\nLet us exult and\nC Em\nlet us give the glory to Him\nD D7\nFor the marriage of the Lamb has come\nC\nAnd His wife has\nG C D Em\nmade herself ready,\nC D G\nFor the marriage of the Lamb has come."
+  },
+  {
+    "id": "166",
+    "number": 166,
+    "collection": "english_yp",
+    "language": "en",
+    "title": "I’m so attracted by Your love",
+    "first_line": "I’m so attracted by Your love,",
+    "theme": null,
+    "page_heading": "#166",
+    "metadata": {},
+    "cross_references": {
+      "New Songs": "299"
+    },
+    "audio_url": null,
+    "sections": [
+      {
+        "type": "verse",
+        "number": 1,
+        "lines": [
+          "C Am",
+          "I’m so attracted by Your love,",
+          "F G",
+          "And I’m drawn by You",
+          "C Am F",
+          "In Your sweetness, to pursue, after You",
+          "G",
+          "For my full satisfaction."
+        ]
+      },
+      {
+        "type": "refrain",
+        "number": 1,
+        "lines": [
+          "C Am F",
+          "I’m in love, I’m in love, I’m in love",
+          "G",
+          "With the most beautiful One."
+        ]
+      },
+      {
+        "type": "verse",
+        "number": 2,
+        "lines": [
+          "I’m captivated by Your name",
+          "And I’m charmed by You;",
+          "With Your fragrance covering me I was gained",
+          "As You kissed me with Your kisses."
+        ]
+      },
+      {
+        "type": "refrain",
+        "number": 2,
+        "lines": [
+          "I’m in love, I’m in love, I’m in love",
+          "With the most affectionate One."
+        ]
+      },
+      {
+        "type": "verse",
+        "number": 3,
+        "lines": [
+          "I’m fellowshipping in Your love",
+          "And rejoicing in You.",
+          "In Your chambers I enjoy our sweet love",
+          "For the church, Your satisfaction."
+        ]
+      },
+      {
+        "type": "refrain",
+        "number": 3,
+        "lines": [
+          "I’m in love, I’m in love, I’m in love",
+          "With the most intimate One."
+        ]
+      }
+    ],
+    "source_file": "ypeng/166.html",
+    "lyrics_text": "1\nC Am\nI’m so attracted by Your love,\nF G\nAnd I’m drawn by You\nC Am F\nIn Your sweetness, to pursue, after You\nG\nFor my full satisfaction.\n\nRefrain 1\nC Am F\nI’m in love, I’m in love, I’m in love\nG\nWith the most beautiful One.\n\n2\nI’m captivated by Your name\nAnd I’m charmed by You;\nWith Your fragrance covering me I was gained\nAs You kissed me with Your kisses.\n\nRefrain 2\nI’m in love, I’m in love, I’m in love\nWith the most affectionate One.\n\n3\nI’m fellowshipping in Your love\nAnd rejoicing in You.\nIn Your chambers I enjoy our sweet love\nFor the church, Your satisfaction.\n\nRefrain 3\nI’m in love, I’m in love, I’m in love\nWith the most intimate One."
+  },
+  {
+    "id": "167",
+    "number": 167,
+    "collection": "english_yp",
+    "language": "en",
+    "title": "They walked along the road",
+    "first_line": "They walked along the road: Two disciples, all alone,",
+    "theme": null,
+    "page_heading": "#167",
+    "metadata": {},
+    "cross_references": {
+      "New Songs": "534"
+    },
+    "audio_url": null,
+    "sections": [
+      {
+        "type": "verse",
+        "number": 1,
+        "lines": [
+          "D A Bm G",
+          "They walked along the road: Two disciples, all alone,",
+          "A",
+          "Their Master dead and gone.",
+          "D A Bm",
+          "A man to them drew near,",
+          "G",
+          "Spoke to them and calmed their fears,",
+          "A",
+          "They told Him everything."
+        ]
+      },
+      {
+        "type": "refrain",
+        "number": 1,
+        "lines": [
+          "(He said:)",
+          "Bm G D A",
+          "Why don’t you believe? For it was necessary",
+          "Bm G",
+          "For the Christ to suffer all these things",
+          "D A",
+          "And enter His glory.",
+          "G A D",
+          "Why don’t you believe?",
+          "G A D",
+          "Why don’t you believe?"
+        ]
+      },
+      {
+        "type": "verse",
+        "number": 2,
+        "lines": [
+          "They came to journey’s end;",
+          "He came in to eat with them,",
+          "He blessed and broke the bread.",
+          "Then opened were their eyes;",
+          "Jesus Christ they recognized.",
+          "He disappeared from them."
+        ]
+      },
+      {
+        "type": "refrain",
+        "number": 2,
+        "lines": [
+          "(They said:)",
+          "Did not our hearts burn As He spoke those words?",
+          "While we walked with Him",
+          "The Scriptures were opened.",
+          "Did not our hearts burn? Did not our hearts burn?"
+        ]
+      },
+      {
+        "type": "verse",
+        "number": 3,
+        "lines": [
+          "We walk along our road",
+          "He reminds us we were told",
+          "“I’m with you every day.”",
+          "No matter how we feel,",
+          "He’s the Spirit, He is real,",
+          "Indwelling you and me."
+        ]
+      },
+      {
+        "type": "refrain",
+        "number": 3,
+        "lines": [
+          "(We say:)",
+          "Do not our hearts burn When we hear His word?",
+          "Jesus Christ, within, In resurrection lives!",
+          "Do not our hearts burn? Do not our hearts burn?"
+        ]
+      }
+    ],
+    "source_file": "ypeng/167.html",
+    "lyrics_text": "1\nD A Bm G\nThey walked along the road: Two disciples, all alone,\nA\nTheir Master dead and gone.\nD A Bm\nA man to them drew near,\nG\nSpoke to them and calmed their fears,\nA\nThey told Him everything.\n\nRefrain 1\n(He said:)\nBm G D A\nWhy don’t you believe? For it was necessary\nBm G\nFor the Christ to suffer all these things\nD A\nAnd enter His glory.\nG A D\nWhy don’t you believe?\nG A D\nWhy don’t you believe?\n\n2\nThey came to journey’s end;\nHe came in to eat with them,\nHe blessed and broke the bread.\nThen opened were their eyes;\nJesus Christ they recognized.\nHe disappeared from them.\n\nRefrain 2\n(They said:)\nDid not our hearts burn As He spoke those words?\nWhile we walked with Him\nThe Scriptures were opened.\nDid not our hearts burn? Did not our hearts burn?\n\n3\nWe walk along our road\nHe reminds us we were told\n“I’m with you every day.”\nNo matter how we feel,\nHe’s the Spirit, He is real,\nIndwelling you and me.\n\nRefrain 3\n(We say:)\nDo not our hearts burn When we hear His word?\nJesus Christ, within, In resurrection lives!\nDo not our hearts burn? Do not our hearts burn?"
+  },
+  {
+    "id": "168",
+    "number": 168,
+    "collection": "english_yp",
+    "language": "en",
+    "title": "Lord, I’ve set my heart",
+    "first_line": "Lord, I’ve set my heart;",
+    "theme": null,
+    "page_heading": "#168",
+    "metadata": {},
+    "cross_references": {
+      "LB": "18"
+    },
+    "audio_url": null,
+    "sections": [
+      {
+        "type": "verse",
+        "number": 1,
+        "lines": [
+          "D A D",
+          "Lord, I’ve set my heart;",
+          "G D A",
+          "Lord, I just love You.",
+          "Bm F#m",
+          "Besides You I have",
+          "Em F#m A",
+          "No other desire.",
+          "Em D A",
+          "Lord, I just like to live You."
+        ]
+      },
+      {
+        "type": "chorus",
+        "number": null,
+        "lines": [
+          "D G D",
+          "Lord, I love You,",
+          "G F#m A",
+          "Because You love me.",
+          "D Em G A",
+          "I’d just like to live You,",
+          "D G",
+          "And be under Your",
+          "D Bm",
+          "Instant moment by",
+          "F#m Em A D",
+          "moment leading."
+        ]
+      },
+      {
+        "type": "verse",
+        "number": 2,
+        "lines": [
+          "On the entire earth,",
+          "in the whole universe,",
+          "I have no int’rest",
+          "Or other desire:",
+          "My desire is only You."
+        ]
+      },
+      {
+        "type": "verse",
+        "number": 3,
+        "lines": [
+          "Thank You, dearest Lord;",
+          "You’ve predestinated me,",
+          "You’ve called me and saved",
+          "Me and, Lord, preserved me.",
+          "You have brought me, Lord, to this day."
+        ]
+      }
+    ],
+    "source_file": "ypeng/168.html",
+    "lyrics_text": "1\nD A D\nLord, I’ve set my heart;\nG D A\nLord, I just love You.\nBm F#m\nBesides You I have\nEm F#m A\nNo other desire.\nEm D A\nLord, I just like to live You.\n\nChorus\nD G D\nLord, I love You,\nG F#m A\nBecause You love me.\nD Em G A\nI’d just like to live You,\nD G\nAnd be under Your\nD Bm\nInstant moment by\nF#m Em A D\nmoment leading.\n\n2\nOn the entire earth,\nin the whole universe,\nI have no int’rest\nOr other desire:\nMy desire is only You.\n\n3\nThank You, dearest Lord;\nYou’ve predestinated me,\nYou’ve called me and saved\nMe and, Lord, preserved me.\nYou have brought me, Lord, to this day."
+  },
+  {
+    "id": "169",
+    "number": 169,
+    "collection": "english_yp",
+    "language": "en",
+    "title": "Keep Spreading, Lord",
+    "first_line": "In my love for You,",
+    "theme": null,
+    "page_heading": "#169",
+    "metadata": {},
+    "cross_references": {
+      "New Songs": "626"
+    },
+    "audio_url": null,
+    "sections": [
+      {
+        "type": "verse",
+        "number": 1,
+        "lines": [
+          "C",
+          "In my love for You,",
+          "Am",
+          "Through Your love for me,",
+          "Dm F",
+          "Overflowing from within,",
+          "Dm",
+          "In my touch with You,",
+          "F",
+          "Being touched by Thee,",
+          "C",
+          "I’m abiding, grafted in;",
+          "Am",
+          "Now Your life bears fruit;",
+          "Em",
+          "It’s surpassing all I could say or do;",
+          "F G7",
+          "Keep spreading, Lord.",
+          "C",
+          "Keep spreading, Lord."
+        ]
+      },
+      {
+        "type": "verse",
+        "number": 2,
+        "lines": [
+          "As I dwell in You,",
+          "You’re indwelling me;",
+          "That Your building work increase.",
+          "As I’m born of You,",
+          "You’ve been born in me,",
+          "That full-growth, this life would reach.",
+          "So I open wide, Ever more abide,",
+          "In my every part.",
+          "Keep spreading Lord,",
+          "Keep spreading Lord."
+        ]
+      },
+      {
+        "type": "bridge",
+        "number": null,
+        "lines": [
+          "C F",
+          "Keep spreading through my mind,",
+          "G",
+          "My emotion, will,",
+          "E7",
+          "Every day renewing",
+          "Am",
+          "My being till",
+          "F G C G7",
+          "I’m fully saturated with You."
+        ]
+      },
+      {
+        "type": "verse",
+        "number": 3,
+        "lines": [
+          "In my heart for You,",
+          "Through Your heart for me,",
+          "From eternity through time;",
+          "In my work for You,",
+          "Through Your work in me,",
+          "I am resting in the vine.",
+          "I now clearly see All things sovereignly",
+          "Work toward Your goal;",
+          "So till You return,",
+          "Keep spreading Lord."
+        ]
+      }
+    ],
+    "source_file": "ypeng/169.html",
+    "lyrics_text": "1\nC\nIn my love for You,\nAm\nThrough Your love for me,\nDm F\nOverflowing from within,\nDm\nIn my touch with You,\nF\nBeing touched by Thee,\nC\nI’m abiding, grafted in;\nAm\nNow Your life bears fruit;\nEm\nIt’s surpassing all I could say or do;\nF G7\nKeep spreading, Lord.\nC\nKeep spreading, Lord.\n\n2\nAs I dwell in You,\nYou’re indwelling me;\nThat Your building work increase.\nAs I’m born of You,\nYou’ve been born in me,\nThat full-growth, this life would reach.\nSo I open wide, Ever more abide,\nIn my every part.\nKeep spreading Lord,\nKeep spreading Lord.\n\nBridge\nC F\nKeep spreading through my mind,\nG\nMy emotion, will,\nE7\nEvery day renewing\nAm\nMy being till\nF G C G7\nI’m fully saturated with You.\n\n3\nIn my heart for You,\nThrough Your heart for me,\nFrom eternity through time;\nIn my work for You,\nThrough Your work in me,\nI am resting in the vine.\nI now clearly see All things sovereignly\nWork toward Your goal;\nSo till You return,\nKeep spreading Lord."
+  },
+  {
+    "id": "170",
+    "number": 170,
+    "collection": "english_yp",
+    "language": "en",
+    "title": "Unto the Economy",
+    "first_line": "God planned His great purpose in eternity,",
+    "theme": null,
+    "page_heading": "#170",
+    "metadata": {
+      "Scripture": "Eph. 1:9-10"
+    },
+    "cross_references": {
+      "New Songs": "719"
+    },
+    "audio_url": null,
+    "sections": [
+      {
+        "type": "verse",
+        "number": 1,
+        "lines": [
+          "A D E A",
+          "God planned His great purpose in eternity,",
+          "A D E",
+          "This great will was hidden, a great mystery;",
+          "A D E A",
+          "With wisdom and prudence He has made it known,",
+          "Bm Bm7 E",
+          "Through revelation, in Christ, the Son."
+        ]
+      },
+      {
+        "type": "chorus",
+        "number": null,
+        "lines": [
+          "A C#7 F#m",
+          "Unto the economy of the fullness of the times,",
+          "Bm",
+          "To head up all things in Christ,",
+          "Bm7 E",
+          "The things in the heavens in Him;",
+          "A C#7 F#m",
+          "Unto the economy of the fullness of the times,",
+          "Bm",
+          "To head up all things in Christ",
+          "Bm7 E A",
+          "And the things on the earth, in Him."
+        ]
+      },
+      {
+        "type": "verse",
+        "number": 2,
+        "lines": [
+          "Through Christ’s incarnation God came into man,",
+          "And through crucifixion came redemption’s plan;",
+          "Then in resurrection, the Comforter came,",
+          "And in His ascension exalt His name!"
+        ]
+      },
+      {
+        "type": "verse",
+        "number": 3,
+        "lines": [
+          "It is God’s good pleasure to show us the Son,",
+          "And through His dispensing we are all made one;",
+          "Through this life abundant and rich life supply,",
+          "The church will be builded and beautified."
+        ]
+      }
+    ],
+    "source_file": "ypeng/170.html",
+    "lyrics_text": "1\nA D E A\nGod planned His great purpose in eternity,\nA D E\nThis great will was hidden, a great mystery;\nA D E A\nWith wisdom and prudence He has made it known,\nBm Bm7 E\nThrough revelation, in Christ, the Son.\n\nChorus\nA C#7 F#m\nUnto the economy of the fullness of the times,\nBm\nTo head up all things in Christ,\nBm7 E\nThe things in the heavens in Him;\nA C#7 F#m\nUnto the economy of the fullness of the times,\nBm\nTo head up all things in Christ\nBm7 E A\nAnd the things on the earth, in Him.\n\n2\nThrough Christ’s incarnation God came into man,\nAnd through crucifixion came redemption’s plan;\nThen in resurrection, the Comforter came,\nAnd in His ascension exalt His name!\n\n3\nIt is God’s good pleasure to show us the Son,\nAnd through His dispensing we are all made one;\nThrough this life abundant and rich life supply,\nThe church will be builded and beautified."
+  }
+]
