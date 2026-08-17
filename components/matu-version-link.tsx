@@ -44,7 +44,7 @@ export default function MatuVersionLink() {
 
       const link = document.createElement("a");
       link.href = `/hymns/matu/${myanmarNumber}`;
-      link.textContent = `MATU ${myanmarNumber}`;
+      link.textContent = `MT${myanmarNumber}`;
       link.className = "reader-version-link focus-ring";
       link.dataset.matuVersion = "true";
 
