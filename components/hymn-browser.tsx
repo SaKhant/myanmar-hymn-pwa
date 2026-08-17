@@ -118,7 +118,7 @@ export function HymnBrowser({ kind, myanmar, english=[], newTranslations=[], ini
 
     {kind==="yp"&&!myanmarOnly&&<div className="mb-5 flex w-full rounded-xl bg-[var(--sage-soft)] p-1 sm:w-fit" role="group" aria-label="Language">{(["my","en"] as const).map(lang=><button key={lang} onClick={()=>setSelectedLanguage(lang)} className={`focus-ring flex-1 rounded-lg px-7 py-2.5 text-sm font-bold sm:flex-none ${language===lang?"bg-[var(--paper)] text-[var(--ink)] shadow-sm":"text-[var(--muted)]"}`}>{lang==="my"?"မြန်မာ":"English"}</button>)}</div>}
 
-    <SearchField value={query} onChange={(value)=>{setQuery(value);setSubmittedMissingNumber(false)}} onSubmit={submitSearch} placeholder={kind==="hymns"?(hymnSection==="new"?"Search E number or Myanmar title…":"Search number, title, or lyric…"):"Search number, title, or lyric…"} cleanFocus/>
+    <SearchField value={query} onChange={(value)=>{setQuery(value);setSubmittedMissingNumber(false)}} onSubmit={submitSearch} placeholder={kind==="hymns"?"":"Search number, title, or lyric…"} cleanFocus/>
 
     {kind==="hymns"&&hymnSection==="hymns"&&!hasQuery&&<Link href="/categories" className="focus-ring mt-5 flex min-h-13 items-center gap-3 rounded-xl border border-[var(--line)] px-4 text-sm font-bold hover:bg-[var(--sage-soft)]"><BookMarked className="text-[var(--sage)]" size={19}/>Categories<ChevronRight className="ml-auto text-[var(--muted)]" size={17}/></Link>}
 
