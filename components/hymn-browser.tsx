@@ -26,18 +26,8 @@ function HymnList({results,kind,language,exactNumber}:{results:HymnSummary[];kin
   return <div className="divide-y divide-[var(--line)] border-y border-[var(--line)]">{results.map(h=>{const exact=String(h.number)===exactNumber;const showFirstLine=h.firstLine&&h.firstLine!==h.title&&!(kind==="yp"&&isChordOnlyText(h.firstLine));return <Link key={h.id} href={`/${kind}/${language}/${h.id}`} className={`hymn-list-row focus-ring flex min-h-14 items-center gap-4 px-2 py-4 hover:bg-[var(--sage-soft)] ${exact?"bg-[var(--sage-soft)]":""}`}><span className="w-12 shrink-0 text-center font-serif text-xl text-[var(--gold)]">{displayNumber(h.number)}</span><span className="min-w-0"><strong className={`block text-[15px] ${language==="my"?"myanmar":""}`}>{h.title}</strong>{showFirstLine&&<small className={`mt-1 block truncate text-[var(--muted)] ${language==="my"?"myanmar":""}`}>{h.firstLine}</small>}</span><ChevronRight className="ml-auto shrink-0 text-[var(--muted)]" size={18}/></Link>})}</div>;
 }
 
-function OfficialHymnGrid({hymns,showAll}:{hymns:HymnSummary[];showAll:boolean}){
-  const byNumber=useMemo(()=>new Map(hymns.filter(hymn=>Number.isInteger(hymn.number)).map(hymn=>[Number(hymn.number),hymn])),[hymns]);
-  const slots=showAll?Array.from({length:700},(_,index)=>({number:index+1,hymn:byNumber.get(index+1)})):hymns.filter(hymn=>Number.isInteger(hymn.number)).map(hymn=>({number:Number(hymn.number),hymn}));
-  return <div className="grid grid-cols-5 gap-2 sm:grid-cols-7 md:grid-cols-9 lg:grid-cols-10">
-    {slots.map(({number,hymn})=>hymn?<Link key={number} href={`/hymns/my/${hymn.id}`} aria-label={`Hymn ${number}`} className="focus-ring flex min-h-11 items-center justify-center rounded-[10px] border border-[var(--line)] bg-[var(--paper)] px-1 text-sm font-bold tabular-nums text-black no-underline transition hover:bg-[var(--sage-soft)]">{number}</Link>:<span key={number} aria-label={`Hymn ${number} unavailable`} className="flex min-h-11 items-center justify-center rounded-[10px] border border-[var(--line)] bg-[var(--paper)] px-1 text-sm font-bold tabular-nums text-[var(--muted)] opacity-45">{number}</span>)}
-  </div>;
-}
-
-function NewTranslationGrid({items}:{items:NewTranslationSummary[]}){
-  return <div className="grid grid-cols-4 gap-2 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-9">
-    {items.map(item=><Link key={item.id} href={`/hymns/new-translations/${item.englishNumber}`} aria-label={`English hymn ${item.englishNumber} Myanmar translation`} className="focus-ring flex min-h-11 items-center justify-center rounded-[10px] border border-[var(--line)] bg-[var(--paper)] px-1.5 text-sm font-bold tabular-nums text-black no-underline transition hover:bg-[var(--sage-soft)]">E{item.englishNumber}</Link>)}
-  </div>;
+function NewTranslationList({items}:{items:NewTranslationSummary[]}){
+  return <div className="grid gap-0.5">{items.map(item=><Link key={item.id} href={`/hymns/new-translations/${item.englishNumber}`} className="focus-ring grid min-h-0 grid-cols-[76px_minmax(0,1fr)] items-center gap-3 rounded-[10px] px-2 py-3 text-black no-underline hover:bg-[var(--sage-soft)]"><span className="tabular-nums text-[0.84rem] font-bold text-black">E{item.englishNumber}</span><span className="myanmar min-w-0 text-base font-bold leading-[1.4] text-black">{item.title}</span></Link>)}</div>;
 }
 
 export function HymnBrowser({ kind, myanmar, english=[], newTranslations=[], initialLanguage="my", initialQuery="", myanmarOnly=false, lyricSearchUrl }:{ kind:HymnKind; myanmar:HymnSummary[]; english?:HymnSummary[]; newTranslations?:NewTranslationSummary[]; initialLanguage?:HymnLanguage; initialQuery?:string; myanmarOnly?:boolean; lyricSearchUrl?:string }) {
@@ -105,8 +95,7 @@ export function HymnBrowser({ kind, myanmar, english=[], newTranslations=[], ini
 
   const switchHymnSection=(section:Exclude<HymnSectionTab,null>)=>{setHymnSection(current=>current===section?null:section);setQuery("");setSubmittedMissingNumber(false)};
   const ypCountLabel=`${results.length.toLocaleString()} ${results.length===1?"song":"songs"}`;
-  const hymnGridResults=hymnSection==="hymns"?results:[];
-  const emptyHymnSection=hymnSection==="hymns"?hymnGridResults.length===0:hymnSection==="new"?newResults.length===0:false;
+  const emptyHymnSection=hymnSection==="hymns"?results.length===0:hymnSection==="new"?newResults.length===0:false;
 
   return <main className="page">
     <header className="mb-7"><p className="eyebrow normal-case">Hymnal.net</p><h1 className={`mt-2 font-serif tracking-tight ${kind==="hymns"?"text-3xl md:text-4xl":"text-4xl md:text-5xl"}`}>{kind==="yp"?"New Songs":"Hymns"}</h1></header>
@@ -123,7 +112,7 @@ export function HymnBrowser({ kind, myanmar, english=[], newTranslations=[], ini
 
     {kind==="yp"&&<p className="my-4 text-sm text-[var(--muted)]">{ypCountLabel}</p>}
 
-    {kind==="hymns"&&hymnSection!==null&&!emptyHymnSection&&<div className="mt-5">{hymnSection==="hymns"?<OfficialHymnGrid hymns={hymnGridResults} showAll={!hasQuery}/>:<NewTranslationGrid items={newResults}/>}</div>}
+    {kind==="hymns"&&hymnSection!==null&&!emptyHymnSection&&<div className="mt-5">{hymnSection==="hymns"?<HymnList results={results} kind="hymns" language="my" exactNumber={numberQuery}/>:<NewTranslationList items={newResults}/>}</div>}
     {kind==="yp"&&results.length>0&&<HymnList results={results} kind={kind} language={language} exactNumber={numberQuery}/>} 
 
     {((kind==="hymns"&&hymnSection!==null&&emptyHymnSection)||(kind==="yp"&&results.length===0))&&<div className="py-16 text-center"><p className="font-serif text-2xl">{submittedMissingNumber?(kind==="hymns"?"Hymn not found":"Song not found"):(kind==="hymns"?"No hymns found":"No songs found")}</p><p className="mt-2 text-sm text-[var(--muted)]">Try a number, title, or phrase from the lyrics.</p></div>}
