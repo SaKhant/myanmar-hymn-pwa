@@ -73,7 +73,7 @@ export function HymnBrowser({ kind, myanmar, english=[], initialLanguage="my", i
     setSubmittedMissingNumber(true);
   };
   const countLabel=kind==="hymns"&&!hasQuery?"700 Hymns":`${results.length.toLocaleString()} ${results.length===1?(kind==="hymns"?"hymn":"song"):(kind==="hymns"?"hymns":"songs")}`;
-  return <main className="page"><header className="mb-7"><p className="eyebrow normal-case">Hymnal.net</p><h1 className="mt-2 font-serif text-4xl tracking-tight md:text-5xl">{kind==="yp"?"New Songs":"Hymns"}</h1></header>
+  return <main className="page"><header className="mb-7"><p className="eyebrow normal-case">Hymnal.net</p><h1 className={`mt-2 font-serif tracking-tight ${kind==="hymns"?"text-3xl md:text-4xl":"text-4xl md:text-5xl"}`}>{kind==="yp"?"New Songs":"Hymns"}</h1></header>
     {kind==="yp"&&!myanmarOnly&&<div className="mb-5 flex w-full rounded-xl bg-[var(--sage-soft)] p-1 sm:w-fit" role="group" aria-label="Language">{(["my","en"] as const).map(lang=><button key={lang} onClick={()=>setSelectedLanguage(lang)} className={`focus-ring flex-1 rounded-lg px-7 py-2.5 text-sm font-bold sm:flex-none ${language===lang?"bg-[var(--paper)] text-[var(--ink)] shadow-sm":"text-[var(--muted)]"}`}>{lang==="my"?"မြန်မာ":"English"}</button>)}</div>}
     <SearchField value={query} onChange={(value)=>{setQuery(value);setSubmittedMissingNumber(false)}} onSubmit={submitSearch} placeholder="Search number, title, or lyric…" cleanFocus/>
     <p className="my-4 text-sm text-[var(--muted)]">{countLabel}</p>
