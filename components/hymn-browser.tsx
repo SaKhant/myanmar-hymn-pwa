@@ -9,6 +9,8 @@ import { SearchField } from "./search-field";
 
 const CHORD_TOKEN=/^[A-G](?:#|b)?(?:(?:maj|min|m|dim|aug|sus|add)?\d*(?:\([^)]*\))?)?(?:\/[A-G](?:#|b)?)?$/i;
 
+type NewTranslationSummary={id:string;englishNumber:number;title:string;category:string;englishTitle:string|null;searchText:string};
+
 function isChordOnlyText(value:string):boolean {
   const tokens=value.trim().replace(/[|,:()\-–—]/g," ").split(/\s+/).filter(Boolean);
   return tokens.length>0&&tokens.every(token=>CHORD_TOKEN.test(token));
@@ -27,7 +29,11 @@ function HymnList({results,kind,language,exactNumber}:{results:HymnSummary[];kin
   return <div className="divide-y divide-[var(--line)] border-y border-[var(--line)]">{results.map(h=>{const exact=String(h.number)===exactNumber;const showFirstLine=h.firstLine&&h.firstLine!==h.title&&!(kind==="yp"&&isChordOnlyText(h.firstLine));return <Link key={h.id} href={`/${kind}/${language}/${h.id}`} className={`hymn-list-row focus-ring flex min-h-14 items-center gap-4 px-2 py-4 hover:bg-[var(--sage-soft)] ${exact?"bg-[var(--sage-soft)]":""}`}><span className="w-12 shrink-0 text-center font-serif text-xl text-[var(--gold)]">{displayNumber(h.number)}</span><span className="min-w-0"><strong className={`block text-[15px] ${language==="my"?"myanmar":""}`}>{h.title}</strong>{showFirstLine&&<small className={`mt-1 block truncate text-[var(--muted)] ${language==="my"?"myanmar":""}`}>{h.firstLine}</small>}</span><ChevronRight className="ml-auto shrink-0 text-[var(--muted)]" size={18}/></Link>})}</div>;
 }
 
-export function HymnBrowser({ kind, myanmar, english=[], initialLanguage="my", initialQuery="", myanmarOnly=false, lyricSearchUrl }:{ kind:HymnKind; myanmar:HymnSummary[]; english?:HymnSummary[]; initialLanguage?:HymnLanguage; initialQuery?:string; myanmarOnly?:boolean; lyricSearchUrl?:string }) {
+function NewTranslationList({items}:{items:NewTranslationSummary[]}){
+  return <div className="grid gap-0.5">{items.map(item=><Link key={item.id} href={`/hymns/new-translations/${item.englishNumber}`} className="focus-ring grid min-h-0 grid-cols-[76px_minmax(0,1fr)] items-center gap-3 rounded-[10px] px-2 py-3 text-black no-underline hover:bg-[var(--sage-soft)]"><span className="tabular-nums text-[0.84rem] font-bold text-black">ENG {item.englishNumber}</span><span className="myanmar min-w-0 text-base font-bold leading-[1.4] text-black">{item.title}</span></Link>)}</div>;
+}
+
+export function HymnBrowser({ kind, myanmar, english=[], newTranslations=[], initialLanguage="my", initialQuery="", myanmarOnly=false, lyricSearchUrl }:{ kind:HymnKind; myanmar:HymnSummary[]; english?:HymnSummary[]; newTranslations?:NewTranslationSummary[]; initialLanguage?:HymnLanguage; initialQuery?:string; myanmarOnly?:boolean; lyricSearchUrl?:string }) {
   const router=useRouter();
   const [selectedLanguage,setSelectedLanguage]=useState<HymnLanguage>(initialLanguage); const [query,setQuery]=useState(initialQuery);
   const [lyricSearchIndex,setLyricSearchIndex]=useState<Record<string,string>>({});
@@ -72,13 +78,13 @@ export function HymnBrowser({ kind, myanmar, english=[], initialLanguage="my", i
     }
     setSubmittedMissingNumber(true);
   };
-  const countLabel=kind==="hymns"&&!hasQuery?"700 Hymns":`${results.length.toLocaleString()} ${results.length===1?(kind==="hymns"?"hymn":"song"):(kind==="hymns"?"hymns":"songs")}`;
+  const countLabel=kind==="hymns"&&!hasQuery?(newTranslations.length>0?`700 Hymns + ${newTranslations.length} New Translations`:"700 Hymns"):`${results.length.toLocaleString()} ${results.length===1?(kind==="hymns"?"hymn":"song"):(kind==="hymns"?"hymns":"songs")}`;
   return <main className="page"><header className="mb-7"><p className="eyebrow normal-case">Hymnal.net</p><h1 className={`mt-2 font-serif tracking-tight ${kind==="hymns"?"text-3xl md:text-4xl":"text-4xl md:text-5xl"}`}>{kind==="yp"?"New Songs":"Hymns"}</h1></header>
     {kind==="yp"&&!myanmarOnly&&<div className="mb-5 flex w-full rounded-xl bg-[var(--sage-soft)] p-1 sm:w-fit" role="group" aria-label="Language">{(["my","en"] as const).map(lang=><button key={lang} onClick={()=>setSelectedLanguage(lang)} className={`focus-ring flex-1 rounded-lg px-7 py-2.5 text-sm font-bold sm:flex-none ${language===lang?"bg-[var(--paper)] text-[var(--ink)] shadow-sm":"text-[var(--muted)]"}`}>{lang==="my"?"မြန်မာ":"English"}</button>)}</div>}
     <SearchField value={query} onChange={(value)=>{setQuery(value);setSubmittedMissingNumber(false)}} onSubmit={submitSearch} placeholder="Search number, title, or lyric…" cleanFocus/>
     <p className="my-4 text-sm text-[var(--muted)]">{countLabel}</p>
-    {kind==="hymns"&&!hasQuery&&<Link href="/hymns/new-translations" className="focus-ring mb-3 flex items-center justify-between rounded-[10px] px-2 py-3 text-sm font-bold text-black no-underline hover:bg-[var(--sage-soft)]"><span>New Translations</span><span className="font-semibold text-[var(--muted)]">33 ENG-numbered →</span></Link>}
     {results.length>0&&<HymnList results={results} kind={kind} language={language} exactNumber={numberQuery}/>} 
+    {kind==="hymns"&&!hasQuery&&newTranslations.length>0&&<NewTranslationList items={newTranslations}/>} 
     {results.length===0&&<div className="py-16 text-center"><p className="font-serif text-2xl">{submittedMissingNumber?(kind==="hymns"?"Hymn not found":"Song not found"):(kind==="hymns"?"No hymns found":"No songs found")}</p><p className="mt-2 text-sm text-[var(--muted)]">Try a number, title, or phrase from the lyrics.</p></div>}
   </main>;
 }
