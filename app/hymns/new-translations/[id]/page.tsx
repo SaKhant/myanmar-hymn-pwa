@@ -54,7 +54,7 @@ export default async function NewTranslationPage({params}:{params:Promise<{id:st
     <p className={styles.kicker}>
       <span className={styles.current}>MYANMAR TRANSLATION</span>
       {" • "}
-      {english?<Link href={`/hymns/en/${hymn.english_number}`}>ENG {hymn.english_number}</Link>:<span>ENG {hymn.english_number}</span>}
+      {english?<Link href={`/hymns/en/${hymn.english_number}`}>E{hymn.english_number}</Link>:<span>E{hymn.english_number}</span>}
     </p>
     <h1 className={`${styles.title} myanmar`}>{hymn.title}</h1>
     <p className={`${styles.meta} myanmar`}>{hymn.category}{hymn.meter?` • ${hymn.meter}`:""}</p>
@@ -79,8 +79,8 @@ export default async function NewTranslationPage({params}:{params:Promise<{id:st
     </div>
 
     <nav className={styles.nav} aria-label="Translation navigation">
-      {previous?<Link href={`/hymns/new-translations/${previous.english_number}`}>← ENG {previous.english_number}</Link>:<span className={styles.navSpacer}/>} 
-      {next?<Link href={`/hymns/new-translations/${next.english_number}`}>ENG {next.english_number} →</Link>:<span className={styles.navSpacer}/>} 
+      {previous?<Link href={`/hymns/new-translations/${previous.english_number}`}>← E{previous.english_number}</Link>:<span className={styles.navSpacer}/>} 
+      {next?<Link href={`/hymns/new-translations/${next.english_number}`}>E{next.english_number} →</Link>:<span className={styles.navSpacer}/>} 
     </nav>
   </main>;
 }
