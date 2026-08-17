@@ -1,0 +1,10 @@
+#hymns-quick-menu,
+#hymns-quick-menu a,
+#hymns-quick-menu span,
+#hymns-quick-menu svg {
+  color: #fff !important;
+}
+
+#hymns-quick-menu svg {
+  stroke: #fff !important;
+}
