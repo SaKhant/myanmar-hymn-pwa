@@ -60,8 +60,6 @@ export function HymnBrowser({ kind, myanmar, english=[], initialLanguage="my", i
     if(exact){
       setSubmittedMissingNumber(false);
       if(!navigator.onLine){
-        // The cached application shell reads this route from IndexedDB offline.
-        // eslint-disable-next-line @next/next/no-location-assign-relative-destination
         location.href=`/${kind}/${language}/${exact.id}`;
         return;
       }
@@ -72,6 +70,7 @@ export function HymnBrowser({ kind, myanmar, english=[], initialLanguage="my", i
   };
   const countLabel=kind==="hymns"&&!hasQuery?"700 Hymns":`${results.length.toLocaleString()} ${results.length===1?(kind==="hymns"?"hymn":"song"):(kind==="hymns"?"hymns":"songs")}`;
   return <main className="page"><header className="mb-7"><p className="eyebrow normal-case">Hymnal.net</p><h1 className="mt-2 font-serif text-4xl tracking-tight md:text-5xl">{kind==="yp"?"New Songs":"Hymns"}</h1></header>
+    {kind==="hymns"&&<div className="mb-5 flex w-full rounded-xl bg-[var(--sage-soft)] p-1 sm:w-fit" role="group" aria-label="Hymn language"><span aria-current="page" className="flex-1 rounded-lg bg-[var(--paper)] px-7 py-2.5 text-center text-sm font-bold text-[var(--ink)] shadow-sm sm:flex-none">မြန်မာ</span><Link href="/hymns/matu" className="focus-ring flex-1 rounded-lg px-7 py-2.5 text-center text-sm font-bold text-[var(--muted)] sm:flex-none">Matu</Link></div>}
     {kind==="yp"&&!myanmarOnly&&<div className="mb-5 flex w-full rounded-xl bg-[var(--sage-soft)] p-1 sm:w-fit" role="group" aria-label="Language">{(["my","en"] as const).map(lang=><button key={lang} onClick={()=>setSelectedLanguage(lang)} className={`focus-ring flex-1 rounded-lg px-7 py-2.5 text-sm font-bold sm:flex-none ${language===lang?"bg-[var(--paper)] text-[var(--ink)] shadow-sm":"text-[var(--muted)]"}`}>{lang==="my"?"မြန်မာ":"English"}</button>)}</div>}
     <SearchField value={query} onChange={(value)=>{setQuery(value);setSubmittedMissingNumber(false)}} onSubmit={submitSearch} placeholder="Search number, title, or lyric…" cleanFocus/>
     <p className="my-4 text-sm text-[var(--muted)]">{countLabel}</p>
