@@ -1,0 +1,163 @@
+name: Integrate Matu offline library
+
+on:
+  push:
+    paths:
+      - ".github/workflows/integrate-matu-offline.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  integrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Patch offline library integration
+        shell: bash
+        run: |
+          python <<'PY'
+          from pathlib import Path
+          import re, subprocess
+
+          # Restore the pre-edit version-file shape from history, then bump it to v3.
+          version_path = Path("lib/offline-library-version.ts")
+          history = subprocess.check_output(
+              ["git", "log", "--format=%H", "--", str(version_path)], text=True
+          ).splitlines()
+          if len(history) >= 2:
+              original = subprocess.check_output(
+                  ["git", "show", f"{history[1]}:{version_path}"], text=True
+              )
+          else:
+              original = version_path.read_text()
+          lines = []
+          version_changed = False
+          for line in original.splitlines():
+              if "VERSION" in line and re.search(r"[=:\s][\"']?\d+[\"']?", line):
+                  line2 = re.sub(
+                      r"([=:\s])([\"']?)\d+\2(?=\s*[;,}]|\s*$)",
+                      lambda m: f"{m.group(1)}{m.group(2)}3{m.group(2)}",
+                      line,
+                      count=1,
+                  )
+                  version_changed = version_changed or line2 != line
+                  line = line2
+              if ("RELEASE" in line or "DATE" in line) and re.search(r"\d{4}-\d{2}-\d{2}", line):
+                  line = re.sub(r"\d{4}-\d{2}-\d{2}", "2026-08-17", line)
+              lines.append(line)
+          if not version_changed:
+              raise SystemExit("Could not identify offline library version constant")
+          version_path.write_text("\n".join(lines) + "\n")
+
+          # Include Matu records in the server offline-library payload.
+          route = Path("app/offline-library/route.ts")
+          text = route.read_text()
+          if "@/lib/hymns/matu-data" not in text:
+              matches = list(re.finditer(r'^import .*? from [\"\']@/lib/hymns/data[\"\'];?\s*$', text, re.M))
+              if not matches:
+                  raise SystemExit("Could not find hymn data import in offline-library route")
+              m = matches[-1]
+              text = text[:m.end()] + '\nimport { matuHymns } from "@/lib/hymns/matu-data";' + text[m.end():]
+          if "matu_hymns:" not in text:
+              text, count = re.subn(
+                  r'(?m)^(\s*)myanmar_yp\s*:',
+                  r'\1matu_hymns: matuHymns.map(withoutAudio),\n\1myanmar_yp:',
+                  text,
+                  count=1,
+              )
+              if count != 1:
+                  raise SystemExit("Could not insert Matu collection into offline-library payload")
+          route.write_text(text)
+
+          # Save the new collection in IndexedDB when an offline library is downloaded/updated.
+          lib = Path("lib/offline-library.ts")
+          text = lib.read_text()
+          if '"matu_hymns"' not in text:
+              text, count = re.subn(
+                  r'(\[\s*[\"\']myanmar_hymns[\"\']\s*,\s*[\"\']english_hymns[\"\'])',
+                  r'\1, "matu_hymns"',
+                  text,
+                  count=1,
+              )
+              if count != 1:
+                  # Fallback for a vertically formatted array.
+                  text, count = re.subn(
+                      r'([\"\']english_hymns[\"\']\s*,)',
+                      r'\1\n  "matu_hymns",',
+                      text,
+                      count=1,
+                  )
+              if count != 1:
+                  raise SystemExit("Could not add Matu to offline collection save list")
+          lib.write_text(text)
+
+          # Let OfflineApp resolve /hymns/matu/N to the Matu IndexedDB collection.
+          offline = Path("components/offline-app.tsx")
+          text = offline.read_text()
+          original_text = text
+
+          # Common language-validation arrays.
+          text = re.sub(
+              r'\[\s*[\"\']my[\"\']\s*,\s*[\"\']en[\"\']\s*\]',
+              '["my", "en", "matu"]',
+              text,
+          )
+
+          # Common parser ternaries; keep the existing HymnLanguage type by assertion.
+          text = text.replace(
+              'requestedLanguage === "en" ? "en" : "my"',
+              'requestedLanguage === "en" ? "en" : requestedLanguage === "matu" ? ("matu" as HymnLanguage) : "my"',
+          )
+          text = text.replace(
+              'parts[1] === "en" ? "en" : "my"',
+              'parts[1] === "en" ? "en" : parts[1] === "matu" ? ("matu" as HymnLanguage) : "my"',
+          )
+
+          # Collection helper used by the offline reader.
+          collection_pattern = re.compile(
+              r'(function\s+collection\s*\([^)]*\)\s*\{\s*)'
+              r'(return\s+`\$\{language\s*===\s*[\"\']my[\"\']\s*\?\s*[\"\']myanmar[\"\']\s*:\s*[\"\']english[\"\']\}_\$\{kind\}`;)',
+              re.S,
+          )
+          if 'return kind === "hymns" ? "matu_hymns"' not in text:
+              text, count = collection_pattern.subn(
+                  r'\1if (String(language) === "matu") {\n    return kind === "hymns" ? "matu_hymns" : "__invalid_matu_yp";\n  }\n  \2',
+                  text,
+                  count=1,
+              )
+              if count != 1:
+                  raise SystemExit("Could not patch OfflineApp collection helper")
+
+          if text == original_text:
+              raise SystemExit("OfflineApp was not changed")
+          offline.write_text(text)
+          PY
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify production build
+        run: npm run build
+
+      - name: Commit offline integration
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app/offline-library/route.ts lib/offline-library.ts lib/offline-library-version.ts components/offline-app.tsx
+          if git diff --cached --quiet; then
+            echo "No offline integration changes needed."
+            exit 0
+          fi
+          git commit -m "Integrate Matu hymns with offline library"
+          git push
