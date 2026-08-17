@@ -14,8 +14,8 @@ function isChordOnlyText(value:string):boolean {
   return tokens.length>0&&tokens.every(token=>CHORD_TOKEN.test(token));
 }
 
-function displayNumber(number:number|undefined,kind:HymnKind):string {
-  if(number===undefined)return "—";
+function displayNumber(number:number|null|undefined,kind:HymnKind):string {
+  if(number==null)return "—";
   return kind==="yp"?String(number).padStart(3,"0"):String(number);
 }
 
