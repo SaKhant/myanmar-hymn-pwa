@@ -35,8 +35,7 @@ function OfflineReader({hymn,hymns,kind,language}:{hymn:OfflineHymn;hymns:Offlin
   const englishNumber=englishReferenceNumber(reference);
   const englishHymn=englishNumber?hymns.find(item=>item.collection==="english_hymns"&&String(item.number??item.id)===englishNumber):undefined;
   const relatedMyanmar=!isMyanmar&&kind==="hymns"?hymns.find(item=>item.collection==="myanmar_hymns"&&englishReferenceNumber(item.cross_references.Eng?.trim())===String(hymn.number??hymn.id)):undefined;
-  const ypReference=kind==="yp"?ypReferenceNumber(hymn.cross_references["New Songs"]?.trim()):undefined;
-  const relatedYp=ypReference?hymns.find(item=>item.collection===collection("yp",isMyanmar?"en":"my")&&String(item.number??item.id)===ypReference):undefined;
+  const relatedYp=kind==="yp"?hymns.find(item=>item.collection===collection("yp",isMyanmar?"en":"my")&&String(item.number??item.id)===String(hymn.number??hymn.id)):undefined;
   const index=hymns.filter(item=>item.collection===hymn.collection).findIndex(item=>item.id===hymn.id);
   const sameCollection=hymns.filter(item=>item.collection===hymn.collection);
   const previous=index>0?sameCollection[index-1]:undefined;
