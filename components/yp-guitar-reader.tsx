@@ -89,7 +89,7 @@ function splitLine(text:string,chords:ChordEvent[]):Array<{text:string;chord?:st
 }
 
 function StructuredGuitarView({sections,guitar,sourceLabel}:{sections:HymnSection[];guitar:GuitarPayload;sourceLabel:string}){
-  return <div className="guitar-view yp-guitar-view">
+  return <div className="guitar-view yp-guitar-view" style={{minWidth:0,overflowX:"hidden"}}>
     <div className="guitar-info" aria-label={`Guitar chords from ${sourceLabel}${guitar.capo?`, capo ${guitar.capo}`:""}`}>
       <span>Source <strong>{sourceLabel}</strong></span>
       {guitar.capo!==null&&guitar.capo>0&&<><i aria-hidden="true">•</i><span>Capo <strong>{guitar.capo}</strong></span></>}
@@ -107,11 +107,11 @@ function StructuredGuitarView({sections,guitar,sourceLabel}:{sections:HymnSectio
           {section.lines.map((line,lineIndex)=>{
             const chords=guitarSection?.lines[lineIndex]?.chords??[];
             const segments=splitLine(line,chords);
-            return <div className="guitar-line" key={lineIndex}>
-              <div className="guitar-phrase">
-                {segments.map((segment,segmentIndex)=><span className="guitar-segment" key={segmentIndex}>
+            return <div className="guitar-line" key={lineIndex} style={{minWidth:0,maxWidth:"100%"}}>
+              <div className="guitar-phrase" style={{flexWrap:"wrap",minWidth:0,maxWidth:"100%",rowGap:".25rem"}}>
+                {segments.map((segment,segmentIndex)=><span className="guitar-segment" key={segmentIndex} style={{flex:"0 1 auto",maxWidth:"100%",minWidth:0}}>
                   <span className="guitar-chord" aria-label={segment.chord?`Chord ${segment.chord}`:undefined}>{segment.chord??"\u00a0"}</span>
-                  <span className="guitar-lyric-segment">{segment.text}</span>
+                  <span className="guitar-lyric-segment" style={{whiteSpace:"pre-wrap",overflowWrap:"anywhere",lineBreak:"auto"}}>{segment.text}</span>
                 </span>)}
               </div>
             </div>;
