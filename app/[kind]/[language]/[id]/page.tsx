@@ -13,15 +13,23 @@ function englishReferenceNumber(reference: string | undefined): string | undefin
   return reference?.match(/^(\d+)(?:\(\d+\))?$/)?.[1];
 }
 
-function ypReferenceNumber(reference: string | undefined): string | undefined {
-  return reference?.match(/^(\d+)$/)?.[1];
-}
+type YpAudioSource={collection:"ns"|"lb";number:number};
 
-function ypAudioUrl(reference: string | undefined, fallbackNumber: number | string | null | undefined): string | undefined {
-  const fallback= fallbackNumber==null ? undefined : String(fallbackNumber).match(/^\d+$/)?.[0];
-  const number=ypReferenceNumber(reference)??fallback;
-  if(!number)return undefined;
-  return `https://www.hymnal.net/Hymns/NewSongs/mp3/ns${number.padStart(4,"0")}.mp3`;
+// Regular YP numbers are local songbook numbers and do NOT equal Hymnal.net New Songs numbers.
+// Only verified source matches belong here. Add further entries after checking the song identity.
+const VERIFIED_YP_AUDIO_SOURCES:Record<number,YpAudioSource>={
+  1:{collection:"lb",number:65},
+  2:{collection:"ns",number:238},
+};
+
+function ypAudioUrl(ypNumber:number|string|null|undefined):string|undefined {
+  if(ypNumber==null)return undefined;
+  const parsed=Number(ypNumber);
+  if(!Number.isInteger(parsed))return undefined;
+  const source=VERIFIED_YP_AUDIO_SOURCES[parsed];
+  if(!source)return undefined;
+  if(source.collection==="ns")return `https://www.hymnal.net/Hymns/NewSongs/mp3/ns${String(source.number).padStart(4,"0")}.mp3`;
+  return `https://www.hymnal.net/Hymns/LongBeach/mp3/lb${source.number}.mp3`;
 }
 
 function validAudioUrl(value: string | null | undefined): string | undefined {
@@ -60,8 +68,7 @@ export default async function HymnPage({params,searchParams}:{params:Promise<{ki
   const relatedMyanmarHymn=validatedMyanmarHymn??discoveredMyanmarHymn;
   const englishVersionLabel=relatedMyanmarHymn?.cross_references.Eng?.trim()||hymn.number||hymn.id;
   const relatedYpSong=kind==="yp"?getHymn("yp",isMyanmar?"en":"my",String(hymn.number??hymn.id)):undefined;
-  const newSongsReference=kind==="yp"?hymn.cross_references["New Songs"]?.trim():undefined;
-  const regularYpAudio=kind==="yp"?ypAudioUrl(newSongsReference,hymn.number??hymn.id):undefined;
+  const regularYpAudio=kind==="yp"?ypAudioUrl(hymn.number??hymn.id):undefined;
   const audioUrl=validAudioUrl(hymn.audio_url)??regularYpAudio??(!isMyanmar?validAudioUrl(relatedMyanmarHymn?.audio_url):undefined);
   const hasLongTitle=Array.from(title).length>32;
   const hasDetails=Object.keys(hymn.metadata).length>0;
