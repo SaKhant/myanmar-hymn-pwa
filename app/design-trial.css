@@ -24,3 +24,20 @@
 #hymns-quick-menu svg polyline {
   stroke: #fff !important;
 }
+
+/* YP Songs uses a connected pair of eighth notes. */
+#hymns-quick-menu a[href*="section=yp"] > svg:first-child {
+  display: none;
+}
+
+#hymns-quick-menu a[href*="section=yp"]::before {
+  content: "♫";
+  display: inline-flex;
+  width: 15px;
+  flex: 0 0 15px;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 18px;
+  line-height: 1;
+}
