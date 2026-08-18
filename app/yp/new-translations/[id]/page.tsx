@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getNewYpTranslation,getNewYpTranslations } from "@/lib/hymns/new-yp-translations";
+import { OnlineAudio } from "@/components/online-audio";
+import { getNewYpAudioUrl,getNewYpTranslation,getNewYpTranslations } from "@/lib/hymns/new-yp-translations";
 
 export function generateStaticParams(){
   return getNewYpTranslations().map(item=>({id:item.id}));
@@ -15,6 +16,7 @@ export default async function NewYpTranslationPage({params}:{params:Promise<{id:
   const index=all.findIndex(item=>item.id===song.id);
   const previous=index>0?all[index-1]:undefined;
   const next=index>=0&&index<all.length-1?all[index+1]:undefined;
+  const audioUrl=getNewYpAudioUrl(song);
 
   return <main className="page max-w-3xl">
     <Link href="/hymns/new-translations?section=yp" className="focus-ring mb-5 inline-flex rounded-lg text-sm font-semibold text-[var(--muted)] hover:text-[var(--ink)]">← Back to YP New Songs</Link>
@@ -26,6 +28,8 @@ export default async function NewYpTranslationPage({params}:{params:Promise<{id:
     <div className="myanmar space-y-1 text-[17px] leading-8">
       {song.raw_lines.map((line,lineIndex)=>line.trim()===""?<div key={lineIndex} className="h-4"/>:<div key={lineIndex} className="whitespace-pre-wrap">{line}</div>)}
     </div>
+
+    {audioUrl&&<div className="mt-9"><OnlineAudio src={audioUrl}/></div>}
 
     <nav className="mt-12 flex items-center justify-between border-t border-[var(--line)] pt-5 text-sm font-semibold" aria-label="New YP song navigation">
       {previous?<Link href={`/yp/new-translations/${previous.id}`}>← {previous.source_ref??"Previous"}</Link>:<span/>}
