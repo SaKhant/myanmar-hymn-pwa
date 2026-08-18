@@ -12,9 +12,10 @@ function lineSegments(line:GuitarLine):GuitarSegment[] {
   return line.segments??[];
 }
 
-const sentenceLineStyle={display:"block",maxWidth:"100%",minWidth:0,whiteSpace:"normal"} as const;
-const sentenceSegmentStyle={display:"inline-grid",maxWidth:"100%",minWidth:0,verticalAlign:"top"} as const;
-const sentenceTextStyle={whiteSpace:"pre-wrap",overflowWrap:"break-word",wordBreak:"normal"} as const;
+const chordSentenceStyle={display:"block",maxWidth:"100%",minWidth:0,whiteSpace:"normal",lineHeight:2.55,paddingTop:".9em"} as const;
+const chordAnchorStyle={position:"relative",display:"inline"} as const;
+const chordLabelStyle={position:"absolute",left:0,top:"-1.05em",zIndex:1,whiteSpace:"nowrap",pointerEvents:"none"} as const;
+const flowingLyricStyle={display:"inline",whiteSpace:"normal",overflowWrap:"normal",wordBreak:"normal"} as const;
 
 export function GuitarReader({ sections, arrangement, numberedNotesImageSrc }: GuitarReaderWithNumberedNotesProps) {
   const [mode, setMode] = useState<ReaderMode>("lyrics");
@@ -43,11 +44,11 @@ export function GuitarReader({ sections, arrangement, numberedNotesImageSrc }: G
             >{verse.number}</span>
           </div>}
           <div className="myanmar">
-            {verse.lines.map((line, lineIndex) => <div className="guitar-line" key={lineIndex} style={{minWidth:0,maxWidth:"100%"}}>
-              <div className="guitar-phrase guitar-sentence-line" style={sentenceLineStyle}>
-                {lineSegments(line).map((segment, segmentIndex) => <span className="guitar-segment" key={segmentIndex} style={sentenceSegmentStyle}>
-                  <span className="guitar-chord" aria-label={segment.chord?`Chord ${segment.chord}`:undefined}>{segment.chord??"\u00a0"}</span>
-                  <span className="guitar-lyric-segment" style={sentenceTextStyle}>{segment.text}</span>
+            {verse.lines.map((line, lineIndex) => <div className="guitar-line" key={lineIndex} style={{minWidth:0,maxWidth:"100%",marginBottom:0}}>
+              <div className="guitar-phrase guitar-sentence-line" style={chordSentenceStyle}>
+                {lineSegments(line).map((segment, segmentIndex) => <span className="guitar-segment" key={segmentIndex} style={chordAnchorStyle}>
+                  {segment.chord&&<span className="guitar-chord" style={chordLabelStyle} aria-label={`Chord ${segment.chord}`}>{segment.chord}</span>}
+                  <span className="guitar-lyric-segment" style={flowingLyricStyle}>{segment.text}</span>
                 </span>)}
               </div>
             </div>)}
