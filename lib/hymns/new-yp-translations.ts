@@ -24,6 +24,28 @@ export function getNewYpTranslation(id:string):NewYpTranslation|undefined{
   return getNewYpTranslations().find(item=>item.id===id);
 }
 
+export function getNewYpAudioUrl(item:Pick<NewYpTranslation,"source_kind"|"source_number">):string|undefined{
+  const number=item.source_number;
+  if(number==null)return undefined;
+
+  if(item.source_kind==="NS"){
+    // The uploaded source also contains an NS 6871 entry, but hymnal.net has no NS6871 page.
+    // Keep the source text untouched and simply avoid attaching a broken audio URL to that record.
+    if(number===6871)return undefined;
+    return `https://www.hymnal.net/Hymns/NewSongs/mp3/ns${String(number).padStart(4,"0")}.mp3`;
+  }
+
+  if(item.source_kind==="LB"){
+    return `https://www.hymnal.net/Hymns/LongBeach/mp3/lb${number}.mp3`;
+  }
+
+  if(item.source_kind==="H"&&number===6871){
+    return "https://www.hymnal.net/Hymns/Hymnal/mp3/e6871_i.mp3";
+  }
+
+  return undefined;
+}
+
 export function getNewYpTranslationSummaries(){
   return getNewYpTranslations().map(item=>({
     id:item.id,
