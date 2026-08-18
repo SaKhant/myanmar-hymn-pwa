@@ -89,7 +89,7 @@ function splitLine(text:string,chords:ChordEvent[]):Array<{text:string;chord?:st
 }
 
 function StructuredGuitarView({sections,guitar,sourceLabel}:{sections:HymnSection[];guitar:GuitarPayload;sourceLabel:string}){
-  return <div className="guitar-view">
+  return <div className="guitar-view yp-guitar-view">
     <div className="guitar-info" aria-label={`Guitar chords from ${sourceLabel}${guitar.capo?`, capo ${guitar.capo}`:""}`}>
       <span>Source <strong>{sourceLabel}</strong></span>
       {guitar.capo!==null&&guitar.capo>0&&<><i aria-hidden="true">•</i><span>Capo <strong>{guitar.capo}</strong></span></>}
