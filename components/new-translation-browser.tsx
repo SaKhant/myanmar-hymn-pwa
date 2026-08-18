@@ -9,8 +9,8 @@ import type { HymnSummary } from "@/lib/hymns/types";
 type TranslationSummary={id:string;englishNumber:number;title:string;category:string;englishTitle:string|null;searchText:string};
 type TranslationSection="hymns"|"yp"|null;
 
-export function NewTranslationBrowser({items,ypItems}:{items:TranslationSummary[];ypItems:HymnSummary[]}){
-  const [section,setSection]=useState<TranslationSection>(null);
+export function NewTranslationBrowser({items,ypItems,initialSection=null,hideCollectionOptions=false}:{items:TranslationSummary[];ypItems:HymnSummary[];initialSection?:TranslationSection;hideCollectionOptions?:boolean}){
+  const [section,setSection]=useState<TranslationSection>(initialSection);
   const [query,setQuery]=useState("");
 
   const hymnResults=useMemo(()=>{
@@ -41,7 +41,7 @@ export function NewTranslationBrowser({items,ypItems}:{items:TranslationSummary[
       <h1 className="mt-2 font-serif text-3xl tracking-tight md:text-4xl">New Translations</h1>
     </header>
 
-    <div className="mb-6 w-full max-w-sm rounded-xl border border-blue-600 bg-blue-500 p-1.5 shadow-xl shadow-blue-300/40" role="group" aria-label="New translation collection">
+    {!hideCollectionOptions&&<div className="mb-6 w-full max-w-sm rounded-xl border border-blue-600 bg-blue-500 p-1.5 shadow-xl shadow-blue-300/40" role="group" aria-label="New translation collection">
       <button type="button" onClick={()=>selectSection("hymns")} aria-pressed={section==="hymns"} className={`focus-ring flex w-full items-center gap-3 rounded-lg px-3 py-3 text-left text-sm font-semibold text-white transition hover:bg-blue-600 ${section==="hymns"?"bg-blue-600":""}`}>
         <BookOpen aria-hidden="true" size={18}/>
         <span>Hymns</span>
@@ -52,7 +52,7 @@ export function NewTranslationBrowser({items,ypItems}:{items:TranslationSummary[
         <span>YP Songs</span>
         <ChevronRight aria-hidden="true" className="ml-auto" size={18}/>
       </button>
-    </div>
+    </div>}
 
     {section!==null&&<>
       {section==="hymns"?<p className="mb-5 text-sm text-[var(--muted)]">Myanmar hymn numbers have not been assigned yet. Listed by English hymn number.</p>:<p className="mb-5 text-sm text-[var(--muted)]">Recently added Myanmar YP translations.</p>}
