@@ -8,6 +8,15 @@
   opacity: 1;
 }
 
+#hymns-quick-menu {
+  width: 14rem;
+}
+
+#hymns-quick-menu button span,
+#hymns-quick-menu a span {
+  white-space: nowrap;
+}
+
 #hymns-quick-menu svg,
 #hymns-quick-menu svg path,
 #hymns-quick-menu svg circle,
