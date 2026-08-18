@@ -17,6 +17,13 @@ function ypReferenceNumber(reference: string | undefined): string | undefined {
   return reference?.match(/^(\d+)$/)?.[1];
 }
 
+function ypAudioUrl(reference: string | undefined, fallbackNumber: number | string | null | undefined): string | undefined {
+  const fallback= fallbackNumber==null ? undefined : String(fallbackNumber).match(/^\d+$/)?.[0];
+  const number=ypReferenceNumber(reference)??fallback;
+  if(!number)return undefined;
+  return `https://www.hymnal.net/Hymns/NewSongs/mp3/ns${number.padStart(4,"0")}.mp3`;
+}
+
 function validAudioUrl(value: string | null | undefined): string | undefined {
   if (!value) return undefined;
   try {
@@ -53,7 +60,9 @@ export default async function HymnPage({params,searchParams}:{params:Promise<{ki
   const relatedMyanmarHymn=validatedMyanmarHymn??discoveredMyanmarHymn;
   const englishVersionLabel=relatedMyanmarHymn?.cross_references.Eng?.trim()||hymn.number||hymn.id;
   const relatedYpSong=kind==="yp"?getHymn("yp",isMyanmar?"en":"my",String(hymn.number??hymn.id)):undefined;
-  const audioUrl=validAudioUrl(hymn.audio_url)??(!isMyanmar?validAudioUrl(relatedMyanmarHymn?.audio_url):undefined);
+  const newSongsReference=kind==="yp"?hymn.cross_references["New Songs"]?.trim():undefined;
+  const regularYpAudio=kind==="yp"?ypAudioUrl(newSongsReference,hymn.number??hymn.id):undefined;
+  const audioUrl=validAudioUrl(hymn.audio_url)??regularYpAudio??(!isMyanmar?validAudioUrl(relatedMyanmarHymn?.audio_url):undefined);
   const hasLongTitle=Array.from(title).length>32;
   const hasDetails=Object.keys(hymn.metadata).length>0;
   const guitarArrangement=getGuitarArrangement(hymn);
