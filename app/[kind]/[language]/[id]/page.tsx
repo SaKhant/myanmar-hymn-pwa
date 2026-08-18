@@ -32,16 +32,6 @@ function isChordOnlyLine(line:string):boolean {
   return tokens.length>0&&tokens.every(token=>CHORD_TOKEN.test(token));
 }
 
-function ypGuitarSheetUrl(ypNumber:number|string|null|undefined):string|undefined {
-  const source=ypSource(ypNumber);
-  if(!source)return undefined;
-  const number4=String(source.number).padStart(4,"0");
-  if(source.collection==="ns")return `https://www.hymnal.net/Hymns/NewSongs/svg/ns${number4}_g.svg`;
-  if(source.collection==="lb")return `https://www.hymnal.net/Hymns/LongBeach/svg/lb${String(source.number).padStart(2,"0")}_g.svg`;
-  if(source.collection==="c")return `https://www.hymnal.net/Hymns/Children/svg/child${number4}_g.svg`;
-  return `https://www.hymnal.net/Hymns/Hymnal/svg/e${number4}_g.svg`;
-}
-
 export default async function HymnPage({params,searchParams}:{params:Promise<{kind:string;language:string;id:string}>;searchParams:Promise<{from?:string}>}) {
   const p=await params;
   const query=await searchParams;
@@ -63,7 +53,8 @@ export default async function HymnPage({params,searchParams}:{params:Promise<{ki
   const relatedYpSong=kind==="yp"?getHymn("yp",isMyanmar?"en":"my",String(hymn.number??hymn.id)):undefined;
   const regularYpSourceLabel=kind==="yp"?ypSourceLabel(hymn.number??hymn.id):undefined;
   const regularYpAudio=kind==="yp"?ypAudioUrl(hymn.number??hymn.id):undefined;
-  const ypGuitarSheet=kind==="yp"&&isMyanmar?ypGuitarSheetUrl(hymn.number??hymn.id):undefined;
+  const ypNumber=kind==="yp"?Number(hymn.number??hymn.id):undefined;
+  const verifiedYpSource=kind==="yp"&&isMyanmar&&ypNumber!==undefined?ypSource(ypNumber):undefined;
   const audioUrl=validAudioUrl(hymn.audio_url)??regularYpAudio??(!isMyanmar?validAudioUrl(relatedMyanmarHymn?.audio_url):undefined);
   const hasLongTitle=Array.from(title).length>32;
   const hasDetails=Object.keys(hymn.metadata).length>0;
@@ -89,7 +80,7 @@ export default async function HymnPage({params,searchParams}:{params:Promise<{ki
         <div className="mt-4"><ReaderActions hymn={{id:hymn.id,kind,language,number:hymn.number,title,sections:hymn.sections}}/></div>
       </header>
 
-      {guitarArrangement?<GuitarReader sections={hymn.sections} arrangement={guitarArrangement} numberedNotesImageSrc={numberedNotesImageSrc}/>:ypGuitarSheet&&regularYpSourceLabel?<YpGuitarReader sections={hymn.sections} guitarSheetSrc={ypGuitarSheet} sourceLabel={regularYpSourceLabel}/>:<div className={`mx-auto max-w-2xl py-7 ${isMyanmar?"reader-lyrics-myanmar":"leading-[1.8]"}`} style={isMyanmar?undefined:{fontSize:"var(--lyric-size,20px)"}}>
+      {guitarArrangement?<GuitarReader sections={hymn.sections} arrangement={guitarArrangement} numberedNotesImageSrc={numberedNotesImageSrc}/>:verifiedYpSource&&regularYpSourceLabel&&ypNumber!==undefined?<YpGuitarReader sections={hymn.sections} ypNumber={ypNumber} sourceLabel={regularYpSourceLabel}/>:<div className={`mx-auto max-w-2xl py-7 ${isMyanmar?"reader-lyrics-myanmar":"leading-[1.8]"}`} style={isMyanmar?undefined:{fontSize:"var(--lyric-size,20px)"}}>
         {hymn.sections.map((section,index)=>{
           const chorus=section.type==="chorus"||section.type==="refrain";
           return <section key={`${section.type}-${section.number}-${index}`} className={`mb-7 last:mb-0 ${chorus?"border-l-2 border-[color-mix(in_srgb,var(--gold)_72%,transparent)] pl-4":""}`}>
