@@ -39,7 +39,7 @@ function SearchBarWithMenu({kind,query,onQueryChange,onSubmit,menuOpen,onMenuTog
   const menuId=kind==="yp"?"yp-quick-menu":"hymns-quick-menu";
   const newTranslationsHref=kind==="yp"?"/hymns/new-translations?section=yp":"/hymns/new-translations";
 
-  return <div className="w-full max-w-md rounded-xl bg-blue-100 p-1.5"><div className="flex items-center gap-2"><BlueSearchForm query={query} onQueryChange={onQueryChange} onSubmit={onSubmit}/><div className="relative shrink-0"><button type="button" aria-label="Open menu" title="Menu" aria-expanded={menuOpen} aria-controls={menuId} onClick={onMenuToggle} className="focus-ring flex h-11 w-11 items-center justify-center rounded-lg border border-black bg-blue-400 text-white transition hover:bg-blue-500"><Menu aria-hidden="true" size={22}/></button>{menuOpen&&<div id={menuId} role="menu" className="absolute right-0 top-[calc(100%+0.5rem)] z-50 w-48 rounded-xl border border-blue-600 bg-blue-500 p-1.5 shadow-xl shadow-blue-300/50"><Link href="/categories" role="menuitem" onClick={onMenuClose} style={{color:"#fff"}} className="focus-ring flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-semibold no-underline transition hover:bg-blue-600"><List aria-hidden="true" size={17} color="#fff"/><span style={{color:"#fff"}}>Categories</span></Link><Link href={newTranslationsHref} role="menuitem" onClick={onMenuClose} style={{color:"#fff"}} className="focus-ring flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-semibold no-underline transition hover:bg-blue-600"><FileText aria-hidden="true" size={17} color="#fff"/><span style={{color:"#fff"}}>New translations</span></Link></div>}</div></div></div>;
+  return <div className="w-full max-w-md rounded-xl bg-blue-100 p-1.5"><div className="flex items-center gap-2"><BlueSearchForm query={query} onQueryChange={onQueryChange} onSubmit={onSubmit}/><div className="relative shrink-0"><button type="button" aria-label="Open menu" title="Menu" aria-expanded={menuOpen} aria-controls={menuId} onClick={onMenuToggle} className="focus-ring flex h-11 w-11 items-center justify-center rounded-lg border border-black bg-blue-500 text-white transition hover:bg-blue-600"><Menu aria-hidden="true" size={22}/></button>{menuOpen&&<div id={menuId} role="menu" className="absolute right-0 top-[calc(100%+0.5rem)] z-50 w-44 rounded-xl border border-blue-600 bg-blue-500 p-1.5 shadow-xl shadow-blue-300/50"><Link href="/categories" role="menuitem" onClick={onMenuClose} style={{color:"#fff"}} className="focus-ring flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-semibold no-underline transition hover:bg-blue-600"><List aria-hidden="true" size={17} color="#fff"/><span style={{color:"#fff"}}>Categories</span></Link><Link href={newTranslationsHref} role="menuitem" onClick={onMenuClose} style={{color:"#fff"}} className="focus-ring flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-semibold no-underline transition hover:bg-blue-600"><FileText aria-hidden="true" size={17} color="#fff"/><span style={{color:"#fff"}}>New translations</span></Link></div>}</div></div></div>;
 }
 
 export function HymnBrowser({ kind, myanmar, english=[], newTranslations=[], initialLanguage="my", initialQuery="", myanmarOnly=false, lyricSearchUrl }:{ kind:HymnKind; myanmar:HymnSummary[]; english?:HymnSummary[]; newTranslations?:NewTranslationSummary[]; initialLanguage?:HymnLanguage; initialQuery?:string; myanmarOnly?:boolean; lyricSearchUrl?:string }) {
@@ -108,6 +108,7 @@ export function HymnBrowser({ kind, myanmar, english=[], newTranslations=[], ini
   const updateQuery=(value:string)=>{setQuery(value);setSubmittedMissingNumber(false)};
   const switchHymnSection=(section:Exclude<HymnSectionTab,null>)=>setHymnSection(current=>current===section?null:section);
   const ypCountLabel=`${results.length.toLocaleString()} ${results.length===1?"song":"songs"}`;
+  const hymnCountLabel=`${results.length.toLocaleString()} ${results.length===1?"hymn":"hymns"}`;
   const hymnListEmpty=kind==="hymns"&&results.length===0&&newResults.length===0;
 
   return <main className="page">
@@ -123,9 +124,10 @@ export function HymnBrowser({ kind, myanmar, english=[], newTranslations=[], ini
       <button type="button" onClick={()=>switchHymnSection("new")} aria-pressed={hymnSection==="new"} className={`focus-ring myanmar rounded-md px-3 py-1 text-[11px] font-bold text-white ${hymnSection==="new"?"bg-blue-600 shadow-sm":""}`}>အသစ်</button>
     </div>}
 
+    {kind==="hymns"&&<p className="my-4 text-sm text-[var(--muted)]">{hymnCountLabel}</p>}
     {kind==="yp"&&<p className="my-4 text-sm text-[var(--muted)]">{ypCountLabel}</p>}
 
-    {kind==="hymns"&&results.length>0&&<div className="mt-5"><HymnList results={results} kind="hymns" language="my" exactNumber={numberQuery}/></div>}
+    {kind==="hymns"&&results.length>0&&<HymnList results={results} kind="hymns" language="my" exactNumber={numberQuery}/>} 
     {kind==="hymns"&&newResults.length>0&&<NewTranslationList items={newResults}/>} 
     {kind==="yp"&&results.length>0&&<HymnList results={results} kind={kind} language={language} exactNumber={numberQuery}/>} 
 
