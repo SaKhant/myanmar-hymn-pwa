@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useMemo,useState } from "react";
-import { BookOpen, ChevronRight, Music2 } from "lucide-react";
+import { BookOpen, ChevronRight, Music } from "lucide-react";
 import { SearchField } from "@/components/search-field";
 import type { HymnSummary } from "@/lib/hymns/types";
 
@@ -48,7 +48,7 @@ export function NewTranslationBrowser({items,ypItems}:{items:TranslationSummary[
         <ChevronRight aria-hidden="true" className="ml-auto" size={18}/>
       </button>
       <button type="button" onClick={()=>selectSection("yp")} aria-pressed={section==="yp"} className={`focus-ring flex w-full items-center gap-3 rounded-lg px-3 py-3 text-left text-sm font-semibold text-white transition hover:bg-blue-600 ${section==="yp"?"bg-blue-600":""}`}>
-        <Music2 aria-hidden="true" size={18}/>
+        <Music aria-hidden="true" size={18}/>
         <span>YP Songs</span>
         <ChevronRight aria-hidden="true" className="ml-auto" size={18}/>
       </button>
