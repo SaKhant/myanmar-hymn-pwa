@@ -2,19 +2,17 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useDeferredValue, useEffect, useMemo, useState } from "react";
-import { BookOpen, ChevronRight, Heart, List, Menu, Music2, Search, Settings } from "lucide-react";
+import { ChevronRight, FileText, List, Menu, Search } from "lucide-react";
 import type { HymnKind, HymnLanguage, HymnSummary } from "@/lib/hymns/types";
 import { normalizeHymnNumberQuery, normalizeSearchText, normalizeTitlePrefix } from "@/lib/hymns/search";
 import { SearchField } from "./search-field";
 
 const CHORD_TOKEN=/^[A-G](?:#|b)?(?:(?:maj|min|m|dim|aug|sus|add)?\d*(?:\([^)]*\))?)?(?:\/[A-G](?:#|b)?)?$/i;
+const SHOW_HYMN_SECTION_SELECTOR=false;
 
 const HYMNS_MENU_ITEMS=[
-  {href:"/",label:"Hymns",icon:BookOpen},
-  {href:"/yp",label:"YP Songs",icon:Music2},
-  {href:"/favorites",label:"Favorites",icon:Heart},
-  {href:"/settings",label:"Settings",icon:Settings},
   {href:"/categories",label:"Categories",icon:List},
+  {href:"/hymns/new-translations",label:"New translations",icon:FileText},
 ] as const;
 
 type NewTranslationSummary={id:string;englishNumber:number;title:string;category:string;englishTitle:string|null;searchText:string};
@@ -112,7 +110,7 @@ export function HymnBrowser({ kind, myanmar, english=[], newTranslations=[], ini
 
     {kind==="hymns"?<div className="w-full max-w-md rounded-xl bg-blue-100 p-1.5"><div className="flex items-center gap-2"><form role="search" className="min-w-0 flex-1" onSubmit={(event)=>{event.preventDefault();submitSearch()}}><div className="flex h-11 overflow-hidden rounded-lg border border-black bg-[var(--paper)]"><label className="min-w-0 flex-1"><span className="sr-only">Search hymns</span><input type="text" lang="my" dir="ltr" autoComplete="off" autoCapitalize="none" autoCorrect="off" spellCheck={false} enterKeyHint="search" value={query} onChange={(event)=>{setQuery(event.currentTarget.value);setSubmittedMissingNumber(false)}} onKeyDown={(event)=>{if(event.key==="Enter"&&!event.nativeEvent.isComposing){event.preventDefault();event.currentTarget.form?.requestSubmit()}}} className="myanmar-search-input h-full w-full border-0 bg-transparent px-3 text-sm outline-none" /></label><button type="submit" aria-label="Search" className="focus-ring flex h-full w-11 shrink-0 items-center justify-center border-l border-black bg-[var(--paper)] text-black transition hover:bg-[var(--sage-soft)]"><Search aria-hidden="true" size={19}/></button></div></form><div className="relative shrink-0"><button type="button" aria-label="Open menu" title="Menu" aria-expanded={menuOpen} aria-controls="hymns-quick-menu" onClick={()=>setMenuOpen(open=>!open)} className="focus-ring flex h-11 w-11 items-center justify-center rounded-lg border border-black bg-blue-400 text-white transition hover:bg-blue-500"><Menu aria-hidden="true" size={22}/></button>{menuOpen&&<div id="hymns-quick-menu" role="menu" className="absolute right-0 top-[calc(100%+0.5rem)] z-50 w-44 rounded-xl border border-blue-600 bg-blue-500 p-1.5 shadow-xl shadow-blue-300/50">{HYMNS_MENU_ITEMS.map(({href,label,icon:Icon})=><Link key={href} href={href} role="menuitem" onClick={()=>setMenuOpen(false)} style={{color:"#fff"}} className="focus-ring flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-semibold no-underline transition hover:bg-blue-600"><Icon aria-hidden="true" size={17} color="#fff"/><span style={{color:"#fff"}}>{label}</span></Link>)}</div>}</div></div></div>:<SearchField value={query} onChange={(value)=>{setQuery(value);setSubmittedMissingNumber(false)}} onSubmit={submitSearch} placeholder="Search number, title, or lyric…" cleanFocus/>}
 
-    {kind==="hymns"&&<div className="mx-auto mt-3 flex w-fit items-center rounded-lg bg-blue-500 p-0.5 shadow-md shadow-blue-300/70" role="group" aria-label="Hymn section">
+    {SHOW_HYMN_SECTION_SELECTOR&&kind==="hymns"&&<div className="mx-auto mt-3 flex w-fit items-center rounded-lg bg-blue-500 p-0.5 shadow-md shadow-blue-300/70" role="group" aria-label="Hymn section">
       <button type="button" onClick={()=>switchHymnSection("hymns")} aria-pressed={hymnSection==="hymns"} className={`focus-ring myanmar rounded-md px-3 py-1 text-[11px] font-bold text-white ${hymnSection==="hymns"?"bg-blue-600 shadow-sm":""}`}>ဓမ္မသီချင်း</button>
       <span aria-hidden="true" className="px-0.5 text-xs font-bold text-white">|</span>
       <button type="button" onClick={()=>switchHymnSection("new")} aria-pressed={hymnSection==="new"} className={`focus-ring myanmar rounded-md px-3 py-1 text-[11px] font-bold text-white ${hymnSection==="new"?"bg-blue-600 shadow-sm":""}`}>အသစ်</button>
