@@ -12,6 +12,10 @@ function lineSegments(line:GuitarLine):GuitarSegment[] {
   return line.segments??[];
 }
 
+const sentenceLineStyle={display:"block",maxWidth:"100%",minWidth:0,whiteSpace:"normal"} as const;
+const sentenceSegmentStyle={display:"inline-grid",maxWidth:"100%",minWidth:0,verticalAlign:"top"} as const;
+const sentenceTextStyle={whiteSpace:"pre-wrap",overflowWrap:"break-word",wordBreak:"normal"} as const;
+
 export function GuitarReader({ sections, arrangement, numberedNotesImageSrc }: GuitarReaderWithNumberedNotesProps) {
   const [mode, setMode] = useState<ReaderMode>("lyrics");
 
@@ -22,7 +26,7 @@ export function GuitarReader({ sections, arrangement, numberedNotesImageSrc }: G
       {numberedNotesImageSrc&&<button type="button" aria-pressed={mode === "numbered-notes"} onClick={() => setMode("numbered-notes")}>Numbered Notes</button>}
     </div>
 
-    {mode === "lyrics" ? <LyricsView sections={sections}/> : mode === "numbered-notes"&&numberedNotesImageSrc ? <NumberedNotesView imageSrc={numberedNotesImageSrc}/> : <div className="guitar-view">
+    {mode === "lyrics" ? <LyricsView sections={sections}/> : mode === "numbered-notes"&&numberedNotesImageSrc ? <NumberedNotesView imageSrc={numberedNotesImageSrc}/> : <div className="guitar-view" style={{minWidth:0,overflowX:"hidden"}}>
       <div className="guitar-info" aria-label={`Original key ${arrangement.originalKey}, capo ${arrangement.capo}, play in ${arrangement.playKey}`}>
         <span>Key <strong>{arrangement.originalKeyDisplay}</strong></span><i aria-hidden="true">•</i>
         <span>Capo <strong>{arrangement.capo}</strong></span><i aria-hidden="true">•</i>
@@ -39,11 +43,11 @@ export function GuitarReader({ sections, arrangement, numberedNotesImageSrc }: G
             >{verse.number}</span>
           </div>}
           <div className="myanmar">
-            {verse.lines.map((line, lineIndex) => <div className="guitar-line" key={lineIndex}>
-              <div className="guitar-phrase guitar-sentence-line">
-                {lineSegments(line).map((segment, segmentIndex) => <span className="guitar-segment" key={segmentIndex}>
+            {verse.lines.map((line, lineIndex) => <div className="guitar-line" key={lineIndex} style={{minWidth:0,maxWidth:"100%"}}>
+              <div className="guitar-phrase guitar-sentence-line" style={sentenceLineStyle}>
+                {lineSegments(line).map((segment, segmentIndex) => <span className="guitar-segment" key={segmentIndex} style={sentenceSegmentStyle}>
                   <span className="guitar-chord" aria-label={segment.chord?`Chord ${segment.chord}`:undefined}>{segment.chord??"\u00a0"}</span>
-                  <span className="guitar-lyric-segment">{segment.text}</span>
+                  <span className="guitar-lyric-segment" style={sentenceTextStyle}>{segment.text}</span>
                 </span>)}
               </div>
             </div>)}
