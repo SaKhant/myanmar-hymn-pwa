@@ -1,12 +1,12 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BookOpen, Heart, Music2, Settings } from "lucide-react";
+import { BookOpen, Heart, Music, Settings } from "lucide-react";
 import { Brand } from "./brand";
 
 const items = [
   { id:"hymns", href:"/", label:"Hymns", icon:BookOpen },
-  { id:"yp", href:"/yp", label:"YP Songs", icon:Music2 }, { id:"favorites", href:"/favorites", label:"Favorites", icon:Heart },
+  { id:"yp", href:"/yp", label:"YP Songs", icon:Music }, { id:"favorites", href:"/favorites", label:"Favorites", icon:Heart },
   { id:"settings", href:"/settings", label:"Settings", icon:Settings },
 ];
 
@@ -25,7 +25,7 @@ function FilledBookOpen({size=21}:{size?:number}) {
 }
 
 function FilledMusic({size=21}:{size?:number}) {
-  return <svg aria-hidden="true" width={size} height={size} viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round"><circle cx="8" cy="18" r="4" fill="currentColor" stroke="var(--muted)" strokeWidth="1.8"/><path d="M12 18V2l7 4" stroke="var(--muted)" strokeWidth="1.8"/></svg>;
+  return <svg aria-hidden="true" width={size} height={size} viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18V5l12-2v13" stroke="var(--muted)" strokeWidth="1.8"/><circle cx="6" cy="18" r="3" fill="currentColor" stroke="var(--muted)" strokeWidth="1.8"/><circle cx="18" cy="16" r="3" fill="currentColor" stroke="var(--muted)" strokeWidth="1.8"/></svg>;
 }
 export function Navigation() {
   const path = usePathname();
