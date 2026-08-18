@@ -74,10 +74,10 @@ a[aria-label^="Hymn "],span[aria-label^="Hymn "],a[aria-label^="English hymn "],
 .numbered-notes-canvas img { display:block; width:100%; max-width:none; height:auto; user-select:none; }
 .numbered-notes-hint { margin:.65rem 0 0; color:var(--muted); font-size:.72rem; text-align:center; }
 
-/* Traditional hymnal stanza presentation for regular Hymns only. */
-.reader-page:has(.reader-version-link[href^="/hymns/"]) article > .mx-auto.max-w-2xl.py-7 { counter-reset:hymn-stanza; }
-.reader-page:has(.reader-version-link[href^="/hymns/"]) article > .mx-auto.max-w-2xl.py-7 > section:not(.border-l-2) { counter-increment:hymn-stanza; }
-.reader-page:has(.reader-version-link[href^="/hymns/"]) article > .mx-auto.max-w-2xl.py-7 > section:not(.border-l-2) > p:first-child {
+/* Small gray stanza badges for regular Hymns and YP Songs. */
+.reader-page:has(.reader-version-link:is([href^="/hymns/"],[href^="/yp/"])) article > .mx-auto.max-w-2xl.py-7 { counter-reset:hymn-stanza; }
+.reader-page:has(.reader-version-link:is([href^="/hymns/"],[href^="/yp/"])) article > .mx-auto.max-w-2xl.py-7 > section:not(.border-l-2) { counter-increment:hymn-stanza; }
+.reader-page:has(.reader-version-link:is([href^="/hymns/"],[href^="/yp/"])) article > .mx-auto.max-w-2xl.py-7 > section:not(.border-l-2) > p:first-child {
   display:inline-flex;
   align-items:center;
   justify-content:center;
@@ -97,18 +97,18 @@ a[aria-label^="Hymn "],span[aria-label^="Hymn "],a[aria-label^="English hymn "],
   text-transform:none;
   vertical-align:middle;
 }
-.reader-page:has(.reader-version-link[href^="/hymns/"]) article > .mx-auto.max-w-2xl.py-7 > section:not(.border-l-2) > p:first-child::after {
+.reader-page:has(.reader-version-link:is([href^="/hymns/"],[href^="/yp/"])) article > .mx-auto.max-w-2xl.py-7 > section:not(.border-l-2) > p:first-child::after {
   content:counter(hymn-stanza);
   display:block;
   font-size:.8rem;
   line-height:1;
   transform:translateY(-.01em);
 }
-.reader-page:has(.reader-version-link[href^="/hymns/"]) article > .mx-auto.max-w-2xl.py-7 > section.border-l-2 {
+.reader-page:has(.reader-version-link:is([href^="/hymns/"],[href^="/yp/"])) article > .mx-auto.max-w-2xl.py-7 > section.border-l-2 {
   border-left:0;
   padding-left:1.5rem;
 }
-.reader-page:has(.reader-version-link[href^="/hymns/"]) article > .mx-auto.max-w-2xl.py-7 > section.border-l-2 > p:first-child { display:none; }
+.reader-page:has(.reader-version-link:is([href^="/hymns/"],[href^="/yp/"])) article > .mx-auto.max-w-2xl.py-7 > section.border-l-2 > p:first-child { display:none; }
 
 @media (max-width:380px) { .guitar-view { font-size:clamp(18px,var(--lyric-size,21px),24px); } .guitar-verse { padding-left:1.35rem; } .guitar-info { gap:.42rem; } .reader-mode-switch button { padding-inline:.55rem; font-size:.68rem; } }
 @media (min-width:768px) { .reader-page { width:min(100%,56rem); padding-bottom:4rem; } .reader-title-myanmar { font-size:30px; } .reader-title-myanmar-long { font-size:27px; } }
