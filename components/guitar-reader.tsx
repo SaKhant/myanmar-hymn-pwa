@@ -2,16 +2,14 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import type { GuitarLine, GuitarPhrase, GuitarReaderProps } from "@/lib/hymns/guitar-types";
+import type { GuitarLine, GuitarReaderProps, GuitarSegment } from "@/lib/hymns/guitar-types";
 
 type ReaderMode = "lyrics" | "guitar" | "numbered-notes";
 type GuitarReaderWithNumberedNotesProps = GuitarReaderProps & { numberedNotesImageSrc?: string };
 
-function linePhrases(line:GuitarLine):GuitarPhrase[] {
-  if(line.phrases)return line.phrases;
-  const segments=line.segments??[];
-  const breaks=[0,...(line.phraseBreaks??[]),segments.length];
-  return breaks.slice(0,-1).map((start,index)=>({segments:segments.slice(start,breaks[index+1])})).filter((phrase)=>phrase.segments.length>0);
+function lineSegments(line:GuitarLine):GuitarSegment[] {
+  if(line.phrases)return line.phrases.flatMap(phrase=>phrase.segments);
+  return line.segments??[];
 }
 
 export function GuitarReader({ sections, arrangement, numberedNotesImageSrc }: GuitarReaderWithNumberedNotesProps) {
@@ -42,12 +40,12 @@ export function GuitarReader({ sections, arrangement, numberedNotesImageSrc }: G
           </div>}
           <div className="myanmar">
             {verse.lines.map((line, lineIndex) => <div className="guitar-line" key={lineIndex}>
-              {linePhrases(line).map((phrase,phraseIndex)=><div className="guitar-phrase" key={phraseIndex}>
-                {phrase.segments.map((segment, segmentIndex) => <span className="guitar-segment" key={segmentIndex}>
+              <div className="guitar-phrase guitar-sentence-line">
+                {lineSegments(line).map((segment, segmentIndex) => <span className="guitar-segment" key={segmentIndex}>
                   <span className="guitar-chord" aria-label={segment.chord?`Chord ${segment.chord}`:undefined}>{segment.chord??"\u00a0"}</span>
                   <span className="guitar-lyric-segment">{segment.text}</span>
                 </span>)}
-              </div>)}
+              </div>
             </div>)}
           </div>
         </section>;
