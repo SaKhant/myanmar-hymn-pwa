@@ -103,7 +103,7 @@ function parseChordRows(svg:string):ChordRow[] {
     const minX=sorted[0]?.x??0;
     const last=sorted.at(-1);
     const maxX=(last?.x??minX)+Math.max(1,(last?.text.length??1)*(last?.fontSize??2.4)*.45);
-    return {y:group.reduce((sum,item)=>sum+item.y,0)/group.length,items:sorted,text:sorted.map(item=>item.text).join(" "),minX,maxX};
+    return {y:group.reduce((sum,item)=>sum+item.y,0)/group.length,text:sorted.map(item=>item.text).join(" "),minX,maxX};
   });
 
   const rows:ChordRow[]=[];
@@ -130,14 +130,6 @@ function parseChordRows(svg:string):ChordRow[] {
   return rows.sort((a,b)=>a.y-b.y);
 }
 
-function mergeEvents(existing:YpChordEvent[],incoming:YpChordEvent[]):YpChordEvent[] {
-  const result=[...existing];
-  for(const event of incoming){
-    if(!result.some(item=>item.chord===event.chord&&Math.abs(item.position-event.position)<.04))result.push(event);
-  }
-  return result.sort((a,b)=>a.position-b.position);
-}
-
 function mapRowAcrossLines(row:ChordRow,lineNorms:string[]):YpChordEvent[][] {
   const total=lineNorms.reduce((sum,line)=>sum+Math.max(1,line.length),0);
   const boundaries:number[]=[];
@@ -152,17 +144,29 @@ function mapRowAcrossLines(row:ChordRow,lineNorms:string[]):YpChordEvent[][] {
     const start=lineIndex===0?0:boundaries[lineIndex-1];
     const end=boundaries[lineIndex]??1;
     const position=Math.max(0,Math.min(.98,(absolute-start)/Math.max(.001,end-start)));
-    out[lineIndex].push({chord:chord.chord,position});
+    if(!out[lineIndex].some(event=>event.chord===chord.chord&&Math.abs(event.position-position)<.04))out[lineIndex].push({chord:chord.chord,position});
   }
-  return out;
+  return out.map(events=>events.sort((a,b)=>a.position-b.position));
+}
+
+function propagatePatterns(mapped:YpChordEvent[][][],englishSections:HymnSection[],englishLyrics:string[][]){
+  englishSections.forEach((section,sectionIndex)=>{
+    mapped[sectionIndex].forEach((events,lineIndex)=>{
+      if(events.length)return;
+      const lineCount=englishLyrics[sectionIndex].length;
+      const exact=englishSections.findIndex((candidate,candidateIndex)=>candidateIndex!==sectionIndex&&candidate.type===section.type&&englishLyrics[candidateIndex].length===lineCount&&mapped[candidateIndex]?.[lineIndex]?.length);
+      const loose=exact>=0?exact:englishSections.findIndex((candidate,candidateIndex)=>candidateIndex!==sectionIndex&&candidate.type===section.type&&mapped[candidateIndex]?.[lineIndex]?.length);
+      if(loose>=0)mapped[sectionIndex][lineIndex]=mapped[loose][lineIndex].map(event=>({...event}));
+    });
+  });
 }
 
 export function parseYpGuitarSvg(svg:string,englishSections:HymnSection[],myanmarSections:HymnSection[]):YpGuitarData {
   const englishLyrics=englishSections.map(section=>lyricLines(section));
-  const mapped: YpChordEvent[][][]=englishLyrics.map(lines=>lines.map(()=>[]));
+  const mapped:YpChordEvent[][][]=englishLyrics.map(lines=>lines.map(()=>[]));
 
-  // Local YP English pages often already contain chord-only lines. Use those exact
-  // chord names as a fallback, while the SVG below supplies better placement.
+  // Local YP English pages often already contain chord-only lines. Those chord
+  // names are the cleanest source, so preserve them and reuse their pattern.
   englishSections.forEach((section,sectionIndex)=>{
     let pending:string[]=[];
     let lyricIndex=0;
@@ -175,6 +179,7 @@ export function parseYpGuitarSvg(svg:string,englishSections:HymnSection[],myanma
       lyricIndex++;
     }
   });
+  propagatePatterns(mapped,englishSections,englishLyrics);
 
   const candidates:Array<{sectionIndex:number;startLine:number;endLine:number;norm:string;lineNorms:string[]}>=[];
   englishLyrics.forEach((lines,sectionIndex)=>{
@@ -186,6 +191,7 @@ export function parseYpGuitarSvg(svg:string,englishSections:HymnSection[],myanma
     }
   });
 
+  const remoteScores=englishLyrics.map(lines=>lines.map(()=>0));
   for(const row of parseChordRows(svg)){
     const rowNorm=normalizeLyric(row.lyricText);
     if(rowNorm.length<2)continue;
@@ -197,22 +203,21 @@ export function parseYpGuitarSvg(svg:string,englishSections:HymnSection[],myanma
     if(!best||best.score<.54)continue;
     const placement=mapRowAcrossLines(row,best.candidate.lineNorms);
     placement.forEach((events,offset)=>{
-      const target=mapped[best!.candidate.sectionIndex]?.[best!.candidate.startLine+offset];
-      if(target&&events.length)mapped[best!.candidate.sectionIndex][best!.candidate.startLine+offset]=mergeEvents(target,events);
+      if(!events.length)return;
+      const sectionIndex=best!.candidate.sectionIndex;
+      const lineIndex=best!.candidate.startLine+offset;
+      const target=mapped[sectionIndex]?.[lineIndex];
+      if(!target||target.length)return;
+      if(best!.score>remoteScores[sectionIndex][lineIndex]){
+        mapped[sectionIndex][lineIndex]=events;
+        remoteScores[sectionIndex][lineIndex]=best!.score;
+      }
     });
   }
 
-  // Printed lead sheets normally show the tune once. Reuse the reviewed musical
-  // pattern for later stanzas/repeated refrains with the same structure.
-  englishSections.forEach((section,sectionIndex)=>{
-    mapped[sectionIndex].forEach((events,lineIndex)=>{
-      if(events.length)return;
-      const lineCount=englishLyrics[sectionIndex].length;
-      const exact=englishSections.findIndex((candidate,candidateIndex)=>candidateIndex!==sectionIndex&&candidate.type===section.type&&englishLyrics[candidateIndex].length===lineCount&&mapped[candidateIndex]?.[lineIndex]?.length);
-      const loose=exact>=0?exact:englishSections.findIndex((candidate,candidateIndex)=>candidateIndex!==sectionIndex&&candidate.type===section.type&&mapped[candidateIndex]?.[lineIndex]?.length);
-      if(loose>=0)mapped[sectionIndex][lineIndex]=mapped[loose][lineIndex].map(event=>({...event}));
-    });
-  });
+  // Printed lead sheets normally show the tune once. Reuse a clean pattern for
+  // later stanzas and repeated refrains instead of accumulating duplicate rows.
+  propagatePatterns(mapped,englishSections,englishLyrics);
 
   const output=myanmarSections.map((section,sectionIndex)=>{
     let englishIndex=sectionIndex;
