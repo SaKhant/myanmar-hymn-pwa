@@ -244,6 +244,50 @@ export function parseHymnalGuitarSvgByVerseOrder(svg:string,myanmarSections:Hymn
   return {capo:capoMatch?Number(capoMatch[1]):0,sections};
 }
 
+export function parseHymnalGuitarSvgBySectionShape(svg:string,myanmarSections:HymnSection[]):YpGuitarData {
+  const rows=parseChordRows(svg);
+  const patterns=rows.map(row=>mapRowAcrossLines(row,["line"])[0]??[]);
+  const output=myanmarSections.map(section=>({type:section.type,number:section.number,lines:section.lines.map(()=>({chords:[] as YpChordEvent[]}))}));
+  const verseIndices=myanmarSections.map((section,index)=>section.type==="verse"?index:-1).filter(index=>index>=0);
+  const firstVerseIndex=verseIndices[0]??-1;
+
+  if(firstVerseIndex<0){
+    const total=myanmarSections.reduce((sum,section)=>sum+section.lines.length,0);
+    if(total>0&&rows.length===total){
+      let cursor=0;
+      output.forEach(section=>section.lines.forEach(line=>{line.chords=(patterns[cursor++]??[]).map(event=>({...event}));}));
+    }
+  }else{
+    const introCount=myanmarSections.slice(0,firstVerseIndex).reduce((sum,section)=>sum+section.lines.length,0);
+    const firstCount=myanmarSections[firstVerseIndex].lines.length;
+    let versePatternStart=0;
+    let safeVerse=false;
+
+    if(firstCount>0&&rows.length>=introCount+firstCount){
+      let cursor=0;
+      for(let index=0;index<firstVerseIndex;index++){
+        output[index].lines.forEach(line=>{line.chords=(patterns[cursor++]??[]).map(event=>({...event}));});
+      }
+      versePatternStart=cursor;
+      safeVerse=true;
+    }else if(firstCount>0&&rows.length>=firstCount){
+      versePatternStart=0;
+      safeVerse=true;
+    }
+
+    if(safeVerse){
+      for(const index of verseIndices){
+        output[index].lines.forEach((line,lineIndex)=>{
+          if(lineIndex<firstCount)line.chords=(patterns[versePatternStart+lineIndex]??[]).map(event=>({...event}));
+        });
+      }
+    }
+  }
+
+  const capoMatch=svg.match(/\(Guitar:\s*Capo\s*(\d+)\)/i);
+  return {capo:capoMatch?Number(capoMatch[1]):0,sections:output};
+}
+
 export function ypGuitarHasChords(data:YpGuitarData):boolean {
   return data.sections.some(section=>section.lines.some(line=>line.chords.length>0));
 }
