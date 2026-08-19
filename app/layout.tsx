@@ -29,7 +29,15 @@ export const metadata: Metadata = {
   appleWebApp: { capable: true, title: "Hymn House", statusBarStyle: "default" },
   icons: { icon: [{ url:"/icon-192.png", sizes:"192x192", type:"image/png" },{ url:"/icon-512.png", sizes:"512x512", type:"image/png" }], apple: "/icon-192.png" },
 };
-export const viewport: Viewport = { themeColor:"#fbfaf6", width:"device-width", initialScale:1, viewportFit:"cover" };
+export const viewport: Viewport = {
+  themeColor:"#fbfaf6",
+  width:"device-width",
+  initialScale:1,
+  minimumScale:1,
+  maximumScale:1,
+  userScalable:false,
+  viewportFit:"cover",
+};
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return <html lang="en" className={padauk.variable}><body>{!SHOW_HYMN_SECTION_SELECTOR&&<style>{`[aria-label="Hymn section"]{display:none!important}`}</style>}<AppSplash/><OfflineLibraryPrompt/>{SHOW_MENU_NAV&&<OfflineNavigation/>}<ServiceWorker/><div className="shell" style={SHOW_MENU_NAV?undefined:{paddingLeft:0,paddingBottom:0}}>{SHOW_MENU_NAV&&<Navigation/>}<OfflineApp/>{children}</div></body></html>;
