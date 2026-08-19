@@ -119,9 +119,9 @@ main > a[href="/hymns"]:first-child:active {
 
 .reader-mode-switch button {
   flex:0 0 auto;
-  min-width:4.7rem;
+  min-width:4.05rem;
   min-height:2.25rem;
-  padding:.34rem .75rem;
+  padding:.34rem .58rem;
   border:0;
   border-right:1px solid #c8c8c8;
   border-radius:0;
@@ -136,11 +136,8 @@ main > a[href="/hymns"]:first-child:active {
   cursor:pointer;
 }
 
-.reader-mode-switch button:nth-child(3) {
-  min-width:6.7rem;
-}
-
 .reader-mode-switch button:last-child {
+  min-width:6.35rem;
   border-right:0;
 }
 
@@ -168,12 +165,12 @@ main > a[href="/hymns"]:first-child:active {
 
 @media (max-width:380px) {
   .reader-mode-switch button {
-    min-width:4.2rem;
+    min-width:3.55rem;
     min-height:2.15rem;
-    padding:.3rem .55rem;
+    padding:.3rem .42rem;
     font-size:.78rem;
   }
-  .reader-mode-switch button:nth-child(3) {
-    min-width:6rem;
+  .reader-mode-switch button:last-child {
+    min-width:5.65rem;
   }
 }
