@@ -79,7 +79,6 @@ function PianoScoreView({ imageSrc }: { imageSrc: string }) {
         <img className="block h-auto w-full" src={imageSrc} alt="Myanmar Hymn 1 piano score with Myanmar lyrics" draggable={false}/>
       </div>
     </div>
-    <p className="numbered-notes-hint">Piano notation source: Hymnal.net E1. English lyrics are replaced with the Myanmar Hymn 1 text.</p>
   </section>;
 }
 
