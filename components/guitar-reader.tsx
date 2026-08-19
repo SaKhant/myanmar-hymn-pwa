@@ -19,16 +19,17 @@ const flowingLyricStyle={display:"inline",whiteSpace:"normal",overflowWrap:"norm
 
 export function GuitarReader({ sections, arrangement, numberedNotesImageSrc, pianoScoreSrc }: GuitarReaderWithNotationProps) {
   const [mode, setMode] = useState<ReaderMode>("lyrics");
+  const resolvedPianoScoreSrc=pianoScoreSrc??(numberedNotesImageSrc?.includes("myanmar-hymn-1")?"/api/piano-score/1":undefined);
 
   return <>
     <div className="reader-mode-switch" role="group" aria-label="Reader display mode">
       <button type="button" aria-pressed={mode === "lyrics"} onClick={() => setMode("lyrics")}>Text</button>
-      {pianoScoreSrc&&<button type="button" aria-pressed={mode === "piano"} onClick={() => setMode("piano")}>Piano</button>}
+      {resolvedPianoScoreSrc&&<button type="button" aria-pressed={mode === "piano"} onClick={() => setMode("piano")}>Piano</button>}
       <button type="button" aria-pressed={mode === "guitar"} onClick={() => setMode("guitar")}>Guitar</button>
       {numberedNotesImageSrc&&<button type="button" aria-pressed={mode === "numbered-notes"} onClick={() => setMode("numbered-notes")}>Jianpu (简谱)</button>}
     </div>
 
-    {mode === "lyrics" ? <LyricsView sections={sections}/> : mode === "piano"&&pianoScoreSrc ? <PianoScoreView imageSrc={pianoScoreSrc}/> : mode === "numbered-notes"&&numberedNotesImageSrc ? <NumberedNotesView imageSrc={numberedNotesImageSrc}/> : <div className="guitar-view" style={{minWidth:0,overflowX:"hidden"}}>
+    {mode === "lyrics" ? <LyricsView sections={sections}/> : mode === "piano"&&resolvedPianoScoreSrc ? <PianoScoreView imageSrc={resolvedPianoScoreSrc}/> : mode === "numbered-notes"&&numberedNotesImageSrc ? <NumberedNotesView imageSrc={numberedNotesImageSrc}/> : <div className="guitar-view" style={{minWidth:0,overflowX:"hidden"}}>
       <div className="guitar-info" aria-label={`Original key ${arrangement.originalKey}, capo ${arrangement.capo}, play in ${arrangement.playKey}`}>
         <span>Key <strong>{arrangement.originalKeyDisplay}</strong></span><i aria-hidden="true">•</i>
         <span>Capo <strong>{arrangement.capo}</strong></span><i aria-hidden="true">•</i>
