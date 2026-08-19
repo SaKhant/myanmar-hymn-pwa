@@ -35,7 +35,7 @@ function svgSummary(svg:string){
     const next=lyrics.filter(lyric=>lyric.y>root.y).sort((a,b)=>(a.y-root.y)-(b.y-root.y))[0];
     return next?Number((next.y-root.y).toFixed(3)):null;
   });
-  return {length:svg.length,textCount:textTags.length,families,sizes,gaps,samples};
+  return {length:svg.length,textCount:textTags.length,families,sizes,gaps,attributeSamples:textTags.slice(0,25).map(match=>match[1]),samples};
 }
 
 async function audit(hymnNumber:number){
