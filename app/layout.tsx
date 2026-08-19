@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Padauk } from "next/font/google";
 import "./globals.css";
 import "./design-trial.css";
+import "./reference-buttons.css";
 import { Navigation } from "@/components/navigation";
 import { ServiceWorker } from "@/components/service-worker";
 import { AppSplash } from "@/components/app-splash";
