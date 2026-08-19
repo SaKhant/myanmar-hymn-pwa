@@ -35,7 +35,11 @@ function svgSummary(svg:string){
     const next=lyrics.filter(lyric=>lyric.y>root.y).sort((a,b)=>(a.y-root.y)-(b.y-root.y))[0];
     return next?Number((next.y-root.y).toFixed(3)):null;
   });
-  return {length:svg.length,textCount:textTags.length,families,sizes,gaps,attributeSamples:textTags.slice(0,25).map(match=>match[1]),samples};
+  const contextSamples=textTags.slice(0,12).map(match=>{
+    const index=match.index??0;
+    return svg.slice(Math.max(0,index-180),Math.min(svg.length,index+260));
+  });
+  return {length:svg.length,textCount:textTags.length,families,sizes,gaps,attributeSamples:textTags.slice(0,25).map(match=>match[1]),contextSamples,samples};
 }
 
 async function audit(hymnNumber:number){
