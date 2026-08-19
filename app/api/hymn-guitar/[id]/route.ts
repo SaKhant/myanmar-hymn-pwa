@@ -13,6 +13,10 @@ function guitarSvgUrl(englishNumber:number):string {
   return `https://www.hymnal.net/Hymns/Hymnal/svg/e${String(englishNumber).padStart(4,"0")}_g.svg`;
 }
 
+function normalizeHymnalSvg(svg:string):string {
+  return svg.replace(/font-family="Century Schoolbook L"/g,'font-family="serif"');
+}
+
 export async function GET(_request:Request,{params}:{params:Promise<{id:string}>}){
   const {id}=await params;
   const hymnNumber=Number(id);
@@ -30,7 +34,7 @@ export async function GET(_request:Request,{params}:{params:Promise<{id:string}>
   try {
     const response=await fetch(guitarSvgUrl(englishNumber),{next:{revalidate:60*60*24*30}});
     if(!response.ok)return NextResponse.json({error:"Guitar source unavailable"},{status:404});
-    const svg=await response.text();
+    const svg=normalizeHymnalSvg(await response.text());
     const guitar=parseYpGuitarSvg(svg,english.sections,myanmar.sections);
     if(!ypGuitarHasChords(guitar))return NextResponse.json({error:"Structured chords unavailable"},{status:404});
     return NextResponse.json({sourceLabel:`E${englishNumber}`,...guitar},{headers:{"Cache-Control":"public, s-maxage=2592000, stale-while-revalidate=604800"}});
