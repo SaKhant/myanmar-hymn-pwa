@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getHymn } from "@/lib/hymns/data";
 import { getKachinHymn, kachinHymns } from "@/lib/hymns/kachin-data";
+import { matuHymns } from "@/lib/hymns/matu-data";
 import styles from "@/app/matu-hymns/[id]/page.module.css";
 
 export function generateStaticParams() {
@@ -16,6 +17,9 @@ export default async function KachinHymnPage({ params }: { params: Promise<{ id:
   const myanmar = myanmarReference ? getHymn("hymns", "my", myanmarReference) : undefined;
   const englishReference = hymn.cross_references.Eng?.trim();
   const english = englishReference ? getHymn("hymns", "en", englishReference) : undefined;
+  const matu = myanmar
+    ? matuHymns.find((record) => String(record.number ?? record.id) === String(myanmar.number ?? myanmar.id))
+    : undefined;
   const index = kachinHymns.findIndex((record) => record.id === hymn.id);
   const previous = index > 0 ? kachinHymns[index - 1] : undefined;
   const next = index >= 0 && index < kachinHymns.length - 1 ? kachinHymns[index + 1] : undefined;
@@ -23,9 +27,10 @@ export default async function KachinHymnPage({ params }: { params: Promise<{ id:
     <main className={styles.page}>
       <Link className={styles.back} href="/hymns">← Back to Hymns</Link>
       <p className={styles.kicker}>
-        {myanmarReference ? <>{myanmar ? <Link href={`/hymns/my/${myanmar.id}`}>M{myanmarReference}</Link> : <span>M{myanmarReference}</span>}{" • "}</> : null}
-        {englishReference ? <>{english ? <Link href={`/hymns/en/${english.id}`}>E{englishReference}</Link> : <span>E{englishReference}</span>}{" • "}</> : null}
+        {myanmarReference ? (myanmar ? <Link href={`/hymns/my/${myanmar.id}`}>M{myanmarReference}</Link> : <span>M{myanmarReference}</span>) : null}
+        {englishReference ? (english ? <Link href={`/hymns/en/${english.id}${myanmar ? `?from=${encodeURIComponent(myanmar.id)}` : ""}`}>E{englishReference}</Link> : <span>E{englishReference}</span>) : null}
         <span className={styles.current}>KC{hymn.number}</span>
+        {matu ? <Link href={`/hymns/matu/${matu.number ?? matu.id}`}>MT{matu.number ?? matu.id}</Link> : null}
       </p>
       <h1 className={styles.title}>{hymn.title || hymn.first_line || `Kachin Hymn ${hymn.number}`}</h1>
       <div>{hymn.sections.map((section, sectionIndex) => (
