@@ -14,8 +14,6 @@ function normalizeHymnalSvg(svg:string):string {
     .replace(/(<g\b[^>]*\btransform="translate\(\s*([-\d.]+)\s*(?:,\s*|\s+)([-\d.]+)\s*\)"[^>]*>\s*)<text\b(?![^>]*\btransform=)([^>]*)>/g,(_match,prefix,x,y,attrs)=>`${prefix}<text transform="translate(${x}, ${y})"${attrs}>`);
 }
 
-function patternForVerse(englishSections:ReturnType<typeof getHymn> extends infer _T?never:never){return englishSections;}
-
 export async function GET(_request:Request,{params}:{params:Promise<{id:string}>}){
   const {id}=await params;
   const item=getNewMyanmarTranslation(id);
@@ -32,7 +30,6 @@ export async function GET(_request:Request,{params}:{params:Promise<{id:string}>
     if(!ypGuitarHasChords(englishGuitar))return NextResponse.json({error:"Structured chords unavailable"},{status:404});
 
     const sections=display.map(section=>{
-      let pattern:YpChordEvent[]=[];
       const patterns:YpChordEvent[][]=[];
       if(section.number!==null){
         const verseIndex=english.sections.findIndex(candidate=>candidate.type==="verse"&&candidate.number===section.number);
@@ -45,13 +42,14 @@ export async function GET(_request:Request,{params}:{params:Promise<{id:string}>
         }
       }else{
         for(let index=0;index<english.sections.length&&english.sections[index].type!=="verse";index++){
-          const source=englishGuitar.sections[index];if(source)patterns.push(...source.lines.map(line=>line.chords));
+          const source=englishGuitar.sections[index];
+          if(source)patterns.push(...source.lines.map(line=>line.chords));
         }
       }
       let lyricIndex=0;
       const lines=section.lines.map(line=>{
         if(line.kind!=="lyric")return {chords:[] as YpChordEvent[]};
-        pattern=patterns[lyricIndex++]??[];
+        const pattern=patterns[lyricIndex++]??[];
         return {chords:pattern.map(event=>({...event}))};
       });
       return {type:section.number===null?"text":"verse",number:section.number,lines};
