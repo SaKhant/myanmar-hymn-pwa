@@ -21,8 +21,8 @@ function removeSerifTextRow(svg:string,y:string):string {
   return svg.replace(pattern,"");
 }
 
-function myanmarText(x:number,y:number,text:string,size=2.18,weight?:"bold"):string {
-  return `<g transform="translate(${x.toFixed(4)}, ${y.toFixed(4)})"><text font-family="Myanmar Text, Noto Sans Myanmar, sans-serif"${weight?` font-weight="${weight}"`:""} font-size="${size.toFixed(4)}" text-anchor="start" fill="currentColor"><tspan>${escapeXml(text)}</tspan></text></g>`;
+function myanmarText(x:number,y:number,text:string,size=2.18):string {
+  return `<g transform="translate(${x.toFixed(4)}, ${y.toFixed(4)})"><text font-family="Myanmar Text, Noto Sans Myanmar, sans-serif" font-size="${size.toFixed(4)}" text-anchor="start" fill="#111"><tspan>${escapeXml(text)}</tspan></text></g>`;
 }
 
 function localizePianoSvg(source:string):string {
@@ -31,15 +31,8 @@ function localizePianoSvg(source:string):string {
   const verses=hymn.sections.filter(section=>section.type==="verse");
   if(verses.length<6)return source;
 
-  let svg=source
-    .replace('width="215.90mm" height="279.40mm" viewBox="0.0000 -0.0000 153.5737 198.7425"','width="153.5737" height="123.5000" viewBox="0 0 153.5737 123.5" preserveAspectRatio="xMidYMin meet"')
-    .replace(/font-family="serif"/g,'font-family="Myanmar Text, Noto Sans Myanmar, sans-serif"')
-    .replace('<tspan>Glory be to God the Father</tspan>',`<tspan>${escapeXml(hymn.title||hymn.first_line||"Myanmar Hymn 1")}</tspan>`)
-    .replace('<tspan>Blessing of the Trinity — His Plan</tspan>','<tspan></tspan>')
-    .replace(/<g transform="translate\(69\.8408, 191\.9677\)">[\s\S]*?<\/g>/,"" );
-
-  // Remove the syllabified English first verse while leaving the notes and chord symbols untouched.
-  svg=removeSerifTextRow(svg,"31.5821");
+  // Remove the syllabified English first verse first, while its original serif markers are intact.
+  let svg=removeSerifTextRow(source,"31.5821");
   svg=removeSerifTextRow(svg,"43.8057");
 
   const englishVerses=[
@@ -58,6 +51,13 @@ function localizePianoSvg(source:string):string {
     });
   }
 
+  svg=svg
+    .replace('width="215.90mm" height="279.40mm" viewBox="0.0000 -0.0000 153.5737 198.7425"','width="153.5737" height="123.5000" viewBox="0 0 153.5737 123.5" preserveAspectRatio="xMidYMin meet"')
+    .replace('<tspan>Glory be to God the Father</tspan>',`<tspan>${escapeXml(hymn.title||hymn.first_line||"Myanmar Hymn 1")}</tspan>`)
+    .replace('<tspan>Blessing of the Trinity — His Plan</tspan>','<tspan></tspan>')
+    .replace(/font-family="serif"/g,'font-family="Myanmar Text, Noto Sans Myanmar, sans-serif"')
+    .replace(/<g transform="translate\(69\.8408, 191\.9677\)">[\s\S]*?<\/g>/,"" );
+
   const first=verses[0].lines;
   const overlay=[
     myanmarText(18.2,31.65,first[0]||"",2.05),
@@ -66,7 +66,6 @@ function localizePianoSvg(source:string):string {
     myanmarText(116.0,43.88,first[3]||"",2.05),
   ].join("");
 
-  // White score paper keeps the notation readable in both light and dark app themes.
   svg=svg.replace("</style>","</style><rect x=\"0\" y=\"0\" width=\"153.5737\" height=\"123.5\" fill=\"#fff\"/>");
   return svg.replace("</svg>",`${overlay}</svg>`);
 }
