@@ -1,0 +1,57 @@
+/* Hymnal-style cross-reference buttons for regular hymn readers. */
+.reader-page:has(.reader-version-link[href^="/hymns/"]) .reader-kicker {
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:.4rem;
+  opacity:1;
+  letter-spacing:0;
+  text-transform:none;
+}
+
+.reader-page:has(.reader-version-link[href^="/hymns/"]) .reader-version-separator {
+  display:none;
+}
+
+.reader-page:has(.reader-version-link[href^="/hymns/"]) .reader-version-link,
+.reader-page:has(.reader-version-link[href^="/hymns/"]) .reader-version-reference {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:1.9rem;
+  padding:.26rem .58rem;
+  border:1px solid color-mix(in srgb,#2f83c6 86%,#000);
+  border-radius:.28rem;
+  background:#2f83c6;
+  color:#fff;
+  box-shadow:inset 0 -1px 0 rgb(0 0 0 / 14%);
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:.76rem;
+  font-weight:800;
+  line-height:1;
+  letter-spacing:.02em;
+  text-decoration:none;
+  text-transform:none;
+  white-space:nowrap;
+}
+
+.reader-page:has(.reader-version-link[href^="/hymns/"]) .reader-version-link:hover {
+  filter:brightness(.96);
+  text-decoration:none;
+}
+
+.reader-page:has(.reader-version-link[href^="/hymns/"]) .reader-version-link[aria-current="page"] {
+  border-color:color-mix(in srgb,#2da85c 86%,#000);
+  background:#2da85c;
+  color:#fff;
+  text-decoration:none;
+}
+
+.reader-page:has(.reader-version-link[href^="/hymns/"]) .reader-version-link:focus-visible {
+  outline:3px solid color-mix(in srgb,#2f83c6 35%,transparent);
+  outline-offset:2px;
+}
+
+.reader-page:has(.reader-version-link[href^="/hymns/"]) .reader-version-link[aria-current="page"]:focus-visible {
+  outline-color:color-mix(in srgb,#2da85c 35%,transparent);
+}
