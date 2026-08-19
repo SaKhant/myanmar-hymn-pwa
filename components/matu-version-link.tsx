@@ -32,10 +32,17 @@ export default function MatuVersionLink() {
     const addLink = () => {
       const kicker = document.querySelector(".reader-kicker");
       if (!kicker) return false;
-      if (kicker.querySelector('[data-matu-version="true"]')) return true;
 
       const myanmarNumber = findMyanmarNumber(kicker, pathname);
       if (myanmarNumber === null || !validMatuNumber(myanmarNumber)) return false;
+
+      const existingServerLink = kicker.querySelector<HTMLAnchorElement>(`a[href="/hymns/matu/${myanmarNumber}"]`);
+      if (existingServerLink) {
+        kicker.querySelectorAll('[data-matu-version="true"]').forEach((node) => node.remove());
+        return true;
+      }
+
+      if (kicker.querySelector('[data-matu-version="true"]')) return true;
 
       const separator = document.createElement("span");
       separator.className = "reader-version-separator";
