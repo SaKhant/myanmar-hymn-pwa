@@ -148,19 +148,20 @@ main > a[href="/hymns"]:first-child:active {
   background:#f7f7f7;
 }
 
+/* Match Hymnal.net's pressed tab: no floating outline, only a soft inset gray shadow. */
 .reader-mode-switch button[aria-pressed="true"] {
   position:relative;
   z-index:1;
-  border-radius:.24rem;
+  border-radius:0;
   background:#fff;
   color:#111;
-  font-weight:600;
-  box-shadow:inset 0 0 0 1px #adadad, 0 0 3px rgb(0 0 0 / 14%);
+  font-weight:500;
+  box-shadow:inset 0 3px 5px rgb(0 0 0 / 13%);
 }
 
 .reader-mode-switch button:focus-visible {
   position:relative;
-  z-index:1;
+  z-index:2;
   outline:2px solid #2f83c6;
   outline-offset:-2px;
 }
