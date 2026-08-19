@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowRight, ChevronRight } from "lucide-react";
 import { ReaderActions } from "@/components/reader-actions";
 import { OnlineAudio } from "@/components/online-audio";
 import { GuitarReader } from "@/components/guitar-reader";
+import { RemoteHymnGuitarReader } from "@/components/hymn-remote-guitar-reader";
 import { YpGuitarReader } from "@/components/yp-guitar-reader";
 import { ReaderBackButton } from "@/components/reader-back-button";
 import { getAdjacentHymns, getHymn, getHymns } from "@/lib/hymns/data";
@@ -59,6 +60,8 @@ export default async function HymnPage({params,searchParams}:{params:Promise<{ki
   const hasLongTitle=Array.from(title).length>32;
   const hasDetails=Object.keys(hymn.metadata).length>0;
   const guitarArrangement=getGuitarArrangement(hymn);
+  const remoteHymnNumber=kind==="hymns"&&isMyanmar&&typeof hymn.number==="number"&&hymn.number>=111&&hymn.number<=200?hymn.number:undefined;
+  const remoteHymnSourceLabel=remoteHymnNumber!==undefined&&englishTargetNumber&&englishReferenceTarget?`E${englishTargetNumber}`:undefined;
   const numberedNotesImageSrc=kind==="hymns"&&isMyanmar&&hymn.number===1?"/jianpu/myanmar-hymn-1.png":undefined;
 
   return <main className="page reader-page">
@@ -80,7 +83,7 @@ export default async function HymnPage({params,searchParams}:{params:Promise<{ki
         <div className="mt-4"><ReaderActions hymn={{id:hymn.id,kind,language,number:hymn.number,title,sections:hymn.sections}}/></div>
       </header>
 
-      {guitarArrangement?<GuitarReader sections={hymn.sections} arrangement={guitarArrangement} numberedNotesImageSrc={numberedNotesImageSrc}/>:verifiedYpSource&&regularYpSourceLabel&&ypNumber!==undefined?<YpGuitarReader sections={hymn.sections} ypNumber={ypNumber} sourceLabel={regularYpSourceLabel}/>:<div className={`mx-auto max-w-2xl py-7 ${isMyanmar?"reader-lyrics-myanmar":"leading-[1.8]"}`} style={isMyanmar?undefined:{fontSize:"var(--lyric-size,20px)"}}>
+      {guitarArrangement?<GuitarReader sections={hymn.sections} arrangement={guitarArrangement} numberedNotesImageSrc={numberedNotesImageSrc}/>:remoteHymnNumber!==undefined&&remoteHymnSourceLabel?<RemoteHymnGuitarReader sections={hymn.sections} hymnNumber={remoteHymnNumber} sourceLabel={remoteHymnSourceLabel}/>:verifiedYpSource&&regularYpSourceLabel&&ypNumber!==undefined?<YpGuitarReader sections={hymn.sections} ypNumber={ypNumber} sourceLabel={regularYpSourceLabel}/>:<div className={`mx-auto max-w-2xl py-7 ${isMyanmar?"reader-lyrics-myanmar":"leading-[1.8]"}`} style={isMyanmar?undefined:{fontSize:"var(--lyric-size,20px)"}}>
         {hymn.sections.map((section,index)=>{
           const chorus=section.type==="chorus"||section.type==="refrain";
           return <section key={`${section.type}-${section.number}-${index}`} className={`mb-7 last:mb-0 ${chorus?"border-l-2 border-[color-mix(in_srgb,var(--gold)_72%,transparent)] pl-4":""}`}>
