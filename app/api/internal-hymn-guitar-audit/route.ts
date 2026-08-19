@@ -19,10 +19,23 @@ function normalizeHymnalSvg(svg:string):string {
 
 function svgSummary(svg:string){
   const textTags=[...svg.matchAll(/<text\b([^>]*)>([\s\S]*?)<\/text>/g)];
-  const samples=textTags.slice(0,160).map(match=>match[2].replace(/<[^>]+>/g,"").replace(/&amp;/g,"&").replace(/&#x266D;/gi,"b").trim()).filter(Boolean);
-  const families=[...new Set(textTags.map(match=>match[1].match(/font-family="([^"]+)"/)?.[1]).filter(Boolean))];
-  const sizes=[...new Set(textTags.map(match=>match[1].match(/font-size="([^"]+)"/)?.[1]).filter(Boolean))];
-  return {length:svg.length,textCount:textTags.length,families,sizes,samples};
+  const parsed=textTags.map(match=>{
+    const transform=match[1].match(/transform="translate\(\s*([-\d.]+)\s*,?\s+([-\d.]+)\s*\)"/);
+    const family=match[1].match(/font-family="([^"]+)"/)?.[1]??"";
+    const fontSize=Number(match[1].match(/font-size="([^"]+)"/)?.[1]??0);
+    const text=match[2].replace(/<[^>]+>/g,"").replace(/&amp;/g,"&").replace(/&#x266D;/gi,"b").trim();
+    return {x:transform?Number(transform[1]):0,y:transform?Number(transform[2]):0,family,fontSize,text};
+  });
+  const samples=parsed.slice(0,160).map(item=>item.text).filter(Boolean);
+  const families=[...new Set(parsed.map(item=>item.family).filter(Boolean))];
+  const sizes=[...new Set(parsed.map(item=>String(item.fontSize)).filter(Boolean))];
+  const roots=parsed.filter(item=>item.family.includes("sans-serif")&&/^[A-G]$/i.test(item.text));
+  const lyrics=parsed.filter(item=>(item.family.includes("serif")||item.family.includes("Century Schoolbook"))&&item.fontSize>=2.25&&item.fontSize<=2.8);
+  const gaps=roots.slice(0,30).map(root=>{
+    const next=lyrics.filter(lyric=>lyric.y>root.y).sort((a,b)=>(a.y-root.y)-(b.y-root.y))[0];
+    return next?Number((next.y-root.y).toFixed(3)):null;
+  });
+  return {length:svg.length,textCount:textTags.length,families,sizes,gaps,samples};
 }
 
 async function audit(hymnNumber:number){
