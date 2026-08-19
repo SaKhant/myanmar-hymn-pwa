@@ -13,6 +13,11 @@ export type NewYpTranslation = {
 
 let cached:NewYpTranslation[]|null=null;
 
+export function compactNewYpSourceRef(sourceRef:string|null):string|null{
+  if(!sourceRef)return null;
+  return sourceRef.replace(/^([A-Za-z]+)\s+(\d+)$/,"$1$2");
+}
+
 export function getNewYpTranslations():NewYpTranslation[]{
   if(cached)return cached;
   const json=gunzipSync(Buffer.from(NEW_YP_TRANSLATIONS_GZIP_BASE64,"base64")).toString("utf8");
@@ -47,11 +52,14 @@ export function getNewYpAudioUrl(item:Pick<NewYpTranslation,"source_kind"|"sourc
 }
 
 export function getNewYpTranslationSummaries(){
-  return getNewYpTranslations().map(item=>({
-    id:item.id,
-    title:item.title,
-    sourceRef:item.source_ref,
-    sourceNumber:item.source_number,
-    searchText:`${item.source_ref??""} ${item.source_number??""} ${item.title} ${item.raw_lines.join(" ")}`.toLocaleLowerCase(),
-  }));
+  return getNewYpTranslations().map(item=>{
+    const compactSourceRef=compactNewYpSourceRef(item.source_ref);
+    return {
+      id:item.id,
+      title:item.title,
+      sourceRef:compactSourceRef,
+      sourceNumber:item.source_number,
+      searchText:`${item.source_ref??""} ${compactSourceRef??""} ${item.source_number??""} ${item.title} ${item.raw_lines.join(" ")}`.toLocaleLowerCase(),
+    };
+  });
 }
