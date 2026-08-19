@@ -60,7 +60,7 @@ export default async function HymnPage({params,searchParams}:{params:Promise<{ki
   const hasLongTitle=Array.from(title).length>32;
   const hasDetails=Object.keys(hymn.metadata).length>0;
   const guitarArrangement=getGuitarArrangement(hymn);
-  const remoteHymnNumber=kind==="hymns"&&isMyanmar&&typeof hymn.number==="number"&&hymn.number>=111&&hymn.number<=200?hymn.number:undefined;
+  const remoteHymnNumber=kind==="hymns"&&isMyanmar&&typeof hymn.number==="number"&&hymn.number>=111&&hymn.number<=700?hymn.number:undefined;
   const remoteHymnSourceLabel=remoteHymnNumber!==undefined&&englishTargetNumber&&englishReferenceTarget?`E${englishTargetNumber}`:undefined;
   const numberedNotesImageSrc=kind==="hymns"&&isMyanmar&&hymn.number===1?"/jianpu/myanmar-hymn-1.png":undefined;
 
