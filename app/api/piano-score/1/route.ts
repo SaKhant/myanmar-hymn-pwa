@@ -26,6 +26,30 @@ function removeLyricHyphens(svg:string,y:string):string {
   return svg.replace(pattern,"");
 }
 
+function increaseLowerVerseLineSpacing(svg:string):string {
+  const yMap:Record<string,string>={
+    "56.2578":"56.7578",
+    "59.2578":"60.2578",
+    "62.2578":"63.7578",
+    "70.2578":"70.7578",
+    "73.2578":"74.2578",
+    "76.2578":"77.7578",
+    "84.2578":"84.7578",
+    "87.2578":"88.2578",
+    "90.2578":"91.7578",
+    "98.2578":"98.7578",
+    "101.2578":"102.2578",
+    "104.2578":"105.7578",
+    "112.2578":"112.7578",
+    "115.2578":"116.2578",
+    "118.2578":"119.7578",
+  };
+  for(const [from,to] of Object.entries(yMap)){
+    svg=svg.replaceAll(`translate(62.1172, ${from})`,`translate(62.1172, ${to})`);
+  }
+  return svg;
+}
+
 function localizePianoSvg(source:string):string {
   const hymn=getHymn("hymns","my","1");
   if(!hymn)return source;
@@ -61,6 +85,8 @@ function localizePianoSvg(source:string):string {
       if(burmese)svg=replaceTspanText(svg,english,burmese);
     });
   }
+
+  svg=increaseLowerVerseLineSpacing(svg);
 
   svg=svg
     .replace('width="215.90mm" height="279.40mm" viewBox="0.0000 -0.0000 153.5737 198.7425"','width="153.5737" height="123.5000" viewBox="0 0 153.5737 123.5" preserveAspectRatio="xMidYMin meet"')
