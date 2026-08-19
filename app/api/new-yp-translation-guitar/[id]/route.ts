@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
+import { parseTranslationLeadSheetByShape } from "@/lib/hymns/new-translation-guitar";
 import { getNewYpTranslation } from "@/lib/hymns/new-yp-translations";
 import { parseNewYpTranslationLines } from "@/lib/hymns/translation-display";
-import { parseHymnalGuitarSvgBySectionShape, ypGuitarHasChords, type YpChordEvent } from "@/lib/hymns/yp-guitar";
+import { ypGuitarHasChords, type YpChordEvent } from "@/lib/hymns/yp-guitar";
 import type { HymnSection } from "@/lib/hymns/types";
 
 function guitarSvgUrl(kind:"NS"|"H"|"LB",number:number):string {
@@ -33,7 +34,7 @@ export async function GET(_request:Request,{params}:{params:Promise<{id:string}>
     const response=await fetch(guitarSvgUrl(item.source_kind,item.source_number),{next:{revalidate:60*60*24*30}});
     if(!response.ok)return NextResponse.json({error:"Guitar source unavailable"},{status:404});
     const svg=normalizeHymnalSvg(await response.text());
-    const parsed=parseHymnalGuitarSvgBySectionShape(svg,lyricSections);
+    const parsed=parseTranslationLeadSheetByShape(svg,lyricSections);
     if(!ypGuitarHasChords(parsed))return NextResponse.json({error:"Structured chords unavailable"},{status:404});
 
     let sourceSectionIndex=0;
