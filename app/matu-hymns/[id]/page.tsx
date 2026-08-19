@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getHymn } from "@/lib/hymns/data";
+import { getKachinHymnByMyanmarNumber } from "@/lib/hymns/kachin-data";
 import { matuHymns } from "@/lib/hymns/matu-data";
 import styles from "./page.module.css";
 
@@ -12,6 +13,7 @@ export default async function MatuHymnPage({ params }: { params: Promise<{ id: s
   const myanmar = getHymn("hymns", "my", String(hymn.number));
   const englishReference = myanmar?.cross_references.Eng?.trim() || hymn.cross_references.Eng?.trim();
   const english = englishReference ? getHymn("hymns", "en", englishReference) : undefined;
+  const kachin = myanmar ? getKachinHymnByMyanmarNumber(myanmar.number ?? myanmar.id) : undefined;
 
   const index = matuHymns.findIndex((record) => record.id === hymn.id);
   const previous = index > 0 ? matuHymns[index - 1] : undefined;
@@ -24,18 +26,15 @@ export default async function MatuHymnPage({ params }: { params: Promise<{ id: s
       </Link>
 
       <p className={styles.kicker}>
-        <Link href={`/hymns/my/${hymn.number}`}>M{hymn.number}</Link>
+        {myanmar ? <Link href={`/hymns/my/${myanmar.id}`}>M{myanmar.number ?? myanmar.id}</Link> : <span>M{hymn.number}</span>}
         {englishReference ? (
-          <>
-            {" • "}
-            {english ? (
-              <Link href={`/hymns/en/${english.number ?? english.id}`}>E{englishReference}</Link>
-            ) : (
-              <span>E{englishReference}</span>
-            )}
-          </>
+          english ? (
+            <Link href={`/hymns/en/${english.number ?? english.id}${myanmar ? `?from=${encodeURIComponent(myanmar.id)}` : ""}`}>E{englishReference}</Link>
+          ) : (
+            <span>E{englishReference}</span>
+          )
         ) : null}
-        {" • "}
+        {kachin ? <Link href={`/hymns/kachin/${kachin.number ?? kachin.id}`}>KC{kachin.number ?? kachin.id}</Link> : null}
         <span className={styles.current}>MT{hymn.number}</span>
       </p>
 
