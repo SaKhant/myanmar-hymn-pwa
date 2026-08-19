@@ -13,6 +13,10 @@ function guitarSvgUrl(englishNumber:number):string {
   return `https://www.hymnal.net/Hymns/Hymnal/svg/e${String(englishNumber).padStart(4,"0")}_g.svg`;
 }
 
+function normalizeHymnalSvg(svg:string):string {
+  return svg.replace(/font-family="Century Schoolbook L"/g,'font-family="serif"');
+}
+
 function svgSummary(svg:string){
   const textTags=[...svg.matchAll(/<text\b([^>]*)>([\s\S]*?)<\/text>/g)];
   const samples=textTags.slice(0,160).map(match=>match[2].replace(/<[^>]+>/g,"").replace(/&amp;/g,"&").replace(/&#x266D;/gi,"b").trim()).filter(Boolean);
@@ -31,7 +35,7 @@ async function audit(hymnNumber:number){
   try {
     const response=await fetch(guitarSvgUrl(englishNumber),{cache:"no-store"});
     if(!response.ok)return {hymnNumber,englishNumber,status:`source-${response.status}`};
-    const svg=await response.text();
+    const svg=normalizeHymnalSvg(await response.text());
     const guitar=parseYpGuitarSvg(svg,english.sections,myanmar.sections);
     return {hymnNumber,englishNumber,status:ypGuitarHasChords(guitar)?"available":"no-structured-chords"};
   } catch {
