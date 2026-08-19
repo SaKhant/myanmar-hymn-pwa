@@ -55,3 +55,50 @@
 .reader-page:has(.reader-version-link[href^="/hymns/"]) .reader-version-link[aria-current="page"]:focus-visible {
   outline-color:color-mix(in srgb,#2da85c 35%,transparent);
 }
+
+/* Icon-only back button based on the supplied chevron artwork. */
+.reader-page > button:first-child,
+.reader-page > a[href="/yp"]:first-child,
+main > a[href="/hymns"]:first-child {
+  display:inline-flex;
+  width:2.5rem;
+  height:2.5rem;
+  min-width:2.5rem;
+  min-height:2.5rem;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:1.5rem;
+  padding:0;
+  overflow:hidden;
+  border:1px solid #d9d9d6;
+  border-radius:999px;
+  background-color:#efefed;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpolyline points='312 104 158 256 312 408' fill='none' stroke='%23000' stroke-width='46' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-position:center;
+  background-repeat:no-repeat;
+  background-size:1.25rem 1.25rem;
+  color:transparent;
+  font-size:0;
+  line-height:0;
+  text-decoration:none;
+  box-shadow:0 2px 7px rgb(0 0 0 / 16%), inset 0 1px 0 rgb(255 255 255 / 65%);
+}
+
+.reader-page > button:first-child > svg,
+.reader-page > a[href="/yp"]:first-child > svg {
+  display:none;
+}
+
+.reader-page > button:first-child:hover,
+.reader-page > a[href="/yp"]:first-child:hover,
+main > a[href="/hymns"]:first-child:hover {
+  background-color:#e8e8e5;
+  text-decoration:none;
+}
+
+.reader-page > button:first-child:active,
+.reader-page > a[href="/yp"]:first-child:active,
+main > a[href="/hymns"]:first-child:active {
+  transform:translateY(1px);
+  box-shadow:0 1px 4px rgb(0 0 0 / 15%), inset 0 1px 2px rgb(0 0 0 / 7%);
+}
