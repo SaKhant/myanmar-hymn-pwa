@@ -22,6 +22,34 @@ function normalizeHymnalSvg(svg:string):string {
     );
 }
 
+function inspectSvg(svg:string){
+  const normalized=normalizeHymnalSvg(svg);
+  const tags=[...normalized.matchAll(/<text\b([^>]*)>([\s\S]*?)<\/text>/g)];
+  const parsed=tags.map(match=>{
+    const attrs=match[1];
+    const family=attrs.match(/font-family="([^"]+)"/)?.[1]??"";
+    const size=Number(attrs.match(/font-size="([^"]+)"/)?.[1]??0);
+    const transform=attrs.match(/transform="translate\(\s*([-\d.]+)\s*(?:,\s*|\s+)([-\d.]+)\s*\)"/);
+    const text=match[2].replace(/<[^>]+>/g,"").replace(/&amp;/g,"&").replace(/&#x266D;/gi,"b").replace(/&#x266F;/gi,"#").trim();
+    return {family,size,hasTransform:Boolean(transform),text};
+  });
+  const families=[...new Set(parsed.map(item=>item.family).filter(Boolean))];
+  const sizes=[...new Set(parsed.map(item=>item.size).filter(Boolean))].sort((a,b)=>a-b);
+  const chordLike=parsed.filter(item=>/^[A-G](?:#|b)?(?:m|maj|min|dim|aug|sus|add)?\d*$/i.test(item.text));
+  const lyricLike=parsed.filter(item=>item.text.length>1&&/\p{L}/u.test(item.text));
+  return {
+    length:svg.length,
+    textCount:parsed.length,
+    transformedCount:parsed.filter(item=>item.hasTransform).length,
+    families,
+    sizes,
+    chordFamilies:[...new Set(chordLike.map(item=>item.family))],
+    chordSizes:[...new Set(chordLike.map(item=>item.size))].sort((a,b)=>a-b),
+    chordSamples:chordLike.slice(0,30).map(item=>item.text),
+    lyricSamples:lyricLike.slice(0,50).map(item=>`${item.family}|${item.size}|${item.text}`),
+  };
+}
+
 async function audit(hymnNumber:number){
   const myanmar=getHymn("hymns","my",String(hymnNumber));
   if(!myanmar)return {hymnNumber,status:"missing-myanmar"};
@@ -40,8 +68,22 @@ async function audit(hymnNumber:number){
   }
 }
 
+async function inspect(hymnNumber:number){
+  const myanmar=getHymn("hymns","my",String(hymnNumber));
+  const englishNumber=englishReferenceNumber(myanmar?.cross_references.Eng);
+  if(!myanmar||!englishNumber)return {hymnNumber,error:"missing mapping"};
+  const response=await fetch(guitarSvgUrl(englishNumber),{cache:"no-store"});
+  if(!response.ok)return {hymnNumber,englishNumber,status:response.status};
+  return {hymnNumber,englishNumber,status:response.status,summary:inspectSvg(await response.text())};
+}
+
 export async function GET(request:Request){
   const url=new URL(request.url);
+  const inspectParam=url.searchParams.get("inspect");
+  if(inspectParam){
+    const numbers=inspectParam.split(",").map(Number).filter(value=>Number.isInteger(value)&&value>=201&&value<=700).slice(0,8);
+    return NextResponse.json({inspection:await Promise.all(numbers.map(inspect))});
+  }
   const start=Math.max(201,Number(url.searchParams.get("start")??201));
   const end=Math.min(700,Number(url.searchParams.get("end")??700));
   if(!Number.isInteger(start)||!Number.isInteger(end)||start>end)return NextResponse.json({error:"Invalid range"},{status:400});
