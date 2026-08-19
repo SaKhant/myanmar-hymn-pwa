@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server";
 import { getHymn } from "@/lib/hymns/data";
+import { parseTranslationLeadSheetByShape } from "@/lib/hymns/new-translation-guitar";
 import { getNewMyanmarTranslations } from "@/lib/hymns/new-translations";
 import { getNewYpTranslations } from "@/lib/hymns/new-yp-translations";
 import { parseNewYpTranslationLines, parseNumberedTranslationLines } from "@/lib/hymns/translation-display";
-import { parseHymnalGuitarSvgBySectionShape, parseYpGuitarSvg, ypGuitarHasChords } from "@/lib/hymns/yp-guitar";
+import { parseYpGuitarSvg, ypGuitarHasChords } from "@/lib/hymns/yp-guitar";
 import type { HymnSection } from "@/lib/hymns/types";
 
 function normalizeHymnalSvg(svg:string):string {
@@ -62,7 +63,7 @@ async function auditYp(index:number){
   try{
     const response=await fetch(ypUrl(item.source_kind,item.source_number),{cache:"no-store"});
     if(!response.ok)return {index,id:item.id,ref:item.source_ref,status:`source-${response.status}`};
-    const parsed=parseHymnalGuitarSvgBySectionShape(normalizeHymnalSvg(await response.text()),lyricSections);
+    const parsed=parseTranslationLeadSheetByShape(normalizeHymnalSvg(await response.text()),lyricSections);
     const lyric=lyricSections.reduce((sum,section)=>sum+section.lines.length,0);
     const mapped=parsed.sections.reduce((sum,section)=>sum+section.lines.filter(line=>line.chords.length).length,0);
     return {index,id:item.id,ref:item.source_ref,status:mapped>0?"available":"unmapped",mapped,lyric};
