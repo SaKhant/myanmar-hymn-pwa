@@ -14,7 +14,12 @@ function guitarSvgUrl(englishNumber:number):string {
 }
 
 function normalizeHymnalSvg(svg:string):string {
-  return svg.replace(/font-family="Century Schoolbook L"/g,'font-family="serif"');
+  return svg
+    .replace(/font-family="Century Schoolbook L"/g,'font-family="serif"')
+    .replace(
+      /(<g\b[^>]*\btransform="translate\(\s*([-\d.]+)\s*(?:,\s*|\s+)([-\d.]+)\s*\)"[^>]*>\s*)<text\b(?![^>]*\btransform=)([^>]*)>/g,
+      (_match,prefix,x,y,attrs)=>`${prefix}<text transform="translate(${x}, ${y})"${attrs}>`,
+    );
 }
 
 export async function GET(_request:Request,{params}:{params:Promise<{id:string}>}){
