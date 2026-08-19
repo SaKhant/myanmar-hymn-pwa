@@ -9,6 +9,18 @@ function englishReferenceNumber(reference:string|undefined):number|undefined {
   return Number.isInteger(parsed)?parsed:undefined;
 }
 
+function guitarSvgUrl(englishNumber:number):string {
+  return `https://www.hymnal.net/Hymns/Hymnal/svg/e${String(englishNumber).padStart(4,"0")}_g.svg`;
+}
+
+function svgSummary(svg:string){
+  const textTags=[...svg.matchAll(/<text\b([^>]*)>([\s\S]*?)<\/text>/g)];
+  const samples=textTags.slice(0,160).map(match=>match[2].replace(/<[^>]+>/g,"").replace(/&amp;/g,"&").replace(/&#x266D;/gi,"b").trim()).filter(Boolean);
+  const families=[...new Set(textTags.map(match=>match[1].match(/font-family="([^"]+)"/)?.[1]).filter(Boolean))];
+  const sizes=[...new Set(textTags.map(match=>match[1].match(/font-size="([^"]+)"/)?.[1]).filter(Boolean))];
+  return {length:svg.length,textCount:textTags.length,families,sizes,samples};
+}
+
 async function audit(hymnNumber:number){
   const myanmar=getHymn("hymns","my",String(hymnNumber));
   if(!myanmar)return {hymnNumber,status:"missing-myanmar"};
@@ -16,9 +28,8 @@ async function audit(hymnNumber:number){
   if(!englishNumber)return {hymnNumber,status:"no-reference"};
   const english=getHymn("hymns","en",String(englishNumber));
   if(!english)return {hymnNumber,englishNumber,status:"missing-english"};
-  const url=`https://www.hymnal.net/Hymns/Hymnal/svg/e${String(englishNumber).padStart(4,"0")}_g.svg`;
   try {
-    const response=await fetch(url,{cache:"no-store"});
+    const response=await fetch(guitarSvgUrl(englishNumber),{cache:"no-store"});
     if(!response.ok)return {hymnNumber,englishNumber,status:`source-${response.status}`};
     const svg=await response.text();
     const guitar=parseYpGuitarSvg(svg,english.sections,myanmar.sections);
@@ -28,7 +39,21 @@ async function audit(hymnNumber:number){
   }
 }
 
-export async function GET(){
+async function inspect(hymnNumber:number){
+  const myanmar=getHymn("hymns","my",String(hymnNumber));
+  const englishNumber=englishReferenceNumber(myanmar?.cross_references.Eng);
+  if(!myanmar||!englishNumber)return {hymnNumber,error:"missing mapping"};
+  const response=await fetch(guitarSvgUrl(englishNumber),{cache:"no-store"});
+  const svg=await response.text();
+  return {hymnNumber,englishNumber,status:response.status,summary:svgSummary(svg)};
+}
+
+export async function GET(request:Request){
+  const inspectParam=new URL(request.url).searchParams.get("inspect");
+  if(inspectParam){
+    const numbers=inspectParam.split(",").map(Number).filter(value=>Number.isInteger(value)&&value>=111&&value<=200).slice(0,6);
+    return NextResponse.json({inspection:await Promise.all(numbers.map(inspect))});
+  }
   const results=[] as Awaited<ReturnType<typeof audit>>[];
   for(let start=111;start<=200;start+=10){
     const batch=Array.from({length:Math.min(10,201-start)},(_,index)=>start+index);
