@@ -103,25 +103,25 @@ main > a[href="/hymns"]:first-child:active {
   box-shadow:0 1px 4px rgb(0 0 0 / 15%), inset 0 1px 2px rgb(0 0 0 / 7%);
 }
 
-/* Hymnal.net-style segmented view-mode tabs. */
+/* Compact Hymnal.net-style segmented view-mode tabs. */
 .reader-mode-switch {
   display:flex;
-  width:min(100%,31rem);
+  width:max-content;
   max-width:100%;
   margin:1.15rem auto 0;
   padding:0;
   overflow:hidden;
   border:1px solid #c8c8c8;
-  border-radius:.32rem;
+  border-radius:.28rem;
   background:#fff;
   box-shadow:0 1px 2px rgb(0 0 0 / 5%);
 }
 
 .reader-mode-switch button {
-  flex:1 1 0;
-  min-width:0;
-  min-height:2.55rem;
-  padding:.42rem .65rem;
+  flex:0 0 auto;
+  min-width:4.7rem;
+  min-height:2.25rem;
+  padding:.34rem .75rem;
   border:0;
   border-right:1px solid #c8c8c8;
   border-radius:0;
@@ -129,11 +129,15 @@ main > a[href="/hymns"]:first-child:active {
   color:#222;
   box-shadow:none;
   font-family:Arial,Helvetica,sans-serif;
-  font-size:.82rem;
+  font-size:.78rem;
   font-weight:500;
-  line-height:1.15;
+  line-height:1.1;
   white-space:nowrap;
   cursor:pointer;
+}
+
+.reader-mode-switch button:nth-child(3) {
+  min-width:6.7rem;
 }
 
 .reader-mode-switch button:last-child {
@@ -160,7 +164,12 @@ main > a[href="/hymns"]:first-child:active {
 
 @media (max-width:380px) {
   .reader-mode-switch button {
-    padding:.38rem .35rem;
-    font-size:.74rem;
+    min-width:4.2rem;
+    min-height:2.15rem;
+    padding:.3rem .55rem;
+    font-size:.72rem;
+  }
+  .reader-mode-switch button:nth-child(3) {
+    min-width:6rem;
   }
 }
