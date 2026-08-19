@@ -5,6 +5,11 @@ import { TranslationGuitarReader } from "@/components/translation-guitar-reader"
 import { getNewYpAudioUrl,getNewYpTranslation,getNewYpTranslations } from "@/lib/hymns/new-yp-translations";
 import { parseNewYpTranslationLines } from "@/lib/hymns/translation-display";
 
+const VERIFIED_NEW_YP_GUITAR_IDS=new Set([
+  "ns-294","ns-931","ns-970","ns-655","ns-1053",
+  "ns-972","ns-356","ns-1058","ns-835","ns-181",
+]);
+
 export function generateStaticParams(){
   return getNewYpTranslations().map(item=>({id:item.id}));
 }
@@ -20,7 +25,7 @@ export default async function NewYpTranslationPage({params}:{params:Promise<{id:
   const next=index>=0&&index<all.length-1?all[index+1]:undefined;
   const audioUrl=getNewYpAudioUrl(song);
   const sections=parseNewYpTranslationLines(song.raw_lines);
-  const hasGuitarSource=Boolean(song.source_kind&&song.source_number!=null&&!(song.source_kind==="NS"&&song.source_number===6871));
+  const hasGuitarSource=VERIFIED_NEW_YP_GUITAR_IDS.has(song.id);
 
   return <main className="page max-w-3xl">
     <Link href="/hymns/new-translations?section=yp" className="focus-ring mb-5 inline-flex rounded-lg text-sm font-semibold text-[var(--muted)] hover:text-[var(--ink)]">← Back to YP New Songs</Link>
