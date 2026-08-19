@@ -33,13 +33,22 @@ function displayLine(raw:string,stripLeadingTabs=true):TranslationDisplayLine {
   return {text,indent,kind:lineKind(text)};
 }
 
+function normalizeCommonIndent(section:TranslationDisplaySection):TranslationDisplaySection {
+  const candidates=section.lines.slice(1).filter(line=>line.kind!=="blank"&&line.kind!=="ellipsis").map(line=>line.indent);
+  if(!candidates.length)return section;
+  const counts=new Map<number,number>();
+  candidates.forEach(value=>counts.set(value,(counts.get(value)??0)+1));
+  const base=[...counts.entries()].sort((a,b)=>b[1]-a[1]||a[0]-b[0])[0]?.[0]??0;
+  return {...section,lines:section.lines.map(line=>({...line,indent:Math.max(0,line.indent-base)}))};
+}
+
 export function parseNumberedTranslationLines(rawLines:string[]):TranslationDisplaySection[]{
   const sections:TranslationDisplaySection[]=[];
   let current:TranslationDisplaySection|null=null;
   for(const raw of rawLines){
     const match=raw.match(/^\s*([၀-၉0-9]+)[။.]\s*(.*)$/);
     if(match){
-      if(current)sections.push(current);
+      if(current)sections.push(normalizeCommonIndent(current));
       current={number:Number(toArabicDigits(match[1])),lines:[displayLine(match[2])]};
     }else if(current){
       current.lines.push(displayLine(raw));
@@ -47,7 +56,7 @@ export function parseNumberedTranslationLines(rawLines:string[]):TranslationDisp
       current={number:null,lines:[displayLine(raw)]};
     }
   }
-  if(current)sections.push(current);
+  if(current)sections.push(normalizeCommonIndent(current));
   return sections;
 }
 
