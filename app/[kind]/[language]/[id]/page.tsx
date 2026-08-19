@@ -8,6 +8,7 @@ import { RemoteHymnGuitarReader } from "@/components/hymn-remote-guitar-reader";
 import { YpGuitarReader } from "@/components/yp-guitar-reader";
 import { ReaderBackButton } from "@/components/reader-back-button";
 import { getAdjacentHymns, getHymn, getHymns } from "@/lib/hymns/data";
+import { getKachinHymnByMyanmarNumber } from "@/lib/hymns/kachin-data";
 import { getGuitarArrangement } from "@/lib/hymns/guitar-data";
 import { ypAudioUrl, ypSource, ypSourceLabel } from "@/lib/hymns/yp-sources";
 import type { HymnKind, HymnLanguage } from "@/lib/hymns/types";
@@ -43,6 +44,7 @@ export default async function HymnPage({params,searchParams}:{params:Promise<{ki
   const adjacent=getAdjacentHymns(kind,language,p.id);
   const title=hymn.title||hymn.first_line||`Hymn ${hymn.number??hymn.id}`;
   const isMyanmar=language==="my";
+  const relatedKachinHymn=kind==="hymns"&&isMyanmar?getKachinHymnByMyanmarNumber(hymn.number??hymn.id):undefined;
   const englishReference=isMyanmar&&kind==="hymns"?hymn.cross_references.Eng?.trim():undefined;
   const englishTargetNumber=englishReferenceNumber(englishReference);
   const englishReferenceTarget=englishTargetNumber?getHymn("hymns","en",englishTargetNumber):undefined;
@@ -72,6 +74,7 @@ export default async function HymnPage({params,searchParams}:{params:Promise<{ki
           {kind==="hymns"&&isMyanmar&&<Link replace href={`/hymns/my/${hymn.id}`} aria-current="page" className="reader-current-version reader-version-link focus-ring">M{hymn.number??hymn.id}</Link>}
           {kind==="hymns"&&!isMyanmar&&relatedMyanmarHymn&&<><Link replace href={`/hymns/my/${relatedMyanmarHymn.id}`} className="reader-version-link focus-ring">M{relatedMyanmarHymn.number??relatedMyanmarHymn.id}</Link><span className="reader-version-separator">•</span></>}
           {kind==="hymns"&&isMyanmar&&englishReference&&<><span className="reader-version-separator">•</span>{englishReferenceTarget?<Link replace href={`/hymns/en/${englishReferenceTarget.id}?from=${encodeURIComponent(hymn.id)}`} className="reader-version-link focus-ring">E{englishReference}</Link>:<span className="reader-version-reference">E{englishReference}</span>}</>}
+          {kind==="hymns"&&isMyanmar&&relatedKachinHymn&&<><span className="reader-version-separator">•</span><Link replace href={`/hymns/kachin/${relatedKachinHymn.number??relatedKachinHymn.id}`} className="reader-version-link focus-ring">KC{relatedKachinHymn.number??relatedKachinHymn.id}</Link></>}
           {kind==="hymns"&&!isMyanmar&&<Link replace href={`/${kind}/${language}/${hymn.id}${relatedMyanmarHymn?`?from=${encodeURIComponent(relatedMyanmarHymn.id)}`:""}`} aria-current="page" className="reader-current-version reader-version-link focus-ring">E{englishVersionLabel}</Link>}
           {kind==="yp"&&isMyanmar&&<Link href={`/yp/my/${hymn.id}`} aria-current="page" className="reader-current-version reader-version-link focus-ring">YP{hymn.number??hymn.id}</Link>}
           {kind==="yp"&&isMyanmar&&relatedYpSong&&<><span className="reader-version-separator">•</span><Link href={`/yp/en/${relatedYpSong.id}`} className="reader-version-link focus-ring">{regularYpSourceLabel??"ENG"}</Link></>}
