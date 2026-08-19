@@ -165,8 +165,6 @@ export function parseYpGuitarSvg(svg:string,englishSections:HymnSection[],myanma
   const englishLyrics=englishSections.map(section=>lyricLines(section));
   const mapped:YpChordEvent[][][]=englishLyrics.map(lines=>lines.map(()=>[]));
 
-  // Local YP English pages often already contain chord-only lines. Those chord
-  // names are the cleanest source, so preserve them and reuse their pattern.
   englishSections.forEach((section,sectionIndex)=>{
     let pending:string[]=[];
     let lyricIndex=0;
@@ -215,8 +213,6 @@ export function parseYpGuitarSvg(svg:string,englishSections:HymnSection[],myanma
     });
   }
 
-  // Printed lead sheets normally show the tune once. Reuse a clean pattern for
-  // later stanzas and repeated refrains instead of accumulating duplicate rows.
   propagatePatterns(mapped,englishSections,englishLyrics);
 
   const output=myanmarSections.map((section,sectionIndex)=>{
@@ -231,6 +227,21 @@ export function parseYpGuitarSvg(svg:string,englishSections:HymnSection[],myanma
 
   const capoMatch=svg.match(/\(Guitar:\s*Capo\s*(\d+)\)/i);
   return {capo:capoMatch?Number(capoMatch[1]):0,sections:output};
+}
+
+export function parseHymnalGuitarSvgByVerseOrder(svg:string,myanmarSections:HymnSection[]):YpGuitarData {
+  const rows=parseChordRows(svg);
+  const verses=myanmarSections.filter(section=>section.type==="verse");
+  const lineCount=verses[0]?.lines.length??0;
+  const safe=lineCount>0&&rows.length===lineCount&&verses.length>0&&verses.every(section=>section.lines.length===lineCount)&&myanmarSections.every(section=>section.type==="verse");
+  const pattern=safe?rows.map(row=>mapRowAcrossLines(row,["line"])[0]??[]):[];
+  const sections=myanmarSections.map(section=>({
+    type:section.type,
+    number:section.number,
+    lines:section.lines.map((_,lineIndex)=>({chords:safe?(pattern[lineIndex]??[]).map(event=>({...event})):[]})),
+  }));
+  const capoMatch=svg.match(/\(Guitar:\s*Capo\s*(\d+)\)/i);
+  return {capo:capoMatch?Number(capoMatch[1]):0,sections};
 }
 
 export function ypGuitarHasChords(data:YpGuitarData):boolean {
