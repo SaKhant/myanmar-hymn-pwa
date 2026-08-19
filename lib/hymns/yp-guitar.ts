@@ -94,7 +94,7 @@ function lyricLines(section:HymnSection):string[] {
 
 function parseChordRows(svg:string):ChordRow[] {
   const text=parseSvgText(svg);
-  const sans=text.filter(item=>item.family.includes("sans-serif"));
+  const sans=text.filter(item=>item.family==="sans"||item.family.includes("sans-serif"));
   const roots=sans.filter(item=>/^[A-G]$/i.test(normalizeChordFragment(item.text)));
   const rootRows=clusterByY(roots,.24);
   const serifLyrics=text.filter(item=>item.family.includes("serif")&&!item.family.includes("sans-serif")&&item.fontSize>=2.25&&item.fontSize<=2.8);
