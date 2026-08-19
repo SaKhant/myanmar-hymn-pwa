@@ -11,18 +11,19 @@ function escapeRegExp(value:string):string {
 }
 
 function replaceTspanText(svg:string,english:string,myanmar:string):string {
-  const pattern=new RegExp(`(<tspan>)\\s*${escapeRegExp(english.trim())}\\s*(<\\/tspan>)`,"g");
+  const pattern=new RegExp(`(<tspan>)\\s*${escapeRegExp(english.trim())}\\s*(<\\/tspan>)`);
   return svg.replace(pattern,`$1${escapeXml(myanmar)}$2`);
 }
 
-function removeSerifTextRow(svg:string,y:string):string {
-  const escapedY=escapeRegExp(y);
-  const pattern=new RegExp(`<g transform="translate\\(([-\\d.]+), ${escapedY}\\)">\\s*<text font-family="serif"[\\s\\S]*?<\\/text>\\s*<\\/g>`,`g`);
-  return svg.replace(pattern,"");
+function replaceSyllables(svg:string,englishSyllables:string[],myanmarSyllables:string[]):string {
+  if(englishSyllables.length!==myanmarSyllables.length)return svg;
+  return englishSyllables.reduce((current,english,index)=>replaceTspanText(current,english,myanmarSyllables[index]),svg);
 }
 
-function myanmarText(x:number,y:number,text:string,size=2.18):string {
-  return `<g transform="translate(${x.toFixed(4)}, ${y.toFixed(4)})"><text font-family="Myanmar Text, Noto Sans Myanmar, sans-serif" font-size="${size.toFixed(4)}" text-anchor="start" fill="#111"><tspan>${escapeXml(text)}</tspan></text></g>`;
+function removeLyricHyphens(svg:string,y:string):string {
+  const escapedY=escapeRegExp(y);
+  const pattern=new RegExp(`<g transform="translate\\(([-\\d.]+), ${escapedY}\\)">\\s*<rect x="0\\.0000" y="-0\\.5714"[\\s\\S]*?<\\/g>`,`g`);
+  return svg.replace(pattern,"");
 }
 
 function localizePianoSvg(source:string):string {
@@ -31,9 +32,19 @@ function localizePianoSvg(source:string):string {
   const verses=hymn.sections.filter(section=>section.type==="verse");
   if(verses.length<6)return source;
 
-  // Remove the syllabified English first verse first, while its original serif markers are intact.
-  let svg=removeSerifTextRow(source,"31.5821");
-  svg=removeSerifTextRow(svg,"43.8057");
+  // Hymnal.net E1 places the first verse syllable-by-syllable under the notes.
+  // Keep every original x/y lyric anchor and swap only the text at those anchors.
+  const firstSystemEnglish=["Glo","ry","be","to","God","the","Fa","ther,","And","to","Christ","the","Son,"];
+  const firstSystemMyanmar=["ခ","မည်း","တော်","ဘု","ရား","ဘုန်း","ကြီး","စေ၊","သား","တော်","ဘုန်း","ကြီး","စေ"];
+  const secondSystemEnglish=["Glo","ry","to","the","Hol","y","Spir","it—","Ev","er","One."];
+  const secondSystemMyanmar=["သန့်","ရှင်း","ဝိ","ညာဉ်","တော်","ဘုန်း","ကြီး","စေ၊","ထာ","ဝ","ရ။"];
+
+  let svg=replaceSyllables(source,firstSystemEnglish,firstSystemMyanmar);
+  svg=replaceSyllables(svg,secondSystemEnglish,secondSystemMyanmar);
+
+  // English syllable hyphens no longer correspond to Burmese orthography.
+  svg=removeLyricHyphens(svg,"31.5821");
+  svg=removeLyricHyphens(svg,"43.8057");
 
   const englishVerses=[
     ["Glory be to God the Father,","And to Christ the Son,","Glory to the Holy Spirit—","Ever One."],
@@ -58,16 +69,8 @@ function localizePianoSvg(source:string):string {
     .replace(/font-family="serif"/g,'font-family="Myanmar Text, Noto Sans Myanmar, sans-serif"')
     .replace(/<g transform="translate\(69\.8408, 191\.9677\)">[\s\S]*?<\/g>/,"" );
 
-  const first=verses[0].lines;
-  const overlay=[
-    myanmarText(18.2,31.65,first[0]||"",2.05),
-    myanmarText(91.0,31.65,first[1]||"",2.05),
-    myanmarText(18.2,43.88,first[2]||"",2.05),
-    myanmarText(116.0,43.88,first[3]||"",2.05),
-  ].join("");
-
   svg=svg.replace("</style>","</style><rect x=\"0\" y=\"0\" width=\"153.5737\" height=\"123.5\" fill=\"#fff\"/>");
-  return svg.replace("</svg>",`${overlay}</svg>`);
+  return svg;
 }
 
 export async function GET(){
