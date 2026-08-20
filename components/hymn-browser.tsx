@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useDeferredValue, useEffect, useMemo, useState } from "react";
+import { memo, useDeferredValue, useEffect, useMemo, useState } from "react";
 import { ChevronRight, FileText, List, Menu, Search } from "lucide-react";
 import { OfflineNewTranslationsRoute } from "@/components/offline-new-translations";
 import { OFFLINE_NAVIGATION_EVENT } from "@/components/offline-navigation";
@@ -30,7 +30,7 @@ function rememberHymnReturnTarget(id:string):void {
   try{sessionStorage.setItem(HYMN_RETURN_TARGET_KEY,id)}catch{}
 }
 
-function HymnList({results,kind,language,exactNumber}:{results:HymnSummary[];kind:HymnKind;language:HymnLanguage;exactNumber?:string}) {
+const HymnList=memo(function HymnList({results,kind,language,exactNumber}:{results:HymnSummary[];kind:HymnKind;language:HymnLanguage;exactNumber?:string}) {
   return <div className="divide-y divide-[var(--line)] border-y border-[var(--line)]">{results.map(h=>{const exact=String(h.number)===exactNumber;const showFirstLine=h.firstLine&&h.firstLine!==h.title&&!(kind==="yp"&&isChordOnlyText(h.firstLine));const rowId=`hymn-list-row-${kind}-${language}-${h.id}`;return <Link id={rowId} key={h.id} href={`/${kind}/${language}/${h.id}`} onClick={()=>rememberHymnReturnTarget(rowId)} className={`hymn-list-row focus-ring flex min-h-14 items-center gap-4 px-2 py-4 hover:bg-[var(--sage-soft)] ${exact?"bg-[var(--sage-soft)]":""}`}><span className="w-12 shrink-0 text-center font-serif text-xl text-[var(--gold)]">{displayNumber(h.number)}</span><span className="min-w-0"><strong className={`block text-[15px] ${language==="my"?"myanmar":""}`}>{h.title}</strong>{showFirstLine&&<small className={`mt-1 block truncate text-[var(--muted)] ${language==="my"?"myanmar":""}`}>{h.firstLine}</small>}</span><ChevronRight className="ml-auto shrink-0 text-[var(--muted)]" size={18}/></Link>})}</div>;
 }
 
