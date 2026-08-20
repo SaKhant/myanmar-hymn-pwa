@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { OnlineAudio } from "@/components/online-audio";
+import { ReaderBackButton } from "@/components/reader-back-button";
 import { TranslationGuitarReader } from "@/components/translation-guitar-reader";
 import { compactNewYpSourceRef,getNewYpAudioUrl,getNewYpTranslation,getNewYpTranslations } from "@/lib/hymns/new-yp-translations";
 import { parseNewYpTranslationLines } from "@/lib/hymns/translation-display";
@@ -24,7 +25,7 @@ export default async function NewYpTranslationPage({params}:{params:Promise<{id:
   const guitarSourceLabel=sourceLabel??"New YP Song";
 
   return <main className="page max-w-3xl">
-    <Link href="/hymns/new-translations?section=yp" className="focus-ring mb-5 inline-flex rounded-lg text-sm font-semibold text-[var(--muted)] hover:text-[var(--ink)]">← Back to YP New Songs</Link>
+    <ReaderBackButton fallback="/hymns/new-translations?section=yp" label="Back to YP New Songs"/>
     <header className="mb-8">
       <p className="eyebrow normal-case">New YP Song{sourceLabel?` • ${sourceLabel}`:""}</p>
       <h1 className="myanmar mt-2 font-serif text-3xl leading-tight tracking-tight md:text-4xl">{song.title}</h1>
