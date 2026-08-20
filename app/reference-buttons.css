@@ -56,7 +56,8 @@
   outline-color:color-mix(in srgb,#2da85c 35%,transparent);
 }
 
-/* Icon-only back button based on the supplied chevron artwork. */
+/* Shared gray circular icon-only back button. */
+.reader-back-icon,
 .reader-page > button:first-child,
 .reader-page > a[href="/yp"]:first-child,
 main > a[href="/hymns"]:first-child {
@@ -89,6 +90,7 @@ main > a[href="/hymns"]:first-child {
   display:none;
 }
 
+.reader-back-icon:hover,
 .reader-page > button:first-child:hover,
 .reader-page > a[href="/yp"]:first-child:hover,
 main > a[href="/hymns"]:first-child:hover {
@@ -96,6 +98,7 @@ main > a[href="/hymns"]:first-child:hover {
   text-decoration:none;
 }
 
+.reader-back-icon:active,
 .reader-page > button:first-child:active,
 .reader-page > a[href="/yp"]:first-child:active,
 main > a[href="/hymns"]:first-child:active {
