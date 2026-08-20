@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useDeferredValue, useEffect, useMemo, useState } from "react";
 import { ChevronRight, FileText, List, Menu, Search } from "lucide-react";
+import { OfflineNewTranslationsRoute } from "@/components/offline-new-translations";
+import { OFFLINE_NAVIGATION_EVENT } from "@/components/offline-navigation";
 import type { HymnKind, HymnLanguage, HymnSummary } from "@/lib/hymns/types";
 import { normalizeHymnNumberQuery, normalizeSearchText, normalizeTitlePrefix } from "@/lib/hymns/search";
 
@@ -55,6 +57,7 @@ export function HymnBrowser({ kind, myanmar, english=[], newTranslations=[], ini
   const [query,setQuery]=useState(initialQuery);
   const [lyricSearchIndex,setLyricSearchIndex]=useState<Record<string,string>>({});
   const [submittedMissingNumber,setSubmittedMissingNumber]=useState(false);
+  const [offlineTranslationPath,setOfflineTranslationPath]=useState<string|null>(null);
   const language: HymnLanguage=kind==="hymns"||myanmarOnly?"my":selectedLanguage;
   const source=language==="my"?myanmar:english;
   const deferredQuery=useDeferredValue(query);
@@ -63,6 +66,25 @@ export function HymnBrowser({ kind, myanmar, english=[], newTranslations=[], ini
   const hasQuery=normalizedQuery.length>0;
 
   useEffect(()=>{if(!lyricSearchUrl||!navigator.onLine)return;let active=true;fetch(lyricSearchUrl).then(response=>response.ok?response.json():Promise.reject()).then((entries:Array<{id:string;lyricSearchText:string}>)=>{if(active)setLyricSearchIndex(Object.fromEntries(entries.map(entry=>[entry.id,entry.lyricSearchText]))) }).catch(()=>{});return()=>{active=false}},[lyricSearchUrl]);
+
+  useEffect(()=>{
+    const sync=()=>{
+      const path=location.pathname;
+      const isTranslationRoute=/^\/hymns\/new-translations(?:\/|$)/.test(path)||/^\/yp\/new-translations(?:\/|$)/.test(path);
+      setOfflineTranslationPath(!navigator.onLine&&isTranslationRoute?path:null);
+    };
+    sync();
+    window.addEventListener("popstate",sync);
+    window.addEventListener(OFFLINE_NAVIGATION_EVENT,sync);
+    window.addEventListener("online",sync);
+    window.addEventListener("offline",sync);
+    return()=>{
+      window.removeEventListener("popstate",sync);
+      window.removeEventListener(OFFLINE_NAVIGATION_EVENT,sync);
+      window.removeEventListener("online",sync);
+      window.removeEventListener("offline",sync);
+    };
+  },[]);
 
   useEffect(()=>{
     let targetId:string|null=null;
@@ -132,6 +154,8 @@ export function HymnBrowser({ kind, myanmar, english=[], newTranslations=[], ini
   const ypCountLabel=`${results.length.toLocaleString()} ${results.length===1?"song":"songs"}`;
   const hymnCountLabel=`${results.length.toLocaleString()} ${results.length===1?"hymn":"hymns"}`;
   const hymnListEmpty=kind==="hymns"&&results.length===0&&newResults.length===0;
+
+  if(offlineTranslationPath)return <OfflineNewTranslationsRoute pathname={offlineTranslationPath}/>;
 
   return <main className="page">
     <header className="mb-3"><p className="eyebrow normal-case">Hymnal.net</p><h1 className="mt-2 font-serif text-3xl tracking-tight md:text-4xl">{kind==="yp"?"New Songs":"Hymns"}</h1></header>
