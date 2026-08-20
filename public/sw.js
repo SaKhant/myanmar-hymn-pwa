@@ -1,7 +1,7 @@
 const version=new URL(self.location.href).searchParams.get("v")||"legacy";
 const cacheName=`hymn-house-shell-${version}`;
 const cachePrefix="hymn-house-shell-";
-const appShell=["/","/yp","/favorites","/settings","/categories","/icon-192.png","/icon-512.png","/splash-guitar.png","/jianpu/myanmar-hymn-1.png","/api/piano-score/1"];
+const appShell=["/","/yp","/favorites","/settings","/categories","/icon-192.png","/icon-512.png","/splash-guitar.png"];
 
 async function cacheResponse(request,response){
   if(!response||!response.ok)return response;
@@ -9,7 +9,7 @@ async function cacheResponse(request,response){
   await cache.put(request,response.clone());
   if(response.headers.get("content-type")?.includes("text/html")){
     const html=await response.clone().text();
-    const assets=[...html.matchAll(/(?:src|href)=["']([^"']+)["']/g)].map(match=>match[1]).filter(value=>value.startsWith("/_next/")||value.startsWith("/jianpu/")||value.startsWith("/icon-"));
+    const assets=[...html.matchAll(/(?:src|href)=["']([^"']+)["']/g)].map(match=>match[1]).filter(value=>value.startsWith("/_next/")||value.startsWith("/icon-"));
     await Promise.all([...new Set(assets)].map(async asset=>{try{const assetResponse=await fetch(asset,{cache:"reload"});if(assetResponse.ok)await cache.put(asset,assetResponse)}catch{}}));
   }
   return response;
@@ -25,6 +25,10 @@ self.addEventListener("fetch",event=>{
   if(event.request.method!=="GET")return;
   const url=new URL(event.request.url);
   if(url.origin!==self.location.origin||url.pathname.startsWith("/offline-library")||url.pathname==="/app-version"||event.request.destination==="audio")return;
+  if(url.pathname.startsWith("/jianpu/")||url.pathname.startsWith("/api/piano-score/")){
+    event.respondWith(fetch(event.request,{cache:"no-store"}));
+    return;
+  }
   if(event.request.mode==="navigate"){
     event.respondWith((async()=>{try{return await cacheResponse(event.request,await fetch(event.request))}catch{return (await caches.match(event.request))||(await caches.match(url.pathname))||(await caches.match("/"))||Response.error()}})());
     return;
