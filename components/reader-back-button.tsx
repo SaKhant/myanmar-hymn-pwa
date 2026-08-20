@@ -1,7 +1,6 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
 
 export function ReaderBackButton({
   fallback,
@@ -24,10 +23,9 @@ export function ReaderBackButton({
     <button
       type="button"
       onClick={goBack}
-      className="focus-ring mb-6 inline-flex items-center gap-2 rounded-lg text-xs font-semibold text-[var(--muted)]"
-    >
-      <ArrowLeft size={15} />
-      {label}
-    </button>
+      aria-label={label}
+      title={label}
+      className="reader-back-icon focus-ring"
+    />
   );
 }

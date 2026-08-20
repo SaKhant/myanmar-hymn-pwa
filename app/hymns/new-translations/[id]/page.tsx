@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ReaderBackButton } from "@/components/reader-back-button";
 import { TranslationGuitarReader } from "@/components/translation-guitar-reader";
 import { getHymn } from "@/lib/hymns/data";
 import { getNewMyanmarTranslation,getNewMyanmarTranslations } from "@/lib/hymns/new-translations";
@@ -20,7 +21,7 @@ export default async function NewTranslationPage({params}:{params:Promise<{id:st
   const sections=parseNumberedTranslationLines(hymn.raw_lines);
 
   return <main className={styles.page}>
-    <Link className={styles.back} href="/hymns/new-translations">← Back to New Translations</Link>
+    <ReaderBackButton fallback="/hymns/new-translations" label="Back to New Translations"/>
     <p className={styles.kicker}>
       <span className={styles.current}>MYANMAR TRANSLATION</span>
       {" • "}

@@ -2,13 +2,16 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useDeferredValue, useEffect, useMemo, useState } from "react";
+import { memo, useDeferredValue, useEffect, useMemo, useState } from "react";
 import { ChevronRight, FileText, List, Menu, Search } from "lucide-react";
+import { OfflineNewTranslationsRoute } from "@/components/offline-new-translations";
+import { OFFLINE_NAVIGATION_EVENT } from "@/components/offline-navigation";
 import type { HymnKind, HymnLanguage, HymnSummary } from "@/lib/hymns/types";
 import { normalizeHymnNumberQuery, normalizeSearchText, normalizeTitlePrefix } from "@/lib/hymns/search";
 
 const CHORD_TOKEN=/^[A-G](?:#|b)?(?:(?:maj|min|m|dim|aug|sus|add)?\d*(?:\([^)]*\))?)?(?:\/[A-G](?:#|b)?)?$/i;
 const SHOW_HYMN_SECTION_SELECTOR=false;
+const HYMN_RETURN_TARGET_KEY="hymn-house:hymn-return-target";
 
 type NewTranslationSummary={id:string;englishNumber:number;title:string;category:string;englishTitle:string|null;searchText:string};
 type HymnSectionTab="hymns"|"new"|null;
@@ -23,9 +26,13 @@ function displayNumber(number:number|null|undefined):string {
   return String(number).padStart(3,"0");
 }
 
-function HymnList({results,kind,language,exactNumber}:{results:HymnSummary[];kind:HymnKind;language:HymnLanguage;exactNumber?:string}) {
-  return <div className="divide-y divide-[var(--line)] border-y border-[var(--line)]">{results.map(h=>{const exact=String(h.number)===exactNumber;const showFirstLine=h.firstLine&&h.firstLine!==h.title&&!(kind==="yp"&&isChordOnlyText(h.firstLine));return <Link key={h.id} href={`/${kind}/${language}/${h.id}`} className={`hymn-list-row focus-ring flex min-h-14 items-center gap-4 px-2 py-4 hover:bg-[var(--sage-soft)] ${exact?"bg-[var(--sage-soft)]":""}`}><span className="w-12 shrink-0 text-center font-serif text-xl text-[var(--gold)]">{displayNumber(h.number)}</span><span className="min-w-0"><strong className={`block text-[15px] ${language==="my"?"myanmar":""}`}>{h.title}</strong>{showFirstLine&&<small className={`mt-1 block truncate text-[var(--muted)] ${language==="my"?"myanmar":""}`}>{h.firstLine}</small>}</span><ChevronRight className="ml-auto shrink-0 text-[var(--muted)]" size={18}/></Link>})}</div>;
+function rememberHymnReturnTarget(id:string):void {
+  try{sessionStorage.setItem(HYMN_RETURN_TARGET_KEY,id)}catch{}
 }
+
+const HymnList=memo(function HymnList({results,kind,language,exactNumber}:{results:HymnSummary[];kind:HymnKind;language:HymnLanguage;exactNumber?:string}) {
+  return <div className="divide-y divide-[var(--line)] border-y border-[var(--line)]">{results.map(h=>{const exact=String(h.number)===exactNumber;const showFirstLine=h.firstLine&&h.firstLine!==h.title&&!(kind==="yp"&&isChordOnlyText(h.firstLine));const rowId=`hymn-list-row-${kind}-${language}-${h.id}`;return <Link id={rowId} key={h.id} href={`/${kind}/${language}/${h.id}`} onClick={()=>rememberHymnReturnTarget(rowId)} className={`hymn-list-row focus-ring flex min-h-14 items-center gap-4 px-2 py-4 hover:bg-[var(--sage-soft)] ${exact?"bg-[var(--sage-soft)]":""}`}><span className="w-12 shrink-0 text-center font-serif text-xl text-[var(--gold)]">{displayNumber(h.number)}</span><span className="min-w-0"><strong className={`block text-[15px] ${language==="my"?"myanmar":""}`}>{h.title}</strong>{showFirstLine&&<small className={`mt-1 block truncate text-[var(--muted)] ${language==="my"?"myanmar":""}`}>{h.firstLine}</small>}</span><ChevronRight className="ml-auto shrink-0 text-[var(--muted)]" size={18}/></Link>})}</div>;
+});
 
 function NewTranslationList({items}:{items:NewTranslationSummary[]}){
   return <div className="grid gap-0.5">{items.map(item=><Link key={item.id} href={`/hymns/new-translations/${item.englishNumber}`} className="focus-ring grid min-h-0 grid-cols-[76px_minmax(0,1fr)] items-center gap-3 rounded-[10px] px-2 py-3 text-black no-underline hover:bg-[var(--sage-soft)]"><span className="tabular-nums text-[0.84rem] font-bold text-black">E{item.englishNumber}</span><span className="myanmar min-w-0 text-base font-bold leading-[1.4] text-black">{item.title}</span></Link>)}</div>;
@@ -38,8 +45,9 @@ function BlueSearchForm({query,onQueryChange,onSubmit}:{query:string;onQueryChan
 function SearchBarWithMenu({kind,query,onQueryChange,onSubmit,menuOpen,onMenuToggle,onMenuClose}:{kind:HymnKind;query:string;onQueryChange:(value:string)=>void;onSubmit:()=>void;menuOpen:boolean;onMenuToggle:()=>void;onMenuClose:()=>void}){
   const menuId=kind==="yp"?"yp-quick-menu":"hymns-quick-menu";
   const newTranslationsHref=kind==="yp"?"/hymns/new-translations?section=yp":"/hymns/new-translations";
+  const menuItemClass="focus-ring flex h-11 items-center gap-3 rounded-lg px-3 text-sm font-semibold no-underline transition hover:bg-blue-600";
 
-  return <div className="w-full max-w-md rounded-xl bg-blue-100 p-1.5"><div className="flex items-center gap-2"><BlueSearchForm query={query} onQueryChange={onQueryChange} onSubmit={onSubmit}/><div className="relative shrink-0"><button type="button" aria-label="Open menu" title="Menu" aria-expanded={menuOpen} aria-controls={menuId} onClick={onMenuToggle} className="focus-ring flex h-11 w-11 items-center justify-center rounded-lg border border-black bg-blue-500 text-white transition hover:bg-blue-600"><Menu aria-hidden="true" size={22}/></button>{menuOpen&&<div id={menuId} role="menu" className="absolute right-0 top-[calc(100%+0.5rem)] z-50 w-44 rounded-xl border border-blue-600 bg-blue-500 p-1.5 shadow-xl shadow-blue-300/50"><Link href="/categories" role="menuitem" onClick={onMenuClose} style={{color:"#fff"}} className="focus-ring flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-semibold no-underline transition hover:bg-blue-600"><List aria-hidden="true" size={17} color="#fff"/><span style={{color:"#fff"}}>Categories</span></Link><Link href={newTranslationsHref} role="menuitem" onClick={onMenuClose} style={{color:"#fff"}} className="focus-ring flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-semibold no-underline transition hover:bg-blue-600"><FileText aria-hidden="true" size={17} color="#fff"/><span style={{color:"#fff"}}>New translations</span></Link></div>}</div></div></div>;
+  return <div className="w-full max-w-md rounded-xl bg-blue-100 p-1.5"><div className="flex items-center gap-2"><BlueSearchForm query={query} onQueryChange={onQueryChange} onSubmit={onSubmit}/><div className="relative shrink-0"><button type="button" aria-label="Open menu" title="Menu" aria-expanded={menuOpen} aria-controls={menuId} onClick={onMenuToggle} className="focus-ring flex h-11 w-11 items-center justify-center rounded-lg border border-black bg-blue-500 text-white transition hover:bg-blue-600"><Menu aria-hidden="true" size={22}/></button>{menuOpen&&<div id={menuId} role="menu" className="absolute right-0 top-[calc(100%+0.5rem)] z-50 w-44 rounded-xl border border-blue-600 bg-blue-500 p-1.5 shadow-xl shadow-blue-300/50"><Link href="/categories" role="menuitem" onClick={onMenuClose} style={{color:"#fff"}} className={menuItemClass}><List aria-hidden="true" size={17} color="#fff"/><span style={{color:"#fff"}}>Categories</span></Link><Link href={newTranslationsHref} role="menuitem" onClick={onMenuClose} style={{color:"#fff"}} className={menuItemClass}><FileText aria-hidden="true" size={17} color="#fff"/><span style={{color:"#fff"}}>New translations</span></Link></div>}</div></div></div>;
 }
 
 export function HymnBrowser({ kind, myanmar, english=[], newTranslations=[], initialLanguage="my", initialQuery="", myanmarOnly=false, lyricSearchUrl }:{ kind:HymnKind; myanmar:HymnSummary[]; english?:HymnSummary[]; newTranslations?:NewTranslationSummary[]; initialLanguage?:HymnLanguage; initialQuery?:string; myanmarOnly?:boolean; lyricSearchUrl?:string }) {
@@ -50,6 +58,7 @@ export function HymnBrowser({ kind, myanmar, english=[], newTranslations=[], ini
   const [query,setQuery]=useState(initialQuery);
   const [lyricSearchIndex,setLyricSearchIndex]=useState<Record<string,string>>({});
   const [submittedMissingNumber,setSubmittedMissingNumber]=useState(false);
+  const [offlineTranslationPath,setOfflineTranslationPath]=useState<string|null>(null);
   const language: HymnLanguage=kind==="hymns"||myanmarOnly?"my":selectedLanguage;
   const source=language==="my"?myanmar:english;
   const deferredQuery=useDeferredValue(query);
@@ -58,6 +67,42 @@ export function HymnBrowser({ kind, myanmar, english=[], newTranslations=[], ini
   const hasQuery=normalizedQuery.length>0;
 
   useEffect(()=>{if(!lyricSearchUrl||!navigator.onLine)return;let active=true;fetch(lyricSearchUrl).then(response=>response.ok?response.json():Promise.reject()).then((entries:Array<{id:string;lyricSearchText:string}>)=>{if(active)setLyricSearchIndex(Object.fromEntries(entries.map(entry=>[entry.id,entry.lyricSearchText]))) }).catch(()=>{});return()=>{active=false}},[lyricSearchUrl]);
+
+  useEffect(()=>{
+    const sync=()=>{
+      const path=location.pathname;
+      const isTranslationRoute=/^\/hymns\/new-translations(?:\/|$)/.test(path)||/^\/yp\/new-translations(?:\/|$)/.test(path);
+      setOfflineTranslationPath(!navigator.onLine&&isTranslationRoute?path:null);
+    };
+    sync();
+    window.addEventListener("popstate",sync);
+    window.addEventListener(OFFLINE_NAVIGATION_EVENT,sync);
+    window.addEventListener("online",sync);
+    window.addEventListener("offline",sync);
+    return()=>{
+      window.removeEventListener("popstate",sync);
+      window.removeEventListener(OFFLINE_NAVIGATION_EVENT,sync);
+      window.removeEventListener("online",sync);
+      window.removeEventListener("offline",sync);
+    };
+  },[]);
+
+  useEffect(()=>{
+    let targetId:string|null=null;
+    try{targetId=sessionStorage.getItem(HYMN_RETURN_TARGET_KEY)}catch{}
+    if(!targetId)return;
+    const restore=()=>{
+      const target=document.getElementById(targetId!);
+      if(!target)return;
+      target.scrollIntoView({block:"center",inline:"nearest",behavior:"auto"});
+    };
+    const frame=requestAnimationFrame(restore);
+    const timer=window.setTimeout(()=>{
+      restore();
+      try{sessionStorage.removeItem(HYMN_RETURN_TARGET_KEY)}catch{}
+    },120);
+    return()=>{cancelAnimationFrame(frame);window.clearTimeout(timer)};
+  },[]);
 
   const results=useMemo(()=>{
     if(!normalizedQuery)return source;
@@ -111,6 +156,8 @@ export function HymnBrowser({ kind, myanmar, english=[], newTranslations=[], ini
   const hymnCountLabel=`${results.length.toLocaleString()} ${results.length===1?"hymn":"hymns"}`;
   const hymnListEmpty=kind==="hymns"&&results.length===0&&newResults.length===0;
 
+  if(offlineTranslationPath)return <OfflineNewTranslationsRoute pathname={offlineTranslationPath}/>;
+
   return <main className="page">
     <header className="mb-3"><p className="eyebrow normal-case">Hymnal.net</p><h1 className="mt-2 font-serif text-3xl tracking-tight md:text-4xl">{kind==="yp"?"New Songs":"Hymns"}</h1></header>
 
@@ -127,10 +174,12 @@ export function HymnBrowser({ kind, myanmar, english=[], newTranslations=[], ini
     {kind==="hymns"&&<p className="my-4 text-sm text-[var(--muted)]">{hymnCountLabel}</p>}
     {kind==="yp"&&<p className="my-4 text-sm text-[var(--muted)]">{ypCountLabel}</p>}
 
-    {kind==="hymns"&&results.length>0&&<HymnList results={results} kind="hymns" language="my" exactNumber={numberQuery}/>} 
-    {kind==="hymns"&&newResults.length>0&&<NewTranslationList items={newResults}/>} 
+    {kind==="hymns"&&results.length>0&&hymnSection!=="new"&&<HymnList results={results} kind={kind} language={language} exactNumber={numberQuery}/>} 
+    {kind==="hymns"&&newResults.length>0&&hymnSection!=="hymns"&&<div className={results.length>0&&hymnSection===null?"mt-6 border-t border-[var(--line)] pt-6":""}><NewTranslationList items={newResults}/></div>}
     {kind==="yp"&&results.length>0&&<HymnList results={results} kind={kind} language={language} exactNumber={numberQuery}/>} 
 
-    {(hymnListEmpty||(kind==="yp"&&results.length===0))&&<div className="py-16 text-center"><p className="font-serif text-2xl">{submittedMissingNumber?(kind==="hymns"?"Hymn not found":"Song not found"):(kind==="hymns"?"No hymns found":"No songs found")}</p><p className="mt-2 text-sm text-[var(--muted)]">Try a number, title, or phrase from the lyrics.</p></div>}
+    {submittedMissingNumber&&<div className="mt-6 rounded-xl border border-[var(--line)] bg-[var(--paper)] p-5"><p className="font-serif text-xl">No matching song number</p><p className="mt-1 text-sm text-[var(--muted)]">Try a different number or title.</p></div>}
+    {!submittedMissingNumber&&kind==="yp"&&results.length===0&&<div className="py-16 text-center"><p className="font-serif text-2xl">No songs found</p><p className="mt-2 text-sm text-[var(--muted)]">Try another search.</p></div>}
+    {!submittedMissingNumber&&hymnListEmpty&&<div className="py-16 text-center"><p className="font-serif text-2xl">No hymns found</p><p className="mt-2 text-sm text-[var(--muted)]">Try another search.</p></div>}
   </main>;
 }

@@ -1,6 +1,8 @@
 import { getCategories, getHymns } from "@/lib/hymns/data";
 import { kachinHymns } from "@/lib/hymns/kachin-data";
 import { matuHymns } from "@/lib/hymns/matu-data";
+import { getNewMyanmarTranslations } from "@/lib/hymns/new-translations";
+import { getNewYpTranslations } from "@/lib/hymns/new-yp-translations";
 import { OFFLINE_LIBRARY_RELEASE_DATE, OFFLINE_LIBRARY_VERSION } from "@/lib/offline-library-version";
 
 function withoutAudio<T extends {audio_url:string|null}>(record:T) {
@@ -22,6 +24,8 @@ export function GET() {
       matu_hymns:matuHymns.map(withoutAudio),
     },
     categories:getCategories(),
+    newTranslations:getNewMyanmarTranslations(),
+    newYpTranslations:getNewYpTranslations(),
   };
   return Response.json(payload,{headers:{"Cache-Control":"no-store, max-age=0"}});
 }

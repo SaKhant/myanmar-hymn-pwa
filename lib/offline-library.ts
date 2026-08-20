@@ -9,7 +9,38 @@ const DATABASE_VERSION=2;
 
 export type OfflineHymn=Omit<HymnRecord,"audio_url"> & {key:string};
 export type OfflineLibraryMeta={key:"library";version:string;releaseDate:string;downloadedAt:string;sizeBytes:number;hymnCount:number;categoryCount:number};
-type OfflinePayload={version:string;releaseDate:string;collections:Record<HymnCollection,Array<Omit<HymnRecord,"audio_url">>>;categories:HymnCategory[]};
+export type OfflineNewTranslation={
+  id:string;
+  english_number:number;
+  myanmar_number:null;
+  status:"unassigned";
+  category:string;
+  english_title:string|null;
+  meter:string|null;
+  title:string;
+  verse_numbers:number[];
+  source_note:string|null;
+  raw_lines:string[];
+  header_lines:string[];
+  source_number_line:string;
+};
+export type OfflineNewYpTranslation={
+  id:string;
+  title:string;
+  source_ref:string|null;
+  source_kind:"NS"|"H"|"LB"|null;
+  source_number:number|null;
+  raw_lines:string[];
+};
+type OfflinePayload={
+  version:string;
+  releaseDate:string;
+  collections:Record<HymnCollection,Array<Omit<HymnRecord,"audio_url">>>;
+  categories:HymnCategory[];
+  newTranslations:OfflineNewTranslation[];
+  newYpTranslations:OfflineNewYpTranslation[];
+};
+type StoredItems<T>={key:string;items:T[]};
 
 function requestResult<T>(request:IDBRequest<T>):Promise<T>{return new Promise((resolve,reject)=>{request.onsuccess=()=>resolve(request.result);request.onerror=()=>reject(request.error)})}
 function transactionDone(transaction:IDBTransaction):Promise<void>{return new Promise((resolve,reject)=>{transaction.oncomplete=()=>resolve();transaction.onerror=()=>reject(transaction.error);transaction.onabort=()=>reject(transaction.error??new Error("Offline library update was aborted"))})}
@@ -60,11 +91,28 @@ export async function readOfflineCategories():Promise<HymnCategory[]>{
   finally{database.close()}
 }
 
+async function readStoredItems<T>(key:string):Promise<T[]>{
+  if(typeof indexedDB==="undefined")return [];
+  const database=await openOfflineDatabase();
+  try{
+    const stored=await requestResult(database.transaction(OFFLINE_METADATA_STORE).objectStore(OFFLINE_METADATA_STORE).get(key)) as StoredItems<T>|undefined;
+    return Array.isArray(stored?.items)?stored.items:[];
+  } finally {database.close()}
+}
+
+export function readOfflineNewTranslations():Promise<OfflineNewTranslation[]>{
+  return readStoredItems<OfflineNewTranslation>("new-translations");
+}
+
+export function readOfflineNewYpTranslations():Promise<OfflineNewYpTranslation[]>{
+  return readStoredItems<OfflineNewYpTranslation>("new-yp-translations");
+}
+
 function validatePayload(value:unknown):OfflinePayload{
   if(!value||typeof value!=="object")throw new Error("Invalid offline library response");
   const payload=value as Partial<OfflinePayload>;
   const collections=payload.collections;
-  if(typeof payload.version!=="string"||typeof payload.releaseDate!=="string"||!collections||!Array.isArray(payload.categories))throw new Error("Invalid offline library response");
+  if(typeof payload.version!=="string"||typeof payload.releaseDate!=="string"||!collections||!Array.isArray(payload.categories)||!Array.isArray(payload.newTranslations)||!Array.isArray(payload.newYpTranslations))throw new Error("Invalid offline library response");
   for(const key of ["myanmar_hymns","english_hymns","myanmar_yp","english_yp"] as HymnCollection[]){
     if(!Array.isArray(collections[key]))throw new Error(`Missing offline collection: ${key}`);
   }
@@ -96,6 +144,8 @@ export async function downloadOfflineLibrary(onProgress?:(received:number,total:
     hymns.forEach(hymn=>hymnStore.put(hymn));
     payload.categories.forEach(category=>categoryStore.put(category));
     metadataStore.put(metadata);
+    metadataStore.put({key:"new-translations",items:payload.newTranslations} satisfies StoredItems<OfflineNewTranslation>);
+    metadataStore.put({key:"new-yp-translations",items:payload.newYpTranslations} satisfies StoredItems<OfflineNewYpTranslation>);
     await transactionDone(transaction);
   } finally {database.close()}
   try{await navigator.storage?.persist?.()}catch{}
@@ -108,4 +158,3 @@ export async function getAvailableOfflineLibraryVersion():Promise<{version:strin
   if(!response.ok)throw new Error("Could not check for library updates");
   return response.json() as Promise<{version:string;releaseDate:string}>;
 }
-

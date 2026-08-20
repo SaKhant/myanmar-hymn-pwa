@@ -1,8 +1,10 @@
 "use client";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Settings } from "lucide-react";
 import { Brand } from "./brand";
+import { OFFLINE_NAVIGATION_EVENT } from "./offline-navigation";
 
 function OpenBookIcon({size=21}:{size?:number}) {
   return <svg aria-hidden="true" width={size} height={size} viewBox="0 0 512 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M7 127L0 138L3 443L18 451L78 440L146 437L214 446L167 416L125 404L66 399L37 377L31 361L31 124Z"/><path d="M72 61L60 75L61 360L76 371L117 373L171 386L208 404L241 431L240 138L210 102L169 77L118 63Z"/><path d="M439 61L393 63L342 77L301 102L271 138L270 431L303 404L340 386L394 373L435 371L450 360L451 75Z"/><path d="M504 127L480 124L480 361L474 377L445 399L386 404L344 416L297 446L365 437L433 440L493 451L508 443L511 138Z"/></svg>;
@@ -37,9 +39,29 @@ function FilledSettings({size=21}:{size?:number}) {
 }
 
 export function Navigation() {
-  const path = usePathname();
-  const matchesRoute=(route:string)=>path===route||path.startsWith(`${route}/`);
-  const isActive=(href:string)=>href==="/"?(path==="/"||matchesRoute("/hymns")||matchesRoute("/categories")):matchesRoute(href);
+  const pathname = usePathname();
+  const [route,setRoute]=useState({pathname,search:""});
+
+  useEffect(()=>{
+    const sync=()=>setRoute({pathname:window.location.pathname,search:window.location.search});
+    sync();
+    window.addEventListener("popstate",sync);
+    window.addEventListener(OFFLINE_NAVIGATION_EVENT,sync);
+    return()=>{
+      window.removeEventListener("popstate",sync);
+      window.removeEventListener(OFFLINE_NAVIGATION_EVENT,sync);
+    };
+  },[pathname]);
+
+  const path=route.pathname||pathname;
+  const isYpNewTranslations=path==="/hymns/new-translations"&&new URLSearchParams(route.search).get("section")==="yp";
+  const matchesRoute=(routePath:string)=>path===routePath||path.startsWith(`${routePath}/`);
+  const isActive=(href:string)=>{
+    if(href==="/")return !isYpNewTranslations&&(path==="/"||matchesRoute("/hymns")||matchesRoute("/categories"));
+    if(href==="/yp")return isYpNewTranslations||matchesRoute("/yp");
+    return matchesRoute(href);
+  };
+
   return <>
     <aside className="fixed inset-y-0 left-0 z-30 hidden w-60 border-r border-[var(--line)] bg-[var(--paper)] px-5 py-7 md:flex md:flex-col">
       <Brand /><nav className="mt-12 space-y-2" aria-label="Main navigation">{items.map(({href,label,icon:Icon}) => { const active=isActive(href); return <Link key={href} href={href} className={`focus-ring flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold ${active?"bg-[var(--sage-soft)] text-[var(--sage)]":"text-[var(--muted)] hover:bg-[var(--sage-soft)]"}`}><Icon size={19}/>{label}</Link>; })}</nav>

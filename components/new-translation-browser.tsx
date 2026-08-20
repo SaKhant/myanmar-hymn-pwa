@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useMemo,useState } from "react";
 import { BookOpen, ChevronRight, Music } from "lucide-react";
+import { ReaderBackButton } from "@/components/reader-back-button";
 import { SearchField } from "@/components/search-field";
 
 type TranslationSummary={id:string;englishNumber:number;title:string;category:string;englishTitle:string|null;searchText:string};
@@ -35,10 +36,9 @@ export function NewTranslationBrowser({items,ypItems,initialSection=null,hideCol
   const resultsCount=section==="hymns"?hymnResults.length:section==="yp"?ypResults.length:0;
 
   return <main className="page">
-    <Link href="/" className="focus-ring mb-5 inline-flex rounded-lg text-sm font-semibold text-[var(--muted)] hover:text-[var(--ink)]">← Back to Hymns</Link>
+    <ReaderBackButton fallback="/" label="Back to Hymns"/>
     <header className="mb-5">
       <p className="eyebrow normal-case">Hymnal.net</p>
-      <h1 className="mt-2 font-serif text-3xl tracking-tight md:text-4xl">New Translations</h1>
     </header>
 
     {!hideCollectionOptions&&<div className="mb-6 w-full max-w-sm rounded-xl border border-blue-600 bg-blue-500 p-1.5 shadow-xl shadow-blue-300/40" role="group" aria-label="New translation collection">
@@ -55,8 +55,6 @@ export function NewTranslationBrowser({items,ypItems,initialSection=null,hideCol
     </div>}
 
     {section!==null&&<>
-      {section==="hymns"?<p className="mb-5 text-sm text-[var(--muted)]">Myanmar hymn numbers have not been assigned yet. Listed by English hymn number.</p>:<p className="mb-5 text-sm text-[var(--muted)]">New Myanmar YP songs not yet included in the regular YP book.</p>}
-
       <SearchField value={query} onChange={setQuery} placeholder={section==="hymns"?"Search E number or Myanmar title…":"Search NS/H/LB number or title…"} cleanFocus />
       <p className="my-4 text-sm text-[var(--muted)]">{resultsCount} {section==="yp"?(resultsCount===1?"song":"songs"):(resultsCount===1?"translation":"translations")}</p>
 
