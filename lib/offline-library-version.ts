@@ -1,2 +1,2 @@
-export const OFFLINE_LIBRARY_VERSION = "3";
+export const OFFLINE_LIBRARY_VERSION = "4";
 export const OFFLINE_LIBRARY_RELEASE_DATE = "2026-08-20";

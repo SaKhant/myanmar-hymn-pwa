@@ -5,6 +5,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, ChevronRight, WifiOff } from "lucide-react";
 import { HymnBrowser } from "@/components/hymn-browser";
 import { OfflineGuitarReader } from "@/components/offline-guitar-reader";
+import { OfflineLocalHymnReader, OfflineMatuHymnBrowser } from "@/components/offline-local-hymns";
 import { ReaderActions } from "@/components/reader-actions";
 import { ReaderBackButton } from "@/components/reader-back-button";
 import { OFFLINE_NAVIGATION_EVENT, OFFLINE_SCROLL_STATE } from "@/components/offline-navigation";
@@ -15,6 +16,7 @@ import type { HymnCategory, HymnKind, HymnLanguage, HymnSummary } from "@/lib/hy
 
 function collection(kind:HymnKind,language:HymnLanguage){return `${language==="my"?"myanmar":"english"}_${kind}`}
 function title(hymn:OfflineHymn){return hymn.title?.trim()||hymn.first_line?.trim()||`Hymn ${hymn.number??hymn.id}`}
+function hymnNumber(hymn:OfflineHymn){return String(hymn.number??hymn.id)}
 function toSummary(hymn:OfflineHymn,kind:HymnKind):HymnSummary{
   const lyricSections=hymn.sections.flatMap(section=>section.lines).join(" ");
   const fields=hymn.language==="my"?[hymn.number,title(hymn),hymn.first_line,hymn.lyrics_text,lyricSections]:[hymn.number,title(hymn),hymn.first_line,hymn.theme,hymn.lyrics_text,lyricSections];
@@ -36,6 +38,10 @@ function OfflineReader({hymn,hymns,kind,language}:{hymn:OfflineHymn;hymns:Offlin
   const englishHymn=englishNumber?hymns.find(item=>item.collection==="english_hymns"&&String(item.number??item.id)===englishNumber):undefined;
   const relatedMyanmar=!isMyanmar&&kind==="hymns"?hymns.find(item=>item.collection==="myanmar_hymns"&&englishReferenceNumber(item.cross_references.Eng?.trim())===String(hymn.number??hymn.id)):undefined;
   const relatedYp=kind==="yp"?hymns.find(item=>item.collection===collection("yp",isMyanmar?"en":"my")&&String(item.number??item.id)===String(hymn.number??hymn.id)):undefined;
+  const versionMyanmar=kind==="hymns"?(isMyanmar?hymn:relatedMyanmar):undefined;
+  const versionMyanmarNumber=versionMyanmar?hymnNumber(versionMyanmar):undefined;
+  const relatedKachin=versionMyanmarNumber?hymns.find(item=>String(item.collection)==="kachin_hymns"&&item.cross_references.Myanmar?.trim()===versionMyanmarNumber):undefined;
+  const relatedMatu=versionMyanmarNumber?hymns.find(item=>String(item.collection)==="matu_hymns"&&hymnNumber(item)===versionMyanmarNumber):undefined;
   const index=hymns.filter(item=>item.collection===hymn.collection).findIndex(item=>item.id===hymn.id);
   const sameCollection=hymns.filter(item=>item.collection===hymn.collection);
   const previous=index>0?sameCollection[index-1]:undefined;
@@ -49,6 +55,8 @@ function OfflineReader({hymn,hymns,kind,language}:{hymn:OfflineHymn;hymns:Offlin
         {kind==="hymns"&&isMyanmar&&reference&&<><span className="reader-version-separator">•</span>{englishHymn?<Link replace href={`/hymns/en/${englishHymn.id}`} className="reader-version-link focus-ring">ENG {reference}</Link>:<span className="reader-version-reference">ENG {reference}</span>}</>}
         {kind==="hymns"&&!isMyanmar&&relatedMyanmar&&<><Link replace href={`/hymns/my/${relatedMyanmar.id}`} className="reader-version-link focus-ring">MY {relatedMyanmar.number??relatedMyanmar.id}</Link><span className="reader-version-separator">•</span></>}
         {kind==="hymns"&&!isMyanmar&&<Link replace href={`/hymns/en/${hymn.id}`} aria-current="page" className="reader-current-version reader-version-link focus-ring">ENG {relatedMyanmar?.cross_references.Eng?.trim()||hymn.number||hymn.id}</Link>}
+        {kind==="hymns"&&relatedKachin&&<><span className="reader-version-separator">•</span><Link href={`/hymns/kachin/${hymnNumber(relatedKachin)}`} className="reader-version-link focus-ring">KC {hymnNumber(relatedKachin)}</Link></>}
+        {kind==="hymns"&&relatedMatu&&<><span className="reader-version-separator">•</span><Link href={`/hymns/matu/${hymnNumber(relatedMatu)}`} className="reader-version-link focus-ring">MT {hymnNumber(relatedMatu)}</Link></>}
         {kind==="yp"&&isMyanmar&&<Link href={`/yp/my/${hymn.id}`} aria-current="page" className="reader-current-version reader-version-link focus-ring">MY {hymn.number??hymn.id}</Link>}
         {kind==="yp"&&isMyanmar&&relatedYp&&<><span className="reader-version-separator">•</span><Link href={`/yp/en/${relatedYp.id}`} className="reader-version-link focus-ring">ENG {relatedYp.number??relatedYp.id}</Link></>}
         {kind==="yp"&&!isMyanmar&&relatedYp&&<><Link href={`/yp/my/${relatedYp.id}`} className="reader-version-link focus-ring">MY {relatedYp.number??relatedYp.id}</Link><span className="reader-version-separator">•</span></>}
@@ -75,6 +83,9 @@ function OfflineRoute({hymns,categories,pathname}:{hymns:OfflineHymn[];categorie
   if(parts[0]==="favorites")return <main className="page"><p className="eyebrow">Your collection</p><h1 className="mt-2 font-serif text-4xl md:text-5xl">Favorites</h1><StoredList/></main>;
   if(parts[0]==="settings")return <main className="page max-w-3xl"><h1 className="font-serif text-4xl md:text-5xl">Settings</h1><section className="surface mt-8 p-6"><h2 className="myanmar text-2xl font-bold">ဖုန်းတွင် App အဖြစ် ထည့်သွင်းရန်</h2><div className="mt-5 space-y-5 text-base leading-7 text-[var(--muted)]"><div><h3 className="font-bold text-[var(--ink)]">Android</h3><p className="myanmar mt-1">Chrome ဖြင့် ဝဘ်ဆိုဒ်ကိုဖွင့်ပါ → ⋮ ကိုနှိပ်ပါ → Install app သို့မဟုတ် Add to Home screen ကိုရွေးပါ။</p></div><div><h3 className="font-bold text-[var(--ink)]">iPhone / iPad</h3><p className="myanmar mt-1">Safari ဖြင့် ဝဘ်ဆိုဒ်ကိုဖွင့်ပါ → Share ⬆️ ကိုနှိပ်ပါ → Add to Home Screen → Add ကိုနှိပ်ပါ။</p></div><p className="myanmar">ထည့်သွင်းပြီးနောက် ပုံမှန် App တစ်ခုကဲ့သို့ Home Screen မှ တိုက်ရိုက်ဖွင့်နိုင်ပါသည်။</p></div></section><p className="mt-6 text-center text-base font-bold text-[var(--muted)]">Audio need internet or wifi.</p></main>;
   if(parts[0]==="categories")return <OfflineCategories categories={categories}/>;
+  if((parts[0]==="hymns"&&parts[1]==="matu"&&parts.length===2)||(parts[0]==="matu-hymns"&&parts.length===1))return <OfflineMatuHymnBrowser hymns={hymns}/>;
+  if(parts[0]==="hymns"&&(parts[1]==="kachin"||parts[1]==="matu")&&parts[2]){const language=parts[1] as "kachin"|"matu";const collectionName=language==="kachin"?"kachin_hymns":"matu_hymns";const id=decodeURIComponent(parts[2]);const hymn=hymns.find(item=>String(item.collection)===collectionName&&(item.id===id||hymnNumber(item)===id));return hymn?<OfflineLocalHymnReader hymn={hymn} hymns={hymns} language={language}/>:<main className="page"><p className="font-serif text-2xl">Hymn not found</p></main>}
+  if(parts[0]==="matu-hymns"&&parts[1]){const id=decodeURIComponent(parts[1]);const hymn=hymns.find(item=>String(item.collection)==="matu_hymns"&&(item.id===id||hymnNumber(item)===id));return hymn?<OfflineLocalHymnReader hymn={hymn} hymns={hymns} language="matu"/>:<main className="page"><p className="font-serif text-2xl">Hymn not found</p></main>}
   if((parts[0]==="hymns"||parts[0]==="yp")&&(parts[1]==="my"||parts[1]==="en")&&parts[2]){const kind=parts[0] as HymnKind,language=parts[1] as HymnLanguage;const hymn=hymns.find(item=>item.collection===collection(kind,language)&&(item.id===decodeURIComponent(parts[2])||String(item.number)===decodeURIComponent(parts[2])));return hymn?<OfflineReader hymn={hymn} hymns={hymns} kind={kind} language={language}/>:<main className="page"><p className="font-serif text-2xl">Hymn not found</p></main>}
   return <HymnBrowser kind="hymns" myanmar={hymns.filter(hymn=>hymn.collection==="myanmar_hymns"&&Number.isInteger(hymn.number)).map(hymn=>toSummary(hymn,"hymns"))}/>;
 }
