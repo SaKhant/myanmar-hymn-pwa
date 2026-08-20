@@ -9,6 +9,7 @@ import { normalizeHymnNumberQuery, normalizeSearchText, normalizeTitlePrefix } f
 
 const CHORD_TOKEN=/^[A-G](?:#|b)?(?:(?:maj|min|m|dim|aug|sus|add)?\d*(?:\([^)]*\))?)?(?:\/[A-G](?:#|b)?)?$/i;
 const SHOW_HYMN_SECTION_SELECTOR=false;
+const HYMN_RETURN_TARGET_KEY="hymn-house:hymn-return-target";
 
 type NewTranslationSummary={id:string;englishNumber:number;title:string;category:string;englishTitle:string|null;searchText:string};
 type HymnSectionTab="hymns"|"new"|null;
@@ -23,8 +24,12 @@ function displayNumber(number:number|null|undefined):string {
   return String(number).padStart(3,"0");
 }
 
+function rememberHymnReturnTarget(id:string):void {
+  try{sessionStorage.setItem(HYMN_RETURN_TARGET_KEY,id)}catch{}
+}
+
 function HymnList({results,kind,language,exactNumber}:{results:HymnSummary[];kind:HymnKind;language:HymnLanguage;exactNumber?:string}) {
-  return <div className="divide-y divide-[var(--line)] border-y border-[var(--line)]">{results.map(h=>{const exact=String(h.number)===exactNumber;const showFirstLine=h.firstLine&&h.firstLine!==h.title&&!(kind==="yp"&&isChordOnlyText(h.firstLine));return <Link key={h.id} href={`/${kind}/${language}/${h.id}`} className={`hymn-list-row focus-ring flex min-h-14 items-center gap-4 px-2 py-4 hover:bg-[var(--sage-soft)] ${exact?"bg-[var(--sage-soft)]":""}`}><span className="w-12 shrink-0 text-center font-serif text-xl text-[var(--gold)]">{displayNumber(h.number)}</span><span className="min-w-0"><strong className={`block text-[15px] ${language==="my"?"myanmar":""}`}>{h.title}</strong>{showFirstLine&&<small className={`mt-1 block truncate text-[var(--muted)] ${language==="my"?"myanmar":""}`}>{h.firstLine}</small>}</span><ChevronRight className="ml-auto shrink-0 text-[var(--muted)]" size={18}/></Link>})}</div>;
+  return <div className="divide-y divide-[var(--line)] border-y border-[var(--line)]">{results.map(h=>{const exact=String(h.number)===exactNumber;const showFirstLine=h.firstLine&&h.firstLine!==h.title&&!(kind==="yp"&&isChordOnlyText(h.firstLine));const rowId=`hymn-list-row-${kind}-${language}-${h.id}`;return <Link id={rowId} key={h.id} href={`/${kind}/${language}/${h.id}`} onClick={()=>rememberHymnReturnTarget(rowId)} className={`hymn-list-row focus-ring flex min-h-14 items-center gap-4 px-2 py-4 hover:bg-[var(--sage-soft)] ${exact?"bg-[var(--sage-soft)]":""}`}><span className="w-12 shrink-0 text-center font-serif text-xl text-[var(--gold)]">{displayNumber(h.number)}</span><span className="min-w-0"><strong className={`block text-[15px] ${language==="my"?"myanmar":""}`}>{h.title}</strong>{showFirstLine&&<small className={`mt-1 block truncate text-[var(--muted)] ${language==="my"?"myanmar":""}`}>{h.firstLine}</small>}</span><ChevronRight className="ml-auto shrink-0 text-[var(--muted)]" size={18}/></Link>})}</div>;
 }
 
 function NewTranslationList({items}:{items:NewTranslationSummary[]}){
@@ -58,6 +63,23 @@ export function HymnBrowser({ kind, myanmar, english=[], newTranslations=[], ini
   const hasQuery=normalizedQuery.length>0;
 
   useEffect(()=>{if(!lyricSearchUrl||!navigator.onLine)return;let active=true;fetch(lyricSearchUrl).then(response=>response.ok?response.json():Promise.reject()).then((entries:Array<{id:string;lyricSearchText:string}>)=>{if(active)setLyricSearchIndex(Object.fromEntries(entries.map(entry=>[entry.id,entry.lyricSearchText]))) }).catch(()=>{});return()=>{active=false}},[lyricSearchUrl]);
+
+  useEffect(()=>{
+    let targetId:string|null=null;
+    try{targetId=sessionStorage.getItem(HYMN_RETURN_TARGET_KEY)}catch{}
+    if(!targetId)return;
+    const restore=()=>{
+      const target=document.getElementById(targetId!);
+      if(!target)return;
+      target.scrollIntoView({block:"center",inline:"nearest",behavior:"auto"});
+    };
+    const frame=requestAnimationFrame(restore);
+    const timer=window.setTimeout(()=>{
+      restore();
+      try{sessionStorage.removeItem(HYMN_RETURN_TARGET_KEY)}catch{}
+    },120);
+    return()=>{cancelAnimationFrame(frame);window.clearTimeout(timer)};
+  },[]);
 
   const results=useMemo(()=>{
     if(!normalizedQuery)return source;
