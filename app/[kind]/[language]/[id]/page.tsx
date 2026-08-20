@@ -88,7 +88,12 @@ export default async function HymnPage({params,searchParams}:{params:Promise<{ki
           {kind==="yp"&&!isMyanmar&&<Link href={`/yp/en/${hymn.id}`} aria-current="page" className="reader-current-version reader-version-link focus-ring">{regularYpSourceLabel??"ENG"}</Link>}
         </p>
         <h1 className={isMyanmar?`reader-title-myanmar mt-2 ${hasLongTitle?"reader-title-myanmar-long":""}`:"mt-2 font-serif text-3xl leading-snug tracking-tight md:text-5xl"}>{title}</h1>
-        {hymn.theme&&<p className={`mt-2.5 text-sm text-[var(--muted)] ${isMyanmar?"myanmar":""}`}>{hymn.theme}</p>}
+        {hymn.theme&&<p className={`mt-2.5 text-sm text-[var(--muted)] ${isMyanmar?"myanmar":""}`}>
+  {hymn.theme}
+  {" "}
+  {(hymn as typeof hymn & {theme_reference?:string}).theme_reference&&
+    <em>{(hymn as typeof hymn & {theme_reference?:string}).theme_reference}</em>}
+</p>}
         <div className="mt-4"><ReaderActions hymn={{id:hymn.id,kind,language,number:hymn.number,title,sections:hymn.sections}}/></div>
       </header>
 
