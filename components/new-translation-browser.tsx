@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useMemo,useState } from "react";
 import { BookOpen, ChevronRight, Music } from "lucide-react";
+import { ReaderBackButton } from "@/components/reader-back-button";
 import { SearchField } from "@/components/search-field";
 
 type TranslationSummary={id:string;englishNumber:number;title:string;category:string;englishTitle:string|null;searchText:string};
@@ -35,7 +36,7 @@ export function NewTranslationBrowser({items,ypItems,initialSection=null,hideCol
   const resultsCount=section==="hymns"?hymnResults.length:section==="yp"?ypResults.length:0;
 
   return <main className="page">
-    <Link href="/" className="focus-ring mb-5 inline-flex rounded-lg text-sm font-semibold text-[var(--muted)] hover:text-[var(--ink)]">← Back to Hymns</Link>
+    <ReaderBackButton fallback="/" label="Back to Hymns"/>
     <header className="mb-5">
       <p className="eyebrow normal-case">Hymnal.net</p>
       <h1 className="mt-2 font-serif text-3xl tracking-tight md:text-4xl">New Translations</h1>
