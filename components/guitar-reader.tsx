@@ -61,7 +61,7 @@ export function GuitarReader({ sections, arrangement, numberedNotesImageSrc, pia
   </>;
 }
 
-// Piano view intentionally has no source-caption text beneath the score.
+// Piano source-caption text remains intentionally omitted beneath the score.
 function PianoScoreView({ imageSrc }: { imageSrc: string }) {
   const [zoom, setZoom] = useState(1);
   const changeZoom = (amount: number) => setZoom((current) => Math.min(2.5, Math.max(1, Number((current + amount).toFixed(2)))));
