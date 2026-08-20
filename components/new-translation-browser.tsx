@@ -55,8 +55,6 @@ export function NewTranslationBrowser({items,ypItems,initialSection=null,hideCol
     </div>}
 
     {section!==null&&<>
-      {section==="yp"&&<p className="mb-5 text-sm text-[var(--muted)]">New Myanmar YP songs not yet included in the regular YP book.</p>}
-
       <SearchField value={query} onChange={setQuery} placeholder={section==="hymns"?"Search E number or Myanmar title…":"Search NS/H/LB number or title…"} cleanFocus />
       <p className="my-4 text-sm text-[var(--muted)]">{resultsCount} {section==="yp"?(resultsCount===1?"song":"songs"):(resultsCount===1?"translation":"translations")}</p>
 
