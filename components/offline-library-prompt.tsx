@@ -81,7 +81,7 @@ export function OfflineLibraryPrompt(){
       <div className="mt-4 text-center">
         <h2 id="offline-prompt-title" className="myanmar text-xl font-bold leading-8">{isUpdate?"အော့ဖ်လိုင်းစာကြည့်တိုက်ကို အပ်ဒိတ်လုပ်နေပါသည်":"အော့ဖ်လိုင်းအတွက် ဒေါင်းလုဒ်လုပ်မလား?"}</h2>
         <div id="offline-prompt-description" className="myanmar mt-2 text-sm leading-7 text-[var(--muted)]">
-          {isUpdate?<><p>သီချင်းအသစ်များနှင့် ပြင်ဆင်ချက်များကို အလိုအလျောက် ထည့်သွင်းနေပါသည်။</p><p>ပြီးပါက အင်တာနက်မရှိဘဲ ဖတ်ရှုနိုင်ပါမည်။</p></>:<><p>ဓမ္မသီချင်းများကို အင်တာနက်မရှိဘဲ ဖတ်ရှုနိုင်ပါမည်။</p><p>အသံဖိုင်များအတွက်တော့ အင်တာနက်လိုအပ်ပါသည်။</p></>}
+          {isUpdate?<><p>သီချင်းအသစ်များနှင့် ပြင်ဆင်ချက်များကို အလိုအလျောက် ထည့်သွင်းနေပါသည်။</p><p>ပြီးပါက အင်တာနက်မရှိဘဲ ဖတ်ရှုနိုင်ပါမည်။</p></>:<><p>ဓမ္မသီချင်းများကို အင်တာနက်မရှိဘဲ ဖတ်ရှုနိုင်ပါမည်။</p><p>ပီယာနိုစာရွက်၊ Jianpu နှင့် အသံဖိုင်များအတွက် အင်တာနက်လိုအပ်ပါသည်။</p></>}
         </div>
       </div>
       {status==="downloading"&&<p className="myanmar mt-4 text-center text-sm font-bold text-[var(--sage)]">{isUpdate?"အပ်ဒိတ်လုပ်နေပါသည်":"ဒေါင်းလုဒ်လုပ်နေပါသည်"}{progress!==null?`… ${progress}%`:"…"}</p>}
