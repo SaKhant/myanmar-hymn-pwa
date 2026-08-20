@@ -5,7 +5,6 @@ import "./design-trial.css";
 import "./reference-buttons.css";
 import { Navigation } from "@/components/navigation";
 import { ServiceWorker } from "@/components/service-worker";
-import { AppSplash } from "@/components/app-splash";
 import { OfflineLibraryPrompt } from "@/components/offline-library-prompt";
 import { OfflineNavigation } from "@/components/offline-navigation";
 import { OfflineApp } from "@/components/offline-app";
@@ -40,5 +39,5 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en" className={padauk.variable}><body>{!SHOW_HYMN_SECTION_SELECTOR&&<style>{`[aria-label="Hymn section"]{display:none!important}`}</style>}<AppSplash/><OfflineLibraryPrompt/>{SHOW_MENU_NAV&&<OfflineNavigation/>}<ServiceWorker/><div className="shell" style={SHOW_MENU_NAV?undefined:{paddingLeft:0,paddingBottom:0}}>{SHOW_MENU_NAV&&<Navigation/>}<OfflineApp/>{children}</div></body></html>;
+  return <html lang="en" className={padauk.variable}><body>{!SHOW_HYMN_SECTION_SELECTOR&&<style>{`[aria-label="Hymn section"]{display:none!important}`}</style>}<OfflineLibraryPrompt/>{SHOW_MENU_NAV&&<OfflineNavigation/>}<ServiceWorker/><div className="shell" style={SHOW_MENU_NAV?undefined:{paddingLeft:0,paddingBottom:0}}>{SHOW_MENU_NAV&&<Navigation/>}<OfflineApp/>{children}</div></body></html>;
 }
