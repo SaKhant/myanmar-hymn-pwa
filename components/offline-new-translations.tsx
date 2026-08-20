@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { WifiOff } from "lucide-react";
 import { NewTranslationBrowser } from "@/components/new-translation-browser";
+import { ReaderBackButton } from "@/components/reader-back-button";
 import { TranslationGuitarReader } from "@/components/translation-guitar-reader";
 import {
   readOfflineNewTranslations,
@@ -47,7 +48,7 @@ function OfflineHymnTranslationReader({item,items}:{item:OfflineNewTranslation;i
   const next=index>=0&&index<items.length-1?items[index+1]:undefined;
 
   return <main className="page max-w-3xl">
-    <Link href="/hymns/new-translations" className="focus-ring mb-5 inline-flex rounded-lg text-sm font-semibold text-[var(--muted)] hover:text-[var(--ink)]">← Back to New Translations</Link>
+    <ReaderBackButton fallback="/hymns/new-translations" label="Back to New Translations"/>
     <p className="eyebrow normal-case"><span>MYANMAR TRANSLATION</span>{" • "}<Link href={`/hymns/en/${item.english_number}`}>E{item.english_number}</Link></p>
     <h1 className="myanmar mt-3 font-serif text-3xl leading-tight tracking-tight md:text-4xl">{item.title}</h1>
     <p className="myanmar mt-3 text-sm text-[var(--muted)]">{item.category}{item.meter?` • ${item.meter}`:""}</p>
@@ -72,7 +73,7 @@ function OfflineYpTranslationReader({item,items}:{item:OfflineNewYpTranslation;i
   const sourceLabel=compactSourceRef(item.source_ref);
 
   return <main className="page max-w-3xl">
-    <Link href="/hymns/new-translations?section=yp" className="focus-ring mb-5 inline-flex rounded-lg text-sm font-semibold text-[var(--muted)] hover:text-[var(--ink)]">← Back to YP New Songs</Link>
+    <ReaderBackButton fallback="/hymns/new-translations?section=yp" label="Back to YP New Songs"/>
     <header className="mb-8">
       <p className="eyebrow normal-case">New YP Song{sourceLabel?` • ${sourceLabel}`:""}</p>
       <h1 className="myanmar mt-2 font-serif text-3xl leading-tight tracking-tight md:text-4xl">{item.title}</h1>
