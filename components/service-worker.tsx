@@ -46,6 +46,9 @@ export function ServiceWorker(){
       }
     };
     void checkForUpdate();
+    const warmGuitarData=()=>{if(navigator.onLine)void import("@/lib/hymns/guitar-data").catch(()=>{})};
+    if(typeof window.requestIdleCallback==="function")window.requestIdleCallback(warmGuitarData,{timeout:15000});
+    else setTimeout(warmGuitarData,8000);
     return()=>navigator.serviceWorker.removeEventListener("controllerchange",handleControllerChange);
   },[]);
   if(!availableVersion)return null;
