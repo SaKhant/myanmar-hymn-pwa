@@ -25,10 +25,24 @@ export interface HymnRecord {
   source_file: string;
 }
 
+export interface HymnReference {
+  number: number;
+  first_line: string | null;
+}
+
+export interface HymnSubcategory {
+  slug: string;
+  title: string;
+  needs_review?: boolean;
+  hymns: HymnReference[];
+}
+
 export interface HymnCategory {
   slug: string;
   category: string;
-  hymns: { number: number; first_line: string | null }[];
+  needs_review?: boolean;
+  hymns: HymnReference[];
+  subcategories?: HymnSubcategory[];
   source_file: string;
 }
 
