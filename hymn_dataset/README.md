@@ -12,6 +12,8 @@ The app reads these files through `lib/hymns/data.ts`.
 | `myanmar_hymns_missing_675_686.json` | Recovered hymns 675–686, merged at load time |
 | `myanmar_yp.json` | Myanmar YP songs |
 | `english_yp.json` | English YP songs |
+| `matu_hymns.json` | Matu hymns (decoded from the old compressed format) |
+| `kachin_hymns.json` | Kachin hymns (decoded from the old compressed format) |
 | `categories.json` | Myanmar book category index |
 
 Each hymn record keeps: page heading, metadata, cross references, audio URL (when present), verse/chorus sections, and a plain `lyrics_text` field.
