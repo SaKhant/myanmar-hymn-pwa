@@ -8,7 +8,6 @@ const VERSION_KEY="hymn-house:installed-app-version";
 async function registerVersion(version:string){
   const registration=await navigator.serviceWorker.register(`/sw.js?v=${encodeURIComponent(version)}`,{updateViaCache:"none"});
   await registration.update();
-  registration.active?.postMessage({type:"PRECACHE_APP_SHELL"});
 }
 
 export function ServiceWorker(){

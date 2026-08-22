@@ -1,7 +1,7 @@
 const version=new URL(self.location.href).searchParams.get("v")||"legacy";
 const cacheName=`hymn-house-shell-${version}`;
 const cachePrefix="hymn-house-shell-";
-const appShell=["/","/yp","/favorites","/settings","/categories","/icon-192.png","/icon-512.png","/splash-guitar.png"];
+const appShell=["/","/icon-192.png","/icon-512.png"];
 
 async function cacheResponse(request,response){
   if(!response||!response.ok)return response;
