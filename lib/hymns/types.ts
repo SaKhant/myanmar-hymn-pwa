@@ -33,12 +33,14 @@ export interface HymnReference {
 export interface HymnSubcategory {
   slug: string;
   title: string;
+  needs_review?: boolean;
   hymns: HymnReference[];
 }
 
 export interface HymnCategory {
   slug: string;
   category: string;
+  needs_review?: boolean;
   hymns: HymnReference[];
   subcategories?: HymnSubcategory[];
   source_file: string;

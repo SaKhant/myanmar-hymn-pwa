@@ -4,10 +4,10 @@ import { getCategories, getSummaries } from "@/lib/hymns/data";
 
 export default function CategoriesPage(){
   return <main className="page">
-    <ReaderBackButton fallback="/" label="Back to Hymns"/>
-    <p className="eyebrow">Myanmar hymn book</p>
+    <ReaderBackButton fallback="/" label="သီချင်းများသို့ ပြန်သွားရန်"/>
+    <p className="eyebrow">မြန်မာဓမ္မသီချင်းစာအုပ်</p>
     <h1 className="myanmar mt-2 font-serif text-4xl md:text-5xl">မာတိကာ ဇယား</h1>
-    <p className="mt-3 text-[var(--muted)]">Select a category to see its hymn list.</p>
+    <p className="myanmar mt-3 text-[var(--muted)]">အမျိုးအစားကိုရွေးပြီး အမျိုးအစားခွဲနှင့် သီချင်းများကို ကြည့်ရှုပါ။</p>
     <CategoriesBrowser categories={getCategories()} hymns={getSummaries("hymns","my")}/>
   </main>;
 }

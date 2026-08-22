@@ -37,7 +37,6 @@ export function CategoriesBrowser({categories,hymns}:{categories:HymnCategory[];
   return <div className="mt-6 grid gap-2">
     {orderedCategories.map(category=>{
       const isOpen=openCategory===category.slug;
-      const references=[...category.hymns].sort((a,b)=>a.number-b.number);
       const subcategories=category.subcategories??[];
       return <section key={category.slug} className="overflow-hidden rounded-xl border border-[var(--line)] bg-[var(--paper)] shadow-sm">
         <button type="button" onClick={()=>{setOpenCategory(current=>current===category.slug?null:category.slug);setOpenSubcategory(null)}} aria-expanded={isOpen} className="focus-ring myanmar flex min-h-16 w-full items-center gap-4 px-5 py-3 text-left text-base font-bold text-[var(--ink)] hover:bg-[var(--sage-soft)]">
@@ -51,14 +50,17 @@ export function CategoriesBrowser({categories,hymns}:{categories:HymnCategory[];
               const subcategoryOpen=openSubcategory===subcategoryKey;
               return <div key={subcategory.slug}>
                 <button type="button" onClick={()=>setOpenSubcategory(current=>current===subcategoryKey?null:subcategoryKey)} aria-expanded={subcategoryOpen} className="focus-ring myanmar flex min-h-14 w-full items-center gap-4 px-5 py-3 text-left text-[15px] font-semibold hover:bg-[var(--sage-soft)]">
-                  <span className="min-w-0 flex-1">{subcategory.title}</span>
+                  <span className="min-w-0 flex-1">
+                    {subcategory.title}
+                    {subcategory.needs_review&&<span className="ml-2 align-middle text-[10px] font-medium text-[var(--muted)]">ပြန်စစ်ရန်</span>}
+                  </span>
                   <span className="rounded-full bg-[var(--sage-soft)] px-2 py-0.5 text-xs text-[var(--sage)]">{subcategory.hymns.length}</span>
                   {subcategoryOpen?<ChevronUp aria-hidden="true" className="shrink-0" size={19}/>:<ChevronDown aria-hidden="true" className="shrink-0" size={19}/>}
                 </button>
                 {subcategoryOpen&&<HymnRows references={subcategory.hymns} hymnByNumber={hymnByNumber}/>}
               </div>;
             })}
-          </div>:<><p className="px-5 py-3 text-sm font-semibold text-[var(--muted)]">{references.length} hymns</p><HymnRows references={references} hymnByNumber={hymnByNumber}/></>}
+          </div>:<p className="myanmar px-5 py-4 text-sm text-[var(--muted)]">အမျိုးအစားခွဲများ မရှိသေးပါ။</p>}
         </div>}
       </section>;
     })}

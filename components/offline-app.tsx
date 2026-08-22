@@ -13,6 +13,7 @@ import { StoredList } from "@/components/stored-list";
 import { normalizeSearchText } from "@/lib/hymns/search";
 import { readOfflineCategories, readOfflineHymns, readOfflineLibraryMeta, type OfflineHymn } from "@/lib/offline-library";
 import type { HymnCategory, HymnKind, HymnLanguage, HymnSummary } from "@/lib/hymns/types";
+import { CategoriesBrowser } from "@/components/categories-browser";
 
 function collection(kind:HymnKind,language:HymnLanguage){return `${language==="my"?"myanmar":"english"}_${kind}`}
 function title(hymn:OfflineHymn){return hymn.title?.trim()||hymn.first_line?.trim()||`Hymn ${hymn.number??hymn.id}`}
@@ -24,9 +25,6 @@ function toSummary(hymn:OfflineHymn,kind:HymnKind):HymnSummary{
 }
 function englishReferenceNumber(reference:string|undefined){return reference?.match(/^(\d+)(?:\(\d+\))?$/)?.[1]}
 function ypReferenceNumber(reference:string|undefined){return reference?.match(/^(\d+)$/)?.[1]}
-function categoryNumber(category:string){const match=category.match(/^\s*(\d+)/);return match?Number(match[1]):Number.POSITIVE_INFINITY}
-const categoryFallbacks:Record<string,string>={Divine_Healing:"အနာရောဂါငြိမ်းစေခြင်း",Prayer:"ဆုတောင်းခြင်း",Study_of_the_Word:"နှုတ်ကပတ်တော်လေ့လာခြင်း",The_Church:"အသင်းတော်",Meetings:"စုဝေးခြင်းများ",Spiritual_Warfare:"ဝိညာဉ်ရေးရာတိုက်ပွဲ",Service:"အမှုတော်ဆောင်ခြင်း",Preaching_of_the_Gospel:"ဧဝံဂေလိတရားဟောပြောခြင်း",Baptism:"ဗတ္တိဇံ",The_Lord_s_Day:"သခင်ဘုရား၏နေ့",The_Kingdom:"နိုင်ငံတော်",Hope_of_Glory:"ဘုန်းတော်မျှော်လင့်ခြင်း",Ultimate_Manifestation:"နောက်ဆုံးထင်ရှားပေါ်ထွန်းခြင်း",Gospel:"ဧဝံဂေလိတရား",The_Word_of_God:"ဘုရားသခင်၏နှုတ်ကပတ်တော်",Others:"အခြားများ",Preaching_the_Gospel:"ဧဝံဂေလိတရားဟောပြောခြင်း"};
-function categoryTitle(category:HymnCategory){if(/[\u1000-\u109f]/u.test(category.category))return category.category;return `${categoryNumber(category.category)}. ${categoryFallbacks[category.slug]??category.category.replace(/^\s*\d+\.\s*/,"").replace(/\s*\[\d+\]\s*$/,"")}`}
 const CHORD_TOKEN=/^[A-G](?:#|b)?(?:(?:maj|min|m|dim|aug|sus|add)?\d*(?:\([^)]*\))?)?(?:\/[A-G](?:#|b)?)?$/i;
 function isChordOnlyLine(line:string){const tokens=line.trim().replace(/[|,:()\-–—]/g," ").split(/\s+/).filter(Boolean);return tokens.length>0&&tokens.every(token=>CHORD_TOKEN.test(token))}
 
@@ -74,7 +72,7 @@ function OfflineReader({hymn,hymns,kind,language}:{hymn:OfflineHymn;hymns:Offlin
   </main>;
 }
 
-function OfflineCategories({categories}:{categories:HymnCategory[]}){return <main className="page"><ReaderBackButton fallback="/" label="Back to Hymns"/><p className="eyebrow">Myanmar hymn book</p><h1 className="mt-2 font-serif text-4xl md:text-5xl">Categories</h1><p className="mt-3 text-[var(--muted)]">Browse 33 themes from the source collection.</p><div className="mt-8 grid gap-3 sm:grid-cols-2">{[...categories].sort((a,b)=>categoryNumber(a.category)-categoryNumber(b.category)||a.category.localeCompare(b.category)).map(category=><section key={category.slug} className="surface p-5"><h2 className="myanmar font-bold">{categoryTitle(category)}</h2><p className="mt-2 text-xs text-[var(--muted)]">{category.hymns.length} hymn references</p><div className="mt-4 flex flex-wrap gap-2">{[...category.hymns].sort((a,b)=>a.number-b.number).map(hymn=><Link key={hymn.number} href={`/hymns/my/${hymn.number}`} className="focus-ring rounded-full bg-[var(--sage-soft)] px-3 py-1.5 text-xs font-bold text-[var(--sage)]">{hymn.number}</Link>)}</div></section>)}</div></main>}
+function OfflineCategories({categories,hymns}:{categories:HymnCategory[];hymns:OfflineHymn[]}){const summaries=hymns.filter(hymn=>hymn.collection==="myanmar_hymns").map(hymn=>toSummary(hymn,"hymns"));return <main className="page"><ReaderBackButton fallback="/" label="သီချင်းများသို့ ပြန်သွားရန်"/><p className="eyebrow">မြန်မာဓမ္မသီချင်းစာအုပ်</p><h1 className="myanmar mt-2 font-serif text-4xl md:text-5xl">မာတိကာ ဇယား</h1><p className="myanmar mt-3 text-[var(--muted)]">အမျိုးအစားကိုရွေးပြီး အမျိုးအစားခွဲနှင့် သီချင်းများကို ကြည့်ရှုပါ။</p><CategoriesBrowser categories={categories} hymns={summaries}/></main>}
 
 function OfflineRoute({hymns,categories,pathname}:{hymns:OfflineHymn[];categories:HymnCategory[];pathname:string}){
   const parts=pathname.split("/").filter(Boolean);
@@ -82,7 +80,7 @@ function OfflineRoute({hymns,categories,pathname}:{hymns:OfflineHymn[];categorie
   if(parts[0]==="yp"&&parts.length===1)return <HymnBrowser kind="yp" myanmar={hymns.filter(hymn=>hymn.collection==="myanmar_yp").map(hymn=>toSummary(hymn,"yp"))} myanmarOnly/>;
   if(parts[0]==="favorites")return <main className="page"><p className="eyebrow">Your collection</p><h1 className="mt-2 font-serif text-4xl md:text-5xl">Favorites</h1><StoredList/></main>;
   if(parts[0]==="settings")return <main className="page max-w-3xl"><h1 className="font-serif text-4xl md:text-5xl">Settings</h1><section className="surface mt-8 p-6"><h2 className="myanmar text-2xl font-bold">ဖုန်းတွင် App အဖြစ် ထည့်သွင်းရန်</h2><div className="mt-5 space-y-5 text-base leading-7 text-[var(--muted)]"><div><h3 className="font-bold text-[var(--ink)]">Android</h3><p className="myanmar mt-1">Chrome ဖြင့် ဝဘ်ဆိုဒ်ကိုဖွင့်ပါ → ⋮ ကိုနှိပ်ပါ → Install app သို့မဟုတ် Add to Home screen ကိုရွေးပါ။</p></div><div><h3 className="font-bold text-[var(--ink)]">iPhone / iPad</h3><p className="myanmar mt-1">Safari ဖြင့် ဝဘ်ဆိုဒ်ကိုဖွင့်ပါ → Share ⬆️ ကိုနှိပ်ပါ → Add to Home Screen → Add ကိုနှိပ်ပါ။</p></div><p className="myanmar">ထည့်သွင်းပြီးနောက် ပုံမှန် App တစ်ခုကဲ့သို့ Home Screen မှ တိုက်ရိုက်ဖွင့်နိုင်ပါသည်။</p></div></section><p className="mt-6 text-center text-base font-bold text-[var(--muted)]">Audio need internet or wifi.</p></main>;
-  if(parts[0]==="categories")return <OfflineCategories categories={categories}/>;
+  if(parts[0]==="categories")return <OfflineCategories categories={categories} hymns={hymns}/>;
   if((parts[0]==="hymns"&&parts[1]==="matu"&&parts.length===2)||(parts[0]==="matu-hymns"&&parts.length===1))return <OfflineMatuHymnBrowser hymns={hymns}/>;
   if(parts[0]==="hymns"&&(parts[1]==="kachin"||parts[1]==="matu")&&parts[2]){const language=parts[1] as "kachin"|"matu";const collectionName=language==="kachin"?"kachin_hymns":"matu_hymns";const id=decodeURIComponent(parts[2]);const hymn=hymns.find(item=>String(item.collection)===collectionName&&(item.id===id||hymnNumber(item)===id));return hymn?<OfflineLocalHymnReader hymn={hymn} hymns={hymns} language={language}/>:<main className="page"><p className="font-serif text-2xl">Hymn not found</p></main>}
   if(parts[0]==="matu-hymns"&&parts[1]){const id=decodeURIComponent(parts[1]);const hymn=hymns.find(item=>String(item.collection)==="matu_hymns"&&(item.id===id||hymnNumber(item)===id));return hymn?<OfflineLocalHymnReader hymn={hymn} hymns={hymns} language="matu"/>:<main className="page"><p className="font-serif text-2xl">Hymn not found</p></main>}
