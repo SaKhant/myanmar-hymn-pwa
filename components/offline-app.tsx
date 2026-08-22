@@ -79,8 +79,8 @@ function OfflineCategories({categories,hymns}:{categories:HymnCategory[];hymns:O
 
 function OfflineRoute({hymns,categories,pathname}:{hymns:OfflineHymn[];categories:HymnCategory[];pathname:string}){
   const parts=pathname.split("/").filter(Boolean);
-  if(!parts.length)return <HymnBrowser kind="hymns" myanmar={hymns.filter(hymn=>hymn.collection==="myanmar_hymns"&&Number.isInteger(hymn.number)).map(hymn=>toSummary(hymn,"hymns"))}/>;
-  if(parts[0]==="yp"&&parts.length===1)return <HymnBrowser kind="yp" myanmar={hymns.filter(hymn=>hymn.collection==="myanmar_yp").map(hymn=>toSummary(hymn,"yp"))} myanmarOnly/>;
+  if(!parts.length)return <HymnBrowser key="browse-hymns" kind="hymns" myanmar={hymns.filter(hymn=>hymn.collection==="myanmar_hymns"&&Number.isInteger(hymn.number)).map(hymn=>toSummary(hymn,"hymns"))}/>;
+  if(parts[0]==="yp"&&parts.length===1)return <HymnBrowser key="browse-yp" kind="yp" myanmar={hymns.filter(hymn=>hymn.collection==="myanmar_yp").map(hymn=>toSummary(hymn,"yp"))} myanmarOnly/>;
   if(parts[0]==="favorites")return <main className="page"><p className="eyebrow">Your collection</p><h1 className="mt-2 font-serif text-4xl md:text-5xl">Favorites</h1><StoredList/></main>;
   if(parts[0]==="settings")return <main className="page max-w-3xl"><h1 className="font-serif text-4xl md:text-5xl">Settings</h1><section className="surface mt-8 p-6"><h2 className="myanmar text-2xl font-bold">ဖုန်းတွင် App အဖြစ် ထည့်သွင်းရန်</h2><div className="mt-5 space-y-5 text-base leading-7 text-[var(--muted)]"><div><h3 className="font-bold text-[var(--ink)]">Android</h3><p className="myanmar mt-1">Chrome ဖြင့် ဝဘ်ဆိုဒ်ကိုဖွင့်ပါ → ⋮ ကိုနှိပ်ပါ → Install app သို့မဟုတ် Add to Home screen ကိုရွေးပါ။</p></div><div><h3 className="font-bold text-[var(--ink)]">iPhone / iPad</h3><p className="myanmar mt-1">Safari ဖြင့် ဝဘ်ဆိုဒ်ကိုဖွင့်ပါ → Share ⬆️ ကိုနှိပ်ပါ → Add to Home Screen → Add ကိုနှိပ်ပါ။</p></div><p className="myanmar">ထည့်သွင်းပြီးနောက် ပုံမှန် App တစ်ခုကဲ့သို့ Home Screen မှ တိုက်ရိုက်ဖွင့်နိုင်ပါသည်။</p></div></section><p className="mt-6 text-center text-base font-bold text-[var(--muted)]">Audio need internet or wifi.</p></main>;
   if(parts[0]==="categories")return <OfflineCategories categories={categories} hymns={hymns}/>;
@@ -88,7 +88,7 @@ function OfflineRoute({hymns,categories,pathname}:{hymns:OfflineHymn[];categorie
   if(parts[0]==="hymns"&&(parts[1]==="kachin"||parts[1]==="matu")&&parts[2]){const language=parts[1] as "kachin"|"matu";const collectionName=language==="kachin"?"kachin_hymns":"matu_hymns";const id=decodeURIComponent(parts[2]);const hymn=hymns.find(item=>String(item.collection)===collectionName&&(item.id===id||hymnNumber(item)===id));return hymn?<OfflineLocalHymnReader hymn={hymn} hymns={hymns} language={language}/>:<main className="page"><p className="font-serif text-2xl">Hymn not found</p></main>}
   if(parts[0]==="matu-hymns"&&parts[1]){const id=decodeURIComponent(parts[1]);const hymn=hymns.find(item=>String(item.collection)==="matu_hymns"&&(item.id===id||hymnNumber(item)===id));return hymn?<OfflineLocalHymnReader hymn={hymn} hymns={hymns} language="matu"/>:<main className="page"><p className="font-serif text-2xl">Hymn not found</p></main>}
   if((parts[0]==="hymns"||parts[0]==="yp")&&(parts[1]==="my"||parts[1]==="en")&&parts[2]){const kind=parts[0] as HymnKind,language=parts[1] as HymnLanguage;const hymn=hymns.find(item=>item.collection===collection(kind,language)&&(item.id===decodeURIComponent(parts[2])||String(item.number)===decodeURIComponent(parts[2])));return hymn?<OfflineReader hymn={hymn} hymns={hymns} kind={kind} language={language}/>:<main className="page"><p className="font-serif text-2xl">Hymn not found</p></main>}
-  return <HymnBrowser kind="hymns" myanmar={hymns.filter(hymn=>hymn.collection==="myanmar_hymns"&&Number.isInteger(hymn.number)).map(hymn=>toSummary(hymn,"hymns"))}/>;
+  return <HymnBrowser key="browse-fallback" kind="hymns" myanmar={hymns.filter(hymn=>hymn.collection==="myanmar_hymns"&&Number.isInteger(hymn.number)).map(hymn=>toSummary(hymn,"hymns"))}/>;
 }
 
 function snapshotToSummary(summary:OfflineSnapshotSummary,kind:HymnKind):HymnSummary{
@@ -120,8 +120,8 @@ export function OfflineApp(){
   const route=useMemo(()=>{
     if(ready)return <OfflineRoute hymns={hymns} categories={categories} pathname={pathname}/>;
     const parts=pathname.split("/").filter(Boolean);
-    if(preview&&parts.length===0)return <HymnBrowser kind="hymns" myanmar={preview.myanmar}/>;
-    if(preview&&parts[0]==="yp"&&parts.length===1)return <HymnBrowser kind="yp" myanmar={preview.yp} myanmarOnly/>;
+    if(preview&&parts.length===0)return <HymnBrowser key="preview-hymns" kind="hymns" myanmar={preview.myanmar}/>;
+    if(preview&&parts[0]==="yp"&&parts.length===1)return <HymnBrowser key="preview-yp" kind="yp" myanmar={preview.yp} myanmarOnly/>;
     return <main className="page"><p className="text-sm font-bold text-[var(--muted)]">Loading offline library…</p></main>;
   },[categories,hymns,pathname,ready,preview]);
   if(!offline)return null;
