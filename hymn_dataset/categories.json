@@ -160,7 +160,171 @@
         "first_line": null
       }
     ],
-    "source_file": "categories/Assurance_and_Joy_of_Salvation.html"
+    "source_file": "categories/Assurance_and_Joy_of_Salvation.html",
+    "subcategories": [
+      {
+        "slug": "all-hymns",
+        "title": "သီချင်းများအားလုံး",
+        "hymns": [
+          {
+            "number": 168,
+            "first_line": null
+          },
+          {
+            "number": 172,
+            "first_line": null
+          },
+          {
+            "number": 169,
+            "first_line": "လာကြလော့၊ ဝမ်းမြောက်လော့"
+          },
+          {
+            "number": 170,
+            "first_line": "ယေရှု အံ့ဖွယ် မေတ္တာတော်"
+          },
+          {
+            "number": 171,
+            "first_line": "ကျွန်ုပ်တွေ့ပြီ၊ မိတ်ဆွေတွေ့ပြီ၊"
+          },
+          {
+            "number": 173,
+            "first_line": null
+          },
+          {
+            "number": 174,
+            "first_line": null
+          },
+          {
+            "number": 175,
+            "first_line": null
+          },
+          {
+            "number": 176,
+            "first_line": null
+          },
+          {
+            "number": 177,
+            "first_line": null
+          },
+          {
+            "number": 179,
+            "first_line": null
+          },
+          {
+            "number": 178,
+            "first_line": "ကျွန်ုပ်ကိုယေရှုပိုင်"
+          },
+          {
+            "number": 180,
+            "first_line": null
+          },
+          {
+            "number": 181,
+            "first_line": null
+          },
+          {
+            "number": 182,
+            "first_line": null
+          },
+          {
+            "number": 309,
+            "first_line": "ယခင်အပြစ်ဖြင့် ချည်နှောင်ခြင်းခံရ"
+          },
+          {
+            "number": 183,
+            "first_line": null
+          },
+          {
+            "number": 187,
+            "first_line": null
+          },
+          {
+            "number": 184,
+            "first_line": "အံ့ဖွယ်ကျေးဇူးတော်ချိုမြိန်သံ"
+          },
+          {
+            "number": 185,
+            "first_line": "ပြစ်ပြည့်ဝလည်း၊ ကျေးဇူးတော်ကြီး"
+          },
+          {
+            "number": 186,
+            "first_line": "ချစ်စွာသောကယ်တင်ရှင်"
+          },
+          {
+            "number": 188,
+            "first_line": null
+          },
+          {
+            "number": 190,
+            "first_line": null
+          },
+          {
+            "number": 189,
+            "first_line": "အဝေးမှနှောင့်ယှက်ဆူညံသံ ကျွန်ုပ်နားထဲရောက်လာ"
+          },
+          {
+            "number": 191,
+            "first_line": null
+          },
+          {
+            "number": 193,
+            "first_line": null
+          },
+          {
+            "number": 192,
+            "first_line": "သက်တာမုန်တိုင်း၌ ကျောက်ဆူးရှိပြီလား"
+          },
+          {
+            "number": 194,
+            "first_line": null
+          },
+          {
+            "number": 197,
+            "first_line": null
+          },
+          {
+            "number": 195,
+            "first_line": "အပြစ်၌ပျောက်ဆုံး၊ ယေရှုကယ်နုတ်ပေးပြီ"
+          },
+          {
+            "number": 196,
+            "first_line": "အံ့ဖွယ်ကယ်တင်ရှင်၊ ကျွန်ုပ်ကို ချစ်မူ"
+          },
+          {
+            "number": 198,
+            "first_line": null
+          },
+          {
+            "number": 199,
+            "first_line": null
+          },
+          {
+            "number": 200,
+            "first_line": null
+          },
+          {
+            "number": 201,
+            "first_line": null
+          },
+          {
+            "number": 204,
+            "first_line": null
+          },
+          {
+            "number": 202,
+            "first_line": "နေ့ရောင်ထက် ထွန်းတောက်သောအလင်းသည်"
+          },
+          {
+            "number": 203,
+            "first_line": "ကျေးဇူးတော်သည် ကျွန်ုပ်ကြွေးဆပ်ပေး"
+          },
+          {
+            "number": 205,
+            "first_line": null
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "Baptism",
@@ -183,7 +347,31 @@
         "first_line": null
       }
     ],
-    "source_file": "categories/Baptism.html"
+    "source_file": "categories/Baptism.html",
+    "subcategories": [
+      {
+        "slug": "all-hymns",
+        "title": "သီချင်းများအားလုံး",
+        "hymns": [
+          {
+            "number": 935,
+            "first_line": null
+          },
+          {
+            "number": 936,
+            "first_line": null
+          },
+          {
+            "number": 937,
+            "first_line": null
+          },
+          {
+            "number": 938,
+            "first_line": null
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "Blessing_of_the_Trinity",
@@ -226,7 +414,51 @@
         "first_line": "ကောင်းချီးပေးဘုရားကို ချီးမွမ်း"
       }
     ],
-    "source_file": "categories/Blessing_of_the_Trinity.html"
+    "source_file": "categories/Blessing_of_the_Trinity.html",
+    "subcategories": [
+      {
+        "slug": "all-hymns",
+        "title": "သီချင်းများအားလုံး",
+        "hymns": [
+          {
+            "number": 1,
+            "first_line": null
+          },
+          {
+            "number": 2,
+            "first_line": null
+          },
+          {
+            "number": 3,
+            "first_line": null
+          },
+          {
+            "number": 4,
+            "first_line": null
+          },
+          {
+            "number": 5,
+            "first_line": null
+          },
+          {
+            "number": 6,
+            "first_line": null
+          },
+          {
+            "number": 7,
+            "first_line": null
+          },
+          {
+            "number": 9,
+            "first_line": null
+          },
+          {
+            "number": 8,
+            "first_line": "ကောင်းချီးပေးဘုရားကို ချီးမွမ်း"
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "Comfort_in_Trials",
@@ -297,7 +529,79 @@
         "first_line": null
       }
     ],
-    "source_file": "categories/Comfort_in_Trials.html"
+    "source_file": "categories/Comfort_in_Trials.html",
+    "subcategories": [
+      {
+        "slug": "all-hymns",
+        "title": "သီချင်းများအားလုံး",
+        "hymns": [
+          {
+            "number": 387,
+            "first_line": null
+          },
+          {
+            "number": 388,
+            "first_line": null
+          },
+          {
+            "number": 389,
+            "first_line": null
+          },
+          {
+            "number": 390,
+            "first_line": null
+          },
+          {
+            "number": 391,
+            "first_line": null
+          },
+          {
+            "number": 392,
+            "first_line": null
+          },
+          {
+            "number": 394,
+            "first_line": null
+          },
+          {
+            "number": 393,
+            "first_line": "စိတ်ငယ်ဝမ်းနည်း ဒုက္ခကြီးထဲမှာ"
+          },
+          {
+            "number": 395,
+            "first_line": null
+          },
+          {
+            "number": 396,
+            "first_line": null
+          },
+          {
+            "number": 397,
+            "first_line": null
+          },
+          {
+            "number": 398,
+            "first_line": null
+          },
+          {
+            "number": 399,
+            "first_line": null
+          },
+          {
+            "number": 400,
+            "first_line": null
+          },
+          {
+            "number": 401,
+            "first_line": null
+          },
+          {
+            "number": 402,
+            "first_line": null
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "Consecration",
@@ -420,7 +724,131 @@
         "first_line": null
       }
     ],
-    "source_file": "categories/Consecration.html"
+    "source_file": "categories/Consecration.html",
+    "subcategories": [
+      {
+        "slug": "all-hymns",
+        "title": "သီချင်းများအားလုံး",
+        "hymns": [
+          {
+            "number": 244,
+            "first_line": null
+          },
+          {
+            "number": 247,
+            "first_line": null
+          },
+          {
+            "number": 245,
+            "first_line": "ကျွန်ုပ်ကို ကိုင်မြဲမေတ္တာတော်"
+          },
+          {
+            "number": 246,
+            "first_line": "သခင်ပိုင်ဆိုင်ပြီ၊ လွန်စွာဝမ်းမြောက်ပါ၏"
+          },
+          {
+            "number": 248,
+            "first_line": null
+          },
+          {
+            "number": 249,
+            "first_line": null
+          },
+          {
+            "number": 250,
+            "first_line": null
+          },
+          {
+            "number": 251,
+            "first_line": null
+          },
+          {
+            "number": 255,
+            "first_line": null
+          },
+          {
+            "number": 252,
+            "first_line": "ပြည့်ဝအပ်နှံပြီ - ချစ်သခင်ထံ"
+          },
+          {
+            "number": 253,
+            "first_line": "ဝမ်းမြောက်စွာပြည့်ဝအပ်နှံ"
+          },
+          {
+            "number": 254,
+            "first_line": "ကျွန်ုပ်အသက်လက်ခံပါ"
+          },
+          {
+            "number": 256,
+            "first_line": null
+          },
+          {
+            "number": 257,
+            "first_line": null
+          },
+          {
+            "number": 260,
+            "first_line": null
+          },
+          {
+            "number": 258,
+            "first_line": "မြေကြီးပျော်ရာ၊ မပြောပါနှင့်"
+          },
+          {
+            "number": 259,
+            "first_line": "ကယ်တင်ရှင်ထံ စိတ်နှလုံးချီးမြောက်ပြီ"
+          },
+          {
+            "number": 262,
+            "first_line": null
+          },
+          {
+            "number": 261,
+            "first_line": "ယေရှုရှင်ဘို့သာ သစ္စာနှင့်နေမည်"
+          },
+          {
+            "number": 263,
+            "first_line": null
+          },
+          {
+            "number": 264,
+            "first_line": null
+          },
+          {
+            "number": 265,
+            "first_line": null
+          },
+          {
+            "number": 267,
+            "first_line": null
+          },
+          {
+            "number": 266,
+            "first_line": "ဘုန်းတော်ပြည့်ဝ၊ အောင်နိုင်အရှင်"
+          },
+          {
+            "number": 268,
+            "first_line": null
+          },
+          {
+            "number": 269,
+            "first_line": null
+          },
+          {
+            "number": 270,
+            "first_line": null
+          },
+          {
+            "number": 271,
+            "first_line": null
+          },
+          {
+            "number": 272,
+            "first_line": null
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "Divine_Healing",
@@ -463,7 +891,51 @@
         "first_line": null
       }
     ],
-    "source_file": "categories/Divine_Healing.html"
+    "source_file": "categories/Divine_Healing.html",
+    "subcategories": [
+      {
+        "slug": "all-hymns",
+        "title": "သီချင်းများအားလုံး",
+        "hymns": [
+          {
+            "number": 752,
+            "first_line": null
+          },
+          {
+            "number": 753,
+            "first_line": null
+          },
+          {
+            "number": 754,
+            "first_line": null
+          },
+          {
+            "number": 755,
+            "first_line": null
+          },
+          {
+            "number": 758,
+            "first_line": null
+          },
+          {
+            "number": 756,
+            "first_line": "When Christ of old with healing pow'r"
+          },
+          {
+            "number": 757,
+            "first_line": "At even when the sun was set,"
+          },
+          {
+            "number": 759,
+            "first_line": null
+          },
+          {
+            "number": 760,
+            "first_line": null
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "Encouragement",
@@ -506,7 +978,51 @@
         "first_line": null
       }
     ],
-    "source_file": "categories/Encouragement.html"
+    "source_file": "categories/Encouragement.html",
+    "subcategories": [
+      {
+        "slug": "all-hymns",
+        "title": "သီချင်းများအားလုံး",
+        "hymns": [
+          {
+            "number": 378,
+            "first_line": null
+          },
+          {
+            "number": 381,
+            "first_line": null
+          },
+          {
+            "number": 379,
+            "first_line": "မျက်နှာတော်ကြည့် ချိန်ယူ"
+          },
+          {
+            "number": 380,
+            "first_line": "ယေရှုကို စေ့စေ့ကြည့်"
+          },
+          {
+            "number": 382,
+            "first_line": null
+          },
+          {
+            "number": 383,
+            "first_line": null
+          },
+          {
+            "number": 384,
+            "first_line": null
+          },
+          {
+            "number": 385,
+            "first_line": null
+          },
+          {
+            "number": 386,
+            "first_line": null
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "Experience_of_Christ",
@@ -813,7 +1329,315 @@
         "first_line": null
       }
     ],
-    "source_file": "categories/Experience_of_Christ.html"
+    "source_file": "categories/Experience_of_Christ.html",
+    "subcategories": [
+      {
+        "slug": "all-hymns",
+        "title": "သီချင်းများအားလုံး",
+        "hymns": [
+          {
+            "number": 284,
+            "first_line": null
+          },
+          {
+            "number": 286,
+            "first_line": null
+          },
+          {
+            "number": 285,
+            "first_line": "ခမည်းတော်ကို မသိကြပေ"
+          },
+          {
+            "number": 287,
+            "first_line": null
+          },
+          {
+            "number": 288,
+            "first_line": null
+          },
+          {
+            "number": 289,
+            "first_line": null
+          },
+          {
+            "number": 290,
+            "first_line": null
+          },
+          {
+            "number": 296,
+            "first_line": null
+          },
+          {
+            "number": 291,
+            "first_line": "အို တန်ခိုးတော်၊ အို ခွန်အားများ"
+          },
+          {
+            "number": 292,
+            "first_line": "ကယ်တင်ရှင် ခရစ်တော် ဘုန်းတော်"
+          },
+          {
+            "number": 293,
+            "first_line": "ကယ်တင်ရှင်ကို အစေခံ"
+          },
+          {
+            "number": 294,
+            "first_line": "ဘုန်းတော်၌ လူသားရှိနေ"
+          },
+          {
+            "number": 295,
+            "first_line": "ယခင်အပြစ်၌ သေနေခဲ့"
+          },
+          {
+            "number": 297,
+            "first_line": null
+          },
+          {
+            "number": 298,
+            "first_line": null
+          },
+          {
+            "number": 307,
+            "first_line": null
+          },
+          {
+            "number": 299,
+            "first_line": "ယေရှုရှင်၊ နေမင်း၊ ဒိုင်းလွှား"
+          },
+          {
+            "number": 300,
+            "first_line": "ယခင် ကောင်းချီးကိုရှာ"
+          },
+          {
+            "number": 301,
+            "first_line": "ယေရှုသည် ကျွန်ုပ်တွက် ရာအားလုံးဖြစ်"
+          },
+          {
+            "number": 302,
+            "first_line": "ခြားသိုးငယ်နှင့် နာမမရှိ"
+          },
+          {
+            "number": 303,
+            "first_line": "ဖွင့်ပြခြင်းတွက် ကျေးဇူးတင်သည်"
+          },
+          {
+            "number": 304,
+            "first_line": "အို၊ ခရစ်တော်၌ စိတ်တွေ့ပြီ"
+          },
+          {
+            "number": 305,
+            "first_line": "သိုးထိန်းတော် မေတ္တာရှင်ဘုရင်"
+          },
+          {
+            "number": 306,
+            "first_line": "ယေရှုကို မမြင်ရချိန်ခါ"
+          },
+          {
+            "number": 308,
+            "first_line": null
+          },
+          {
+            "number": 309,
+            "first_line": null
+          },
+          {
+            "number": 310,
+            "first_line": null
+          },
+          {
+            "number": 311,
+            "first_line": null
+          },
+          {
+            "number": 312,
+            "first_line": null
+          },
+          {
+            "number": 313,
+            "first_line": null
+          },
+          {
+            "number": 314,
+            "first_line": null
+          },
+          {
+            "number": 315,
+            "first_line": null
+          },
+          {
+            "number": 316,
+            "first_line": null
+          },
+          {
+            "number": 317,
+            "first_line": null
+          },
+          {
+            "number": 319,
+            "first_line": null
+          },
+          {
+            "number": 318,
+            "first_line": "သခင်ကိုချစ်၊ ကျွန်ုပ်မေတ္တာမဟုတ်"
+          },
+          {
+            "number": 320,
+            "first_line": null
+          },
+          {
+            "number": 321,
+            "first_line": null
+          },
+          {
+            "number": 327,
+            "first_line": null
+          },
+          {
+            "number": 322,
+            "first_line": "ခရစ်တော်သည် ဘုန်းတော်၌ရှိ"
+          },
+          {
+            "number": 323,
+            "first_line": "မျက်မှောက်တော် လျှို့ဝှက်နေရာ၌"
+          },
+          {
+            "number": 324,
+            "first_line": "မျက်မှောက်တော်သို့ လန်းဆန်းလာပြီ"
+          },
+          {
+            "number": 325,
+            "first_line": "ချိုသာလှနာမ သွန်းလောင်းနံ့သာဆီ"
+          },
+          {
+            "number": 326,
+            "first_line": "ဘုရားနှင့်ဆွေဖွဲ့၍ ဝမ်းမြောက်စေရန်"
+          },
+          {
+            "number": 328,
+            "first_line": null
+          },
+          {
+            "number": 333,
+            "first_line": null
+          },
+          {
+            "number": 354,
+            "first_line": null
+          },
+          {
+            "number": 329,
+            "first_line": "နက်နဲမေတ္တာတော်၌ တည်နေရမည်"
+          },
+          {
+            "number": 330,
+            "first_line": "သခင်ဘုရား၌ တည်နေခြင်း"
+          },
+          {
+            "number": 331,
+            "first_line": "အတောင်တော်၌ လုံခြုံစွာ တည်နေရပြီ"
+          },
+          {
+            "number": 332,
+            "first_line": "ကျွန်ုပ်ထက် မြင့်မားကျောက်၌ ပုန်းခိုလုံခြုံ"
+          },
+          {
+            "number": 334,
+            "first_line": null
+          },
+          {
+            "number": 341,
+            "first_line": null
+          },
+          {
+            "number": 335,
+            "first_line": "နေ့စဉ် ယုံကြည်ကိုးစားရာ"
+          },
+          {
+            "number": 336,
+            "first_line": "သံသယများ၊ ယေရှုထံအပ်"
+          },
+          {
+            "number": 337,
+            "first_line": "ယေရှုအမည်ရှိသောသူသည်"
+          },
+          {
+            "number": 338,
+            "first_line": "ယေရှုနှင့်လျှောက်လှမ်းသည်ထင်မှတ်"
+          },
+          {
+            "number": 339,
+            "first_line": "ကတိတော်ကို ယူဆောင်၊ နေ့စဉ်ခွန်အား"
+          },
+          {
+            "number": 340,
+            "first_line": "ဘုရားမေတ္တာကို လက်ခုပ်တီး"
+          },
+          {
+            "number": 342,
+            "first_line": null
+          },
+          {
+            "number": 343,
+            "first_line": null
+          },
+          {
+            "number": 344,
+            "first_line": null
+          },
+          {
+            "number": 345,
+            "first_line": null
+          },
+          {
+            "number": 346,
+            "first_line": null
+          },
+          {
+            "number": 347,
+            "first_line": null
+          },
+          {
+            "number": 348,
+            "first_line": null
+          },
+          {
+            "number": 349,
+            "first_line": null
+          },
+          {
+            "number": 350,
+            "first_line": null
+          },
+          {
+            "number": 351,
+            "first_line": null
+          },
+          {
+            "number": 352,
+            "first_line": null
+          },
+          {
+            "number": 353,
+            "first_line": null
+          },
+          {
+            "number": 355,
+            "first_line": null
+          },
+          {
+            "number": 356,
+            "first_line": null
+          },
+          {
+            "number": 357,
+            "first_line": null
+          },
+          {
+            "number": 358,
+            "first_line": null
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "Experience_of_God",
@@ -860,7 +1684,55 @@
         "first_line": "နေ့အချိန်သည် လွန်လုပြီ"
       }
     ],
-    "source_file": "categories/Experience_of_God.html"
+    "source_file": "categories/Experience_of_God.html",
+    "subcategories": [
+      {
+        "slug": "all-hymns",
+        "title": "သီချင်းများအားလုံး",
+        "hymns": [
+          {
+            "number": 359,
+            "first_line": null
+          },
+          {
+            "number": 360,
+            "first_line": null
+          },
+          {
+            "number": 363,
+            "first_line": null
+          },
+          {
+            "number": 361,
+            "first_line": "ကျွန်ုပ်၏ဝိညာဉ်တွင်း အသက်စမ်းရေစီးဆင်း —"
+          },
+          {
+            "number": 362,
+            "first_line": "အသက်သည် သားတော်ရှိခမည်းဘုရား"
+          },
+          {
+            "number": 364,
+            "first_line": null
+          },
+          {
+            "number": 365,
+            "first_line": null
+          },
+          {
+            "number": 366,
+            "first_line": null
+          },
+          {
+            "number": 367,
+            "first_line": null
+          },
+          {
+            "number": 368,
+            "first_line": "နေ့အချိန်သည် လွန်လုပြီ"
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "Fullness_of_the_Spirit",
@@ -979,7 +1851,127 @@
         "first_line": null
       }
     ],
-    "source_file": "categories/Fullness_of_the_Spirit.html"
+    "source_file": "categories/Fullness_of_the_Spirit.html",
+    "subcategories": [
+      {
+        "slug": "all-hymns",
+        "title": "သီချင်းများအားလုံး",
+        "hymns": [
+          {
+            "number": 141,
+            "first_line": null
+          },
+          {
+            "number": 142,
+            "first_line": null
+          },
+          {
+            "number": 143,
+            "first_line": null
+          },
+          {
+            "number": 144,
+            "first_line": null
+          },
+          {
+            "number": 145,
+            "first_line": null
+          },
+          {
+            "number": 147,
+            "first_line": null
+          },
+          {
+            "number": 146,
+            "first_line": "ဝိညာဉ်တော်မှုတ်သွင်းပါ"
+          },
+          {
+            "number": 148,
+            "first_line": null
+          },
+          {
+            "number": 149,
+            "first_line": null
+          },
+          {
+            "number": 150,
+            "first_line": null
+          },
+          {
+            "number": 151,
+            "first_line": null
+          },
+          {
+            "number": 152,
+            "first_line": "ကရုဏာအောက် ချီးမွမ်းစောင့်မျှော်"
+          },
+          {
+            "number": 153,
+            "first_line": null
+          },
+          {
+            "number": 154,
+            "first_line": null
+          },
+          {
+            "number": 155,
+            "first_line": null
+          },
+          {
+            "number": 156,
+            "first_line": null
+          },
+          {
+            "number": 157,
+            "first_line": null
+          },
+          {
+            "number": 158,
+            "first_line": null
+          },
+          {
+            "number": 159,
+            "first_line": null
+          },
+          {
+            "number": 160,
+            "first_line": null
+          },
+          {
+            "number": 161,
+            "first_line": null
+          },
+          {
+            "number": 162,
+            "first_line": null
+          },
+          {
+            "number": 163,
+            "first_line": null
+          },
+          {
+            "number": 164,
+            "first_line": null
+          },
+          {
+            "number": 165,
+            "first_line": null
+          },
+          {
+            "number": 281,
+            "first_line": null
+          },
+          {
+            "number": 166,
+            "first_line": "ဘုရားရှင်၏ ဝိညာဉ်တော်"
+          },
+          {
+            "number": 167,
+            "first_line": null
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "Glorying_in_the_Cross",
@@ -998,7 +1990,27 @@
         "first_line": null
       }
     ],
-    "source_file": "categories/Glorying_in_the_Cross.html"
+    "source_file": "categories/Glorying_in_the_Cross.html",
+    "subcategories": [
+      {
+        "slug": "all-hymns",
+        "title": "သီချင်းများအားလုံး",
+        "hymns": [
+          {
+            "number": 369,
+            "first_line": null
+          },
+          {
+            "number": 370,
+            "first_line": null
+          },
+          {
+            "number": 371,
+            "first_line": null
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "Gospel",
@@ -1417,7 +2429,427 @@
         "first_line": "Do you know that you were chosen"
       }
     ],
-    "source_file": "categories/Gospel.html"
+    "source_file": "categories/Gospel.html",
+    "subcategories": [
+      {
+        "slug": "all-hymns",
+        "title": "သီချင်းများအားလုံး",
+        "hymns": [
+          {
+            "number": 986,
+            "first_line": null
+          },
+          {
+            "number": 993,
+            "first_line": null
+          },
+          {
+            "number": 987,
+            "first_line": "One day when heaven was filled with His praises,"
+          },
+          {
+            "number": 988,
+            "first_line": "Merciful and loving,"
+          },
+          {
+            "number": 989,
+            "first_line": "Jesus, my Savior, to Bethlehem came,"
+          },
+          {
+            "number": 990,
+            "first_line": "The Great Physician now is near,"
+          },
+          {
+            "number": 991,
+            "first_line": "We have heard the joyful sound:"
+          },
+          {
+            "number": 992,
+            "first_line": "There's not a Friend like the lowly Jesus:"
+          },
+          {
+            "number": 994,
+            "first_line": null
+          },
+          {
+            "number": 1003,
+            "first_line": null
+          },
+          {
+            "number": 995,
+            "first_line": "There is a green hill far away,"
+          },
+          {
+            "number": 996,
+            "first_line": "Jesus, Savior, Son of God,"
+          },
+          {
+            "number": 997,
+            "first_line": "I hear the Savior say,"
+          },
+          {
+            "number": 998,
+            "first_line": "Christ has become one with sinners,"
+          },
+          {
+            "number": 999,
+            "first_line": "Alas, and did my Savior bleed?"
+          },
+          {
+            "number": 1000,
+            "first_line": "Working will not save me;"
+          },
+          {
+            "number": 1001,
+            "first_line": "Free from the law — oh, happy condition!"
+          },
+          {
+            "number": 1002,
+            "first_line": "Nothing either great or small —"
+          },
+          {
+            "number": 1004,
+            "first_line": null
+          },
+          {
+            "number": 1010,
+            "first_line": null
+          },
+          {
+            "number": 1005,
+            "first_line": "Christ our Redeemer died on the cross,"
+          },
+          {
+            "number": 1006,
+            "first_line": "There is a fountain filled with blood"
+          },
+          {
+            "number": 1007,
+            "first_line": "Have you been to Jesus for the cleansing pow'r?"
+          },
+          {
+            "number": 1008,
+            "first_line": "What can wash away my sin?"
+          },
+          {
+            "number": 1009,
+            "first_line": "Would you be free from your burden of sin?"
+          },
+          {
+            "number": 1011,
+            "first_line": null
+          },
+          {
+            "number": 1013,
+            "first_line": null
+          },
+          {
+            "number": 1012,
+            "first_line": "There is no love like the love of Jesus,"
+          },
+          {
+            "number": 1014,
+            "first_line": null
+          },
+          {
+            "number": 1017,
+            "first_line": null
+          },
+          {
+            "number": 1015,
+            "first_line": "O glory, glory, what a life"
+          },
+          {
+            "number": 1016,
+            "first_line": "Under the burdens of guilt and care,"
+          },
+          {
+            "number": 1018,
+            "first_line": null
+          },
+          {
+            "number": 1019,
+            "first_line": null
+          },
+          {
+            "number": 1020,
+            "first_line": null
+          },
+          {
+            "number": 1021,
+            "first_line": null
+          },
+          {
+            "number": 1022,
+            "first_line": null
+          },
+          {
+            "number": 1025,
+            "first_line": null
+          },
+          {
+            "number": 1023,
+            "first_line": "I need Thee, precious Jesus!"
+          },
+          {
+            "number": 1024,
+            "first_line": "Christ the Savior is just the One you need,"
+          },
+          {
+            "number": 1026,
+            "first_line": null
+          },
+          {
+            "number": 1030,
+            "first_line": null
+          },
+          {
+            "number": 1027,
+            "first_line": "Softly and tenderly Jesus is calling —"
+          },
+          {
+            "number": 1028,
+            "first_line": "Jesus is tenderly calling thee home —"
+          },
+          {
+            "number": 1029,
+            "first_line": "Christ calling yet! Shall I not hear?"
+          },
+          {
+            "number": 1031,
+            "first_line": null
+          },
+          {
+            "number": 1047,
+            "first_line": null
+          },
+          {
+            "number": 1032,
+            "first_line": "Come, ye sinners, poor and wretched,"
+          },
+          {
+            "number": 1033,
+            "first_line": "Ye who are troubled and burdened by sin,"
+          },
+          {
+            "number": 1034,
+            "first_line": "\"Whosoever heareth!\" shout, shout the sound!"
+          },
+          {
+            "number": 1035,
+            "first_line": "There is life for a look at the Crucified One,"
+          },
+          {
+            "number": 1036,
+            "first_line": "Look to Jesus, weary one,"
+          },
+          {
+            "number": 1037,
+            "first_line": "\"Though your sins be as scarlet,"
+          },
+          {
+            "number": 1038,
+            "first_line": "If you are tired of the load of your sin,"
+          },
+          {
+            "number": 1039,
+            "first_line": "There's a Stranger at the door,"
+          },
+          {
+            "number": 1040,
+            "first_line": "Hark, the Savior's knocking, knocking,"
+          },
+          {
+            "number": 1041,
+            "first_line": "Jesus is standing in Pilate's hall —"
+          },
+          {
+            "number": 1042,
+            "first_line": "While we pray and while we plead,"
+          },
+          {
+            "number": 1043,
+            "first_line": "Life at best is very brief,"
+          },
+          {
+            "number": 1044,
+            "first_line": "Are you ready God to meet?"
+          },
+          {
+            "number": 1045,
+            "first_line": "O do not let the Word depart,"
+          },
+          {
+            "number": 1046,
+            "first_line": "\"Almost persuaded\" now to believe;"
+          },
+          {
+            "number": 1048,
+            "first_line": null
+          },
+          {
+            "number": 1052,
+            "first_line": null
+          },
+          {
+            "number": 1049,
+            "first_line": "Drawn to the Cross which Thou hast blest,"
+          },
+          {
+            "number": 1050,
+            "first_line": "Out of my bondage, sorrow, and night,"
+          },
+          {
+            "number": 1051,
+            "first_line": "I hear Thy welcome voice,"
+          },
+          {
+            "number": 1053,
+            "first_line": null
+          },
+          {
+            "number": 1061,
+            "first_line": null
+          },
+          {
+            "number": 1054,
+            "first_line": "Pass me not, O gentle Savior,"
+          },
+          {
+            "number": 1055,
+            "first_line": "I am sinful, I am helpless,"
+          },
+          {
+            "number": 1056,
+            "first_line": "Jesus, my Lord, to Thee I cry;"
+          },
+          {
+            "number": 1057,
+            "first_line": "Jesus, lover of my soul,"
+          },
+          {
+            "number": 1058,
+            "first_line": "Rock of Ages, cleft for me,"
+          },
+          {
+            "number": 1059,
+            "first_line": "Jesus, keep me near the cross,"
+          },
+          {
+            "number": 1060,
+            "first_line": "Thou didst leave Thy throne and Thy kingly crown,"
+          },
+          {
+            "number": 1062,
+            "first_line": null
+          },
+          {
+            "number": 1063,
+            "first_line": null
+          },
+          {
+            "number": 1064,
+            "first_line": null
+          },
+          {
+            "number": 1072,
+            "first_line": null
+          },
+          {
+            "number": 1065,
+            "first_line": "O how great His salvation!"
+          },
+          {
+            "number": 1066,
+            "first_line": "Down at the cross where my Savior died,"
+          },
+          {
+            "number": 1067,
+            "first_line": "There was One who was willing to die in my stead,"
+          },
+          {
+            "number": 1068,
+            "first_line": "In tenderness He sought me,"
+          },
+          {
+            "number": 1069,
+            "first_line": "We're feeding on the living Bread,"
+          },
+          {
+            "number": 1070,
+            "first_line": "I was sinking deep in sin,"
+          },
+          {
+            "number": 1071,
+            "first_line": "Sinner Jesus will receive;"
+          },
+          {
+            "number": 1073,
+            "first_line": null
+          },
+          {
+            "number": 1074,
+            "first_line": null
+          },
+          {
+            "number": 1075,
+            "first_line": null
+          },
+          {
+            "number": 1080,
+            "first_line": null
+          },
+          {
+            "number": 1326,
+            "first_line": null
+          },
+          {
+            "number": 1333,
+            "first_line": null
+          },
+          {
+            "number": 1076,
+            "first_line": "O teach me what it meaneth:"
+          },
+          {
+            "number": 1077,
+            "first_line": "There were ninety and nine that safely lay"
+          },
+          {
+            "number": 1078,
+            "first_line": "One sat alone beside the highway begging,"
+          },
+          {
+            "number": 1079,
+            "first_line": "If I gained the world, but lost the Savior,"
+          },
+          {
+            "number": 1327,
+            "first_line": "Once I thirsted for a fountain,"
+          },
+          {
+            "number": 1328,
+            "first_line": "My wandering days grew increasingly empty"
+          },
+          {
+            "number": 1329,
+            "first_line": "The wedding feast, the peak of man's enjoyment"
+          },
+          {
+            "number": 1330,
+            "first_line": "\"All things are ready,\" come to the feast!"
+          },
+          {
+            "number": 1331,
+            "first_line": "Just taste and see that the Lord is good;"
+          },
+          {
+            "number": 1332,
+            "first_line": "Do you know that you were chosen"
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "Hope_of_Glory",
@@ -1604,7 +3036,195 @@
         "first_line": null
       }
     ],
-    "source_file": "categories/Hope_of_Glory.html"
+    "source_file": "categories/Hope_of_Glory.html",
+    "subcategories": [
+      {
+        "slug": "all-hymns",
+        "title": "သီချင်းများအားလုံး",
+        "hymns": [
+          {
+            "number": 948,
+            "first_line": null
+          },
+          {
+            "number": 949,
+            "first_line": null
+          },
+          {
+            "number": 950,
+            "first_line": null
+          },
+          {
+            "number": 951,
+            "first_line": null
+          },
+          {
+            "number": 952,
+            "first_line": null
+          },
+          {
+            "number": 953,
+            "first_line": null
+          },
+          {
+            "number": 954,
+            "first_line": null
+          },
+          {
+            "number": 955,
+            "first_line": null
+          },
+          {
+            "number": 957,
+            "first_line": null
+          },
+          {
+            "number": 956,
+            "first_line": "Soon our Lord will come, the day is drawing nigh,"
+          },
+          {
+            "number": 958,
+            "first_line": null
+          },
+          {
+            "number": 962,
+            "first_line": null
+          },
+          {
+            "number": 959,
+            "first_line": "Since Thy departure from Olivet's Mountain,"
+          },
+          {
+            "number": 960,
+            "first_line": "My King will soon come back again,"
+          },
+          {
+            "number": 961,
+            "first_line": "The Church has waited long,"
+          },
+          {
+            "number": 963,
+            "first_line": null
+          },
+          {
+            "number": 965,
+            "first_line": null
+          },
+          {
+            "number": 964,
+            "first_line": "'Midst the darkness, storm, and sorrow,"
+          },
+          {
+            "number": 966,
+            "first_line": null
+          },
+          {
+            "number": 967,
+            "first_line": null
+          },
+          {
+            "number": 968,
+            "first_line": null
+          },
+          {
+            "number": 969,
+            "first_line": null
+          },
+          {
+            "number": 970,
+            "first_line": null
+          },
+          {
+            "number": 1321,
+            "first_line": null
+          },
+          {
+            "number": 1322,
+            "first_line": null
+          },
+          {
+            "number": 1302,
+            "first_line": null
+          },
+          {
+            "number": 1312,
+            "first_line": null
+          },
+          {
+            "number": 1303,
+            "first_line": "The kingdom of God is at hand:"
+          },
+          {
+            "number": 1304,
+            "first_line": "Christ comes quickly for His Bride,"
+          },
+          {
+            "number": 1305,
+            "first_line": "Our faith to God-ward must in these days spread abroad."
+          },
+          {
+            "number": 1306,
+            "first_line": "We love Thy coming, Lord!"
+          },
+          {
+            "number": 1307,
+            "first_line": "The day approaches; Jesus soon is coming."
+          },
+          {
+            "number": 1308,
+            "first_line": "We have oil in our lamps — we are burning!"
+          },
+          {
+            "number": 1309,
+            "first_line": "Who can tell how soon the Bride may hear the cry,"
+          },
+          {
+            "number": 1310,
+            "first_line": "The Lord is longing for His Bride,"
+          },
+          {
+            "number": 1311,
+            "first_line": "The local churches are preparing for the Lord's return —"
+          },
+          {
+            "number": 1313,
+            "first_line": null
+          },
+          {
+            "number": 1318,
+            "first_line": null
+          },
+          {
+            "number": 1314,
+            "first_line": "Lord, Thou wilt soon appear,"
+          },
+          {
+            "number": 1315,
+            "first_line": "Rejoice! Rejoice! Our Bridegroom's coming,"
+          },
+          {
+            "number": 1316,
+            "first_line": "Our Bridegroom soon is coming"
+          },
+          {
+            "number": 1317,
+            "first_line": "When our Lord comes in glory and we're raptured to His side,"
+          },
+          {
+            "number": 1319,
+            "first_line": null
+          },
+          {
+            "number": 1320,
+            "first_line": null
+          },
+          {
+            "number": 1323,
+            "first_line": null
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "Longings",
@@ -1763,7 +3383,167 @@
         "first_line": null
       }
     ],
-    "source_file": "categories/Longings.html"
+    "source_file": "categories/Longings.html",
+    "subcategories": [
+      {
+        "slug": "all-hymns",
+        "title": "သီချင်းများအားလုံး",
+        "hymns": [
+          {
+            "number": 206,
+            "first_line": null
+          },
+          {
+            "number": 207,
+            "first_line": null
+          },
+          {
+            "number": 208,
+            "first_line": null
+          },
+          {
+            "number": 212,
+            "first_line": null
+          },
+          {
+            "number": 209,
+            "first_line": "ယေရှု၊ သန့်ရှင်းမီးဖြင့် ကြွပါ"
+          },
+          {
+            "number": 210,
+            "first_line": "ဘုရားမေတ္တာ ကြီးမြတ်သာလွန်"
+          },
+          {
+            "number": 211,
+            "first_line": "ထွန်းလင်းပါ၊ အလင်းရှင်"
+          },
+          {
+            "number": 213,
+            "first_line": null
+          },
+          {
+            "number": 214,
+            "first_line": null
+          },
+          {
+            "number": 215,
+            "first_line": null
+          },
+          {
+            "number": 216,
+            "first_line": null
+          },
+          {
+            "number": 219,
+            "first_line": null
+          },
+          {
+            "number": 217,
+            "first_line": "ကိုယ်တော်ကိုသာ သခင်"
+          },
+          {
+            "number": 218,
+            "first_line": "စိတ်၏နေမင်း၊ ချစ်ကယ်တင်ရှင်"
+          },
+          {
+            "number": 220,
+            "first_line": null
+          },
+          {
+            "number": 221,
+            "first_line": null
+          },
+          {
+            "number": 222,
+            "first_line": null
+          },
+          {
+            "number": 223,
+            "first_line": null
+          },
+          {
+            "number": 224,
+            "first_line": null
+          },
+          {
+            "number": 225,
+            "first_line": null
+          },
+          {
+            "number": 226,
+            "first_line": null
+          },
+          {
+            "number": 227,
+            "first_line": null
+          },
+          {
+            "number": 230,
+            "first_line": null
+          },
+          {
+            "number": 228,
+            "first_line": "ကျွန်ုပ်၌ ကိုယ်တော်ကြီးထွားပါ"
+          },
+          {
+            "number": 229,
+            "first_line": "ထက်ရပ်လမ်းကို အားထုတ်ချီတက်"
+          },
+          {
+            "number": 231,
+            "first_line": null
+          },
+          {
+            "number": 232,
+            "first_line": null
+          },
+          {
+            "number": 233,
+            "first_line": null
+          },
+          {
+            "number": 234,
+            "first_line": null
+          },
+          {
+            "number": 235,
+            "first_line": null
+          },
+          {
+            "number": 236,
+            "first_line": null
+          },
+          {
+            "number": 238,
+            "first_line": null
+          },
+          {
+            "number": 237,
+            "first_line": "ပုန်းကွယ်ရန်သူတန်ခိုးရှိနေ"
+          },
+          {
+            "number": 239,
+            "first_line": null
+          },
+          {
+            "number": 240,
+            "first_line": null
+          },
+          {
+            "number": 241,
+            "first_line": null
+          },
+          {
+            "number": 242,
+            "first_line": null
+          },
+          {
+            "number": 243,
+            "first_line": null
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "Meetings",
@@ -1814,7 +3594,59 @@
         "first_line": "We've become the Lord's dear brothers"
       }
     ],
-    "source_file": "categories/Meetings.html"
+    "source_file": "categories/Meetings.html",
+    "subcategories": [
+      {
+        "slug": "all-hymns",
+        "title": "သီချင်းများအားလုံး",
+        "hymns": [
+          {
+            "number": 862,
+            "first_line": null
+          },
+          {
+            "number": 863,
+            "first_line": null
+          },
+          {
+            "number": 864,
+            "first_line": null
+          },
+          {
+            "number": 865,
+            "first_line": null
+          },
+          {
+            "number": 866,
+            "first_line": null
+          },
+          {
+            "number": 867,
+            "first_line": null
+          },
+          {
+            "number": 868,
+            "first_line": null
+          },
+          {
+            "number": 869,
+            "first_line": null
+          },
+          {
+            "number": 1279,
+            "first_line": null
+          },
+          {
+            "number": 1281,
+            "first_line": null
+          },
+          {
+            "number": 1280,
+            "first_line": "We've become the Lord's dear brothers"
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "Others",
@@ -1889,7 +3721,83 @@
         "first_line": null
       }
     ],
-    "source_file": "categories/Others.html"
+    "source_file": "categories/Others.html",
+    "subcategories": [
+      {
+        "slug": "all-hymns",
+        "title": "သီချင်းများအားလုံး",
+        "hymns": [
+          {
+            "number": 1334,
+            "first_line": null
+          },
+          {
+            "number": 1348,
+            "first_line": null
+          },
+          {
+            "number": 1335,
+            "first_line": "Great is the Lord, and greatly to be praised,"
+          },
+          {
+            "number": 1336,
+            "first_line": "What shall I give unto the Lord"
+          },
+          {
+            "number": 1337,
+            "first_line": "When the Lord turned again the captivity of Zion,"
+          },
+          {
+            "number": 1338,
+            "first_line": "This is My rest forever;"
+          },
+          {
+            "number": 1339,
+            "first_line": "Behold how good and how pleasant it is,"
+          },
+          {
+            "number": 1340,
+            "first_line": "Therefore with joy shall ye draw water"
+          },
+          {
+            "number": 1341,
+            "first_line": "Therefore the redeemed of the Lord shall return,"
+          },
+          {
+            "number": 1342,
+            "first_line": "Therefore, they shall come and sing in the height of Zion,"
+          },
+          {
+            "number": 1343,
+            "first_line": "A new commandment"
+          },
+          {
+            "number": 1344,
+            "first_line": "Oh, the depth of the riches and the"
+          },
+          {
+            "number": 1345,
+            "first_line": "Whenever the heart shall turn to the Lord,"
+          },
+          {
+            "number": 1346,
+            "first_line": "Now unto the King eternal, immortal, invisible,"
+          },
+          {
+            "number": 1347,
+            "first_line": "Now is come salvation and strength"
+          },
+          {
+            "number": 1349,
+            "first_line": null
+          },
+          {
+            "number": 1350,
+            "first_line": null
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "Praise_of_the_Lord",
@@ -2256,7 +4164,375 @@
         "first_line": null
       }
     ],
-    "source_file": "categories/Praise_of_the_Lord.html"
+    "source_file": "categories/Praise_of_the_Lord.html",
+    "subcategories": [
+      {
+        "slug": "all-hymns",
+        "title": "သီချင်းများအားလုံး",
+        "hymns": [
+          {
+            "number": 57,
+            "first_line": null
+          },
+          {
+            "number": 59,
+            "first_line": null
+          },
+          {
+            "number": 58,
+            "first_line": "ခမည်းတော်၏ပုံသဏ္ဌာန်တော်"
+          },
+          {
+            "number": 60,
+            "first_line": null
+          },
+          {
+            "number": 61,
+            "first_line": null
+          },
+          {
+            "number": 62,
+            "first_line": null
+          },
+          {
+            "number": 66,
+            "first_line": null
+          },
+          {
+            "number": 63,
+            "first_line": "ယေရှုမြတ်နာမ ချိုသာလှ"
+          },
+          {
+            "number": 64,
+            "first_line": "ယေရှုနာမ ချိုမြိန်လှ၏"
+          },
+          {
+            "number": 65,
+            "first_line": "ကိုယ်တော်နာမတော် ယေရှုမည်"
+          },
+          {
+            "number": 67,
+            "first_line": null
+          },
+          {
+            "number": 69,
+            "first_line": null
+          },
+          {
+            "number": 68,
+            "first_line": "နားထောင်ကောင်းကင်သား ကြွေးကြော်"
+          },
+          {
+            "number": 70,
+            "first_line": null
+          },
+          {
+            "number": 72,
+            "first_line": null
+          },
+          {
+            "number": 71,
+            "first_line": "သခင်၊ ကျွန်ုပ်တို့လျှောက်ရာလမ်း"
+          },
+          {
+            "number": 73,
+            "first_line": null
+          },
+          {
+            "number": 75,
+            "first_line": null
+          },
+          {
+            "number": 561,
+            "first_line": null
+          },
+          {
+            "number": 74,
+            "first_line": "ဦးခေါင်းတော်ဒဏ်ရာပြည့်နှက်"
+          },
+          {
+            "number": 76,
+            "first_line": null
+          },
+          {
+            "number": 79,
+            "first_line": null
+          },
+          {
+            "number": 77,
+            "first_line": "ငြိုငြင်ခံသူ နာမဖြင့်"
+          },
+          {
+            "number": 78,
+            "first_line": "ယေရှု၊ ပြစ်သားမိတ်ဆွေ"
+          },
+          {
+            "number": 80,
+            "first_line": null
+          },
+          {
+            "number": 83,
+            "first_line": null
+          },
+          {
+            "number": 81,
+            "first_line": "ကိုယ်တော်ထမြောက်၊ ဟာလေလုယာ"
+          },
+          {
+            "number": 82,
+            "first_line": "ဟာလေလုယ၊ ရှင်ယေရှုသည်"
+          },
+          {
+            "number": 84,
+            "first_line": null
+          },
+          {
+            "number": 85,
+            "first_line": null
+          },
+          {
+            "number": 86,
+            "first_line": null
+          },
+          {
+            "number": 88,
+            "first_line": null
+          },
+          {
+            "number": 87,
+            "first_line": "ကြည့်၊ သန့်ရှင်းသူ၊ ကြည့်ဖွယ်ကောင်း၏"
+          },
+          {
+            "number": 89,
+            "first_line": null
+          },
+          {
+            "number": 90,
+            "first_line": null
+          },
+          {
+            "number": 91,
+            "first_line": null
+          },
+          {
+            "number": 562,
+            "first_line": null
+          },
+          {
+            "number": 92,
+            "first_line": null
+          },
+          {
+            "number": 93,
+            "first_line": null
+          },
+          {
+            "number": 94,
+            "first_line": null
+          },
+          {
+            "number": 97,
+            "first_line": null
+          },
+          {
+            "number": 563,
+            "first_line": null
+          },
+          {
+            "number": 95,
+            "first_line": "နံနက်ခင်းထက်လှပ၊ ကိုယ်တော်"
+          },
+          {
+            "number": 96,
+            "first_line": "တင့်တယ်လှသခင်"
+          },
+          {
+            "number": 98,
+            "first_line": null
+          },
+          {
+            "number": 99,
+            "first_line": null
+          },
+          {
+            "number": 564,
+            "first_line": null
+          },
+          {
+            "number": 100,
+            "first_line": null
+          },
+          {
+            "number": 101,
+            "first_line": null
+          },
+          {
+            "number": 102,
+            "first_line": null
+          },
+          {
+            "number": 104,
+            "first_line": null
+          },
+          {
+            "number": 103,
+            "first_line": "ယေရှုအကြောင်း အောက်မေ့သောခါ"
+          },
+          {
+            "number": 105,
+            "first_line": null
+          },
+          {
+            "number": 133,
+            "first_line": null
+          },
+          {
+            "number": 106,
+            "first_line": "ကိုယ်တော်၏ ကျေးဇူးစကားတော်"
+          },
+          {
+            "number": 107,
+            "first_line": "သခင်ယေရှု၏မျက်မှောက်တော်"
+          },
+          {
+            "number": 108,
+            "first_line": "သန့်ရှင်းစားပွဲတော်ကိုဝန်းရံ"
+          },
+          {
+            "number": 109,
+            "first_line": "ညတကာည၊ တည်ကြည်သောည"
+          },
+          {
+            "number": 110,
+            "first_line": "ဖိုးထိုက်နာမတော်၌ စည်းဝေး"
+          },
+          {
+            "number": 111,
+            "first_line": "သခင်ယေရှုခရစ်ကို အောက်မေ့ကြရာ"
+          },
+          {
+            "number": 112,
+            "first_line": "သခင်၏စားပွဲကို ကြည့်သော်"
+          },
+          {
+            "number": 113,
+            "first_line": "သခင်၊ ပွဲတော်တွက် ကျေးဇူးတင်"
+          },
+          {
+            "number": 114,
+            "first_line": "သခင်၊ မုန့်အတွက်ကျေးဇူးတင်"
+          },
+          {
+            "number": 115,
+            "first_line": "မေတ္တာတော်စားပွဲပေါ်တွင်"
+          },
+          {
+            "number": 116,
+            "first_line": "ခွက်ကို ဝေမျှသောက်သုံးစဉ်"
+          },
+          {
+            "number": 117,
+            "first_line": "ဤနေရာ သခင်နှင့်မျက်နှာချင်းဆိုင်"
+          },
+          {
+            "number": 118,
+            "first_line": "ပွဲတော်မုန့်နှင့် စပျစ်ရည်"
+          },
+          {
+            "number": 119,
+            "first_line": "သခင်ယေရှု၊ ဤမုန့်နှင့်ခွက်"
+          },
+          {
+            "number": 120,
+            "first_line": "ချိုမြိန်မေတ္တာတော်စားပွဲ"
+          },
+          {
+            "number": 121,
+            "first_line": "သခင်ယေရှု၌ စုဝေးကြ"
+          },
+          {
+            "number": 122,
+            "first_line": "သခင်ယေရှု၊ ဖိုးထိုက်နာမ"
+          },
+          {
+            "number": 123,
+            "first_line": "ကျွန်ုပ်တို့၏ချစ်သခင်ရပ်နေ"
+          },
+          {
+            "number": 124,
+            "first_line": "ခရစ်တော်၏ရွေးနုတ်ရယူခြင်း"
+          },
+          {
+            "number": 125,
+            "first_line": "အို အံ့သြဖွယ်သော သခင်ရှင်"
+          },
+          {
+            "number": 126,
+            "first_line": "စားပွဲတော်ကို ကြည့်ရှုပါလေ"
+          },
+          {
+            "number": 127,
+            "first_line": "သခင်ဘုရား၏ စားသောက်ပွဲသို့ စုဝေးလာ"
+          },
+          {
+            "number": 128,
+            "first_line": "ကျွန်ုပ်တို့သည် ခန္ဓာတော်တစ်ကိုယ်တည်းဖြစ်"
+          },
+          {
+            "number": 129,
+            "first_line": "မုန့်စားသုံး၊ သခင်ဘုရား၏လူ"
+          },
+          {
+            "number": 130,
+            "first_line": "ဤသွေးတော်ခွက်သောက်သုံး"
+          },
+          {
+            "number": 131,
+            "first_line": "သခင်ယေရှု၊ ကိုယ်တော်၏စားပွဲတော်ရှေ့"
+          },
+          {
+            "number": 132,
+            "first_line": "စားပွဲတော်၌ စည်းဝေးကြ"
+          },
+          {
+            "number": 234,
+            "first_line": null
+          },
+          {
+            "number": 241,
+            "first_line": null
+          },
+          {
+            "number": 134,
+            "first_line": "သိုးထိန်းများ လာရောက်ပျပ်ဝပ်"
+          },
+          {
+            "number": 135,
+            "first_line": "ချီးမွမ်း၊ ချီးမွမ်း၊ ယေရှုသည် ရွေးနုတ်ရှင်ဖြစ်၏"
+          },
+          {
+            "number": 136,
+            "first_line": "နံနက်အာရုဏ်တက်သော်"
+          },
+          {
+            "number": 137,
+            "first_line": "ယေရှုကို ထောင်သောင်းချီးမွမ်း"
+          },
+          {
+            "number": 138,
+            "first_line": "ဘုန်းတော်၊ လေးမြတ်၊ ချီးမွမ်း၊ တန်ခိုး"
+          },
+          {
+            "number": 139,
+            "first_line": "ကောင်းချီး၊ လေးမြတ်ခြင်းနှင့် ဘုန်းတော် ကိုယ်တော်"
+          },
+          {
+            "number": 140,
+            "first_line": null
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "Prayer",
@@ -2419,7 +4695,171 @@
         "first_line": null
       }
     ],
-    "source_file": "categories/Prayer.html"
+    "source_file": "categories/Prayer.html",
+    "subcategories": [
+      {
+        "slug": "all-hymns",
+        "title": "သီချင်းများအားလုံး",
+        "hymns": [
+          {
+            "number": 761,
+            "first_line": null
+          },
+          {
+            "number": 764,
+            "first_line": null
+          },
+          {
+            "number": 762,
+            "first_line": "Prayer is the incense of a holy heart"
+          },
+          {
+            "number": 763,
+            "first_line": "Christ is the Alpha of our prayers;"
+          },
+          {
+            "number": 765,
+            "first_line": null
+          },
+          {
+            "number": 766,
+            "first_line": null
+          },
+          {
+            "number": 768,
+            "first_line": null
+          },
+          {
+            "number": 767,
+            "first_line": "Teach us to pray that we may cause"
+          },
+          {
+            "number": 769,
+            "first_line": null
+          },
+          {
+            "number": 773,
+            "first_line": null
+          },
+          {
+            "number": 1217,
+            "first_line": null
+          },
+          {
+            "number": 770,
+            "first_line": "In the holiest place, touch the throne of grace,"
+          },
+          {
+            "number": 771,
+            "first_line": "The veil is rent and opened is"
+          },
+          {
+            "number": 772,
+            "first_line": "Lord, we meet to seek Thy face"
+          },
+          {
+            "number": 774,
+            "first_line": null
+          },
+          {
+            "number": 775,
+            "first_line": null
+          },
+          {
+            "number": 776,
+            "first_line": null
+          },
+          {
+            "number": 778,
+            "first_line": null
+          },
+          {
+            "number": 777,
+            "first_line": "Say to this mountain, \"Go,"
+          },
+          {
+            "number": 779,
+            "first_line": null
+          },
+          {
+            "number": 780,
+            "first_line": null
+          },
+          {
+            "number": 781,
+            "first_line": null
+          },
+          {
+            "number": 782,
+            "first_line": null
+          },
+          {
+            "number": 783,
+            "first_line": null
+          },
+          {
+            "number": 784,
+            "first_line": null
+          },
+          {
+            "number": 785,
+            "first_line": null
+          },
+          {
+            "number": 786,
+            "first_line": null
+          },
+          {
+            "number": 787,
+            "first_line": null
+          },
+          {
+            "number": 789,
+            "first_line": null
+          },
+          {
+            "number": 788,
+            "first_line": "When thou wakest in the morning"
+          },
+          {
+            "number": 790,
+            "first_line": null
+          },
+          {
+            "number": 791,
+            "first_line": null
+          },
+          {
+            "number": 792,
+            "first_line": null
+          },
+          {
+            "number": 793,
+            "first_line": null
+          },
+          {
+            "number": 794,
+            "first_line": null
+          },
+          {
+            "number": 795,
+            "first_line": null
+          },
+          {
+            "number": 796,
+            "first_line": null
+          },
+          {
+            "number": 797,
+            "first_line": null
+          },
+          {
+            "number": 798,
+            "first_line": null
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "Preaching_of_the_Gospel",
@@ -2522,7 +4962,111 @@
         "first_line": null
       }
     ],
-    "source_file": "categories/Preaching_of_the_Gospel.html"
+    "source_file": "categories/Preaching_of_the_Gospel.html",
+    "subcategories": [
+      {
+        "slug": "all-hymns",
+        "title": "သီချင်းများအားလုံး",
+        "hymns": [
+          {
+            "number": 915,
+            "first_line": null
+          },
+          {
+            "number": 916,
+            "first_line": null
+          },
+          {
+            "number": 917,
+            "first_line": null
+          },
+          {
+            "number": 918,
+            "first_line": null
+          },
+          {
+            "number": 920,
+            "first_line": null
+          },
+          {
+            "number": 919,
+            "first_line": "He shall reign o'er all the earth,"
+          },
+          {
+            "number": 921,
+            "first_line": null
+          },
+          {
+            "number": 922,
+            "first_line": null
+          },
+          {
+            "number": 923,
+            "first_line": null
+          },
+          {
+            "number": 924,
+            "first_line": null
+          },
+          {
+            "number": 925,
+            "first_line": null
+          },
+          {
+            "number": 926,
+            "first_line": null
+          },
+          {
+            "number": 927,
+            "first_line": null
+          },
+          {
+            "number": 928,
+            "first_line": null
+          },
+          {
+            "number": 929,
+            "first_line": null
+          },
+          {
+            "number": 930,
+            "first_line": null
+          },
+          {
+            "number": 931,
+            "first_line": null
+          },
+          {
+            "number": 932,
+            "first_line": null
+          },
+          {
+            "number": 933,
+            "first_line": null
+          },
+          {
+            "number": 934,
+            "first_line": null
+          },
+          {
+            "number": 1292,
+            "first_line": null
+          },
+          {
+            "number": 1293,
+            "first_line": null
+          },
+          {
+            "number": 1294,
+            "first_line": null
+          },
+          {
+            "number": 1295,
+            "first_line": null
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "Preaching_the_Gospel",
@@ -2545,7 +5089,31 @@
         "first_line": null
       }
     ],
-    "source_file": "categories/Preaching_the_Gospel.html"
+    "source_file": "categories/Preaching_the_Gospel.html",
+    "subcategories": [
+      {
+        "slug": "all-hymns",
+        "title": "သီချင်းများအားလုံး",
+        "hymns": [
+          {
+            "number": 1292,
+            "first_line": null
+          },
+          {
+            "number": 1293,
+            "first_line": null
+          },
+          {
+            "number": 1294,
+            "first_line": null
+          },
+          {
+            "number": 1295,
+            "first_line": null
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "Service",
@@ -2632,7 +5200,95 @@
         "first_line": null
       }
     ],
-    "source_file": "categories/Service.html"
+    "source_file": "categories/Service.html",
+    "subcategories": [
+      {
+        "slug": "all-hymns",
+        "title": "သီချင်းများအားလုံး",
+        "hymns": [
+          {
+            "number": 895,
+            "first_line": null
+          },
+          {
+            "number": 897,
+            "first_line": null
+          },
+          {
+            "number": 896,
+            "first_line": "Go, labor on; spend, and be spent;"
+          },
+          {
+            "number": 898,
+            "first_line": null
+          },
+          {
+            "number": 899,
+            "first_line": null
+          },
+          {
+            "number": 900,
+            "first_line": null
+          },
+          {
+            "number": 901,
+            "first_line": null
+          },
+          {
+            "number": 903,
+            "first_line": null
+          },
+          {
+            "number": 902,
+            "first_line": "Shine Thou upon us, Lord,"
+          },
+          {
+            "number": 904,
+            "first_line": null
+          },
+          {
+            "number": 905,
+            "first_line": null
+          },
+          {
+            "number": 906,
+            "first_line": null
+          },
+          {
+            "number": 907,
+            "first_line": null
+          },
+          {
+            "number": 908,
+            "first_line": null
+          },
+          {
+            "number": 909,
+            "first_line": null
+          },
+          {
+            "number": 910,
+            "first_line": null
+          },
+          {
+            "number": 911,
+            "first_line": null
+          },
+          {
+            "number": 912,
+            "first_line": null
+          },
+          {
+            "number": 913,
+            "first_line": null
+          },
+          {
+            "number": 914,
+            "first_line": null
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "Spiritual_Warfare",
@@ -2779,7 +5435,155 @@
         "first_line": null
       }
     ],
-    "source_file": "categories/Spiritual_Warfare.html"
+    "source_file": "categories/Spiritual_Warfare.html",
+    "subcategories": [
+      {
+        "slug": "all-hymns",
+        "title": "သီချင်းများအားလုံး",
+        "hymns": [
+          {
+            "number": 870,
+            "first_line": null
+          },
+          {
+            "number": 871,
+            "first_line": null
+          },
+          {
+            "number": 1282,
+            "first_line": null
+          },
+          {
+            "number": 872,
+            "first_line": null
+          },
+          {
+            "number": 1283,
+            "first_line": null
+          },
+          {
+            "number": 873,
+            "first_line": null
+          },
+          {
+            "number": 874,
+            "first_line": null
+          },
+          {
+            "number": 875,
+            "first_line": null
+          },
+          {
+            "number": 876,
+            "first_line": null
+          },
+          {
+            "number": 877,
+            "first_line": null
+          },
+          {
+            "number": 878,
+            "first_line": null
+          },
+          {
+            "number": 879,
+            "first_line": null
+          },
+          {
+            "number": 880,
+            "first_line": null
+          },
+          {
+            "number": 881,
+            "first_line": null
+          },
+          {
+            "number": 882,
+            "first_line": null
+          },
+          {
+            "number": 883,
+            "first_line": null
+          },
+          {
+            "number": 884,
+            "first_line": null
+          },
+          {
+            "number": 885,
+            "first_line": null
+          },
+          {
+            "number": 1291,
+            "first_line": null
+          },
+          {
+            "number": 886,
+            "first_line": null
+          },
+          {
+            "number": 887,
+            "first_line": null
+          },
+          {
+            "number": 888,
+            "first_line": null
+          },
+          {
+            "number": 889,
+            "first_line": null
+          },
+          {
+            "number": 890,
+            "first_line": null
+          },
+          {
+            "number": 1288,
+            "first_line": null
+          },
+          {
+            "number": 1290,
+            "first_line": null
+          },
+          {
+            "number": 1289,
+            "first_line": "The vict'ry's won! The Lord has triumphed o'er the foe!"
+          },
+          {
+            "number": 891,
+            "first_line": null
+          },
+          {
+            "number": 892,
+            "first_line": null
+          },
+          {
+            "number": 893,
+            "first_line": null
+          },
+          {
+            "number": 894,
+            "first_line": null
+          },
+          {
+            "number": 1284,
+            "first_line": null
+          },
+          {
+            "number": 1285,
+            "first_line": null
+          },
+          {
+            "number": 1286,
+            "first_line": null
+          },
+          {
+            "number": 1287,
+            "first_line": null
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "Study_of_the_Word",
@@ -2862,7 +5666,91 @@
         "first_line": null
       }
     ],
-    "source_file": "categories/Study_of_the_Word.html"
+    "source_file": "categories/Study_of_the_Word.html",
+    "subcategories": [
+      {
+        "slug": "all-hymns",
+        "title": "သီချင်းများအားလုံး",
+        "hymns": [
+          {
+            "number": 799,
+            "first_line": null
+          },
+          {
+            "number": 805,
+            "first_line": null
+          },
+          {
+            "number": 800,
+            "first_line": "God the Lord has spoken, God has been unveiled;"
+          },
+          {
+            "number": 801,
+            "first_line": "O living Word of God, God's image true,"
+          },
+          {
+            "number": 802,
+            "first_line": "Thou art the Word and Spirit, Lord;"
+          },
+          {
+            "number": 803,
+            "first_line": "O Word of God incarnate,"
+          },
+          {
+            "number": 804,
+            "first_line": "Thy Word is like a storehouse, Lord,"
+          },
+          {
+            "number": 806,
+            "first_line": null
+          },
+          {
+            "number": 810,
+            "first_line": null
+          },
+          {
+            "number": 807,
+            "first_line": "Open my eyes that I may see"
+          },
+          {
+            "number": 808,
+            "first_line": "Master, speak! Thy servant heareth,"
+          },
+          {
+            "number": 809,
+            "first_line": "Speak, Lord, in the stillness,"
+          },
+          {
+            "number": 811,
+            "first_line": null
+          },
+          {
+            "number": 814,
+            "first_line": null
+          },
+          {
+            "number": 812,
+            "first_line": "I come to Thee, dear Lord,"
+          },
+          {
+            "number": 813,
+            "first_line": "I come before Thy throne of grace"
+          },
+          {
+            "number": 815,
+            "first_line": null
+          },
+          {
+            "number": 816,
+            "first_line": null
+          },
+          {
+            "number": 817,
+            "first_line": null
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "The_Church",
@@ -3281,7 +6169,427 @@
         "first_line": null
       }
     ],
-    "source_file": "categories/The_Church.html"
+    "source_file": "categories/The_Church.html",
+    "subcategories": [
+      {
+        "slug": "all-hymns",
+        "title": "သီချင်းများအားလုံး",
+        "hymns": [
+          {
+            "number": 818,
+            "first_line": null
+          },
+          {
+            "number": 819,
+            "first_line": null
+          },
+          {
+            "number": 820,
+            "first_line": null
+          },
+          {
+            "number": 821,
+            "first_line": null
+          },
+          {
+            "number": 822,
+            "first_line": null
+          },
+          {
+            "number": 823,
+            "first_line": null
+          },
+          {
+            "number": 828,
+            "first_line": null
+          },
+          {
+            "number": 824,
+            "first_line": "The Church is Christ's own Body,"
+          },
+          {
+            "number": 825,
+            "first_line": "Church of God, beloved and chosen,"
+          },
+          {
+            "number": 826,
+            "first_line": "I saw great throngs — each was a brother dear,"
+          },
+          {
+            "number": 827,
+            "first_line": "I have found life's Giver, and the Prince of Life;"
+          },
+          {
+            "number": 829,
+            "first_line": null
+          },
+          {
+            "number": 1274,
+            "first_line": null
+          },
+          {
+            "number": 830,
+            "first_line": null
+          },
+          {
+            "number": 831,
+            "first_line": null
+          },
+          {
+            "number": 832,
+            "first_line": null
+          },
+          {
+            "number": 833,
+            "first_line": null
+          },
+          {
+            "number": 836,
+            "first_line": null
+          },
+          {
+            "number": 834,
+            "first_line": "The chief Cornerstone Thou art, Lord,"
+          },
+          {
+            "number": 835,
+            "first_line": "On Christ, salvation rests secure;"
+          },
+          {
+            "number": 837,
+            "first_line": null
+          },
+          {
+            "number": 849,
+            "first_line": null
+          },
+          {
+            "number": 838,
+            "first_line": "Thy blueprint, Lord, I treasure dear,"
+          },
+          {
+            "number": 839,
+            "first_line": "Lord, Thou art a potter skilled"
+          },
+          {
+            "number": 840,
+            "first_line": "Freed from self and Adam's nature,"
+          },
+          {
+            "number": 841,
+            "first_line": "Thou art all my life, Lord,"
+          },
+          {
+            "number": 842,
+            "first_line": "Breathe Thou, O Lord, on me,"
+          },
+          {
+            "number": 843,
+            "first_line": "Lord, breathe Thy breath of life upon me,"
+          },
+          {
+            "number": 844,
+            "first_line": "Lord, speak Thy Word, upon us breathe;"
+          },
+          {
+            "number": 845,
+            "first_line": "Release my spirit! This is what I need:"
+          },
+          {
+            "number": 846,
+            "first_line": "Oh, may my spirit flow,"
+          },
+          {
+            "number": 847,
+            "first_line": "I long for fellowship in spirit,"
+          },
+          {
+            "number": 848,
+            "first_line": "What a blessing, what a priv'lege!"
+          },
+          {
+            "number": 850,
+            "first_line": null
+          },
+          {
+            "number": 853,
+            "first_line": null
+          },
+          {
+            "number": 851,
+            "first_line": "How lovely is Thy dwelling-place!"
+          },
+          {
+            "number": 852,
+            "first_line": "Thy dwelling-place, O Lord, I love;"
+          },
+          {
+            "number": 854,
+            "first_line": null
+          },
+          {
+            "number": 855,
+            "first_line": null
+          },
+          {
+            "number": 861,
+            "first_line": null
+          },
+          {
+            "number": 856,
+            "first_line": "How pleasant and how good it is"
+          },
+          {
+            "number": 857,
+            "first_line": "How sweet, how heav'nly is the sight,"
+          },
+          {
+            "number": 858,
+            "first_line": "All praise to our redeeming Lord,"
+          },
+          {
+            "number": 859,
+            "first_line": "Let party names no more"
+          },
+          {
+            "number": 860,
+            "first_line": "Blest be the tie that binds"
+          },
+          {
+            "number": 1220,
+            "first_line": null
+          },
+          {
+            "number": 1221,
+            "first_line": null
+          },
+          {
+            "number": 1222,
+            "first_line": null
+          },
+          {
+            "number": 1224,
+            "first_line": null
+          },
+          {
+            "number": 1223,
+            "first_line": "O walk about, walk about Zion,"
+          },
+          {
+            "number": 1225,
+            "first_line": null
+          },
+          {
+            "number": 1226,
+            "first_line": null
+          },
+          {
+            "number": 1227,
+            "first_line": null
+          },
+          {
+            "number": 1229,
+            "first_line": null
+          },
+          {
+            "number": 1228,
+            "first_line": "The Bible is the Word of God,"
+          },
+          {
+            "number": 1230,
+            "first_line": null
+          },
+          {
+            "number": 1232,
+            "first_line": null
+          },
+          {
+            "number": 1231,
+            "first_line": "O praise the Lord, God has a plan —"
+          },
+          {
+            "number": 1233,
+            "first_line": null
+          },
+          {
+            "number": 1238,
+            "first_line": null
+          },
+          {
+            "number": 1234,
+            "first_line": "I thirsted in the barren land of Babylon"
+          },
+          {
+            "number": 1235,
+            "first_line": "Oh, listen to the wanderer"
+          },
+          {
+            "number": 1236,
+            "first_line": "In the church the sound of life upon our ear is falling,"
+          },
+          {
+            "number": 1237,
+            "first_line": "Splendid church life! His green garden!"
+          },
+          {
+            "number": 1239,
+            "first_line": null
+          },
+          {
+            "number": 1242,
+            "first_line": null
+          },
+          {
+            "number": 1240,
+            "first_line": "Deeper, deeper, in the cross of Jesus;"
+          },
+          {
+            "number": 1241,
+            "first_line": "God's life and building can be seen"
+          },
+          {
+            "number": 1243,
+            "first_line": null
+          },
+          {
+            "number": 1244,
+            "first_line": null
+          },
+          {
+            "number": 1245,
+            "first_line": null
+          },
+          {
+            "number": 1247,
+            "first_line": null
+          },
+          {
+            "number": 1246,
+            "first_line": "We give ourselves to follow the churches,"
+          },
+          {
+            "number": 1248,
+            "first_line": null
+          },
+          {
+            "number": 1250,
+            "first_line": null
+          },
+          {
+            "number": 1249,
+            "first_line": "How oft believers through the years"
+          },
+          {
+            "number": 1251,
+            "first_line": null
+          },
+          {
+            "number": 1256,
+            "first_line": null
+          },
+          {
+            "number": 1252,
+            "first_line": "Down in Babylon, in captivity,"
+          },
+          {
+            "number": 1253,
+            "first_line": "Lord, Thy word of old to David"
+          },
+          {
+            "number": 1254,
+            "first_line": "This is the time for building the temple of the Lord"
+          },
+          {
+            "number": 1255,
+            "first_line": "We are for the Lord's recovery"
+          },
+          {
+            "number": 1257,
+            "first_line": null
+          },
+          {
+            "number": 1266,
+            "first_line": null
+          },
+          {
+            "number": 1258,
+            "first_line": "Oh, how lovable, how precious"
+          },
+          {
+            "number": 1259,
+            "first_line": "See the local churches,"
+          },
+          {
+            "number": 1260,
+            "first_line": "We're in the local church,"
+          },
+          {
+            "number": 1261,
+            "first_line": "In Chicago * land we must take our stand"
+          },
+          {
+            "number": 1262,
+            "first_line": "It's by our mingled spirit, Lord,"
+          },
+          {
+            "number": 1263,
+            "first_line": "There's a church in New York City * ,"
+          },
+          {
+            "number": 1264,
+            "first_line": "In the age of Revelation,"
+          },
+          {
+            "number": 1265,
+            "first_line": "The churches are the Body"
+          },
+          {
+            "number": 1267,
+            "first_line": null
+          },
+          {
+            "number": 1268,
+            "first_line": null
+          },
+          {
+            "number": 1269,
+            "first_line": null
+          },
+          {
+            "number": 1270,
+            "first_line": null
+          },
+          {
+            "number": 1273,
+            "first_line": null
+          },
+          {
+            "number": 1271,
+            "first_line": "We're the river-crossers, Hebrews is our name;"
+          },
+          {
+            "number": 1272,
+            "first_line": "The birthright God has giv'n to us"
+          },
+          {
+            "number": 1275,
+            "first_line": null
+          },
+          {
+            "number": 1277,
+            "first_line": null
+          },
+          {
+            "number": 1276,
+            "first_line": "Oh, the Lord is quickly coming,"
+          },
+          {
+            "number": 1278,
+            "first_line": null
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "The_Kingdom",
@@ -3340,7 +6648,67 @@
         "first_line": "The Lord has been revealed in us,"
       }
     ],
-    "source_file": "categories/The_Kingdom.html"
+    "source_file": "categories/The_Kingdom.html",
+    "subcategories": [
+      {
+        "slug": "all-hymns",
+        "title": "သီချင်းများအားလုံး",
+        "hymns": [
+          {
+            "number": 941,
+            "first_line": null
+          },
+          {
+            "number": 942,
+            "first_line": null
+          },
+          {
+            "number": 1297,
+            "first_line": null
+          },
+          {
+            "number": 943,
+            "first_line": null
+          },
+          {
+            "number": 944,
+            "first_line": null
+          },
+          {
+            "number": 945,
+            "first_line": null
+          },
+          {
+            "number": 946,
+            "first_line": null
+          },
+          {
+            "number": 947,
+            "first_line": null
+          },
+          {
+            "number": 1296,
+            "first_line": null
+          },
+          {
+            "number": 1298,
+            "first_line": null
+          },
+          {
+            "number": 1299,
+            "first_line": null
+          },
+          {
+            "number": 1301,
+            "first_line": null
+          },
+          {
+            "number": 1300,
+            "first_line": "The Lord has been revealed in us,"
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "The_Lord_s_Day",
@@ -3355,7 +6723,23 @@
         "first_line": null
       }
     ],
-    "source_file": "categories/The_Lord_s_Day.html"
+    "source_file": "categories/The_Lord_s_Day.html",
+    "subcategories": [
+      {
+        "slug": "all-hymns",
+        "title": "သီချင်းများအားလုံး",
+        "hymns": [
+          {
+            "number": 939,
+            "first_line": null
+          },
+          {
+            "number": 940,
+            "first_line": null
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "The_Resurrection_Life",
@@ -3366,7 +6750,19 @@
         "first_line": null
       }
     ],
-    "source_file": "categories/The_Resurrection_Life.html"
+    "source_file": "categories/The_Resurrection_Life.html",
+    "subcategories": [
+      {
+        "slug": "all-hymns",
+        "title": "သီချင်းများအားလုံး",
+        "hymns": [
+          {
+            "number": 377,
+            "first_line": null
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "The_Way_of_the_Cross",
@@ -3393,7 +6789,35 @@
         "first_line": null
       }
     ],
-    "source_file": "categories/The_Way_of_the_Cross.html"
+    "source_file": "categories/The_Way_of_the_Cross.html",
+    "subcategories": [
+      {
+        "slug": "all-hymns",
+        "title": "သီချင်းများအားလုံး",
+        "hymns": [
+          {
+            "number": 372,
+            "first_line": null
+          },
+          {
+            "number": 373,
+            "first_line": null
+          },
+          {
+            "number": 374,
+            "first_line": null
+          },
+          {
+            "number": 375,
+            "first_line": null
+          },
+          {
+            "number": 376,
+            "first_line": null
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "The_Word_of_God",
@@ -3408,7 +6832,23 @@
         "first_line": null
       }
     ],
-    "source_file": "categories/The_Word_of_God.html"
+    "source_file": "categories/The_Word_of_God.html",
+    "subcategories": [
+      {
+        "slug": "all-hymns",
+        "title": "သီချင်းများအားလုံး",
+        "hymns": [
+          {
+            "number": 1218,
+            "first_line": null
+          },
+          {
+            "number": 1219,
+            "first_line": null
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "Ultimate_Manifestation",
@@ -3483,7 +6923,83 @@
         "first_line": "River of living water,"
       }
     ],
-    "source_file": "categories/Ultimate_Manifestation.html"
+    "source_file": "categories/Ultimate_Manifestation.html",
+    "subcategories": [
+      {
+        "slug": "all-hymns",
+        "title": "သီချင်းများအားလုံး",
+        "hymns": [
+          {
+            "number": 971,
+            "first_line": null
+          },
+          {
+            "number": 1324,
+            "first_line": null
+          },
+          {
+            "number": 1325,
+            "first_line": null
+          },
+          {
+            "number": 972,
+            "first_line": null
+          },
+          {
+            "number": 973,
+            "first_line": null
+          },
+          {
+            "number": 974,
+            "first_line": null
+          },
+          {
+            "number": 975,
+            "first_line": null
+          },
+          {
+            "number": 977,
+            "first_line": null
+          },
+          {
+            "number": 976,
+            "first_line": "O Lord Jesus, Thy redeemed ones"
+          },
+          {
+            "number": 978,
+            "first_line": null
+          },
+          {
+            "number": 979,
+            "first_line": null
+          },
+          {
+            "number": 980,
+            "first_line": null
+          },
+          {
+            "number": 981,
+            "first_line": null
+          },
+          {
+            "number": 982,
+            "first_line": null
+          },
+          {
+            "number": 983,
+            "first_line": null
+          },
+          {
+            "number": 985,
+            "first_line": null
+          },
+          {
+            "number": 984,
+            "first_line": "River of living water,"
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "Union_with_Christ",
@@ -3534,7 +7050,59 @@
         "first_line": "မည်မျှအံ့သြဖွယ်၊ ကိုယ်တော်နှင့်သေခံပြီ"
       }
     ],
-    "source_file": "categories/Union_with_Christ.html"
+    "source_file": "categories/Union_with_Christ.html",
+    "subcategories": [
+      {
+        "slug": "all-hymns",
+        "title": "သီချင်းများအားလုံး",
+        "hymns": [
+          {
+            "number": 273,
+            "first_line": null
+          },
+          {
+            "number": 277,
+            "first_line": null
+          },
+          {
+            "number": 274,
+            "first_line": "ထာဝရသားတော်နှင့်အတူ"
+          },
+          {
+            "number": 275,
+            "first_line": "ဗက်လင်၌ ခရစ်တော်"
+          },
+          {
+            "number": 276,
+            "first_line": "ယခင်က၊ စီရင်ခံနေရာ"
+          },
+          {
+            "number": 278,
+            "first_line": null
+          },
+          {
+            "number": 283,
+            "first_line": null
+          },
+          {
+            "number": 279,
+            "first_line": "ကိုယ်တော်နှင့်အတူ သေခံထမြောက်"
+          },
+          {
+            "number": 280,
+            "first_line": "ခရစ်တော် ကားတိုင်ပေါ်သေခံ"
+          },
+          {
+            "number": 281,
+            "first_line": "ယေရှုနှင့်အတူ ကျွန်ုပ်သေခံပြီ"
+          },
+          {
+            "number": 282,
+            "first_line": "မည်မျှအံ့သြဖွယ်၊ ကိုယ်တော်နှင့်သေခံပြီ"
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "Various_Aspects_of_the_Inner_Life",
@@ -3641,7 +7209,115 @@
         "first_line": null
       }
     ],
-    "source_file": "categories/Various_Aspects_of_the_Inner_Life.html"
+    "source_file": "categories/Various_Aspects_of_the_Inner_Life.html",
+    "subcategories": [
+      {
+        "slug": "all-hymns",
+        "title": "သီချင်းများအားလုံး",
+        "hymns": [
+          {
+            "number": 733,
+            "first_line": null
+          },
+          {
+            "number": 734,
+            "first_line": null
+          },
+          {
+            "number": 735,
+            "first_line": null
+          },
+          {
+            "number": 736,
+            "first_line": null
+          },
+          {
+            "number": 1213,
+            "first_line": null
+          },
+          {
+            "number": 737,
+            "first_line": null
+          },
+          {
+            "number": 738,
+            "first_line": null
+          },
+          {
+            "number": 739,
+            "first_line": null
+          },
+          {
+            "number": 740,
+            "first_line": null
+          },
+          {
+            "number": 741,
+            "first_line": null
+          },
+          {
+            "number": 742,
+            "first_line": null
+          },
+          {
+            "number": 743,
+            "first_line": null
+          },
+          {
+            "number": 744,
+            "first_line": null
+          },
+          {
+            "number": 745,
+            "first_line": null
+          },
+          {
+            "number": 746,
+            "first_line": null
+          },
+          {
+            "number": 748,
+            "first_line": null
+          },
+          {
+            "number": 747,
+            "first_line": "The holiest of God's temple is"
+          },
+          {
+            "number": 749,
+            "first_line": null
+          },
+          {
+            "number": 750,
+            "first_line": null
+          },
+          {
+            "number": 751,
+            "first_line": null
+          },
+          {
+            "number": 1211,
+            "first_line": null
+          },
+          {
+            "number": 1212,
+            "first_line": null
+          },
+          {
+            "number": 1214,
+            "first_line": null
+          },
+          {
+            "number": 1215,
+            "first_line": null
+          },
+          {
+            "number": 1216,
+            "first_line": null
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "Worship_of_the_Father",
@@ -3836,6 +7512,202 @@
         "first_line": null
       }
     ],
-    "source_file": "categories/Worship_of_the_Father.html"
+    "source_file": "categories/Worship_of_the_Father.html",
+    "subcategories": [
+      {
+        "slug": "all-hymns",
+        "title": "သီချင်းများအားလုံး",
+        "hymns": [
+          {
+            "number": 10,
+            "first_line": null
+          },
+          {
+            "number": 11,
+            "first_line": null
+          },
+          {
+            "number": 12,
+            "first_line": null
+          },
+          {
+            "number": 13,
+            "first_line": null
+          },
+          {
+            "number": 14,
+            "first_line": null
+          },
+          {
+            "number": 15,
+            "first_line": null
+          },
+          {
+            "number": 16,
+            "first_line": null
+          },
+          {
+            "number": 17,
+            "first_line": null
+          },
+          {
+            "number": 18,
+            "first_line": null
+          },
+          {
+            "number": 19,
+            "first_line": null
+          },
+          {
+            "number": 20,
+            "first_line": null
+          },
+          {
+            "number": 21,
+            "first_line": null
+          },
+          {
+            "number": 22,
+            "first_line": null
+          },
+          {
+            "number": 23,
+            "first_line": null
+          },
+          {
+            "number": 24,
+            "first_line": null
+          },
+          {
+            "number": 25,
+            "first_line": null
+          },
+          {
+            "number": 26,
+            "first_line": null
+          },
+          {
+            "number": 27,
+            "first_line": null
+          },
+          {
+            "number": 31,
+            "first_line": null
+          },
+          {
+            "number": 28,
+            "first_line": "ဘုရားမေတ္တာ မည်မျှကြီးမား"
+          },
+          {
+            "number": 29,
+            "first_line": "မင်္ဂလာရှိ ဘုရား"
+          },
+          {
+            "number": 30,
+            "first_line": "ကိုယ်တော် မေတ္တာတော် ပေးဝေမှု"
+          },
+          {
+            "number": 32,
+            "first_line": null
+          },
+          {
+            "number": 33,
+            "first_line": null
+          },
+          {
+            "number": 34,
+            "first_line": null
+          },
+          {
+            "number": 35,
+            "first_line": null
+          },
+          {
+            "number": 36,
+            "first_line": null
+          },
+          {
+            "number": 37,
+            "first_line": null
+          },
+          {
+            "number": 45,
+            "first_line": null
+          },
+          {
+            "number": 38,
+            "first_line": "မေတ္တာဖြင့် ဆုကျေးဇူးများပေး"
+          },
+          {
+            "number": 39,
+            "first_line": "ဘုရားမြတ်သခင်အား ဘုန်းကြီးစေသတည်း"
+          },
+          {
+            "number": 40,
+            "first_line": "ဘုရားကို ချီးမွမ်း"
+          },
+          {
+            "number": 41,
+            "first_line": "ထာဝရသီချင်းဆို၊ ကျွန်ုပ်တို့ငြီးငွေ့ခြင်းမရှိ"
+          },
+          {
+            "number": 42,
+            "first_line": "ဘုရား၏ ဖိတ်ခေါ်ခြင်းခံ"
+          },
+          {
+            "number": 43,
+            "first_line": "ဖိုးထိုက်ကယ်တင်ရှင်နာမ၌"
+          },
+          {
+            "number": 44,
+            "first_line": "အို သန့်ရှင်းအဖ၊ ကြင်နာမေတ္တာရှင်"
+          },
+          {
+            "number": 46,
+            "first_line": null
+          },
+          {
+            "number": 49,
+            "first_line": null
+          },
+          {
+            "number": 47,
+            "first_line": "ခမည်းတော်ကို ကောင်းချီးပေးသည်"
+          },
+          {
+            "number": 48,
+            "first_line": "ခမည်းတော်ကို ကောင်းချီးပေး"
+          },
+          {
+            "number": 50,
+            "first_line": null
+          },
+          {
+            "number": 55,
+            "first_line": null
+          },
+          {
+            "number": 51,
+            "first_line": "ဘုရားနှင့်အဖထံ တုံ့ပြန်ကြ၏"
+          },
+          {
+            "number": 52,
+            "first_line": "အဖ၊ ကိုယ်တော်ထံ ဝမ်းမြောက်သီချင်းကျူး"
+          },
+          {
+            "number": 53,
+            "first_line": "ဘုရားနှင့်အဖထံ သစ်လွင်တုံ့ပြန်"
+          },
+          {
+            "number": 54,
+            "first_line": "ဘုရားနှင့်အဖထံ ချီးမွမ်းပါသည်"
+          },
+          {
+            "number": 56,
+            "first_line": null
+          }
+        ]
+      }
+    ]
   }
 ]
