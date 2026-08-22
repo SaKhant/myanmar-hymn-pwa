@@ -11,7 +11,7 @@ import { ReaderBackButton } from "@/components/reader-back-button";
 import { OFFLINE_NAVIGATION_EVENT, OFFLINE_SCROLL_STATE } from "@/components/offline-navigation";
 import { StoredList } from "@/components/stored-list";
 import { normalizeSearchText } from "@/lib/hymns/search";
-import { readOfflineCategories, readOfflineHymns, readOfflineLibraryMeta, type OfflineHymn } from "@/lib/offline-library";
+import { clearOfflineLibrarySnapshot, readOfflineHymns, readOfflineCategories, readOfflineLibraryMeta, readOfflineLibrarySnapshot, type OfflineHymn, type OfflineLibrarySnapshot, type OfflineSnapshotSummary } from "@/lib/offline-library";
 import type { HymnCategory, HymnKind, HymnLanguage, HymnSummary } from "@/lib/hymns/types";
 import { CategoriesBrowser } from "@/components/categories-browser";
 
@@ -88,14 +88,35 @@ function OfflineRoute({hymns,categories,pathname}:{hymns:OfflineHymn[];categorie
   return <HymnBrowser kind="hymns" myanmar={hymns.filter(hymn=>hymn.collection==="myanmar_hymns"&&Number.isInteger(hymn.number)).map(hymn=>toSummary(hymn,"hymns"))}/>;
 }
 
+function snapshotToSummary(summary:OfflineSnapshotSummary,kind:HymnKind):HymnSummary{
+  return {id:summary.id,number:summary.number,collection:kind==="yp"?"myanmar_yp":"myanmar_hymns",language:"my",kind,title:summary.title,firstLine:summary.firstLine,theme:summary.theme,searchText:"",lyricSearchText:""};
+}
+
 export function OfflineApp(){
-  const [offline,setOffline]=useState(false),[ready,setReady]=useState(false),[pathname,setPathname]=useState("/"),[hymns,setHymns]=useState<OfflineHymn[]>([]),[categories,setCategories]=useState<HymnCategory[]>([]);
+  const [offline,setOffline]=useState(false),[ready,setReady]=useState(false),[pathname,setPathname]=useState("/"),[hymns,setHymns]=useState<OfflineHymn[]>([]),[categories,setCategories]=useState<HymnCategory[]>([]),[snapshot,setSnapshot]=useState<OfflineLibrarySnapshot|null>(()=>typeof navigator==="undefined"||navigator.onLine?null:readOfflineLibrarySnapshot());
   const containerRef=useRef<HTMLDivElement>(null);
   useEffect(()=>{const sync=()=>setOffline(!navigator.onLine);sync();window.addEventListener("online",sync);window.addEventListener("offline",sync);return()=>{window.removeEventListener("online",sync);window.removeEventListener("offline",sync)}},[]);
   useEffect(()=>{const sync=()=>setPathname(location.pathname);sync();window.addEventListener("popstate",sync);window.addEventListener(OFFLINE_NAVIGATION_EVENT,sync);return()=>{window.removeEventListener("popstate",sync);window.removeEventListener(OFFLINE_NAVIGATION_EVENT,sync)}},[]);
-  useEffect(()=>{if(!offline)return;let active=true;Promise.all([readOfflineLibraryMeta(),readOfflineHymns(),readOfflineCategories()]).then(([meta,records,storedCategories])=>{if(active&&meta){setHymns(records);setCategories(storedCategories);setReady(true)}}).catch(()=>{if(active)setReady(true)});return()=>{active=false}},[offline]);
+  useEffect(()=>{
+    if(!offline)return;
+    let active=true;
+    Promise.all([readOfflineLibraryMeta(),readOfflineHymns(),readOfflineCategories()]).then(([meta,records,storedCategories])=>{
+      if(!active)return;
+      if(meta){setHymns(records);setCategories(storedCategories)}
+      else clearOfflineLibrarySnapshot();
+      setReady(true);
+    }).catch(()=>{if(active)setReady(true)});
+    return()=>{active=false};
+  },[offline]);
   useEffect(()=>{const frame=requestAnimationFrame(()=>containerRef.current?.scrollTo(0,Number(history.state?.[OFFLINE_SCROLL_STATE])||0));return()=>cancelAnimationFrame(frame)},[pathname]);
-  const route=useMemo(()=>ready?<OfflineRoute hymns={hymns} categories={categories} pathname={pathname}/>:<main className="page"><p className="text-sm font-bold text-[var(--muted)]">Loading offline library…</p></main>,[categories,hymns,pathname,ready]);
+  const preview=useMemo(()=>snapshot?{myanmar:snapshot.myanmarHymns.map(item=>snapshotToSummary(item,"hymns")),yp:snapshot.myanmarYp.map(item=>snapshotToSummary(item,"yp"))}:null,[snapshot]);
+  const route=useMemo(()=>{
+    if(ready)return <OfflineRoute hymns={hymns} categories={categories} pathname={pathname}/>;
+    const parts=pathname.split("/").filter(Boolean);
+    if(preview&&parts.length===0)return <HymnBrowser kind="hymns" myanmar={preview.myanmar}/>;
+    if(preview&&parts[0]==="yp"&&parts.length===1)return <HymnBrowser kind="yp" myanmar={preview.yp} myanmarOnly/>;
+    return <main className="page"><p className="text-sm font-bold text-[var(--muted)]">Loading offline library…</p></main>;
+  },[categories,hymns,pathname,ready,preview]);
   if(!offline)return null;
   return <div ref={containerRef} className="offline-app fixed inset-0 z-20 overflow-y-auto bg-[var(--paper)]">{route}</div>;
 }

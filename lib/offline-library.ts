@@ -148,6 +148,7 @@ export async function downloadOfflineLibrary(onProgress?:(received:number,total:
     metadataStore.put({key:"new-yp-translations",items:payload.newYpTranslations} satisfies StoredItems<OfflineNewYpTranslation>);
     await transactionDone(transaction);
   } finally {database.close()}
+  writeOfflineLibrarySnapshot(payload.version,payload.collections);
   try{await navigator.storage?.persist?.()}catch{}
   window.dispatchEvent(new CustomEvent("offline-library-updated",{detail:metadata}));
   return metadata;
@@ -158,3 +159,29 @@ export async function getAvailableOfflineLibraryVersion():Promise<{version:strin
   if(!response.ok)throw new Error("Could not check for library updates");
   return response.json() as Promise<{version:string;releaseDate:string}>;
 }
+
+export type OfflineSnapshotSummary={id:string;number:number|null;title:string;firstLine:string;theme:string};
+export type OfflineLibrarySnapshot={version:string;savedAt:string;myanmarHymns:OfflineSnapshotSummary[];myanmarYp:OfflineSnapshotSummary[]};
+const SNAPSHOT_STORAGE_KEY="hymn-house:library-snapshot";
+
+function toSnapshotSummary(hymn:{id:string;number:number|null;title:string|null;first_line:string|null;theme:string|null}):OfflineSnapshotSummary{
+  return {id:hymn.id,number:hymn.number??null,title:hymn.title?.trim()||hymn.first_line?.trim()||`Hymn ${hymn.number??hymn.id}`,firstLine:hymn.first_line?.trim()??"",theme:hymn.theme?.trim()??""};
+}
+
+export function writeOfflineLibrarySnapshot(version:string,collections:OfflinePayload["collections"]):void{
+  try{
+    const snapshot:OfflineLibrarySnapshot={version,savedAt:new Date().toISOString(),myanmarHymns:(collections.myanmar_hymns??[]).map(toSnapshotSummary),myanmarYp:(collections.myanmar_yp??[]).map(toSnapshotSummary)};
+    localStorage.setItem(SNAPSHOT_STORAGE_KEY,JSON.stringify(snapshot));
+  }catch{}
+}
+
+export function readOfflineLibrarySnapshot():OfflineLibrarySnapshot|null{
+  try{
+    const raw=localStorage.getItem(SNAPSHOT_STORAGE_KEY);
+    if(!raw)return null;
+    const parsed=JSON.parse(raw) as OfflineLibrarySnapshot;
+    return typeof parsed?.version==="string"&&Array.isArray(parsed.myanmarHymns)&&Array.isArray(parsed.myanmarYp)?parsed:null;
+  }catch{return null}
+}
+
+export function clearOfflineLibrarySnapshot():void{try{localStorage.removeItem(SNAPSHOT_STORAGE_KEY)}catch{}}
