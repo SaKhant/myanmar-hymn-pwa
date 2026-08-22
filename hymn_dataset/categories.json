@@ -164,7 +164,7 @@
   },
   {
     "slug": "Baptism",
-    "category": "25. Baptism [3]",
+    "category": "25. ဗတ္တိဇံ",
     "hymns": [
       {
         "number": 935,
@@ -424,7 +424,7 @@
   },
   {
     "slug": "Divine_Healing",
-    "category": "17. Divine Healing [4]",
+    "category": "17. အနာရောဂါငြိမ်းစေခြင်း",
     "hymns": [
       {
         "number": 752,
@@ -1002,7 +1002,7 @@
   },
   {
     "slug": "Gospel",
-    "category": "30. Gospel [17]",
+    "category": "30. ဧဝံဂေလိတရား",
     "hymns": [
       {
         "number": 986,
@@ -1421,7 +1421,7 @@
   },
   {
     "slug": "Hope_of_Glory",
-    "category": "28. Hope of Glory [16]",
+    "category": "28. ဘုန်းတော်မျှော်လင့်ခြင်း",
     "hymns": [
       {
         "number": 948,
@@ -1767,7 +1767,7 @@
   },
   {
     "slug": "Meetings",
-    "category": "21. Meetings [8]",
+    "category": "21. စုဝေးခြင်းများ",
     "hymns": [
       {
         "number": 862,
@@ -1818,7 +1818,7 @@
   },
   {
     "slug": "Others",
-    "category": "32. Others [2]",
+    "category": "32. အခြားများ",
     "hymns": [
       {
         "number": 1334,
@@ -2260,7 +2260,7 @@
   },
   {
     "slug": "Prayer",
-    "category": "18. Prayer [21]",
+    "category": "18. ဆုတောင်းခြင်း",
     "hymns": [
       {
         "number": 761,
@@ -2423,7 +2423,7 @@
   },
   {
     "slug": "Preaching_of_the_Gospel",
-    "category": "24. Preaching of the Gospel [18]",
+    "category": "24. ဧဝံဂေလိတရားဟောပြောခြင်း",
     "hymns": [
       {
         "number": 915,
@@ -2526,7 +2526,7 @@
   },
   {
     "slug": "Preaching_the_Gospel",
-    "category": "32. Preaching the Gospel [3]",
+    "category": "32. ဧဝံဂေလိတရားဟောပြောခြင်း",
     "hymns": [
       {
         "number": 1292,
@@ -2549,7 +2549,7 @@
   },
   {
     "slug": "Service",
-    "category": "23. Service [16]",
+    "category": "23. အမှုတော်ဆောင်ခြင်း",
     "hymns": [
       {
         "number": 895,
@@ -2636,7 +2636,7 @@
   },
   {
     "slug": "Spiritual_Warfare",
-    "category": "22. Spiritual Warfare [25]",
+    "category": "22. ဝိညာဉ်ရေးရာတိုက်ပွဲ",
     "hymns": [
       {
         "number": 870,
@@ -2783,7 +2783,7 @@
   },
   {
     "slug": "Study_of_the_Word",
-    "category": "19. Study of the Word [6]",
+    "category": "19. နှုတ်ကပတ်တော်လေ့လာခြင်း",
     "hymns": [
       {
         "number": 799,
@@ -2866,7 +2866,7 @@
   },
   {
     "slug": "The_Church",
-    "category": "20. The Church [33]",
+    "category": "20. အသင်းတော်",
     "hymns": [
       {
         "number": 818,
@@ -3285,7 +3285,7 @@
   },
   {
     "slug": "The_Kingdom",
-    "category": "27. The Kingdom [10]",
+    "category": "27. နိုင်ငံတော်",
     "hymns": [
       {
         "number": 941,
@@ -3344,7 +3344,7 @@
   },
   {
     "slug": "The_Lord_s_Day",
-    "category": "26. The Lord's Day [2]",
+    "category": "26. သခင်ဘုရား၏နေ့",
     "hymns": [
       {
         "number": 939,
@@ -3397,7 +3397,7 @@
   },
   {
     "slug": "The_Word_of_God",
-    "category": "31. The Word of God [1]",
+    "category": "31. ဘုရားသခင်၏နှုတ်ကပတ်တော်",
     "hymns": [
       {
         "number": 1218,
@@ -3412,7 +3412,7 @@
   },
   {
     "slug": "Ultimate_Manifestation",
-    "category": "29. Ultimate Manifestation [9]",
+    "category": "29. နောက်ဆုံးထင်ရှားပေါ်ထွန်းခြင်း",
     "hymns": [
       {
         "number": 971,
