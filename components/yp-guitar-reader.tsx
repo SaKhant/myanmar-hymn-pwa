@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { HymnSection } from "@/lib/hymns/types";
 
 type ReaderMode="lyrics"|"guitar";
@@ -12,11 +12,16 @@ const chordAnchorStyle={position:"relative",display:"inline"} as const;
 const chordLabelStyle={position:"absolute",left:0,top:"-1.05em",zIndex:1,whiteSpace:"nowrap",pointerEvents:"none"} as const;
 const flowingLyricStyle={display:"inline",whiteSpace:"normal",overflowWrap:"normal",wordBreak:"normal"} as const;
 
-export function YpGuitarReader({sections,ypNumber,sourceLabel}:{sections:HymnSection[];ypNumber:number;sourceLabel:string}){
+export function YpGuitarReader({sections,ypNumber,sourceLabel,unavailableMessage}:{sections:HymnSection[];ypNumber:number;sourceLabel:string;unavailableMessage?:string}){
   const [mode,setMode]=useState<ReaderMode>("lyrics");
   const [guitar,setGuitar]=useState<GuitarPayload|null>(null);
   const [loading,setLoading]=useState(false);
   const [error,setError]=useState<string|null>(null);
+
+  useEffect(()=>{
+    if(!Number.isInteger(ypNumber)||!navigator.onLine)return;
+    void fetch(`/api/yp-guitar/${ypNumber}`).catch(()=>{});
+  },[ypNumber]);
 
   async function showGuitar(){
     setMode("guitar");
@@ -40,7 +45,7 @@ export function YpGuitarReader({sections,ypNumber,sourceLabel}:{sections:HymnSec
       <button type="button" aria-pressed={mode==="guitar"} onClick={showGuitar}>Guitar</button>
     </div>
 
-    {mode==="lyrics"?<LyricsView sections={sections}/>:loading?<LoadingGuitar/>:guitar?<StructuredGuitarView sections={sections} guitar={guitar} sourceLabel={sourceLabel}/>:<UnavailableGuitar message={error}/>} 
+    {mode==="lyrics"?<LyricsView sections={sections}/>:loading?<LoadingGuitar/>:guitar?<StructuredGuitarView sections={sections} guitar={guitar} sourceLabel={sourceLabel}/>:<UnavailableGuitar message={error??unavailableMessage??null}/>} 
   </>;
 }
 
