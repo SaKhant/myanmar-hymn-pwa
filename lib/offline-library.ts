@@ -184,4 +184,10 @@ export function readOfflineLibrarySnapshot():OfflineLibrarySnapshot|null{
   }catch{return null}
 }
 
+export function writeOfflineLibrarySnapshotFromRecords(version:string,hymns:Array<Omit<HymnRecord,"audio_url">>):void{
+  const collections={myanmar_hymns:[],english_hymns:[],myanmar_yp:[],english_yp:[]} as OfflinePayload["collections"];
+  for(const hymn of hymns){const list=collections[hymn.collection];if(list)list.push(hymn)}
+  writeOfflineLibrarySnapshot(version,collections);
+}
+
 export function clearOfflineLibrarySnapshot():void{try{localStorage.removeItem(SNAPSHOT_STORAGE_KEY)}catch{}}

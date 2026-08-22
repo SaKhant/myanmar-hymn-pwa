@@ -11,7 +11,7 @@ import { ReaderBackButton } from "@/components/reader-back-button";
 import { OFFLINE_NAVIGATION_EVENT, OFFLINE_SCROLL_STATE } from "@/components/offline-navigation";
 import { StoredList } from "@/components/stored-list";
 import { normalizeSearchText } from "@/lib/hymns/search";
-import { clearOfflineLibrarySnapshot, readOfflineHymns, readOfflineCategories, readOfflineLibraryMeta, readOfflineLibrarySnapshot, type OfflineHymn, type OfflineLibrarySnapshot, type OfflineSnapshotSummary } from "@/lib/offline-library";
+import { clearOfflineLibrarySnapshot, readOfflineHymns, readOfflineCategories, readOfflineLibraryMeta, readOfflineLibrarySnapshot, writeOfflineLibrarySnapshotFromRecords, type OfflineHymn, type OfflineLibrarySnapshot, type OfflineSnapshotSummary } from "@/lib/offline-library";
 import type { HymnCategory, HymnKind, HymnLanguage, HymnSummary } from "@/lib/hymns/types";
 import { CategoriesBrowser } from "@/components/categories-browser";
 
@@ -102,7 +102,11 @@ export function OfflineApp(){
     let active=true;
     Promise.all([readOfflineLibraryMeta(),readOfflineHymns(),readOfflineCategories()]).then(([meta,records,storedCategories])=>{
       if(!active)return;
-      if(meta){setHymns(records);setCategories(storedCategories)}
+      if(meta){
+        setHymns(records);setCategories(storedCategories);
+        const stored=readOfflineLibrarySnapshot();
+        if(!stored||stored.version!==meta.version)writeOfflineLibrarySnapshotFromRecords(meta.version,records);
+      }
       else clearOfflineLibrarySnapshot();
       setReady(true);
     }).catch(()=>{if(active)setReady(true)});
