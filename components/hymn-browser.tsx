@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { memo, useDeferredValue, useEffect, useMemo, useState } from "react";
+import { memo, useCallback, useDeferredValue, useEffect, useMemo, useState } from "react";
 import { ChevronRight, FileText, List, Menu, Search } from "lucide-react";
 import { OfflineNewTranslationsRoute } from "@/components/offline-new-translations";
 import { OFFLINE_NAVIGATION_EVENT } from "@/components/offline-navigation";
@@ -31,10 +31,10 @@ function rememberHymnReturnTarget(id:string):void {
   try{sessionStorage.setItem(HYMN_RETURN_TARGET_KEY,id)}catch{}
 }
 
-const HymnList=memo(function HymnList({results,kind,language,exactNumber}:{results:HymnSummary[];kind:HymnKind;language:HymnLanguage;exactNumber?:string}) {
+const HymnList=memo(function HymnList({results,kind,language,exactNumber,moreAvailable=false,onLoadMore,loadingMore=false}:{results:HymnSummary[];kind:HymnKind;language:HymnLanguage;exactNumber?:string;moreAvailable?:boolean;onLoadMore?:()=>void;loadingMore?:boolean}) {
   const [visibleCount,setVisibleCount]=useState(LIST_PAGE_SIZE);
   const visibleResults=results.slice(0,visibleCount);
-  return <><div className="divide-y divide-[var(--line)] border-y border-[var(--line)]">{visibleResults.map(h=>{const exact=String(h.number)===exactNumber;const showFirstLine=h.firstLine&&h.firstLine!==h.title&&!(kind==="yp"&&isChordOnlyText(h.firstLine));const rowId=`hymn-list-row-${kind}-${language}-${h.id}`;return <Link id={rowId} key={h.id} href={`/${kind}/${language}/${h.id}`} onClick={()=>rememberHymnReturnTarget(rowId)} style={{contentVisibility:"auto",containIntrinsicSize:"auto 72px"}} className={`hymn-list-row focus-ring flex min-h-14 items-center gap-4 px-2 py-4 hover:bg-[var(--sage-soft)] ${exact?"bg-[var(--sage-soft)]":""}`}><span className="w-12 shrink-0 text-center font-serif text-xl text-[var(--gold)]">{displayNumber(h.number)}</span><span className="min-w-0"><strong className={`block text-[15px] ${language==="my"?"myanmar":""}`}>{h.title}</strong>{showFirstLine&&<small className={`mt-1 block truncate text-[var(--muted)] ${language==="my"?"myanmar":""}`}>{h.firstLine}</small>}</span><ChevronRight className="ml-auto shrink-0 text-[var(--muted)]" size={18}/></Link>})}</div>{visibleCount<results.length&&<button type="button" onClick={()=>setVisibleCount(current=>Math.min(current+LIST_PAGE_SIZE,results.length))} className="focus-ring mx-auto mt-5 flex min-h-11 items-center rounded-xl border border-[var(--line)] bg-[var(--paper)] px-5 text-sm font-bold text-[var(--ink)] hover:bg-[var(--sage-soft)]">Show 50 more</button>}</>;
+  return <><div className="divide-y divide-[var(--line)] border-y border-[var(--line)]">{visibleResults.map(h=>{const exact=String(h.number)===exactNumber;const showFirstLine=h.firstLine&&h.firstLine!==h.title&&!(kind==="yp"&&isChordOnlyText(h.firstLine));const rowId=`hymn-list-row-${kind}-${language}-${h.id}`;return <Link id={rowId} key={h.id} href={`/${kind}/${language}/${h.id}`} onClick={()=>rememberHymnReturnTarget(rowId)} style={{contentVisibility:"auto",containIntrinsicSize:"auto 72px"}} className={`hymn-list-row focus-ring flex min-h-14 items-center gap-4 px-2 py-4 hover:bg-[var(--sage-soft)] ${exact?"bg-[var(--sage-soft)]":""}`}><span className="w-12 shrink-0 text-center font-serif text-xl text-[var(--gold)]">{displayNumber(h.number)}</span><span className="min-w-0"><strong className={`block text-[15px] ${language==="my"?"myanmar":""}`}>{h.title}</strong>{showFirstLine&&<small className={`mt-1 block truncate text-[var(--muted)] ${language==="my"?"myanmar":""}`}>{h.firstLine}</small>}</span><ChevronRight className="ml-auto shrink-0 text-[var(--muted)]" size={18}/></Link>})}</div>{(visibleCount<results.length||moreAvailable)&&<button type="button" onClick={()=>visibleCount<results.length?setVisibleCount(current=>Math.min(current+LIST_PAGE_SIZE,results.length)):onLoadMore?.()} disabled={loadingMore} className="focus-ring mx-auto mt-5 flex min-h-11 items-center rounded-xl border border-[var(--line)] bg-[var(--paper)] px-5 text-sm font-bold text-[var(--ink)] hover:bg-[var(--sage-soft)] disabled:opacity-60">{loadingMore?"Loading…":"Show 50 more"}</button>}</>;
 });
 
 function NewTranslationList({items}:{items:NewTranslationSummary[]}){
@@ -53,23 +53,34 @@ function SearchBarWithMenu({kind,query,onQueryChange,onSubmit,menuOpen,onMenuTog
   return <div className="w-full max-w-md rounded-xl bg-blue-100 p-1.5"><div className="flex items-center gap-2"><BlueSearchForm query={query} onQueryChange={onQueryChange} onSubmit={onSubmit}/><div className="relative shrink-0"><button type="button" aria-label="Open menu" title="Menu" aria-expanded={menuOpen} aria-controls={menuId} onClick={onMenuToggle} className="focus-ring flex h-11 w-11 items-center justify-center rounded-lg border border-black bg-blue-500 text-white transition hover:bg-blue-600"><Menu aria-hidden="true" size={22}/></button>{menuOpen&&<div id={menuId} role="menu" className="absolute right-0 top-[calc(100%+0.5rem)] z-50 w-44 rounded-xl border border-blue-600 bg-blue-500 p-1.5 shadow-xl shadow-blue-300/50"><Link href="/categories" role="menuitem" onClick={onMenuClose} style={{color:"#fff"}} className={menuItemClass}><List aria-hidden="true" size={17} color="#fff"/><span style={{color:"#fff"}}>Categories</span></Link><Link href={newTranslationsHref} role="menuitem" onClick={onMenuClose} style={{color:"#fff"}} className={menuItemClass}><FileText aria-hidden="true" size={17} color="#fff"/><span style={{color:"#fff"}}>New translations</span></Link></div>}</div></div></div>;
 }
 
-export function HymnBrowser({ kind, myanmar, english=[], newTranslations=[], initialLanguage="my", initialQuery="", myanmarOnly=false, lyricSearchUrl }:{ kind:HymnKind; myanmar:HymnSummary[]; english?:HymnSummary[]; newTranslations?:NewTranslationSummary[]; initialLanguage?:HymnLanguage; initialQuery?:string; myanmarOnly?:boolean; lyricSearchUrl?:string }) {
+export function HymnBrowser({ kind, myanmar, english=[], newTranslations=[], initialLanguage="my", initialQuery="", myanmarOnly=false, lyricSearchUrl, allHymnsUrl, totalCount }:{ kind:HymnKind; myanmar:HymnSummary[]; english?:HymnSummary[]; newTranslations?:NewTranslationSummary[]; initialLanguage?:HymnLanguage; initialQuery?:string; myanmarOnly?:boolean; lyricSearchUrl?:string; allHymnsUrl?:string; totalCount?:number }) {
   const router=useRouter();
   const [selectedLanguage,setSelectedLanguage]=useState<HymnLanguage>(initialLanguage);
   const [hymnSection,setHymnSection]=useState<HymnSectionTab>(null);
   const [menuOpen,setMenuOpen]=useState(false);
   const [query,setQuery]=useState(initialQuery);
+  const [loadedMyanmar,setLoadedMyanmar]=useState(myanmar);
+  const [hasLoadedAll,setHasLoadedAll]=useState(!allHymnsUrl);
+  const [loadingAll,setLoadingAll]=useState(false);
   const [lyricSearchIndex,setLyricSearchIndex]=useState<Record<string,string>>({});
   const [submittedMissingNumber,setSubmittedMissingNumber]=useState(false);
   const [offlineTranslationPath,setOfflineTranslationPath]=useState<string|null>(null);
   const language: HymnLanguage=kind==="hymns"||myanmarOnly?"my":selectedLanguage;
-  const source=language==="my"?myanmar:english;
+  const source=language==="my"?loadedMyanmar:english;
   const deferredQuery=useDeferredValue(query);
   const normalizedQuery=normalizeSearchText(deferredQuery);
   const numberQuery=normalizeHymnNumberQuery(deferredQuery);
   const hasQuery=normalizedQuery.length>0;
 
-  useEffect(()=>{if(!lyricSearchUrl||!navigator.onLine)return;let active=true;fetch(lyricSearchUrl).then(response=>response.ok?response.json():Promise.reject()).then((entries:Array<{id:string;lyricSearchText:string}>)=>{if(active)setLyricSearchIndex(Object.fromEntries(entries.map(entry=>[entry.id,entry.lyricSearchText]))) }).catch(()=>{});return()=>{active=false}},[lyricSearchUrl]);
+  const loadAllHymns=useCallback(()=>{
+    if(!allHymnsUrl||kind!=="hymns"||!navigator.onLine||hasLoadedAll||loadingAll)return;
+    setLoadingAll(true);
+    fetch(allHymnsUrl).then(response=>response.ok?response.json():Promise.reject()).then((summaries:HymnSummary[])=>{setLoadedMyanmar(summaries);setHasLoadedAll(true)}).catch(()=>{}).finally(()=>setLoadingAll(false));
+  },[allHymnsUrl,hasLoadedAll,kind,loadingAll]);
+
+  useEffect(()=>{if(hasQuery)loadAllHymns()},[hasQuery,loadAllHymns]);
+
+  useEffect(()=>{if(!lyricSearchUrl||!navigator.onLine||Array.from(normalizedQuery).length<3)return;let active=true;fetch(lyricSearchUrl).then(response=>response.ok?response.json():Promise.reject()).then((entries:Array<{id:string;lyricSearchText:string}>)=>{if(active)setLyricSearchIndex(Object.fromEntries(entries.map(entry=>[entry.id,entry.lyricSearchText]))) }).catch(()=>{});return()=>{active=false}},[lyricSearchUrl,normalizedQuery]);
 
   useEffect(()=>{
     const sync=()=>{
@@ -156,7 +167,8 @@ export function HymnBrowser({ kind, myanmar, english=[], newTranslations=[], ini
   const updateQuery=(value:string)=>{setQuery(value);setSubmittedMissingNumber(false)};
   const switchHymnSection=(section:Exclude<HymnSectionTab,null>)=>setHymnSection(current=>current===section?null:section);
   const ypCountLabel=`${results.length.toLocaleString()} ${results.length===1?"song":"songs"}`;
-  const hymnCountLabel=`${results.length.toLocaleString()} ${results.length===1?"hymn":"hymns"}`;
+  const hymnResultCount=!hasQuery&&totalCount!==undefined?totalCount:results.length;
+  const hymnCountLabel=`${hymnResultCount.toLocaleString()} ${hymnResultCount===1?"hymn":"hymns"}`;
   const hymnListEmpty=kind==="hymns"&&results.length===0&&newResults.length===0;
 
   if(offlineTranslationPath)return <OfflineNewTranslationsRoute pathname={offlineTranslationPath}/>;
@@ -167,6 +179,7 @@ export function HymnBrowser({ kind, myanmar, english=[], newTranslations=[], ini
     {kind==="yp"&&!myanmarOnly&&<div className="mb-3 flex w-full rounded-xl bg-[var(--sage-soft)] p-1 sm:w-fit" role="group" aria-label="Language">{(["my","en"] as const).map(lang=><button key={lang} onClick={()=>setSelectedLanguage(lang)} className={`focus-ring flex-1 rounded-lg px-7 py-2.5 text-sm font-bold sm:flex-none ${language===lang?"bg-[var(--paper)] text-[var(--ink)] shadow-sm":"text-[var(--muted)]"}`}>{lang==="my"?"မြန်မာ":"English"}</button>)}</div>}
 
     <SearchBarWithMenu kind={kind} query={query} onQueryChange={updateQuery} onSubmit={submitSearch} menuOpen={menuOpen} onMenuToggle={()=>setMenuOpen(open=>!open)} onMenuClose={()=>setMenuOpen(false)}/>
+    {kind==="hymns"&&loadingAll&&<p className="mt-2 text-xs font-semibold text-[var(--muted)]">Loading hymn index…</p>}
 
     {SHOW_HYMN_SECTION_SELECTOR&&kind==="hymns"&&<div className="mx-auto mt-3 flex w-fit items-center rounded-lg bg-blue-500 p-0.5 shadow-md shadow-blue-300/70" role="group" aria-label="Hymn section">
       <button type="button" onClick={()=>switchHymnSection("hymns")} aria-pressed={hymnSection==="hymns"} className={`focus-ring myanmar rounded-md px-3 py-1 text-[11px] font-bold text-white ${hymnSection==="hymns"?"bg-blue-600 shadow-sm":""}`}>ဓမ္မသီချင်း</button>
@@ -177,7 +190,7 @@ export function HymnBrowser({ kind, myanmar, english=[], newTranslations=[], ini
     {kind==="hymns"&&<p className="my-4 text-sm text-[var(--muted)]">{hymnCountLabel}</p>}
     {kind==="yp"&&<p className="my-4 text-sm text-[var(--muted)]">{ypCountLabel}</p>}
 
-    {kind==="hymns"&&results.length>0&&hymnSection!=="new"&&<HymnList key={`${kind}-${language}-${normalizedQuery}`} results={results} kind={kind} language={language} exactNumber={numberQuery}/>} 
+    {kind==="hymns"&&results.length>0&&hymnSection!=="new"&&<HymnList key={`${kind}-${language}-${normalizedQuery}`} results={results} kind={kind} language={language} exactNumber={numberQuery} moreAvailable={!hasQuery&&!hasLoadedAll&&totalCount!==undefined&&results.length<totalCount} onLoadMore={loadAllHymns} loadingMore={loadingAll}/>} 
     {kind==="hymns"&&newResults.length>0&&hymnSection!=="hymns"&&<div className={results.length>0&&hymnSection===null?"mt-6 border-t border-[var(--line)] pt-6":""}><NewTranslationList items={newResults}/></div>}
     {kind==="yp"&&results.length>0&&<HymnList results={results} kind={kind} language={language} exactNumber={numberQuery}/>} 
 
