@@ -7,9 +7,8 @@ The app reads these files through `lib/hymns/data.ts`.
 
 | File | What it is |
 |---|---|
-| `myanmar_hymns.json` | Myanmar main hymnal |
+| `myanmar_hymns.json` | Myanmar main hymnal (includes recovered hymns 675–686) |
 | `english_hymns.json` | English main hymnal |
-| `myanmar_hymns_missing_675_686.json` | Recovered hymns 675–686, merged at load time |
 | `myanmar_yp.json` | Myanmar YP songs |
 | `english_yp.json` | English YP songs |
 | `matu_hymns.json` | Matu hymns (decoded from the old compressed format) |

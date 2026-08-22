@@ -11,8 +11,7 @@ Use this map whenever you want to **add or edit** songs. After any change run
 
 | Content | File(s) | Hand-editable? |
 |---|---|---|
-| Myanmar hymns | `hymn_dataset/myanmar_hymns.json` | YES — plain JSON |
-| Hymns 675–686 (recovered) | `hymn_dataset/myanmar_hymns_missing_675_686.json` | YES |
+| Myanmar hymns (incl. 675–686) | `hymn_dataset/myanmar_hymns.json` | YES — plain JSON |
 | English hymns | `hymn_dataset/english_hymns.json` | YES |
 | Matu hymns | `hymn_dataset/matu_hymns.json` | YES — plain JSON |
 | Kachin hymns | `hymn_dataset/kachin_hymns.json` | YES — plain JSON |

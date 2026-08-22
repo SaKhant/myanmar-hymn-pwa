@@ -1,9 +1,8 @@
 import { readFileSync, writeFileSync } from "node:fs";
 
 const primary = JSON.parse(readFileSync("hymn_dataset/myanmar_hymns.json", "utf8"));
-const recovered = JSON.parse(readFileSync("hymn_dataset/myanmar_hymns_missing_675_686.json", "utf8"));
 const hymnByNumber = new Map(
-  [...primary, ...recovered]
+  [...primary]
     .filter((hymn) => Number.isInteger(hymn.number) && hymn.number >= 1 && hymn.number <= 700)
     .map((hymn) => [hymn.number, hymn]),
 );
