@@ -12,6 +12,7 @@ import { normalizeHymnNumberQuery, normalizeSearchText, normalizeTitlePrefix } f
 const CHORD_TOKEN=/^[A-G](?:#|b)?(?:(?:maj|min|m|dim|aug|sus|add)?\d*(?:\([^)]*\))?)?(?:\/[A-G](?:#|b)?)?$/i;
 const SHOW_HYMN_SECTION_SELECTOR=false;
 const HYMN_RETURN_TARGET_KEY="hymn-house:hymn-return-target";
+const LIST_PAGE_SIZE=50;
 
 type NewTranslationSummary={id:string;englishNumber:number;title:string;category:string;englishTitle:string|null;searchText:string};
 type HymnSectionTab="hymns"|"new"|null;
@@ -31,7 +32,9 @@ function rememberHymnReturnTarget(id:string):void {
 }
 
 const HymnList=memo(function HymnList({results,kind,language,exactNumber}:{results:HymnSummary[];kind:HymnKind;language:HymnLanguage;exactNumber?:string}) {
-  return <div className="divide-y divide-[var(--line)] border-y border-[var(--line)]">{results.map(h=>{const exact=String(h.number)===exactNumber;const showFirstLine=h.firstLine&&h.firstLine!==h.title&&!(kind==="yp"&&isChordOnlyText(h.firstLine));const rowId=`hymn-list-row-${kind}-${language}-${h.id}`;return <Link id={rowId} key={h.id} href={`/${kind}/${language}/${h.id}`} onClick={()=>rememberHymnReturnTarget(rowId)} style={{contentVisibility:"auto",containIntrinsicSize:"auto 72px"}} className={`hymn-list-row focus-ring flex min-h-14 items-center gap-4 px-2 py-4 hover:bg-[var(--sage-soft)] ${exact?"bg-[var(--sage-soft)]":""}`}><span className="w-12 shrink-0 text-center font-serif text-xl text-[var(--gold)]">{displayNumber(h.number)}</span><span className="min-w-0"><strong className={`block text-[15px] ${language==="my"?"myanmar":""}`}>{h.title}</strong>{showFirstLine&&<small className={`mt-1 block truncate text-[var(--muted)] ${language==="my"?"myanmar":""}`}>{h.firstLine}</small>}</span><ChevronRight className="ml-auto shrink-0 text-[var(--muted)]" size={18}/></Link>})}</div>;
+  const [visibleCount,setVisibleCount]=useState(LIST_PAGE_SIZE);
+  const visibleResults=results.slice(0,visibleCount);
+  return <><div className="divide-y divide-[var(--line)] border-y border-[var(--line)]">{visibleResults.map(h=>{const exact=String(h.number)===exactNumber;const showFirstLine=h.firstLine&&h.firstLine!==h.title&&!(kind==="yp"&&isChordOnlyText(h.firstLine));const rowId=`hymn-list-row-${kind}-${language}-${h.id}`;return <Link id={rowId} key={h.id} href={`/${kind}/${language}/${h.id}`} onClick={()=>rememberHymnReturnTarget(rowId)} style={{contentVisibility:"auto",containIntrinsicSize:"auto 72px"}} className={`hymn-list-row focus-ring flex min-h-14 items-center gap-4 px-2 py-4 hover:bg-[var(--sage-soft)] ${exact?"bg-[var(--sage-soft)]":""}`}><span className="w-12 shrink-0 text-center font-serif text-xl text-[var(--gold)]">{displayNumber(h.number)}</span><span className="min-w-0"><strong className={`block text-[15px] ${language==="my"?"myanmar":""}`}>{h.title}</strong>{showFirstLine&&<small className={`mt-1 block truncate text-[var(--muted)] ${language==="my"?"myanmar":""}`}>{h.firstLine}</small>}</span><ChevronRight className="ml-auto shrink-0 text-[var(--muted)]" size={18}/></Link>})}</div>{visibleCount<results.length&&<button type="button" onClick={()=>setVisibleCount(current=>Math.min(current+LIST_PAGE_SIZE,results.length))} className="focus-ring mx-auto mt-5 flex min-h-11 items-center rounded-xl border border-[var(--line)] bg-[var(--paper)] px-5 text-sm font-bold text-[var(--ink)] hover:bg-[var(--sage-soft)]">Show 50 more</button>}</>;
 });
 
 function NewTranslationList({items}:{items:NewTranslationSummary[]}){
@@ -174,7 +177,7 @@ export function HymnBrowser({ kind, myanmar, english=[], newTranslations=[], ini
     {kind==="hymns"&&<p className="my-4 text-sm text-[var(--muted)]">{hymnCountLabel}</p>}
     {kind==="yp"&&<p className="my-4 text-sm text-[var(--muted)]">{ypCountLabel}</p>}
 
-    {kind==="hymns"&&results.length>0&&hymnSection!=="new"&&<HymnList results={results} kind={kind} language={language} exactNumber={numberQuery}/>} 
+    {kind==="hymns"&&results.length>0&&hymnSection!=="new"&&<HymnList key={`${kind}-${language}-${normalizedQuery}`} results={results} kind={kind} language={language} exactNumber={numberQuery}/>} 
     {kind==="hymns"&&newResults.length>0&&hymnSection!=="hymns"&&<div className={results.length>0&&hymnSection===null?"mt-6 border-t border-[var(--line)] pt-6":""}><NewTranslationList items={newResults}/></div>}
     {kind==="yp"&&results.length>0&&<HymnList results={results} kind={kind} language={language} exactNumber={numberQuery}/>} 
 
