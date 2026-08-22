@@ -53,21 +53,32 @@ function SearchBarWithMenu({kind,query,onQueryChange,onSubmit,menuOpen,onMenuTog
   return <div className="w-full max-w-md rounded-xl bg-blue-100 p-1.5"><div className="flex items-center gap-2"><BlueSearchForm query={query} onQueryChange={onQueryChange} onSubmit={onSubmit}/><div className="relative shrink-0"><button type="button" aria-label="Open menu" title="Menu" aria-expanded={menuOpen} aria-controls={menuId} onClick={onMenuToggle} className="focus-ring flex h-11 w-11 items-center justify-center rounded-lg border border-black bg-blue-500 text-white transition hover:bg-blue-600"><Menu aria-hidden="true" size={22}/></button>{menuOpen&&<div id={menuId} role="menu" className="absolute right-0 top-[calc(100%+0.5rem)] z-50 w-44 rounded-xl border border-blue-600 bg-blue-500 p-1.5 shadow-xl shadow-blue-300/50"><Link href="/categories" role="menuitem" onClick={onMenuClose} style={{color:"#fff"}} className={menuItemClass}><List aria-hidden="true" size={17} color="#fff"/><span style={{color:"#fff"}}>Categories</span></Link><Link href={newTranslationsHref} role="menuitem" onClick={onMenuClose} style={{color:"#fff"}} className={menuItemClass}><FileText aria-hidden="true" size={17} color="#fff"/><span style={{color:"#fff"}}>New translations</span></Link></div>}</div></div></div>;
 }
 
-export function HymnBrowser({ kind, myanmar, english=[], newTranslations=[], initialLanguage="my", initialQuery="", myanmarOnly=false, lyricSearchUrl }:{ kind:HymnKind; myanmar:HymnSummary[]; english?:HymnSummary[]; newTranslations?:NewTranslationSummary[]; initialLanguage?:HymnLanguage; initialQuery?:string; myanmarOnly?:boolean; lyricSearchUrl?:string }) {
+export function HymnBrowser({ kind, myanmar, english=[], newTranslations=[], initialLanguage="my", initialQuery="", myanmarOnly=false, lyricSearchUrl, allHymnsUrl, totalCount }:{ kind:HymnKind; myanmar:HymnSummary[]; english?:HymnSummary[]; newTranslations?:NewTranslationSummary[]; initialLanguage?:HymnLanguage; initialQuery?:string; myanmarOnly?:boolean; lyricSearchUrl?:string; allHymnsUrl?:string; totalCount?:number }) {
   const router=useRouter();
   const [selectedLanguage,setSelectedLanguage]=useState<HymnLanguage>(initialLanguage);
   const [hymnSection,setHymnSection]=useState<HymnSectionTab>(null);
   const [menuOpen,setMenuOpen]=useState(false);
   const [query,setQuery]=useState(initialQuery);
+  const [loadedMyanmar,setLoadedMyanmar]=useState(myanmar);
+  const [loadingAll,setLoadingAll]=useState(Boolean(allHymnsUrl));
   const [lyricSearchIndex,setLyricSearchIndex]=useState<Record<string,string>>({});
   const [submittedMissingNumber,setSubmittedMissingNumber]=useState(false);
   const [offlineTranslationPath,setOfflineTranslationPath]=useState<string|null>(null);
   const language: HymnLanguage=kind==="hymns"||myanmarOnly?"my":selectedLanguage;
-  const source=language==="my"?myanmar:english;
+  const source=language==="my"?loadedMyanmar:english;
   const deferredQuery=useDeferredValue(query);
   const normalizedQuery=normalizeSearchText(deferredQuery);
   const numberQuery=normalizeHymnNumberQuery(deferredQuery);
   const hasQuery=normalizedQuery.length>0;
+
+  useEffect(()=>{
+    if(!allHymnsUrl||kind!=="hymns"||!navigator.onLine)return;
+    let active=true;
+    const timer=window.setTimeout(()=>{
+      fetch(allHymnsUrl).then(response=>response.ok?response.json():Promise.reject()).then((summaries:HymnSummary[])=>{if(active)setLoadedMyanmar(summaries)}).catch(()=>{}).finally(()=>{if(active)setLoadingAll(false)});
+    },250);
+    return()=>{active=false;window.clearTimeout(timer)};
+  },[allHymnsUrl,kind]);
 
   useEffect(()=>{if(!lyricSearchUrl||!navigator.onLine)return;let active=true;fetch(lyricSearchUrl).then(response=>response.ok?response.json():Promise.reject()).then((entries:Array<{id:string;lyricSearchText:string}>)=>{if(active)setLyricSearchIndex(Object.fromEntries(entries.map(entry=>[entry.id,entry.lyricSearchText]))) }).catch(()=>{});return()=>{active=false}},[lyricSearchUrl]);
 
@@ -156,7 +167,8 @@ export function HymnBrowser({ kind, myanmar, english=[], newTranslations=[], ini
   const updateQuery=(value:string)=>{setQuery(value);setSubmittedMissingNumber(false)};
   const switchHymnSection=(section:Exclude<HymnSectionTab,null>)=>setHymnSection(current=>current===section?null:section);
   const ypCountLabel=`${results.length.toLocaleString()} ${results.length===1?"song":"songs"}`;
-  const hymnCountLabel=`${results.length.toLocaleString()} ${results.length===1?"hymn":"hymns"}`;
+  const hymnResultCount=!hasQuery&&totalCount!==undefined?totalCount:results.length;
+  const hymnCountLabel=`${hymnResultCount.toLocaleString()} ${hymnResultCount===1?"hymn":"hymns"}`;
   const hymnListEmpty=kind==="hymns"&&results.length===0&&newResults.length===0;
 
   if(offlineTranslationPath)return <OfflineNewTranslationsRoute pathname={offlineTranslationPath}/>;
@@ -167,6 +179,7 @@ export function HymnBrowser({ kind, myanmar, english=[], newTranslations=[], ini
     {kind==="yp"&&!myanmarOnly&&<div className="mb-3 flex w-full rounded-xl bg-[var(--sage-soft)] p-1 sm:w-fit" role="group" aria-label="Language">{(["my","en"] as const).map(lang=><button key={lang} onClick={()=>setSelectedLanguage(lang)} className={`focus-ring flex-1 rounded-lg px-7 py-2.5 text-sm font-bold sm:flex-none ${language===lang?"bg-[var(--paper)] text-[var(--ink)] shadow-sm":"text-[var(--muted)]"}`}>{lang==="my"?"မြန်မာ":"English"}</button>)}</div>}
 
     <SearchBarWithMenu kind={kind} query={query} onQueryChange={updateQuery} onSubmit={submitSearch} menuOpen={menuOpen} onMenuToggle={()=>setMenuOpen(open=>!open)} onMenuClose={()=>setMenuOpen(false)}/>
+    {kind==="hymns"&&loadingAll&&!hasQuery&&<p className="mt-2 text-xs font-semibold text-[var(--muted)]">Loading hymn index…</p>}
 
     {SHOW_HYMN_SECTION_SELECTOR&&kind==="hymns"&&<div className="mx-auto mt-3 flex w-fit items-center rounded-lg bg-blue-500 p-0.5 shadow-md shadow-blue-300/70" role="group" aria-label="Hymn section">
       <button type="button" onClick={()=>switchHymnSection("hymns")} aria-pressed={hymnSection==="hymns"} className={`focus-ring myanmar rounded-md px-3 py-1 text-[11px] font-bold text-white ${hymnSection==="hymns"?"bg-blue-600 shadow-sm":""}`}>ဓမ္မသီချင်း</button>
